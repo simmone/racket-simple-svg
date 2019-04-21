@@ -7,10 +7,10 @@
                  (natural? natural? string?)
                  (
                   #:x natural?
-                      #:y natural?
-                      #:rx natural?
-                      #:ry natural?
-                      )
+                  #:y natural?
+                  #:rx natural?
+                  #:ry natural?
+                  )
                  void?)]
           ))
 
@@ -30,4 +30,4 @@
                (when (not (= y 0)) (printf "y=\"~a\" " y))
                (when (not (= rx 0)) (printf "rx=\"~a\" " rx))
                (when (not (= ry 0)) (printf "ry=\"~a\" " ry))))))
-                     
+
