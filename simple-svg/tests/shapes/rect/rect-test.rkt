@@ -10,6 +10,7 @@
 (require racket/runtime-path)
 (define-runtime-path rect_file "rect.dat")
 (define-runtime-path rect_y_file "rect_y.dat")
+(define-runtime-path rect_radius_file "rect_radius.dat")
 
 (define test-all
   (test-suite
@@ -42,6 +43,21 @@
              output
              (lambda ()
                (rect 100 100 "#000000" #:y 50)))))
+         (lambda (actual)
+           (check-lines? expected actual))))))
+
+   (test-case
+    "test-rect-radius"
+
+    (call-with-input-file rect_radius_file
+      (lambda (expected)
+        (call-with-input-string
+         (call-with-output-string
+          (lambda (output)
+            (with-output-to-svg
+             output
+             (lambda ()
+               (rect 100 100 "#000000" #:y 50 #:rx 5 #:ry 10)))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
