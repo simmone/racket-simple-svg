@@ -5,19 +5,19 @@
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
 
-(require rackunit "../../../shapes/ellipse.rkt")
+(require rackunit "../../../shapes/line.rkt")
 
 (require racket/runtime-path)
-(define-runtime-path ellipse_svg "ellipse.svg")
+(define-runtime-path line_svg "line.svg")
 
 (define test-all
   (test-suite
-   "test-ellipse"
+   "test-line"
 
    (test-case
     "test-basic"
 
-    (call-with-input-file ellipse_svg
+    (call-with-input-file line_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
@@ -25,7 +25,7 @@
             (with-output-to-svg
              output
              (lambda ()
-               (ellipse '(150 . 150) 100 50 "#ff0000")))))
+               (line '(5 . 5) '(100 . 100) "#765373" 8)))))
          (lambda (actual)
            (check-lines? expected actual))))))
 

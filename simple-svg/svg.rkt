@@ -27,18 +27,20 @@
    ([*svg* output_port])
    (dynamic-wind
        (lambda () 
-         (fprintf (*svg*) "<svg ~a>\n"
-           (with-output-to-string
-             (lambda ()
-               (printf "width=\"~a\" height=\"~a\"" width height)
-               
-               (when 
-                (or
-                 (not (= viewBoxX 0))
-                 (not (= viewBoxY 0))
-                 (not (= viewBoxWidth width))
-                 (not (= viewBoxHeight height)))
-                (printf " viewBox=\"~a ~a ~a ~a\"" viewBoxX viewBoxY viewBoxWidth viewBoxHeight))))))
+         (fprintf 
+          (*svg*)
+          "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" ~a>\n"
+          (with-output-to-string
+            (lambda ()
+              (printf "width=\"~a\" height=\"~a\"" width height)
+              
+              (when 
+               (or
+                (not (= viewBoxX 0))
+                (not (= viewBoxY 0))
+                (not (= viewBoxWidth width))
+                (not (= viewBoxHeight height)))
+               (printf " viewBox=\"~a ~a ~a ~a\"" viewBoxX viewBoxY viewBoxWidth viewBoxHeight))))))
        (lambda () (write_proc))
        (lambda ()
          (fprintf (*svg*) "</svg>\n")))))

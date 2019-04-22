@@ -1,4 +1,3 @@
-
 #lang racket
 
 (require rackunit/text-ui)
@@ -8,8 +7,8 @@
 (require rackunit "../../main.rkt")
 
 (require racket/runtime-path)
-(define-runtime-path empty_file "empty-svg.dat")
-(define-runtime-path size_file "size-svg.dat")
+(define-runtime-path emty_svg "empty.svg")
+(define-runtime-path size_svg "size.svg")
 
 (define test-basic
   (test-suite
@@ -18,7 +17,7 @@
    (test-case
     "test-empty-svg"
 
-    (call-with-input-file empty_file
+    (call-with-input-file emty_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
@@ -33,7 +32,7 @@
    (test-case
     "test-size-svg"
 
-    (call-with-input-file size_file
+    (call-with-input-file size_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string

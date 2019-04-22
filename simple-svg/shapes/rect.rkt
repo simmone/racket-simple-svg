@@ -6,19 +6,15 @@
           [rect (->* 
                  (natural? natural? string?)
                  (
-                  #:x natural?
-                  #:y natural?
-                  #:rx natural?
-                  #:ry natural?
+                  #:start_point pair?
+                  #:radius pair?
                   )
                  void?)]
           ))
 
 (define (rect width height fill
-              #:x [x 0]
-              #:y [y 0]
-              #:rx [rx 0]
-              #:ry [ry 0])
+              #:start_point [start_point '(0 . 0)]
+              #:radius [radius '(0 . 0)])
 
   (fprintf (*svg*) "  <rect ~a/>\n"
            (with-output-to-string
@@ -26,8 +22,8 @@
                (printf "width=\"~a\" height=\"~a\" fill=\"~a\" "
                        width height fill)
 
-               (when (not (= x 0)) (printf "x=\"~a\" " x))
-               (when (not (= y 0)) (printf "y=\"~a\" " y))
-               (when (not (= rx 0)) (printf "rx=\"~a\" " rx))
-               (when (not (= ry 0)) (printf "ry=\"~a\" " ry))))))
+               (when (not (= (car start_point) 0)) (printf "x=\"~a\" " (car start_point)))
+               (when (not (= (cdr start_point) 0)) (printf "y=\"~a\" " (cdr start_point)))
+               (when (not (= (car radius) 0)) (printf "rx=\"~a\" " (car radius)))
+               (when (not (= (cdr radius) 0)) (printf "ry=\"~a\" " (cdr radius)))))))
 
