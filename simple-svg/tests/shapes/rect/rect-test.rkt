@@ -27,7 +27,7 @@
             (with-output-to-svg
              output
              (lambda ()
-               (rect 100 100 "#000000")))))
+               (rect 100 100 "#BBC42A")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
@@ -42,7 +42,7 @@
             (with-output-to-svg
              output
              (lambda ()
-               (rect 100 100 "#000000" #:start_point '(0 . 50))))))
+               (rect 100 100 "#BBC42A" #:start_point '(0 . 50))))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
@@ -57,7 +57,7 @@
             (with-output-to-svg
              output
              (lambda ()
-               (rect 100 100 "#000000" #:start_point '(0 . 50) #:radius '(5 . 10))))))
+               (rect 100 100 "#BBC42A" #:start_point '(0 . 50) #:radius '(5 . 10))))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
