@@ -4,10 +4,13 @@
 @(require racket/runtime-path)
 @(require racket/port)
 
-@(define-runtime-path basic_svg "basic.svg")
+@(require scribble/eval
+          (for-label racket racket/runtime-path "../main.rkt"))
 
 @(require (for-label racket))
 @(require (for-label "../main.rkt"))
+
+@(define-runtime-path basic_svg "basics.svg")
 
 @title{Simple-Svg: Scalable Vector Graphics}
 
@@ -37,15 +40,23 @@ raco pkg install simple-svg
   use output_port to represent a file or a string, all svg actions should in this lambda.
 }
 
-@codeblock{
-  (call-with-output-file
-    "basic.svg"
+@racket{
+  @(call-with-output-string
     (lambda (output)
       (with-output-to-svg
         output
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
+
+@(call-with-output-file
+    basic_svg
+    #:exists 'replace
+    (lambda (output)
+      (with-output-to-svg
+        output
+        (lambda ()
+          (rect 100 100 "#BBC42A")))))
 
 generate "basic.svg":
 
@@ -58,15 +69,4 @@ generate "basic.svg":
           (rect 100 100 "#BBC42A")))))
 }
 
-@(call-with-output-file
-  basic_svg
-  #:exists 'replace
-  (lambda (output)
-    (with-output-to-svg
-      output
-      (lambda ()
-        (rect 100 100 "#BBC42A")))))
-
 @image{@basic_svg}
-
-@include-section["shapes/rect.scrbl"]
