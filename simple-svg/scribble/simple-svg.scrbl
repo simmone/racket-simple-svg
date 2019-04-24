@@ -37,7 +37,7 @@ raco pkg install simple-svg
   use output_port to represent a file or a string, all svg actions should in this lambda.
 }
 
-@verbatim{
+@codeblock{
   (call-with-output-file
     "basic.svg"
     (lambda (output)
@@ -46,6 +46,8 @@ raco pkg install simple-svg
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
+
+generate "basic.svg":
 
 @verbatim{
   @(call-with-output-string
@@ -56,15 +58,15 @@ raco pkg install simple-svg
           (rect 100 100 "#BBC42A")))))
 }
 
-@verbatim {
 @(call-with-output-file
-   basic_svg
-   #:exists 'replace
-   (lambda (output)
-     (with-output-to-svg
-       output
-       (lambda ()
-         (rect 100 100 "#BBC42A")))))
-}
+  basic_svg
+  #:exists 'replace
+  (lambda (output)
+    (with-output-to-svg
+      output
+      (lambda ()
+        (rect 100 100 "#BBC42A")))))
 
 @image{@basic_svg}
+
+@include-section["shapes/rect.scrbl"]

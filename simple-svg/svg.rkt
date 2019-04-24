@@ -29,7 +29,7 @@
        (lambda () 
          (fprintf 
           (*svg*)
-          "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" ~a>\n"
+          "<svg\n    version=\"1.1\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n    ~a>\n"
           (with-output-to-string
             (lambda ()
               (printf "width=\"~a\" height=\"~a\"" width? height?)

@@ -1,15 +1,14 @@
 #lang racket
 
+(require rackunit)
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
 
-(require rackunit "../../../shapes/rect.rkt")
-
 (require racket/runtime-path)
 (define-runtime-path rect_svg "rect.svg")
-(define-runtime-path rect_y_svg "rect_y.svg")
+(define-runtime-path rect_start_svg "rect_start.svg")
 (define-runtime-path rect_radius_svg "rect_radius.svg")
 
 (define test-all
@@ -34,7 +33,7 @@
    (test-case
     "test-rect-y"
 
-    (call-with-input-file rect_y_svg
+    (call-with-input-file rect_start_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
@@ -42,7 +41,7 @@
             (with-output-to-svg
              output
              (lambda ()
-               (rect 100 100 "#BBC42A" #:start_point '(0 . 50))))))
+               (rect 100 100 "#BBC42A" #:start_point '(50 . 50))))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
@@ -57,7 +56,7 @@
             (with-output-to-svg
              output
              (lambda ()
-               (rect 100 100 "#BBC42A" #:start_point '(0 . 50) #:radius '(5 . 10))))))
+               (rect 100 100 "#BBC42A" #:start_point '(50 . 50) #:radius '(5 . 10))))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
