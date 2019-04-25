@@ -11,6 +11,9 @@
                                     #:viewBoxY? natural?
                                     #:viewBoxWidth? natural?
                                     #:viewBoxHeight? natural?
+                                    #:stroke-width? natural?
+                                    #:stroke-fill? string?
+                                    #:fill? string?
                                     )
                                    void?)]
           [rect (->* 

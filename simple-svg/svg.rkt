@@ -8,6 +8,9 @@
                                     #:viewBoxY? natural?
                                     #:viewBoxWidth? natural?
                                     #:viewBoxHeight? natural?
+                                    #:stroke-width? natural?
+                                    #:stroke-fill? string?
+                                    #:fill? string?
                                     )
                                    void?)]
           [*svg* parameter?]
@@ -22,6 +25,9 @@
                             #:viewBoxY? [viewBoxY? 0]
                             #:viewBoxWidth? [viewBoxWidth? width?]
                             #:viewBoxHeight? [viewBoxHeight? height?]
+                            #:stroke-width? [stroke-width? 0]
+                            #:stroke-fill? [stroke-fill? "red"]
+                            #:fill? [fill? "white"]
                             )
   (parameterize 
    ([*svg* output_port])
@@ -40,7 +46,12 @@
                 (not (= viewBoxY? 0))
                 (not (= viewBoxWidth? width?))
                 (not (= viewBoxHeight? height?)))
-               (printf " viewBox=\"~a ~a ~a ~a\"" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?))))))
+               (printf " viewBox=\"~a ~a ~a ~a\"" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?)))))
+         
+         (when (not (= stroke-width? 0))
+               (fprintf (*svg*)
+                        "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
+                        width? height? stroke-width? stroke-fill? fill?)))
        (lambda () (write_proc))
        (lambda ()
          (fprintf (*svg*) "</svg>\n")))))
