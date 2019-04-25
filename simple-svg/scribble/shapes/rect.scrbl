@@ -1,12 +1,6 @@
 #lang scribble/manual
 
 @(require "../../main.rkt")
-@(require racket/runtime-path)
-@(require racket/port)
-
-@(define-runtime-path basic_svg "basic.svg")
-@(define-runtime-path start_point_svg "start_point.svg")
-@(define-runtime-path radius_svg "radius.svg")
 
 @(require (for-label racket))
 @(require (for-label "../../shapes/rect.rkt"))
@@ -36,31 +30,14 @@ draw a rectangle.
     (lambda (output)
       (with-output-to-svg
         output
+        #:stroke-width? 1
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
 
-@verbatim{
-  @(call-with-output-string
-    (lambda (output)
-      (with-output-to-svg
-        output
-        (lambda ()
-          (rect 100 100 "#BBC42A")))))
-}
+@image{showcase/shapes/rect/rect.svg}
 
-@(call-with-output-file
-  basic_svg
-  #:exists 'replace
-  (lambda (output)
-    (with-output-to-svg
-      output
-      (lambda ()
-        (rect 100 100 "#BBC42A")))))
-
-@image{@basic_svg}
-
-@section{start_point}
+@section{start point}
 
 @codeblock{
   (call-with-output-file
@@ -68,27 +45,25 @@ draw a rectangle.
     (lambda (output)
       (with-output-to-svg
         output
+        #:stroke-width? 1
         (lambda ()
-          (rect 100 100 "#BBC42A"  #:start_point '(50 . 50))))))
+          (rect 100 100 "#BBC42A" #:start_point '(50 . 50))))))
 }
 
-@verbatim{
-  @(call-with-output-string
+@image{showcase/shapes/rect/rect_y.svg}
+
+@section{radius}
+
+@codeblock{
+  (call-with-output-file
+    "start_radius.svg"
     (lambda (output)
       (with-output-to-svg
         output
+        #:stroke-width? 1
         (lambda ()
-          (rect 100 100 "#BBC42A"  #:start_point '(50 . 50))))))
+          (rect 100 100 "#BBC42A" #:start_point '(50 . 50) #:radius '(5 . 10))))))
 }
 
-@(call-with-output-file
-  start_point_svg
-  #:exists 'replace
-  (lambda (output)
-    (with-output-to-svg
-      output
-      (lambda ()
-        (rect 100 100 "#BBC42A"  #:start_point '(50 . 50))))))
-
-@image{@start_point_svg}
+@image{showcase/shapes/rect/rect_radius.svg}
 
