@@ -6,11 +6,6 @@
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
 
-(require racket/runtime-path)
-(define-runtime-path rect_svg "rect.svg")
-(define-runtime-path rect_start_svg "rect_start.svg")
-(define-runtime-path rect_radius_svg "rect_radius.svg")
-
 (define test-all
   (test-suite
    "test-rect"
@@ -18,13 +13,14 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file rect_svg
+    (call-with-input-file "../../../showcase/shapes/rect/rect.svg"
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
           (lambda (output)
             (with-output-to-svg
              output
+             #:stroke-width? 1
              (lambda ()
                (rect 100 100 "#BBC42A")))))
          (lambda (actual)
@@ -33,13 +29,14 @@
    (test-case
     "test-rect-y"
 
-    (call-with-input-file rect_start_svg
+    (call-with-input-file "../../../showcase/shapes/rect/rect_y.svg"
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
           (lambda (output)
             (with-output-to-svg
              output
+             #:stroke-width? 1
              (lambda ()
                (rect 100 100 "#BBC42A" #:start_point '(50 . 50))))))
          (lambda (actual)
@@ -48,13 +45,14 @@
    (test-case
     "test-rect-radius"
 
-    (call-with-input-file rect_radius_svg
+    (call-with-input-file "../../../showcase/shapes/rect/rect_radius.svg"
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
           (lambda (output)
             (with-output-to-svg
              output
+             #:stroke-width? 1
              (lambda ()
                (rect 100 100 "#BBC42A" #:start_point '(50 . 50) #:radius '(5 . 10))))))
          (lambda (actual)

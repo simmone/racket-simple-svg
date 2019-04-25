@@ -35,38 +35,40 @@ raco pkg install simple-svg
           [#:viewBoxY? viewBoxY? natural? 0]
           [#:viewBoxWidth? viewBoxWidth? natural? width?]
           [#:viewBoxHeight? viewBoxHeight? natural? height?]
+          [#:stroke-width? stroke-width? natural? 0]
+          [#:stroke-fill? stroke-fill? string? "red"]
+          [#:fill? fill? string? "white"]
         )
         void?]{
-  use output_port to represent a file or a string, all svg actions should in this lambda.
+  output_port to represent a file or a string, all svg actions should in the procedure.
+  
+  #:width? and #:height? set canvas size, or it'll be a 300X300.
+
+  default is no stroke, use stroke should set #:stroke-width? > 0.
+
+  #:stroke-fill? set the stroke color, default is "red".
+
+  #:fill? set the canvas color, default is "white".
 }
 
-@racket{
-  @(call-with-output-string
+@codeblock{
+  (call-with-output-string
     (lambda (output)
       (with-output-to-svg
         output
+        #:stroke-width? 1
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
-
-@(call-with-output-file
-    basic_svg
-    #:exists 'replace
-    (lambda (output)
-      (with-output-to-svg
-        output
-        (lambda ()
-          (rect 100 100 "#BBC42A")))))
-
-generate "basic.svg":
 
 @verbatim{
   @(call-with-output-string
     (lambda (output)
       (with-output-to-svg
         output
+        #:stroke-width? 1
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
 
-@image{@basic_svg}
+@image{showcase/shapes/rect/rect.svg}
