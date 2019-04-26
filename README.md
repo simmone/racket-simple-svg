@@ -87,3 +87,31 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   (circle '(100 . 100) 50 "#ED6E46")
 ```
 ![ScreenShot](simple-svg/showcase/shapes/circle/circle.svg)
+
+## Ellipse
+
+```racket
+(define (ellipse center_point radius_width radius_height fill)
+```
+  draw a ellipse by center_point and radius.
+  
+### ellipse
+```racket
+  (ellipse '(150 . 150) 100 50 "#7AA20D")
+```
+![ScreenShot](simple-svg/showcase/shapes/ellipse/ellipse.svg)
+
+## Line
+
+```racket
+(define (line start_point end_point stroke_fill stroke_width)
+```
+  draw a line by start, end point.
+  
+### line
+```racket
+  (line '(5 . 5) '(100 . 100) "#765373" 8)
+```
+![ScreenShot](simple-svg/showcase/shapes/line/line.svg)
+
+
