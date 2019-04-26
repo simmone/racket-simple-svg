@@ -74,3 +74,5 @@ raco pkg install simple-svg
 @image{showcase/shapes/rect/rect.svg}
 
 @include-section{shapes/rect.scrbl}
+
+@include-section{shapes/circle.scrbl}

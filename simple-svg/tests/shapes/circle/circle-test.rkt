@@ -7,9 +7,6 @@
 
 (require rackunit "../../../shapes/circle.rkt")
 
-(require racket/runtime-path)
-(define-runtime-path circle_svg "circle.svg")
-
 (define test-all
   (test-suite
    "test-circle"
@@ -17,15 +14,16 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file circle_svg
+    (call-with-input-file "../../../showcase/shapes/circle/circle.svg"
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
           (lambda (output)
             (with-output-to-svg
              output
+             #:stroke-width? 1
              (lambda ()
-               (circle '(100 . 100) 50 "#ff0000")))))
+               (circle '(100 . 100) 50 "#ED6E46")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 

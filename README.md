@@ -57,6 +57,12 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
   use radius to set corner radius: '(radiusX . radiusY).
 
+### rect
+```racket
+  (rect 100 100 "#BBC42A")
+```
+![ScreenShot](simple-svg/showcase/shapes/rect/rect.svg)
+
 ### with start_point
 ```racket
     (rect 100 100 "#BBC42A" #:start_point '(50 . 50))
@@ -69,3 +75,15 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/rect_radius.svg)
 
+## Circle
+
+```racket
+(define (circle center_point radius fill)
+```
+  draw a circle by center_point and radius.
+  
+### circle
+```racket
+  (circle '(100 . 100) 50 "#ED6E46")
+```
+![ScreenShot](simple-svg/showcase/shapes/circle/circle.svg)
