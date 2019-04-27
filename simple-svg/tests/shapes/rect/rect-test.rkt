@@ -6,6 +6,11 @@
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
 
+(require racket/runtime-path)
+(define-runtime-path rect_svg "../../../showcase/shapes/rect/rect.svg")
+(define-runtime-path rect_y_svg "../../../showcase/shapes/rect/rect_y.svg")
+(define-runtime-path rect_radius_svg "../../../showcase/shapes/rect/rect_radius.svg")
+
 (define test-all
   (test-suite
    "test-rect"
@@ -13,7 +18,7 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file "../../../showcase/shapes/rect/rect.svg"
+    (call-with-input-file rect_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
@@ -29,7 +34,7 @@
    (test-case
     "test-rect-y"
 
-    (call-with-input-file "../../../showcase/shapes/rect/rect_y.svg"
+    (call-with-input-file rect_y_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string
@@ -45,7 +50,7 @@
    (test-case
     "test-rect-radius"
 
-    (call-with-input-file "../../../showcase/shapes/rect/rect_radius.svg"
+    (call-with-input-file rect_radius_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string

@@ -7,6 +7,9 @@
 
 (require rackunit "../../../shapes/ellipse.rkt")
 
+(require racket/runtime-path)
+(define-runtime-path ellipse_svg "../../../showcase/shapes/ellipse/ellipse.svg")
+
 (define test-all
   (test-suite
    "test-ellipse"
@@ -14,7 +17,7 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file "../../../showcase/shapes/ellipse/ellipse.svg"
+    (call-with-input-file ellipse_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string

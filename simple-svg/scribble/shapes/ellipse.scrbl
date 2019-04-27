@@ -3,13 +3,13 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../shapes/rect.rkt"))
+@(require (for-label "../../shapes/ellipse.rkt"))
 
 @title{Ellipse}
 
 draw a ellipse.
 
-@defproc[(rect
+@defproc[(ellipse
           [center_point pair?]
           [radius_width natural?]
           [radius_height natural?]

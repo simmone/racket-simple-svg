@@ -3,13 +3,13 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../shapes/rect.rkt"))
+@(require (for-label "../../shapes/line.rkt"))
 
 @title{Line}
 
 draw a line.
 
-@defproc[(rect
+@defproc[(line
           [start_point pair?]
           [end_point pair?]
           [stroke_fill string?]

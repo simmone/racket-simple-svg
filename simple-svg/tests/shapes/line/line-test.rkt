@@ -7,6 +7,9 @@
 
 (require rackunit "../../../shapes/line.rkt")
 
+(require racket/runtime-path)
+(define-runtime-path line_svg "../../../showcase/shapes/line/line.svg")
+
 (define test-all
   (test-suite
    "test-line"
@@ -14,7 +17,7 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file "../../../showcase/shapes/line/line.svg"
+    (call-with-input-file line_svg
       (lambda (expected)
         (call-with-input-string
          (call-with-output-string

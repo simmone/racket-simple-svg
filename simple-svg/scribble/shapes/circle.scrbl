@@ -3,13 +3,13 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../shapes/rect.rkt"))
+@(require (for-label "../../shapes/circle.rkt"))
 
 @title{Circle}
 
 draw a circle.
 
-@defproc[(rect
+@defproc[(circle
           [center_point pair?]
           [radius natural?]
           [fill string?]

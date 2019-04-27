@@ -8,7 +8,7 @@
 (require rackunit "../../../shapes/polygon.rkt")
 
 (require racket/runtime-path)
-(define-runtime-path polygon_svg "polygon.svg")
+(define-runtime-path polygon_svg "../../../showcase/shapes/polygon/polygon.svg")
 
 (define test-all
   (test-suite
@@ -24,6 +24,7 @@
           (lambda (output)
             (with-output-to-svg
              output
+             #:stroke-width? 1
              (lambda ()
                (polygon 
                 '((50 . 5) (100 . 5) (125 . 30) (125 . 80) (100 . 105) (50 . 105) (25 . 80) (25 . 30))

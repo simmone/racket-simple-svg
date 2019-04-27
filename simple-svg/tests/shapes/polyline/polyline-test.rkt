@@ -8,7 +8,7 @@
 (require rackunit "../../../shapes/polyline.rkt")
 
 (require racket/runtime-path)
-(define-runtime-path polyline_svg "polyline.svg")
+(define-runtime-path polyline_svg "../../../showcase/shapes/polyline/polyline.svg")
 
 (define test-all
   (test-suite
@@ -24,10 +24,11 @@
           (lambda (output)
             (with-output-to-svg
              output
+             #:stroke-width? 1
              (lambda ()
                (polyline 
                 '((0 . 40) (40 . 40) (40 . 80) (80 . 80) (80 . 120) (120 . 120) (120 . 160))
-                "#BBC42A" 6 "white")))))
+                "#BBC42A" 6 "blue")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
