@@ -19,6 +19,7 @@
 (define *svg* (make-parameter #f))
 
 (define (with-output-to-svg output_port write_proc
+                            #:padding? [padding? 10]
                             #:width? [width? 300]
                             #:height? [height? 300]
                             #:viewBoxX? [viewBoxX? 0]
