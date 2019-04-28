@@ -15,6 +15,8 @@
 (define (rect width height fill
               #:start_point [start_point '(0 . 0)]
               #:radius [radius '(0 . 0)])
+  
+  ((*size-func*) (+ (car start_point) width) (+ (cdr start_point) height))
 
   (fprintf (*svg*) "  <rect ~a/>\n"
            (with-output-to-string
