@@ -29,20 +29,23 @@ raco pkg install simple-svg
 @defproc[(with-output-to-svg
           [output_port output-port?]
           [procedure procedure?]
-          [#:width? width? natural? 300]
-          [#:height? height? natural? 300]
+          [#:padding? padding? natural? 10]
+          [#:width? width? natural? 0]
+          [#:height? height? natural? 0]
           [#:viewBoxX? viewBoxX? natural? 0]
           [#:viewBoxY? viewBoxY? natural? 0]
-          [#:viewBoxWidth? viewBoxWidth? natural? width?]
-          [#:viewBoxHeight? viewBoxHeight? natural? height?]
+          [#:viewBoxWidth? viewBoxWidth? natural? 0]
+          [#:viewBoxHeight? viewBoxHeight? natural? 0]
           [#:stroke-width? stroke-width? natural? 0]
           [#:stroke-fill? stroke-fill? string? "red"]
           [#:fill? fill? string? "white"]
         )
         void?]{
-  output_port to represent a file or a string, all svg actions should in the procedure.
-  
-  #:width? and #:height? set canvas size, or it'll be a 300X300.
+  use output_port to write svg to a file or a string, all svg actions should in the procedure.
+
+  svg canvas size is automatically calculated by all the content plus padding?.
+  default generate a svg by a 10 padding.
+  you can set size manully #:width? and #:height?.
 
   default is no stroke, use stroke should set #:stroke-width? > 0.
 

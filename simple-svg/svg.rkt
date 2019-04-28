@@ -15,11 +15,12 @@
                                     )
                                    void?)]
           [*svg* parameter?]
+          [*padding* parameter?]
           [*size-func* parameter?]
           ))
 
 (define *svg* (make-parameter #f))
-
+(define *padding* (make-parameter #f))
 (define *size-func* (make-parameter #f))
 
 (define *MAX_WIDTH* 0)
@@ -44,40 +45,45 @@
        (lambda () 
          (fprintf 
           (*svg*)
-          "<svg\n    version=\"1.1\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n    "))
+          "<svg\n    version=\"1.1\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n"))
        (lambda ()
          (let ([content
                 (call-with-output-string
                  (lambda (svg_output_port)
                    (parameterize
                     ([*svg* svg_output_port]
+                     [*padding* padding?]
                      [*size-func* 
                       (lambda (_width _height)
                         (when (> _width *MAX_WIDTH*) (set! *MAX_WIDTH* _width))
                         (when (> _height *MAX_HEIGHT*) (set! *MAX_HEIGHT* _height)))])
                     (write_proc))))])
 
-           (fprintf (*svg*) "~a>\n"
+           (fprintf (*svg*) "~a"
                     (if (or
                          (not (= width? 0))
                          (not (= height? 0)))
-                        (format "width=\"~a\" height=\"~a\"" width? height?)
-                        (format "width=\"~a\" height=\"~a\"" 
+                        (format "    width=\"~a\" height=\"~a\"\n" width? height?)
+                        (format "    width=\"~a\" height=\"~a\"\n"
                                 (+ *MAX_WIDTH* (* padding? 2))
                                 (+ *MAX_HEIGHT* (* padding? 2)))))
-              
+
            (when 
             (or
              (not (= viewBoxX? 0))
              (not (= viewBoxY? 0))
              (not (= viewBoxWidth? width?))
              (not (= viewBoxHeight? height?)))
-            (fprintf (*svg*) " viewBox=\"~a ~a ~a ~a\"" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?))
+            (fprintf (*svg*) "    viewBox=\"~a ~a ~a ~a\"" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?))
+           
+           (fprintf (*svg*) "    >\n")
          
            (when (not (= stroke-width? 0))
                  (fprintf (*svg*)
                           "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
-                          width? height? stroke-width? stroke-fill? fill?))
+                          (+ *MAX_WIDTH* (* padding? 2))
+                          (+ *MAX_HEIGHT* (* padding? 2))
+                          stroke-width? stroke-fill? fill?))
           
            (fprintf (*svg*) "~a" content)))
        (lambda ()
