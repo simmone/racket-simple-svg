@@ -74,16 +74,20 @@
              (not (= viewBoxY? 0))
              (not (= viewBoxWidth? width?))
              (not (= viewBoxHeight? height?)))
-            (fprintf (*svg*) "    viewBox=\"~a ~a ~a ~a\"" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?))
+            (fprintf (*svg*) "    viewBox=\"~a ~a ~a ~a\"\n" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?))
            
            (fprintf (*svg*) "    >\n")
          
            (when (not (= stroke-width? 0))
-                 (fprintf (*svg*)
-                          "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
-                          (+ *MAX_WIDTH* (* padding? 2))
-                          (+ *MAX_HEIGHT* (* padding? 2))
-                          stroke-width? stroke-fill? fill?))
+                 (fprintf (*svg*) "~a stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
+                    (if (or
+                         (not (= width? 0))
+                         (not (= height? 0)))
+                        (format "  <rect width=\"~a\" height=\"~a\"" width? height?)
+                        (format "  <rect width=\"~a\" height=\"~a\""
+                                (+ *MAX_WIDTH* (* padding? 2))
+                                (+ *MAX_HEIGHT* (* padding? 2))))
+                    stroke-width? stroke-fill? fill?))
           
            (fprintf (*svg*) "~a" content)))
        (lambda ()

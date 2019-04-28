@@ -9,6 +9,7 @@
 (require racket/runtime-path)
 (define-runtime-path empty_svg "../../showcase/basic/empty.svg")
 (define-runtime-path size_svg "../../showcase/basic/size.svg")
+(define-runtime-path viewBox_svg "../../showcase/basic/viewBox.svg")
 
 (define test-basic
   (test-suite
@@ -44,6 +45,26 @@
              output
              (lambda ()
                (void)))))
+         (lambda (actual)
+           (check-lines? expected actual))))))
+
+   (test-case
+    "test-size-svg"
+
+    (call-with-input-file viewBox_svg
+      (lambda (expected)
+        (call-with-input-string
+         (call-with-output-string
+          (lambda (output)
+            (with-output-to-svg
+             output
+             #:stroke-width? 1
+             #:viewBoxX? 60
+             #:viewBoxY? 0
+             #:viewBoxWidth? 120
+             #:viewBoxHeight? 120
+             (lambda ()
+               (rect 100 100 "#BBC42A")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 

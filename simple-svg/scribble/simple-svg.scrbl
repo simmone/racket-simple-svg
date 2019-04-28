@@ -54,6 +54,8 @@ raco pkg install simple-svg
   #:fill? set the canvas color, default is "white".
 }
 
+@subsection{basic usage}
+
 @codeblock{
   (call-with-output-string
     (lambda (output)
@@ -75,6 +77,34 @@ raco pkg install simple-svg
 }
 
 @image{showcase/shapes/rect/rect.svg}
+
+@subsection{viewBox}
+
+@codeblock{
+  (call-with-output-string
+    (lambda (output)
+      (with-output-to-svg
+        output
+        #:stroke-width? 1
+        (lambda ()
+          (rect 100 100 "#BBC42A")))))
+}
+
+@verbatim{
+  @(call-with-output-string
+    (lambda (output)
+      (with-output-to-svg
+        output
+        #:stroke-width? 1
+        #:viewBoxX 60
+        #:viewBoxY 0
+        #:viewBoxWidth 120
+        #:viewBoxHeight 120
+        (lambda ()
+          (rect 100 100 "#BBC42A")))))
+}
+
+@image{showcase/basic/viewBox.svg}
 
 @include-section{shapes/rect.scrbl}
 
