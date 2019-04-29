@@ -13,7 +13,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
     (lambda (output)
       (with-output-to-svg
         output
-        #:stroke-width? 1
+        #:canvas? '(1 "red" "white")
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 ```
@@ -22,27 +22,24 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 # with-output-to-svg
 ```racket
 (define (with-output-to-svg output_port write_proc
-                            #:width? [width? 300]
-                            #:height? [height? 300]
-                            #:viewBoxX? [viewBoxX? 0]
-                            #:viewBoxY? [viewBoxY? 0]
-                            #:viewBoxWidth? [viewBoxWidth? width?]
-                            #:viewBoxHeight? [viewBoxHeight? height?]
-                            #:stroke-width? [stroke-width? 0]
-                            #:stroke-fill? [stroke-fill? "red"]
-                            #:fill? [fill? "white"]
+                            [#:padding? padding? natural? 10]
+                            [#:width? width? (or/c #f natural?) #f]
+                            [#:height? height? (or/c #f natural?) #f]
+                            [#:viewBox? viewBox? (or/c #f (list/c natural? natural? natural? natural?)) #f]
+                            [#:canvas? canvas? (or/c #f (list/c natural? string? string?)) #f]
                             )
 ```
 
-  output_port to represent a file or a string, all svg actions should in the procedure.
+  use output_port to write svg to a file or a string, all the svg actions should occur in the procedure.
+
+  canvas size is automatically calculated.
+  default generate a svg by a 10 padding.
+  you can set size manully by #:width? and #:height?.
+
+  viewBox?: '(x y width height), if needed.
+
+  canvas?: '(stroke-width stroke-fill fill), if needed.
   
-  #:width? and #:height? set canvas size, or it'll be a 300X300.
-
-  default is no stroke, use stroke should set #:stroke-width? > 0.
-
-  #:stroke-fill? set the stroke color, default is "red".
-
-  #:fill? set the canvas color, default is "white".
 # Shapes
 
 ## Rectangle

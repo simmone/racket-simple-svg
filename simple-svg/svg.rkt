@@ -18,10 +18,6 @@
 (define *padding* (make-parameter #f))
 (define *size-func* (make-parameter #f))
 
-(define *MAX_WIDTH* 0)
-
-(define *MAX_HEIGHT* 0)
-
 (define (with-output-to-svg output_port write_proc
                             #:padding? [padding? 10]
                             #:width? [width? #f]
@@ -37,7 +33,9 @@
           (*svg*)
           "<svg\n    version=\"1.1\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n"))
        (lambda ()
-         (let ([content
+         (let* ([max_width 0]
+                [max_height 0]
+                [content
                 (call-with-output-string
                  (lambda (svg_output_port)
                    (parameterize
@@ -45,13 +43,13 @@
                      [*padding* padding?]
                      [*size-func* 
                       (lambda (_width _height)
-                        (when (> _width *MAX_WIDTH*) (set! *MAX_WIDTH* _width))
-                        (when (> _height *MAX_HEIGHT*) (set! *MAX_HEIGHT* _height)))])
+                        (when (> _width max_width) (set! max_width _width))
+                        (when (> _height max_height) (set! max_height _height)))])
                     (write_proc))))])
-
+           
            (fprintf (*svg*) "    width=\"~a\" height=\"~a\"\n"
-                    (if width? width? (+ *MAX_WIDTH* (* padding? 2)))
-                    (if height? height? (+ *MAX_HEIGHT* (* padding? 2))))
+                    (if width? width? (+ max_width (* padding? 2)))
+                    (if height? height? (+ max_height (* padding? 2))))
 
            (when viewBox?
                  (fprintf (*svg*) "    viewBox=\"~a ~a ~a ~a\"\n"
@@ -61,8 +59,8 @@
          
            (when canvas?
                  (fprintf (*svg*) "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
-                          (if width? width? (+ *MAX_WIDTH* (* padding? 2)))
-                          (if height? height? (+ *MAX_HEIGHT* (* padding? 2)))
+                          (if width? width? (+ max_width (* padding? 2)))
+                          (if height? height? (+ max_height (* padding? 2)))
                     (first canvas?) (second canvas?) (third canvas?)))
           
            (fprintf (*svg*) "~a" content)))

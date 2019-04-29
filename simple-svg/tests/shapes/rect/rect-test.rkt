@@ -25,43 +25,44 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:background? '(1 "red" "white")
+             #:canvas? '(1 "red" "white")
              (lambda ()
                (rect 100 100 "#BBC42A")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
-;   (test-case
-;    "test-rect-y"
-;
-;    (call-with-input-file rect_y_svg
-;      (lambda (expected)
-;        (call-with-input-string
-;         (call-with-output-string
-;          (lambda (output)
-;            (with-output-to-svg
-;             output
-;             #:stroke-width? 1
-;             (lambda ()
-;               (rect 100 100 "#BBC42A" #:start_point '(50 . 50))))))
-;         (lambda (actual)
-;           (check-lines? expected actual))))))
-;
-;   (test-case
-;    "test-rect-radius"
-;
-;    (call-with-input-file rect_radius_svg
-;      (lambda (expected)
-;        (call-with-input-string
-;         (call-with-output-string
-;          (lambda (output)
-;            (with-output-to-svg
-;             output
-;             #:stroke-width? 1
-;             (lambda ()
-;               (rect 100 100 "#BBC42A" #:start_point '(50 . 50) #:radius '(5 . 10))))))
-;         (lambda (actual)
-;           (check-lines? expected actual))))))
+   (test-case
+    "test-rect-y"
+
+    (call-with-input-file rect_y_svg
+      (lambda (expected)
+        (call-with-input-string
+         (call-with-output-string
+          (lambda (output)
+            (with-output-to-svg
+             output
+             #:padding? 0
+             #:canvas? '(1 "red" "white")
+             (lambda ()
+               (rect 100 100 "#BBC42A" #:start_point? '(50 . 50))))))
+         (lambda (actual)
+           (check-lines? expected actual))))))
+
+   (test-case
+    "test-rect-radius"
+
+    (call-with-input-file rect_radius_svg
+      (lambda (expected)
+        (call-with-input-string
+         (call-with-output-string
+          (lambda (output)
+            (with-output-to-svg
+             output
+             #:canvas? '(1 "red" "white")
+             (lambda ()
+               (rect 100 100 "#BBC42A" #:radius? '(5 . 10))))))
+         (lambda (actual)
+           (check-lines? expected actual))))))
 
    ))
 

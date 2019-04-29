@@ -44,8 +44,7 @@ raco pkg install simple-svg
 
   viewBox?: '(x y width height), if needed.
 
-  canvas? used to show svg canvas: '(stroke-width stroke-fill fill).
-  set stroke-width > 0 to show background.
+  canvas?: '(stroke-width stroke-fill fill), if needed.
 }
 
 @subsection{basic usage}

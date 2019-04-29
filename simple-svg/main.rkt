@@ -15,8 +15,8 @@
           [rect (->* 
                  (natural? natural? string?)
                  (
-                  #:start_point pair?
-                  #:radius pair?
+                  #:start_point? (or/c #f (cons/c natural? natural?))
+                  #:radius? (or/c #f (cons/c natural? natural?))
                   )
                  void?)]
           ))
