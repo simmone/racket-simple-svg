@@ -7,7 +7,7 @@
           ))
 
 (define (circle center_point radius fill)
-  ((*size-func*) (* (car center_point) 2) (* (cdr center_point) 2))
+  ((*size-func*) (+ (car center_point) radius) (+ (cdr center_point) radius))
 
   (fprintf (*svg*) "  <circle ~a/>\n"
            (with-output-to-string

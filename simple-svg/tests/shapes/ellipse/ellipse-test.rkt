@@ -1,11 +1,10 @@
 #lang racket
 
+(require rackunit)
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
-
-(require rackunit "../../../shapes/ellipse.rkt")
 
 (require racket/runtime-path)
 (define-runtime-path ellipse_svg "../../../showcase/shapes/ellipse/ellipse.svg")
@@ -24,9 +23,9 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:background? '(1 "red" "white")
+             #:canvas? '(1 "red" "white")
              (lambda ()
-               (ellipse '(150 . 150) 100 50 "#7AA20D")))))
+               (ellipse '(150 . 100) '(100 . 50) "#7AA20D")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 

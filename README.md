@@ -46,8 +46,8 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ```racket
 (define (rect width height fill
-              #:start_point [start_point '(0 . 0)]
-              #:radius [radius '(0 . 0)])
+              #:start_point? [start_point? #f]
+              #:radius? [radius? #f])
 ```
 
   draw a rectangle at start point '(x . y).

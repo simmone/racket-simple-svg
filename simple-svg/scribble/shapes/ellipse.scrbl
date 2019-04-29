@@ -10,13 +10,12 @@
 draw a ellipse.
 
 @defproc[(ellipse
-          [center_point pair?]
-          [radius_width natural?]
-          [radius_height natural?]
+          [center_point (cons/c natural? natural?)]
+          [radius (cons/c natural? natural?)]
           [fill string?]
         )
         void?]{
-  draw a ellipse by center_point and radius.
+  draw a ellipse by center_point: '(x . y) and radius: '(width . height).
 }
 
 @section{ellipse}

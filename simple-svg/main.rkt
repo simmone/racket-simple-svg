@@ -3,6 +3,7 @@
 (require "svg.rkt")
 (require "shapes/rect.rkt")
 (require "shapes/circle.rkt")
+(require "shapes/ellipse.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -21,4 +22,5 @@
                   )
                  void?)]
           [circle (-> (cons/c natural? natural?) natural? string? void?)]
+          [ellipse (-> (cons/c natural? natural?) (cons/c natural? natural?) string? void?)]
           ))

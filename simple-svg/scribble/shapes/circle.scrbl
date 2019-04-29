@@ -10,7 +10,7 @@
 draw a circle.
 
 @defproc[(circle
-          [center_point pair?]
+          [center_point (cons/c natural? natural?)]
           [radius natural?]
           [fill string?]
         )
