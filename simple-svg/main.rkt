@@ -2,6 +2,7 @@
 
 (require "svg.rkt")
 (require "shapes/rect.rkt")
+(require "shapes/circle.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -19,4 +20,5 @@
                   #:radius? (or/c #f (cons/c natural? natural?))
                   )
                  void?)]
+          [circle (-> (cons/c natural? natural?) natural? string? void?)]
           ))

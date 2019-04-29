@@ -15,7 +15,7 @@ draw a circle.
           [fill string?]
         )
         void?]{
-  draw a circle by center_point and radius.
+  draw a circle by center_point: '(x . y) and radius length.
 }
 
 @section{circle}

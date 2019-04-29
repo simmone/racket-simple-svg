@@ -24,7 +24,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:background? '(1 "red" "white")
+             #:canvas? '(1 "red" "white")
              (lambda ()
                (circle '(100 . 100) 50 "#ED6E46")))))
          (lambda (actual)

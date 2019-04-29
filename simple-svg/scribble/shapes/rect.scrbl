@@ -13,13 +13,15 @@ draw a rectangle.
           [width natural?]
           [height natural?]
           [fill string?]
-          [#:start_point? start_point? pair? '(0 . 0)]
-          [#:radius? radius? pair? '(0 . 0)]
+          [#:start_point? start_poiont? (or/c #f (cons/c natural? natural?)) #f]
+          [#:radius? radius? (or/c #f (cons/c natural? natural?)) #f]
         )
         void?]{
-  draw a rectangle at start point '(x . y).
+  draw a rectangle.
 
-  use radius to set corner radius: '(radiusX . radiusY).
+  start_point?: '(x .y)
+
+  radius?: '(radiusX . radiusY)
 }
 
 @section{rect}
@@ -30,7 +32,7 @@ draw a rectangle.
 
 @image{showcase/shapes/rect/rect.svg}
 
-@section{rect with start point}
+@section{rect with start point(no padding)}
 
 @codeblock{
   (rect 100 100 "#BBC42A" #:start_point '(50 . 50))
@@ -41,7 +43,7 @@ draw a rectangle.
 @section{rect with radius}
 
 @codeblock{
-  (rect 100 100 "#BBC42A" #:start_point '(50 . 50) #:radius '(5 . 10))
+  (rect 100 100 "#BBC42A" #:radius? '(5 . 10))
 }
 
 @image{showcase/shapes/rect/rect_radius.svg}

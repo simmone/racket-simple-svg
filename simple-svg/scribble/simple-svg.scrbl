@@ -65,6 +65,7 @@ raco pkg install simple-svg
       (with-output-to-svg
         output
         #:canvas? '(1 "red" "white")
+        #:viewBox? '(60 0 120 120)
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }

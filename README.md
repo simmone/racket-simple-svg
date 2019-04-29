@@ -77,7 +77,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```racket
 (define (circle center_point radius fill)
 ```
-  draw a circle by center_point and radius.
+  draw a circle by center_point: '(x . y) and radius length.
   
 ### circle
 ```racket
