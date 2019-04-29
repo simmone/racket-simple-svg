@@ -24,7 +24,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:stroke-width? 1
+             #:background? '(1 "red" "white")
              (lambda ()
                (ellipse '(150 . 150) 100 50 "#7AA20D")))))
          (lambda (actual)

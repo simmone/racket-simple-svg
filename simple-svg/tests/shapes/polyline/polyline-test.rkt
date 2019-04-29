@@ -24,7 +24,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:stroke-width? 1
+             #:background? '(1 "red" "white")
              (lambda ()
                (polyline 
                 '((0 . 40) (40 . 40) (40 . 80) (80 . 80) (80 . 120) (120 . 120) (120 . 160))

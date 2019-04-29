@@ -30,28 +30,22 @@ raco pkg install simple-svg
           [output_port output-port?]
           [procedure procedure?]
           [#:padding? padding? natural? 10]
-          [#:width? width? natural? 0]
-          [#:height? height? natural? 0]
-          [#:viewBoxX? viewBoxX? natural? 0]
-          [#:viewBoxY? viewBoxY? natural? 0]
-          [#:viewBoxWidth? viewBoxWidth? natural? 0]
-          [#:viewBoxHeight? viewBoxHeight? natural? 0]
-          [#:stroke-width? stroke-width? natural? 0]
-          [#:stroke-fill? stroke-fill? string? "red"]
-          [#:fill? fill? string? "white"]
+          [#:width? width? (or/c #f natural?) #f]
+          [#:height? height? (or/c #f natural?) #f]
+          [#:viewBox? viewBox? (or/c #f (list/c natural? natural? natural? natural?)) #f]
+          [#:canvas? canvas? (or/c #f (list/c natural? string? string?)) #f]
         )
         void?]{
-  use output_port to write svg to a file or a string, all svg actions should in the procedure.
+  use output_port to write svg to a file or a string, all the svg actions should occur in the procedure.
 
-  svg canvas size is automatically calculated by all the content plus padding?.
+  canvas size is automatically calculated.
   default generate a svg by a 10 padding.
-  you can set size manully #:width? and #:height?.
+  you can set size manully by #:width? and #:height?.
 
-  default is no stroke, use stroke should set #:stroke-width? > 0.
+  viewBox?: '(x y width height), if needed.
 
-  #:stroke-fill? set the stroke color, default is "red".
-
-  #:fill? set the canvas color, default is "white".
+  canvas? used to show svg canvas: '(stroke-width stroke-fill fill).
+  set stroke-width > 0 to show background.
 }
 
 @subsection{basic usage}
@@ -61,7 +55,7 @@ raco pkg install simple-svg
     (lambda (output)
       (with-output-to-svg
         output
-        #:stroke-width? 1
+        #:canvas? '(1 "red" "white")
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
@@ -71,7 +65,7 @@ raco pkg install simple-svg
     (lambda (output)
       (with-output-to-svg
         output
-        #:stroke-width? 1
+        #:canvas? '(1 "red" "white")
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
@@ -85,7 +79,7 @@ raco pkg install simple-svg
     (lambda (output)
       (with-output-to-svg
         output
-        #:stroke-width? 1
+        #:canvas? '(1 "red" "white")
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }
@@ -95,11 +89,8 @@ raco pkg install simple-svg
     (lambda (output)
       (with-output-to-svg
         output
-        #:stroke-width? 1
-        #:viewBoxX 60
-        #:viewBoxY 0
-        #:viewBoxWidth 120
-        #:viewBoxHeight 120
+        #:canvas? '(1 "red" "white")
+        #:viewBox? '(60 0 120 120)
         (lambda ()
           (rect 100 100 "#BBC42A")))))
 }

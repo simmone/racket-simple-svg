@@ -24,7 +24,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:stroke-width? 1
+             #:background? '(1 "red" "white")
              (lambda ()
                (polygon 
                 '((50 . 5) (100 . 5) (125 . 30) (125 . 80) (100 . 105) (50 . 105) (25 . 80) (25 . 30))

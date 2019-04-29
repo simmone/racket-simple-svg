@@ -41,7 +41,7 @@
             (with-output-to-svg
              #:width? 640
              #:height? 320
-             #:stroke-width? 1
+             #:canvas? '(1 "red" "white")
              output
              (lambda ()
                (void)))))
@@ -58,11 +58,8 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:stroke-width? 1
-             #:viewBoxX? 60
-             #:viewBoxY? 0
-             #:viewBoxWidth? 120
-             #:viewBoxHeight? 120
+             #:canvas? '(1 "red" "white")
+             #:viewBox? '(60 0 120 120)
              (lambda ()
                (rect 100 100 "#BBC42A")))))
          (lambda (actual)

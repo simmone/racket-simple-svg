@@ -24,7 +24,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:stroke-width? 1
+             #:background? '(1 "red" "white")
              (lambda ()
                (line '(5 . 5) '(100 . 100) "#765373" 8)))))
          (lambda (actual)

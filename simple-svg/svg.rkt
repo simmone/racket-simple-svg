@@ -3,15 +3,10 @@
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
                                    (#:padding? natural?
-                                    #:width? natural?
-                                    #:height? natural?
-                                    #:viewBoxX? natural?
-                                    #:viewBoxY? natural?
-                                    #:viewBoxWidth? natural?
-                                    #:viewBoxHeight? natural?
-                                    #:stroke-width? natural?
-                                    #:stroke-fill? string?
-                                    #:fill? string?
+                                    #:width? (or/c #f natural?)
+                                    #:height? (or/c #f natural?)
+                                    #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
+                                    #:canvas? (or/c #f (list/c natural? string? string?))
                                     )
                                    void?)]
           [*svg* parameter?]
@@ -29,15 +24,10 @@
 
 (define (with-output-to-svg output_port write_proc
                             #:padding? [padding? 10]
-                            #:width? [width? 0]
-                            #:height? [height? 0]
-                            #:viewBoxX? [viewBoxX? 0]
-                            #:viewBoxY? [viewBoxY? 0]
-                            #:viewBoxWidth? [viewBoxWidth? width?]
-                            #:viewBoxHeight? [viewBoxHeight? height?]
-                            #:stroke-width? [stroke-width? 0]
-                            #:stroke-fill? [stroke-fill? "red"]
-                            #:fill? [fill? "white"]
+                            #:width? [width? #f]
+                            #:height? [height? #f]
+                            #:viewBox? [viewBox? #f]
+                            #:canvas? [canvas? #f]
                             )
   (parameterize 
    ([*svg* output_port])
@@ -59,35 +49,21 @@
                         (when (> _height *MAX_HEIGHT*) (set! *MAX_HEIGHT* _height)))])
                     (write_proc))))])
 
-           (fprintf (*svg*) "~a"
-                    (if (or
-                         (not (= width? 0))
-                         (not (= height? 0)))
-                        (format "    width=\"~a\" height=\"~a\"\n" width? height?)
-                        (format "    width=\"~a\" height=\"~a\"\n"
-                                (+ *MAX_WIDTH* (* padding? 2))
-                                (+ *MAX_HEIGHT* (* padding? 2)))))
+           (fprintf (*svg*) "    width=\"~a\" height=\"~a\"\n"
+                    (if width? width? (+ *MAX_WIDTH* (* padding? 2)))
+                    (if height? height? (+ *MAX_HEIGHT* (* padding? 2))))
 
-           (when 
-            (or
-             (not (= viewBoxX? 0))
-             (not (= viewBoxY? 0))
-             (not (= viewBoxWidth? width?))
-             (not (= viewBoxHeight? height?)))
-            (fprintf (*svg*) "    viewBox=\"~a ~a ~a ~a\"\n" viewBoxX? viewBoxY? viewBoxWidth? viewBoxHeight?))
+           (when viewBox?
+                 (fprintf (*svg*) "    viewBox=\"~a ~a ~a ~a\"\n"
+                          (first viewBox?) (second viewBox?) (third viewBox?) (fourth viewBox?)))
            
            (fprintf (*svg*) "    >\n")
          
-           (when (not (= stroke-width? 0))
-                 (fprintf (*svg*) "~a stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
-                    (if (or
-                         (not (= width? 0))
-                         (not (= height? 0)))
-                        (format "  <rect width=\"~a\" height=\"~a\"" width? height?)
-                        (format "  <rect width=\"~a\" height=\"~a\""
-                                (+ *MAX_WIDTH* (* padding? 2))
-                                (+ *MAX_HEIGHT* (* padding? 2))))
-                    stroke-width? stroke-fill? fill?))
+           (when canvas?
+                 (fprintf (*svg*) "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
+                          (if width? width? (+ *MAX_WIDTH* (* padding? 2)))
+                          (if height? height? (+ *MAX_HEIGHT* (* padding? 2)))
+                    (first canvas?) (second canvas?) (third canvas?)))
           
            (fprintf (*svg*) "~a" content)))
        (lambda ()
