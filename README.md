@@ -60,7 +60,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/rect.svg)
 
-### with start_point
+### with start_point(no padding)
 ```racket
     (rect 100 100 "#BBC42A" #:start_point '(50 . 50))
 ```
