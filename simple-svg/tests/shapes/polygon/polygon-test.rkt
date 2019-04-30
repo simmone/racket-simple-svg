@@ -1,11 +1,10 @@
 #lang racket
 
+(require rackunit)
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
-
-(require rackunit "../../../shapes/polygon.rkt")
 
 (require racket/runtime-path)
 (define-runtime-path polygon_svg "../../../showcase/shapes/polygon/polygon.svg")
@@ -24,7 +23,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:background? '(1 "red" "white")
+             #:canvas? '(1 "red" "white")
              (lambda ()
                (polygon 
                 '((50 . 5) (100 . 5) (125 . 30) (125 . 80) (100 . 105) (50 . 105) (25 . 80) (25 . 30))

@@ -5,8 +5,6 @@
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
 
-(require rackunit "../../../shapes/line.rkt")
-
 (require racket/runtime-path)
 (define-runtime-path line_svg "../../../showcase/shapes/line/line.svg")
 
@@ -24,9 +22,9 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:background? '(1 "red" "white")
+             #:canvas? '(1 "red" "white")
              (lambda ()
-               (line '(5 . 5) '(100 . 100) "#765373" 8)))))
+               (line '(0 . 0) '(100 . 100) "#765373" 8)))))
          (lambda (actual)
            (check-lines? expected actual))))))
    ))

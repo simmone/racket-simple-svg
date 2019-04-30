@@ -39,7 +39,7 @@ raco pkg install simple-svg
   use output_port to write svg to a file or a string, all the svg actions should occur in the procedure.
 
   canvas size is automatically calculated.
-  default generate a svg by a 10 padding.
+  default generate a svg with a 10 padding.
   you can set size manully by #:width? and #:height?.
 
   viewBox?: '(x y width height), if needed.

@@ -10,19 +10,18 @@
 draw a line.
 
 @defproc[(line
-          [start_point pair?]
-          [end_point pair?]
+          [start_point (cons/c natural? natural?)]
+          [end_point (cons/c natural? natural?)]
           [stroke_fill string?]
           [stroke_width natural?]
         )
         void?]{
-  draw a line by start, end point.
 }
 
 @section{line}
 
 @codeblock{
-  (line '(5 . 5) '(100 . 100) "#765373" 8)
+  (line '(0 . 0) '(100 . 100) "#765373" 8)
 }
 
 @image{showcase/shapes/line/line.svg}

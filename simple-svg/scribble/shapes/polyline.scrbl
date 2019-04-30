@@ -10,7 +10,7 @@
 draw a polyline.
 
 @defproc[(polyline
-          [points (listof pair?)]
+          [points (listof (cons/c natural? natural?))]
           [stroke_fill string?]
           [stroke_width natural?]
           [fill string?]

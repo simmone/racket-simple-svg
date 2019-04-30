@@ -4,6 +4,9 @@
 (require "shapes/rect.rkt")
 (require "shapes/circle.rkt")
 (require "shapes/ellipse.rkt")
+(require "shapes/line.rkt")
+(require "shapes/polyline.rkt")
+(require "shapes/polygon.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -23,4 +26,7 @@
                  void?)]
           [circle (-> (cons/c natural? natural?) natural? string? void?)]
           [ellipse (-> (cons/c natural? natural?) (cons/c natural? natural?) string? void?)]
+          [line (-> (cons/c natural? natural?) (cons/c natural? natural?) string? natural? void?)]
+          [polyline (-> (listof (cons/c natural? natural?)) string? natural? string? void?)]
+          [polygon (-> (listof (cons/c natural? natural?)) string? void?)]
           ))

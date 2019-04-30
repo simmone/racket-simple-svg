@@ -1,7 +1,8 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="300" height="300">
-  <rect width="300" height="300" stroke-width="1" stroke="red" fill="white" />
-  <line x1="5" y1="5" x2="100" y2="100" stroke="#765373" stroke-width="8" />
+    width="120" height="120"
+    >
+  <rect width="120" height="120" stroke-width="1" stroke="red" fill="white" />
+  <line x1="10" y1="10" x2="110" y2="110" stroke="#765373" stroke-width="8" />
 </svg>

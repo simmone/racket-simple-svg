@@ -1,11 +1,10 @@
 #lang racket
 
+(require rackunit)
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
 (require "../../../main.rkt")
-
-(require rackunit "../../../shapes/polyline.rkt")
 
 (require racket/runtime-path)
 (define-runtime-path polyline_svg "../../../showcase/shapes/polyline/polyline.svg")
@@ -24,7 +23,7 @@
           (lambda (output)
             (with-output-to-svg
              output
-             #:background? '(1 "red" "white")
+             #:canvas? '(1 "red" "white")
              (lambda ()
                (polyline 
                 '((0 . 40) (40 . 40) (40 . 80) (80 . 80) (80 . 120) (120 . 120) (120 . 160))

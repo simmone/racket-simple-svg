@@ -3,10 +3,10 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [polygon (-> (listof pair?) string? void?)]
+          [polygon (-> (listof (cons/c natural? natural?)) string? void?)]
           ))
 
-(define (polygon points  fill)
+(define (polygon points fill)
   (fprintf (*svg*) "  <polygon ~a />\n"
            (with-output-to-string
              (lambda ()
@@ -14,7 +14,10 @@
                (printf "points=\"")
                (let loop ([loop_points points])
                  (when (not (null? loop_points))
-                       (printf "~a,~a" (caar loop_points) (cdar loop_points))
+                       ((*size-func*) (caar loop_points) (cdar loop_points))
+                       (printf "~a,~a"
+                               (+ (caar loop_points) (*padding*))
+                               (+ (cdar loop_points) (*padding*)))
                        (when (> (length loop_points) 1) (printf " "))
                        (loop (cdr loop_points))))
                (printf "\" ")
