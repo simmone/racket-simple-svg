@@ -7,6 +7,7 @@
 (require "shapes/line.rkt")
 (require "shapes/polyline.rkt")
 (require "shapes/polygon.rkt")
+(require "path/raw-path.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -29,4 +30,13 @@
           [line (-> (cons/c natural? natural?) (cons/c natural? natural?) string? natural? void?)]
           [polyline (-> (listof (cons/c natural? natural?)) string? natural? string? void?)]
           [polygon (-> (listof (cons/c natural? natural?)) string? void?)]
+          [raw-path (->* 
+                 (natural? natural? string?)
+                 (
+                  #:fill? string?
+                  #:stroke-fill? string?
+                  #:stroke-width? natural?
+                  #:stroke-linejoin? string?
+                  )
+                 void?)]
           ))

@@ -108,3 +108,5 @@ raco pkg install simple-svg
 @include-section{shapes/polyline.scrbl}
 
 @include-section{shapes/polygon.scrbl}
+
+@include-section{path/raw-path.scrbl}
