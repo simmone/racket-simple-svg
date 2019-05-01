@@ -15,8 +15,8 @@
           ))
 
 (define (raw-path width height raw_data
-              #:fill? [fill? "red"]
-              #:stroke-fill? [stroke-fill? "red"]
+              #:fill? [fill? "none"]
+              #:stroke-fill? [stroke-fill? "#333333"]
               #:stroke-width? [stroke-width? 1]
               #:stroke-linejoin? [stroke-linejoin? "round"])
 

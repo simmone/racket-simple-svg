@@ -24,6 +24,8 @@ draw path by raw data.
   raw data normally come from other svg tools.
 
   raw path's size can't be calculated, so width and height is mandatory.
+  
+  stroke-linejoin? is one of "round", "miter", "bevel".
 }
 
 @codeblock{
