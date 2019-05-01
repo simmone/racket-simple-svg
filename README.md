@@ -171,6 +171,6 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   #:stroke-width? 9
   #:stroke-linejoin? "round")
 ```
-![ScreenShot](simple-svg/showcase/shapes/path/raw_path.svg)
+![ScreenShot](simple-svg/showcase/path/raw_path.svg)
 
 
