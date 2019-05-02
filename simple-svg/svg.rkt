@@ -36,16 +36,16 @@
          (let* ([max_width 0]
                 [max_height 0]
                 [content
-                (call-with-output-string
-                 (lambda (svg_output_port)
-                   (parameterize
-                    ([*svg* svg_output_port]
-                     [*padding* padding?]
-                     [*size-func* 
-                      (lambda (_width _height)
-                        (when (> _width max_width) (set! max_width _width))
-                        (when (> _height max_height) (set! max_height _height)))])
-                    (write_proc))))])
+                 (call-with-output-string
+                  (lambda (svg_output_port)
+                    (parameterize
+                        ([*svg* svg_output_port]
+                         [*padding* padding?]
+                         [*size-func* 
+                          (lambda (_width _height)
+                            (when (> _width max_width) (set! max_width _width))
+                            (when (> _height max_height) (set! max_height _height)))])
+                      (write_proc))))])
            
            (fprintf (*svg*) "    width=\"~a\" height=\"~a\"\n"
                     (if width? width? (+ max_width (* padding? 2)))

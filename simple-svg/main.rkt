@@ -8,6 +8,8 @@
 (require "shapes/polyline.rkt")
 (require "shapes/polygon.rkt")
 (require "path/raw-path.rkt")
+(require "path/path.rkt")
+(require "path/moveto.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -39,4 +41,15 @@
                   #:stroke-linejoin? string?
                   )
                  void?)]
+          [path (->*
+                 (procedure?)
+                 (
+                  #:fill? string?
+                  #:stroke-fill? string?
+                  #:stroke-width? natural?
+                  #:stroke-linejoin? string?
+                  )
+                 void?)]
+          [moveto (-> (cons/c natural? natural?) void?)]
+          [moveto* (-> (cons/c natural? natural?) void?)]
           ))
