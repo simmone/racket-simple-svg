@@ -48,3 +48,14 @@ draw a rectangle.
 
 @image{showcase/shapes/rect/rect_radius.svg}
 
+@section{multiple rect}
+
+@codeblock{
+  (rect 150 150 "blue")
+  (rect 100 100 "green")
+  (rect 50 50 "red")
+}
+
+@image{showcase/shapes/rect/m_rect.svg}
+
+

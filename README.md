@@ -72,6 +72,14 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/rect_radius.svg)
 
+### multiple rect
+```racket
+(rect 150 150 "blue")
+(rect 100 100 "green")
+(rect 50 50 "red")
+```
+![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
+
 ## Circle
 
 ```racket
