@@ -57,5 +57,3 @@ draw a rectangle.
 }
 
 @image{showcase/shapes/rect/m_rect.svg}
-
-

@@ -23,10 +23,8 @@
   ((*size-func*) (car ((*position-get*))) (cdr ((*position-get*))))
 
   (if (eq? type 'M)
-      (fprintf (*svg*) "           ~a~a,~a\n"
-               type
+      (fprintf (*svg*) "           M~a,~a\n"
                (+ (car point) (*padding*)) (+ (cdr point) (*padding*)))
-      (fprintf (*svg*) "           ~a~a,~a\n"
-               type
+      (fprintf (*svg*) "           m~a,~a\n"
                (car point) (cdr point))))
 

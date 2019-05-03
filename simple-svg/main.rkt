@@ -10,6 +10,7 @@
 (require "path/raw-path.rkt")
 (require "path/path.rkt")
 (require "path/moveto.rkt")
+(require "path/ccurve.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -52,4 +53,14 @@
                  void?)]
           [moveto (-> (cons/c natural? natural?) void?)]
           [moveto* (-> (cons/c natural? natural?) void?)]
+          [ccurve (-> 
+                   (cons/c natural? natural?)
+                   (cons/c natural? natural?)
+                   (cons/c natural? natural?)
+                   void?)]
+          [ccurve* (->
+                    (cons/c natural? natural?)
+                    (cons/c natural? natural?)
+                    (cons/c natural? natural?)
+                    void?)]
           ))
