@@ -31,7 +31,7 @@
                  fill? stroke-fill? stroke-width? stroke-linejoin?)
         (fprintf (*svg*) "        d=\"\n"))
       (lambda ()
-        (let ([position '(0 . 0)])
+        (let ([position (cons (*padding*) (*padding*))])
           (parameterize
               ([*position-get* (lambda () position)]
                [*position-set* (lambda (_position) (set! position _position))])

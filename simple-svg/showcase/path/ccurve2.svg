@@ -1,0 +1,21 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width="210" height="125"
+    >
+  <rect width="210" height="125" stroke-width="1" stroke="red" fill="white" />
+  <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
+        d="
+           m10,60
+           c20,-45 70,-45 90,0
+           c20,45 70,45 90,0
+          "
+          />
+  <circle cx="10" cy="60" r="2" fill="red" />
+  <circle cx="30" cy="15" r="2" fill="red" />
+  <circle cx="80" cy="15" r="2" fill="red" />
+  <circle cx="100" cy="60" r="2" fill="red" />
+  <circle cx="120" cy="105" r="2" fill="red" />
+  <circle cx="170" cy="105" r="2" fill="red" />
+  <circle cx="190" cy="60" r="2" fill="red" />
+</svg>

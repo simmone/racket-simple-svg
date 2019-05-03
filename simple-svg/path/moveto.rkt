@@ -4,8 +4,8 @@
 (require "path.rkt")
 
 (provide (contract-out
-          [moveto (-> (cons/c natural? natural?) void?)]
-          [moveto* (-> (cons/c natural? natural?) void?)]
+          [moveto (-> (cons/c integer? integer?) void?)]
+          [moveto* (-> (cons/c integer? integer?) void?)]
           ))
 
 (define (moveto point) (m 'm point))
@@ -27,4 +27,5 @@
                (+ (car point) (*padding*)) (+ (cdr point) (*padding*)))
       (fprintf (*svg*) "           m~a,~a\n"
                (car point) (cdr point))))
+
 

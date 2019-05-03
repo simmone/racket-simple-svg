@@ -17,9 +17,9 @@ use three control points to draw a Cubic Bezier Curve.
           [point3 (cons/c natural? natural?) void?]
         )
         void?]{
-  ccurve use relative position.
-  ccurve* use absolute position.
 }
+
+ccurve* use absolute position.
 
 @codeblock{
   (path
@@ -31,6 +31,18 @@ use three control points to draw a Cubic Bezier Curve.
       (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
 }
 
+ccurve use relative position, relative to the current position.
+
+@codeblock{
+  (path
+    #:stroke-fill? "#333333"
+    #:stroke-width? 3
+    (lambda ()
+      (moveto* '(0 . 50))
+      (ccurve '(20 . -45) '(70 . -45) '(90 . 0))
+      (ccurve '(20 . 45) '(70 . 45) '(90 . 0))))
+}
+
 little red pots show the control points.
 
-@image{showcase/path/ccurve*.svg}
+@image{showcase/path/ccurve1.svg}

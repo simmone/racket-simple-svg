@@ -5,14 +5,14 @@
 
 (provide (contract-out
           [ccurve (-> 
-                   (cons/c natural? natural?)
-                   (cons/c natural? natural?)
-                   (cons/c natural? natural?)
+                   (cons/c integer? integer?)
+                   (cons/c integer? integer?)
+                   (cons/c integer? integer?)
                    void?)]
           [ccurve* (->
-                    (cons/c natural? natural?)
-                    (cons/c natural? natural?)
-                    (cons/c natural? natural?)
+                    (cons/c integer? integer?)
+                    (cons/c integer? integer?)
+                    (cons/c integer? integer?)
                     void?)]
           ))
 
@@ -37,13 +37,13 @@
 
         (set! point2*
               (cons
-               (+ (car point2) (car point1*))
-               (+ (cdr point2) (cdr point1*))))
+               (+ (car point2) (car ((*position-get*))))
+               (+ (cdr point2) (cdr ((*position-get*))))))
 
         (set! point3*
               (cons
-               (+ (car point3) (car point2*))
-               (+ (cdr point3) (cdr point2*))))))
+               (+ (car point3) (car ((*position-get*))))
+               (+ (cdr point3) (cdr ((*position-get*))))))))
         
       ((*position-set*) point3*)
 

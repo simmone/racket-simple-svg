@@ -51,16 +51,16 @@
                   #:stroke-linejoin? string?
                   )
                  void?)]
-          [moveto (-> (cons/c natural? natural?) void?)]
-          [moveto* (-> (cons/c natural? natural?) void?)]
+          [moveto (-> (cons/c integer? integer?) void?)]
+          [moveto* (-> (cons/c integer? integer?) void?)]
           [ccurve (-> 
-                   (cons/c natural? natural?)
-                   (cons/c natural? natural?)
-                   (cons/c natural? natural?)
+                   (cons/c integer? integer?)
+                   (cons/c integer? integer?)
+                   (cons/c integer? integer?)
                    void?)]
           [ccurve* (->
-                    (cons/c natural? natural?)
-                    (cons/c natural? natural?)
-                    (cons/c natural? natural?)
+                    (cons/c integer? integer?)
+                    (cons/c integer? integer?)
+                    (cons/c integer? integer?)
                     void?)]
           ))
