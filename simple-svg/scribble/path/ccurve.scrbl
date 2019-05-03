@@ -31,7 +31,7 @@ ccurve* use absolute position.
       (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
 }
 
-ccurve use relative position, relative to the current position.
+ccurve use relative position, relative to the start position.
 
 @codeblock{
   (path

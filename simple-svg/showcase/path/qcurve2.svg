@@ -7,15 +7,13 @@
   <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
         d="
            M10,60
-           c20,-45 70,-45 90,0
-           c20,45 70,45 90,0
+           q50,-50 100,0
+           q50,50 100,0
           "
           />
   <circle cx="10" cy="60" r="2" fill="red" />
-  <circle cx="30" cy="15" r="2" fill="red" />
-  <circle cx="80" cy="15" r="2" fill="red" />
-  <circle cx="100" cy="60" r="2" fill="red" />
-  <circle cx="120" cy="105" r="2" fill="red" />
-  <circle cx="170" cy="105" r="2" fill="red" />
-  <circle cx="190" cy="60" r="2" fill="red" />
+  <circle cx="60" cy="20" r="2" fill="red" />
+  <circle cx="110" cy="60" r="2" fill="red" />
+  <circle cx="160" cy="110" r="2" fill="red" />
+  <circle cx="210" cy="60" r="2" fill="red" />
 </svg>

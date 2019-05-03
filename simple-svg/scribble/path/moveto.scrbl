@@ -9,14 +9,15 @@
 
 move to a position.
 
-@defproc[(moveto
+@defproc[(moveto*
           [point (cons/c natural? natural?) void?]
         )
         void?]{
-  moveto use relative position.
   moveto* use absolute position.
+
+  moveto use relative position, don't use moveto as the path start.
 }
 
 @codeblock{
-  (moveto '(100 . 100))
+  (moveto* '(100 . 100))
 }

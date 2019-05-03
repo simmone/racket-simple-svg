@@ -60,7 +60,7 @@
                 #:stroke-fill? "#333333"
                 #:stroke-width? 3
                 (lambda ()
-                  (moveto '(0 . 50))
+                  (moveto* '(0 . 50))
                   (ccurve '(20 . -45) '(70 . -45) '(90 . 0))
                   (ccurve '(20 . 45) '(70 . 45) '(90 . 0))))
                (circle '(0 . 50) 2 "red")
