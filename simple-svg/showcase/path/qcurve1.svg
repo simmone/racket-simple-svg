@@ -1,9 +1,9 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="202" height="117"
+    width="222" height="122"
     >
-  <rect width="202" height="117" stroke-width="1" stroke="red" fill="white" />
+  <rect width="222" height="122" stroke-width="1" stroke="red" fill="white" />
   <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
         d="
            M10,60
@@ -12,7 +12,7 @@
           "
           />
   <circle cx="10" cy="60" r="2" fill="red" />
-  <circle cx="60" cy="20" r="2" fill="red" />
+  <circle cx="60" cy="10" r="2" fill="red" />
   <circle cx="110" cy="60" r="2" fill="red" />
   <circle cx="160" cy="110" r="2" fill="red" />
   <circle cx="210" cy="60" r="2" fill="red" />

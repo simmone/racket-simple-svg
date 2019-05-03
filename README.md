@@ -153,8 +153,8 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ```racket
 (define (raw-path width height raw_data
-              #:fill? [fill? "red"]
-              #:stroke-fill? [stroke-fill? "red"]
+              #:fill? [fill? "none"]
+              #:stroke-fill? [stroke-fill? "#333333"]
               #:stroke-width? [stroke-width? 1]
               #:stroke-linejoin? [stroke-linejoin? "round"])
 ```
@@ -182,3 +182,74 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ![ScreenShot](simple-svg/showcase/path/raw_path.svg)
 
 
+## Path
+
+```racket
+(define (path path_proc
+              #:fill? [fill? "none"]
+              #:stroke-fill? [stroke-fill? "#333333"]
+              #:stroke-width? [stroke-width? 1]
+              #:stroke-linejoin? [stroke-linejoin? "round"])
+```
+  draw a path programmtially.
+
+  fill?, stroke-fill?, stroke-width? stroke-linejoin? same as raw-path.
+
+  every path step should write in this procedure: moveto, curve etc.
+
+### moveto
+```racket
+(define (moveto point)
+(define (moveto* point)
+```
+  moveto* use absolute position.
+
+  moveto use relative position, don't use moveto as the path start.
+
+```racket
+  (moveto* '(100 . 100))
+```
+
+### Cubic Bezier Curve
+```racket
+(define (ccurve point1 point2 point3)
+(define (ccurve* point1 point2 point3)
+```
+  use three control points to draw a Cubic Bezier Curve.
+
+  ccurve* use absolute position.
+
+  ccurve use relative position, relative to the start position.
+
+```racket
+  (path
+    #:stroke-fill? "#333333"
+    #:stroke-width? 3
+    (lambda ()
+      (moveto* '(0 . 50))
+      (ccurve* '(20 . 5) '(70 . 5) '(90 . 50))
+      (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
+```
+![ScreenShot](simple-svg/showcase/path/ccurve1.svg)
+
+### Quadratic Bezier Curve
+```racket
+(define (qcurve point1 point2)
+(define (qcurve* point1 point2)
+```
+  use two control points to draw a Quadratic Bezier Curve.
+
+  qcurve* use absolute position.
+
+  qcurve use relative position, relative to the start position.
+
+```racket
+  (path
+    #:stroke-fill? "#333333"
+    #:stroke-width? 3
+    (lambda ()
+      (moveto* '(0 . 50))
+      (qcurve* '(50 . 0) '(100 . 50))
+      (qcurve* '(150 . 100) '(200 . 50))))
+```
+![ScreenShot](simple-svg/showcase/path/qcurve1.svg)

@@ -11,6 +11,7 @@
 (require "path/path.rkt")
 (require "path/moveto.rkt")
 (require "path/ccurve.rkt")
+(require "path/qcurve.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -60,6 +61,14 @@
                    void?)]
           [ccurve* (->
                     (cons/c integer? integer?)
+                    (cons/c integer? integer?)
+                    (cons/c integer? integer?)
+                    void?)]
+          [qcurve (-> 
+                   (cons/c integer? integer?)
+                   (cons/c integer? integer?)
+                   void?)]
+          [qcurve* (->
                     (cons/c integer? integer?)
                     (cons/c integer? integer?)
                     void?)]

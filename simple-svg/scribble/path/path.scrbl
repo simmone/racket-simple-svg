@@ -25,3 +25,5 @@ draw a path programmtially.
 @include-section{moveto.scrbl}
 
 @include-section{ccurve.scrbl}
+
+@include-section{qcurve.scrbl}
