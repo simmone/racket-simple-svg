@@ -211,6 +211,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```
 
 ### Cubic Bezier Curve
+
 ```racket
 (define (ccurve point1 point2 point3)
 (define (ccurve* point1 point2 point3)
@@ -233,6 +234,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ![ScreenShot](simple-svg/showcase/path/ccurve1.svg)
 
 ### Quadratic Bezier Curve
+
 ```racket
 (define (qcurve point1 point2)
 (define (qcurve* point1 point2)
@@ -244,12 +246,27 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   qcurve use relative position, relative to the start position.
 
 ```racket
-  (path
-    #:stroke-fill? "#333333"
-    #:stroke-width? 3
-    (lambda ()
-      (moveto* '(0 . 50))
-      (qcurve* '(50 . 0) '(100 . 50))
-      (qcurve* '(150 . 100) '(200 . 50))))
+  (moveto* '(0 . 50))
+  (qcurve* '(50 . 0) '(100 . 50))
+  (qcurve* '(150 . 100) '(200 . 50))))
 ```
 ![ScreenShot](simple-svg/showcase/path/qcurve1.svg)
+
+### lineto
+
+```racket
+(define (lineto point)
+```
+  lineto* is the absolute version.
+
+  horizontal line: hlineto and hlineto*.
+  vertical line: vlineto and vlineto*.
+
+```racket
+  (moveto* '(0 . 0))
+  (lineto '(100 . 100))
+  (hlineto '(-100 . 0))
+  (lineto '(100 . -100))
+  (close-path)
+```
+![ScreenShot](simple-svg/showcase/path/lineto.svg)

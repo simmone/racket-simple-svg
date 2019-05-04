@@ -12,6 +12,8 @@
 (require "path/moveto.rkt")
 (require "path/ccurve.rkt")
 (require "path/qcurve.rkt")
+(require "path/lineto.rkt")
+(require "path/close-path.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -72,4 +74,11 @@
                     (cons/c integer? integer?)
                     (cons/c integer? integer?)
                     void?)]
+          [lineto (-> (cons/c integer? integer?) void?)]
+          [lineto* (-> (cons/c integer? integer?) void?)]
+          [hlineto (-> (cons/c integer? integer?) void?)]
+          [hlineto* (-> (cons/c integer? integer?) void?)]
+          [vlineto (-> (cons/c integer? integer?) void?)]
+          [vlineto* (-> (cons/c integer? integer?) void?)]
+          [close-path (-> void?)]
           ))

@@ -27,3 +27,5 @@ draw a path programmtially.
 @include-section{ccurve.scrbl}
 
 @include-section{qcurve.scrbl}
+
+@include-section{lineto.scrbl}

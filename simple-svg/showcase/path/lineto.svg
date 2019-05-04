@@ -1,14 +1,20 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="120" height="120"
+    width="122" height="122"
     >
-  <rect width="120" height="120" stroke-width="1" stroke="red" fill="white" />
+  <rect width="122" height="122" stroke-width="1" stroke="red" fill="white" />
   <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
         d="
            M10,10
-           L60,60
-           l-50,50
+           l100,100
+           h-100,0
+           l100,-100
+           z
           "
           />
+  <circle cx="10" cy="10" r="2" fill="red" />
+  <circle cx="110" cy="110" r="2" fill="red" />
+  <circle cx="10" cy="110" r="2" fill="red" />
+  <circle cx="110" cy="10" r="2" fill="red" />
 </svg>
