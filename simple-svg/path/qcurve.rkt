@@ -19,6 +19,8 @@
 (define (qcurve* point1 point2) (curve 'Q point1 point2))
 
 (define (curve type point1 point2)
+  ((*sequence-set*))
+
   (let ([point1* #f]
         [point2* #f])
   (if (eq? type 'Q)

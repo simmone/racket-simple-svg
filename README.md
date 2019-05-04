@@ -204,7 +204,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```
   moveto* use absolute position.
 
-  moveto use relative position, don't use moveto as the path start.
+  moveto use relative position.
 
 ```racket
   (moveto* '(100 . 100))

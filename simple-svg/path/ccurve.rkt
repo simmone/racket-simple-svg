@@ -21,6 +21,8 @@
 (define (ccurve* point1 point2 point3) (curve 'C point1 point2 point3))
 
 (define (curve type point1 point2 point3)
+  ((*sequence-set*))
+
   (let ([point1* #f]
         [point2* #f]
         [point3* #f])

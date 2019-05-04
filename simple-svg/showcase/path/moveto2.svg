@@ -1,13 +1,13 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="50" height="130"
+    width="41" height="81"
     >
-  <rect width="50" height="130" stroke-width="1" stroke="red" fill="white" />
+  <rect width="41" height="81" stroke-width="1" stroke="red" fill="white" />
   <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
         d="
-           M20,60
-           m20,60
+           m30,70
           "
           />
+  <circle cx="30" cy="70" r="1" fill="red" />
 </svg>

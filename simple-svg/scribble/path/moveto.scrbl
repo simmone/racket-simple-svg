@@ -15,7 +15,7 @@ move to a position.
         void?]{
   moveto* use absolute position.
 
-  moveto use relative position, don't use moveto as the path start.
+  moveto use relative position.
 }
 
 @codeblock{

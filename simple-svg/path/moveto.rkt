@@ -13,8 +13,13 @@
 (define (moveto* point) (m 'M point))
 
 (define (m type point)
+  ((*sequence-set*))
+
   (if (eq? type 'M)
-      ((*position-set*) point)
+      ((*position-set*)
+       (cons
+        (+ (car point) (car ((*position-get*))))
+        (+ (cdr point) (cdr ((*position-get*))))))
       ((*position-set*)
        (cons
         (+ (car point) (car ((*position-get*))))
@@ -25,7 +30,8 @@
   (if (eq? type 'M)
       (fprintf (*svg*) "           M~a,~a\n"
                (+ (car point) (*padding*)) (+ (cdr point) (*padding*)))
-      (fprintf (*svg*) "           m~a,~a\n"
-               (car point) (cdr point))))
-
-
+      (if (= ((*sequence-get*)) 1)
+          (fprintf (*svg*) "           m~a,~a\n"
+                   (+ (car point) (*padding*)) (+ (cdr point) (*padding*)))
+          (fprintf (*svg*) "           m~a,~a\n"
+                   (car point) (cdr point)))))
