@@ -5,65 +5,47 @@
 
 (provide (contract-out
           [arc (->
-                natural?
-                natural?
+                (cons/c integer? integer?)
                 (cons/c integer? integer?)
                 (list/c 'left_big 'left_small 'right_big 'right_small)
-                (cons/c integer? integer?)
+                (cons/c natural? natural?)
                 void?)]
-          [arc* (->
-                 natural?
-                 natural?
-                 (cons/c integer? integer?)
-                 (list/c 'left_big 'left_small 'right_big 'right_small)
-                 (cons/c integer? integer?)
-                 void?)]
+          [arc (->
+                (cons/c integer? integer?)
+                (cons/c integer? integer?)
+                (list/c 'left_big 'left_small 'right_big 'right_small)
+                (cons/c natural? natural?)
+                void?)]
           ))
 
-(define (arc point1 point2 point3) (curve 'c point1 point2 point3))
+(define (arc point radius direction size) (action 'A point radius direction size))
 
-(define (arc* point1 point2 point3) (curve 'C point1 point2 point3))
+(define (arc* point radius direction size) (action 'a point radius direction size))
 
-(define (curve type point1 point2 point3)
+(define (action type point radius direction size)
   ((*sequence-set*))
 
-  (let ([point1* #f]
-        [point2* #f]
-        [point3* #f])
-  (if (eq? type 'C)
-      (begin
-        (set! point1* point1)
-        (set! point2* point2)
-        (set! point3* point3))
-      (begin
-        (set! point1*
-              (cons
-               (+ (car point1) (car ((*position-get*))))
-               (+ (cdr point1) (cdr ((*position-get*))))))
+  ((*position-set*) point)
 
-        (set! point2*
-              (cons
-               (+ (car point2) (car ((*position-get*))))
-               (+ (cdr point2) (cdr ((*position-get*))))))
+  ((*size-func*) (car size) (cdr size))
+  
+  (let ([section #f])
+    (cond
+     [(eq? direction 'left_big)
+      (set! section "1,0")]
+     [(eq? direction 'left_small)
+      (set! section "0,0")]
+     [(eq? direction 'right_big)
+      (set! section "1,1")]
+     [(eq? direction 'right_small)
+      (set! section "0,1")])
 
-        (set! point3*
-              (cons
-               (+ (car point3) (car ((*position-get*))))
-               (+ (cdr point3) (cdr ((*position-get*))))))))
-        
-      ((*position-set*) point3*)
-
-      ((*size-func*) (car point1*) (cdr point1*))
-      ((*size-func*) (car point2*) (cdr point2*))
-      ((*size-func*) (car point3*) (cdr point3*))
-
-      (if (eq? type 'C)
-          (fprintf (*svg*) "           C~a,~a ~a,~a ~a,~a\n"
-                   (+ (car point1*) (*padding*)) (+ (cdr point1*) (*padding*))
-                   (+ (car point2*) (*padding*)) (+ (cdr point2*) (*padding*))
-                   (+ (car point3*) (*padding*)) (+ (cdr point3*) (*padding*)))
-          (fprintf (*svg*) "           c~a,~a ~a,~a ~a,~a\n"
-                   (car point1) (cdr point1)
-                   (car point2) (cdr point2)
-                   (car point3) (cdr point3)))))
-
+    (if (eq? type 'A)
+          (fprintf (*svg*) "           A~a,~a 0 ~a ~a,~a\n"
+                   (car radius) (cdr radius)
+                   section
+                   (+ (car point) (*padding*)) (+ (cdr point) (*padding*)))
+          (fprintf (*svg*) "           a~a,~a 0 ~a ~a,~a\n"
+                   (car radius) (cdr radius)
+                   section
+                   (car point) (cdr point)))))

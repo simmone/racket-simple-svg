@@ -30,28 +30,28 @@
                 #:stroke-width? 3
                 (lambda ()
                   (moveto* '(120 . 35))
-                  (arc* '(80 . 40) 'left_big '(160 . 75))))
+                  (arc* '(160 . 75) '(80 . 40) 'left_big '(160 . 75))))
 
                (path
                 #:stroke-fill? "green"
                 #:stroke-width? 3
                 (lambda ()
                   (moveto* '(120 . 35))
-                  (arc* '(80 . 40) 'left_small '(160 . 75))))
+                  (arc* '(160 . 75) '(80 . 40) 'left_small '(160 . 75))))
 
                (path
                 #:stroke-fill? "blue"
                 #:stroke-width? 3
                 (lambda ()
                   (moveto* '(120 . 35))
-                  (arc* '(80 . 40) 'right_big '(160 . 75))))
+                  (arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 80))))
 
                (path
                 #:stroke-fill? "yellow"
                 #:stroke-width? 3
                 (lambda ()
                   (moveto* '(120 . 35))
-                  (arc* '(80 . 40) 'right_small '(160 . 75))))
+                  (arc* '(160 . 75) '(80 . 40) 'right_small '(160 . 75))))
 
                (circle '(120 . 35) 2 "red")
                (circle '(160 . 75) 2 "red")
