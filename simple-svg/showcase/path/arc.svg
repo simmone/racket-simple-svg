@@ -1,33 +1,33 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="300" height="300"
+    width="300" height="130"
     >
-  <rect width="300" height="300" stroke-width="1" stroke="red" fill="white" />
-  <path fill="none" stroke="red" stroke-width="3" stroke-linejoin="round"
+  <rect width="300" height="130" stroke-width="1" stroke="red" fill="white" />
+  <path fill="none" stroke="#ccccff" stroke-width="3" stroke-linejoin="round"
         d="
-           M50,50
-           A2,1 0 1,0 100,100
-          "
-          />
-  <path fill="none" stroke="yellow" stroke-width="3" stroke-linejoin="round"
-        d="
-           M60,60
-           A2,1 0 0,1 110,110
-          "
-          />
-  <path fill="none" stroke="blue" stroke-width="3" stroke-linejoin="round"
-        d="
-           M70,70
-           A2,1 0 1,1 120,120
+           M130,45
+           A80,40 0 1,0 170,85
           "
           />
   <path fill="none" stroke="green" stroke-width="3" stroke-linejoin="round"
         d="
-           M80,80
-           A2,1 0 1,0 130,130
+           M130,45
+           A80,40 0 0,0 170,85
           "
           />
-  <circle cx="50" cy="50" r="2" fill="red" />
-  <circle cx="100" cy="100" r="2" fill="red" />
+  <path fill="none" stroke="blue" stroke-width="3" stroke-linejoin="round"
+        d="
+           M130,45
+           A80,40 0 1,1 170,85
+          "
+          />
+  <path fill="none" stroke="yellow" stroke-width="3" stroke-linejoin="round"
+        d="
+           M130,45
+           A80,40 0 0,1 170,85
+          "
+          />
+  <circle cx="130" cy="45" r="2" fill="red" />
+  <circle cx="170" cy="85" r="2" fill="red" />
 </svg>
