@@ -4,30 +4,30 @@
     width="300" height="300"
     >
   <rect width="300" height="300" stroke-width="1" stroke="red" fill="white" />
-  <path fill="none" stroke="#cccc00" stroke-width="3" stroke-linejoin="round"
+  <path fill="none" stroke="red" stroke-width="3" stroke-linejoin="round"
         d="
            M50,50
-           A60,30 0 1,0 200,200
+           A2,1 0 1,0 100,100
           "
           />
-  <path fill="none" stroke="#ff0000" stroke-width="3" stroke-linejoin="round"
+  <path fill="none" stroke="yellow" stroke-width="3" stroke-linejoin="round"
         d="
-           M150,150
-           A60,30 0 0,1 200,200
+           M60,60
+           A2,1 0 0,1 110,110
           "
           />
-  <path fill="none" stroke="#00ff00" stroke-width="3" stroke-linejoin="round"
+  <path fill="none" stroke="blue" stroke-width="3" stroke-linejoin="round"
         d="
-           M150,150
-           A60,30 0 1,1 200,200
+           M70,70
+           A2,1 0 1,1 120,120
           "
           />
-  <path fill="none" stroke="#0000ff" stroke-width="3" stroke-linejoin="round"
+  <path fill="none" stroke="green" stroke-width="3" stroke-linejoin="round"
         d="
-           M150,150
-           A60,30 0 1,0 200,200
+           M80,80
+           A2,1 0 1,0 130,130
           "
           />
-  <circle cx="10" cy="10" r="2" fill="red" />
-  <circle cx="40" cy="40" r="2" fill="red" />
+  <circle cx="50" cy="50" r="2" fill="red" />
+  <circle cx="100" cy="100" r="2" fill="red" />
 </svg>
