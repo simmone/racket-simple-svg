@@ -6,7 +6,7 @@
 @(require (for-label "../../path/lineto.rkt"))
 @(require (for-label "../../path/close-path.rkt"))
 
-@title{lineto/lineto*}
+@title{close-path/lineto/lineto*}
 
 draw a line.
 

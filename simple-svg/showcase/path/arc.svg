@@ -1,0 +1,33 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width="300" height="300"
+    >
+  <rect width="300" height="300" stroke-width="1" stroke="red" fill="white" />
+  <path fill="none" stroke="#cccc00" stroke-width="3" stroke-linejoin="round"
+        d="
+           M50,50
+           A60,30 0 1,0 200,200
+          "
+          />
+  <path fill="none" stroke="#ff0000" stroke-width="3" stroke-linejoin="round"
+        d="
+           M150,150
+           A60,30 0 0,1 200,200
+          "
+          />
+  <path fill="none" stroke="#00ff00" stroke-width="3" stroke-linejoin="round"
+        d="
+           M150,150
+           A60,30 0 1,1 200,200
+          "
+          />
+  <path fill="none" stroke="#0000ff" stroke-width="3" stroke-linejoin="round"
+        d="
+           M150,150
+           A60,30 0 1,0 200,200
+          "
+          />
+  <circle cx="10" cy="10" r="2" fill="red" />
+  <circle cx="40" cy="40" r="2" fill="red" />
+</svg>
