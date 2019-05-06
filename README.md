@@ -270,3 +270,48 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   (close-path)
 ```
 ![ScreenShot](simple-svg/showcase/path/lineto.svg)
+
+### arc
+
+```racket
+(define (arc point radius direction size)
+```
+  arc* is the absolute version.
+
+  point is the end point.
+  
+  radius spcify the ellipse's size.
+  
+  direction is a simplified large-arc-flag and sweep-flag's comibination.
+  
+  as the arc's size can't be calculated, so should set the arc size manully.
+```racket
+(path
+  #:stroke-fill? "#ccccff"
+  #:stroke-width? 3
+  (lambda ()
+    (moveto* '(120 . 35))
+    (arc* '(160 . 75) '(80 . 40) 'left_big '(160 . 75))))
+
+(path
+  #:stroke-fill? "green"
+  #:stroke-width? 3
+  (lambda ()
+    (moveto* '(120 . 35))
+    (arc* '(160 . 75) '(80 . 40) 'left_small '(160 . 75))))
+
+(path
+  #:stroke-fill? "blue"
+  #:stroke-width? 3
+  (lambda ()
+    (moveto* '(120 . 35))
+    (arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 110))))
+
+(path
+  #:stroke-fill? "yellow"
+  #:stroke-width? 3
+  (lambda ()
+    (moveto* '(120 . 35))
+    (arc* '(160 . 75) '(80 . 40) 'right_small '(160 . 75))))
+```
+![ScreenShot](simple-svg/showcase/path/arc.svg)

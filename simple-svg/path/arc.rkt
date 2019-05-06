@@ -6,21 +6,21 @@
 (provide (contract-out
           [arc (->
                 (cons/c integer? integer?)
-                (cons/c integer? integer?)
-                (list/c 'left_big 'left_small 'right_big 'right_small)
+                (cons/c natural? natural?)
+                (or/c 'left_big 'left_small 'right_big 'right_small)
                 (cons/c natural? natural?)
                 void?)]
-          [arc (->
-                (cons/c integer? integer?)
-                (cons/c integer? integer?)
-                (list/c 'left_big 'left_small 'right_big 'right_small)
-                (cons/c natural? natural?)
-                void?)]
+          [arc* (->
+                 (cons/c integer? integer?)
+                 (cons/c natural? natural?)
+                 (or/c 'left_big 'left_small 'right_big 'right_small)
+                 (cons/c natural? natural?)
+                 void?)]
           ))
 
-(define (arc point radius direction size) (action 'A point radius direction size))
+(define (arc point radius direction size) (action 'a point radius direction size))
 
-(define (arc* point radius direction size) (action 'a point radius direction size))
+(define (arc* point radius direction size) (action 'A point radius direction size))
 
 (define (action type point radius direction size)
   ((*sequence-set*))

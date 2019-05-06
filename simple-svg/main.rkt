@@ -14,6 +14,7 @@
 (require "path/qcurve.rkt")
 (require "path/lineto.rkt")
 (require "path/close-path.rkt")
+(require "path/arc.rkt")
 
 (provide (contract-out
           [with-output-to-svg (->* (output-port? procedure?)
@@ -81,4 +82,16 @@
           [vlineto (-> (cons/c integer? integer?) void?)]
           [vlineto* (-> (cons/c integer? integer?) void?)]
           [close-path (-> void?)]
+          [arc (->
+                (cons/c integer? integer?)
+                (cons/c natural? natural?)
+                (or/c 'left_big 'left_small 'right_big 'right_small)
+                (cons/c natural? natural?)
+                void?)]
+          [arc* (->
+                 (cons/c integer? integer?)
+                 (cons/c natural? natural?)
+                 (or/c 'left_big 'left_small 'right_big 'right_small)
+                 (cons/c natural? natural?)
+                 void?)]
           ))

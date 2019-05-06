@@ -44,7 +44,7 @@
                 #:stroke-width? 3
                 (lambda ()
                   (moveto* '(120 . 35))
-                  (arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 80))))
+                  (arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 110))))
 
                (path
                 #:stroke-fill? "yellow"
