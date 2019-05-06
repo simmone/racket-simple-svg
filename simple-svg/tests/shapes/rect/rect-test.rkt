@@ -28,6 +28,7 @@
              output
              #:canvas? '(1 "red" "white")
              (lambda ()
+               (def-rect 100 100 "#BBC42A")
                (rect 100 100 "#BBC42A")))))
          (lambda (actual)
            (check-lines? expected actual))))))
