@@ -4,5 +4,5 @@
     width="120" height="120"
     >
   <rect width="120" height="120" stroke-width="1" stroke="red" fill="white" />
-  <rect width="100" height="100" fill="#BBC42A" x="10" y="10" />
+  <rect width="100" height="100" fill="#BBC42A" x="0" y="0" transform="translate(10 10)" />
 </svg>
