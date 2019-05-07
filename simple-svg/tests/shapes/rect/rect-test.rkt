@@ -28,62 +28,61 @@
              output
              #:canvas? '(1 "red" "white")
              (lambda ()
-               (def-rect 100 100 "#BBC42A")
-               (rect 100 100 "#BBC42A")))))
+               (def-rect 100 100 "#BBC42A")))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
-   (test-case
-    "test-rect-y"
-
-    (call-with-input-file rect_y_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:padding? 0
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (rect 100 100 "#BBC42A" #:start_point? '(50 . 50))))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
-
-   (test-case
-    "test-rect-radius"
-
-    (call-with-input-file rect_radius_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (rect 100 100 "#BBC42A" #:radius? '(5 . 10))))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
-
-   (test-case
-    "test-multiple_rect"
-
-    (call-with-input-file m_rect_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (rect 150 150 "blue")
-               (rect 100 100 "green")
-               (rect 50 50 "red")
-               ))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+;   (test-case
+;    "test-rect-y"
+;
+;    (call-with-input-file rect_y_svg
+;      (lambda (expected)
+;        (call-with-input-string
+;         (call-with-output-string
+;          (lambda (output)
+;            (with-output-to-svg
+;             output
+;             #:padding? 0
+;             #:canvas? '(1 "red" "white")
+;             (lambda ()
+;               (rect 100 100 "#BBC42A" #:start_point? '(50 . 50))))))
+;         (lambda (actual)
+;           (check-lines? expected actual))))))
+;
+;   (test-case
+;    "test-rect-radius"
+;
+;    (call-with-input-file rect_radius_svg
+;      (lambda (expected)
+;        (call-with-input-string
+;         (call-with-output-string
+;          (lambda (output)
+;            (with-output-to-svg
+;             output
+;             #:canvas? '(1 "red" "white")
+;             (lambda ()
+;               (rect 100 100 "#BBC42A" #:radius? '(5 . 10))))))
+;         (lambda (actual)
+;           (check-lines? expected actual))))))
+;
+;   (test-case
+;    "test-multiple_rect"
+;
+;    (call-with-input-file m_rect_svg
+;      (lambda (expected)
+;        (call-with-input-string
+;         (call-with-output-string
+;          (lambda (output)
+;            (with-output-to-svg
+;             output
+;             #:canvas? '(1 "red" "white")
+;             (lambda ()
+;               (rect 150 150 "blue")
+;               (rect 100 100 "green")
+;               (rect 50 50 "red")
+;               ))))
+;         (lambda (actual)
+;           (check-lines? expected actual))))))
 
    ))
 

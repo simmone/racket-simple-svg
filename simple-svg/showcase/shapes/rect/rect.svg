@@ -2,18 +2,17 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:space="preserve"
     width="120" height="120"
     >
   <rect width="120" height="120" stroke-width="1" stroke="red" fill="white" />
   
   <defs>
-    <rect id="rec" width="100" height="100" />
+    <rect id="s1" width="100" height="100" />
   </defs>
   
-  <symbol id="content">
-    <use xlink:href="#rec" fill="#BBC42A" />
+  <symbol id="default">
+    <use xlink:href="#s1" fill="#BBC42A" />
   </symbol>
 
-  <use xlink:href="#content" transform="translate(10 10)"/>
+  <use xlink:href="#default" transform="translate(10 10)"/>
 </svg>
