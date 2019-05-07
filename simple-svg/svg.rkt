@@ -1,7 +1,7 @@
 #lang racket
 
 (provide (contract-out
-          [with-output-to-svg (->* (output-port? procedure?)
+          [svg-out (->* (output-port? procedure?)
                                    (#:padding? natural?
                                     #:width? (or/c #f natural?)
                                     #:height? (or/c #f natural?)
@@ -18,7 +18,7 @@
 (define *padding* (make-parameter #f))
 (define *size-func* (make-parameter #f))
 
-(define (with-output-to-svg output_port write_proc
+(define (svg-out output_port write_proc
                             #:padding? [padding? 10]
                             #:width? [width? #f]
                             #:height? [height? #f]
@@ -31,7 +31,10 @@
        (lambda () 
          (fprintf 
           (*svg*)
-          "<svg\n    version=\"1.1\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n"))
+          "<svg\n    ~a\n    ~a\n    ~a\n"
+          "version=\"1.1\""
+          "xmlns=\"http://www.w3.org/2000/svg\""
+          "xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n")
        (lambda ()
          (let* ([max_width 0]
                 [max_height 0]
