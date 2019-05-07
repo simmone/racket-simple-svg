@@ -22,13 +22,12 @@
     (call-with-input-file rect_svg
       (lambda (expected)
         (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (def-rect 100 100 "#BBC42A")))))
+         (svg-out
+          #:canvas? '(1 "red" "white")
+          (lambda ()
+            (let ([rec (def-rect 100 100)])
+              (svg-set-fill! rec "#BBC42A")
+              (svg-use rec #:at '(0 . 0)))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
