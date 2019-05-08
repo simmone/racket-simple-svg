@@ -17,7 +17,7 @@
 (require "path/arc.rkt")
 
 (provide (contract-out
-          [with-output-to-svg (->* (output-port? procedure?)
+          [svg-out (->* (output-port? procedure?)
                                    (#:padding? natural?
                                     #:width? (or/c #f natural?)
                                     #:height? (or/c #f natural?)

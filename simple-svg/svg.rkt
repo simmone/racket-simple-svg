@@ -10,12 +10,14 @@
                                     )
                                    void?)]
           [*svg* parameter?]
-          [*padding* parameter?]
+          [*shapes_map* parameter?]
+          [*shapes_count* parameter?]
           [*size-func* parameter?]
           ))
 
 (define *svg* (make-parameter #f))
-(define *padding* (make-parameter #f))
+(define *shapes_map* (make-parameter #f))
+(define *shapes_count* (make-parameter #f))
 (define *size-func* (make-parameter #f))
 
 (define (svg-out output_port write_proc
@@ -38,12 +40,17 @@
        (lambda ()
          (let* ([max_width 0]
                 [max_height 0]
+                [shapes_count 0]
                 [content
                  (call-with-output-string
                   (lambda (svg_output_port)
                     (parameterize
                         ([*svg* svg_output_port]
-                         [*padding* padding?]
+                         [*shapes_map* (make-hash)]
+                         [*shapes_counter*
+                          (lambda ()
+                            (set! shapes_count (add1 shapes_count))
+                            shapes_count)]
                          [*size-func* 
                           (lambda (_width _height)
                             (when (> _width max_width) (set! max_width _width))
@@ -68,4 +75,4 @@
           
            (fprintf (*svg*) "~a" content)))
        (lambda ()
-         (fprintf (*svg*) "</svg>\n")))))
+         (fprintf (*svg*) "</svg>\n"))))))

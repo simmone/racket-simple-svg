@@ -3,36 +3,20 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [rect (->* 
-                 (natural? natural? string?)
+          [svg-rect-def (->* 
+                 (natural? natural?)
                  (
-                  #:start_point? (or/c #f (cons/c natural? natural?))
                   #:radius? (or/c #f (cons/c natural? natural?))
                   )
                  void?)]
           ))
 
-(define (rect width height fill
-              #:start_point? [start_point? #f]
+(define (svg-def-rect width height
               #:radius? [radius? #f])
+  (let ([shapes_id ((*shapes_counter*))])
+  (hash-set! (*shape_map*) 
 
-  (let ([x 0]
-        [y 0]
-        [radiusX 0]
-        [radiusY 0])
-
-    (when start_point?
-          (set! x (car start_point?))
-          (set! y (cdr start_point?)))
-
-    (when radius?
-          (set! radiusX (car radius?))
-          (set! radiusY (cdr radius?)))
-    
-  (if start_point?
-      ((*size-func*) (+ x width) (+ y height))
-      ((*size-func*) width height))
-
+(define (svg-rect-format rec)
   (fprintf (*svg*) "  <rect ~a/>\n"
            (with-output-to-string
              (lambda ()
@@ -45,5 +29,5 @@
                    (printf "x=\"~a\" y=\"~a\" " (+ x (*padding*)) (+ y (*padding*))))
 
                (when radius?
-                     (printf "rx=\"~a\" ry=\"~a\" " radiusX radiusY)))))))
+                     (printf "rx=\"~a\" ry=\"~a\" " radiusX radiusY))))))
 
