@@ -12,6 +12,7 @@
                                     #:canvas? (or/c #f (list/c natural? string? string?))
                                     )
                                    void?)]
+          [svg-set-property (-> string? symbol? any/c void?)]
           [svg-rect-def (->* 
                  (natural? natural?)
                  (

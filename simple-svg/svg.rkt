@@ -8,19 +8,17 @@
                                     #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                                     #:canvas? (or/c #f (list/c natural? string? string?))
                                     )
-                                   void?)]
-          [*svg* parameter?]
+                                   string?)]
+          [svg-set-property (-> string? symbol? any/c void?)]
+          [svg-use (->* (string?) (#:at? (cons/c natural? natural?)) void?)]
           [*shape-index* parameter?]
-          [*group-index* parameter?]
-          [*add-shape* parameter?]
-          [*add-group* parameter?]
-          [*size-func* parameter?]
           ))
 
 (define *svg* (make-parameter #f))
 (define *shape-index* (make-parameter #f))
 (define *group-index* (make-parameter #f))
 (define *add-shape* (make-parameter #f))
+(define *set-property* (make-parameter #f))
 (define *add-group* (make-parameter #f))
 (define *size-func* (make-parameter #f))
 
@@ -61,9 +59,13 @@
                             (when (> _width max_width) (set! max_width _width))
                             (when (> _height max_height) (set! max_height _height)))]
                          [*add-shape*
-                          (lambda (_shape_index shape)
-                            (hash-set! shapes_map _shape_index shape)
-                            (hash-set! groups_map "default" `(,@(hash-ref groups_map "default" '()) ,_shape_index)))]
+                          (lambda (_index shape)
+                            (hash-set! shapes_map _index shape)
+                            (hash-set! groups_map "default" `(,@(hash-ref groups_map "default" '()) ,_index)))]
+                         [*set-property*
+                          (lambda (_index property value)
+                            (let ([property_map (second (hash-ref shapes_map _index))])
+                              (hash-set! property_map property value)))]
                          )
                       (write_proc))))])
            
@@ -86,3 +88,9 @@
            (fprintf (*svg*) "~a" content)))
        (lambda ()
          (fprintf (*svg*) "</svg>\n"))))))
+
+(define (svg-set-property index property value)
+  ((*set-property*) index property value))
+
+
+(define (svg-use index #:at? [at? '(0 . 0)])

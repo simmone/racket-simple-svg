@@ -26,8 +26,9 @@
           #:canvas? '(1 "red" "white")
           (lambda ()
             (let ([rec (svg-rect-def 100 100)])
-              (svg-set-fill! rec "#BBC42A")
-              (svg-use rec #:at '(0 . 0)))))
+              (svg-set-property rec 'fill "#BBC42A")
+              (svg-use rec #:at '(0 . 0))
+              (svg-show-default))))
          (lambda (actual)
            (check-lines? expected actual))))))
 
