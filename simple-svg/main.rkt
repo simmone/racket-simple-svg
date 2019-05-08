@@ -13,6 +13,7 @@
                                     )
                                    void?)]
           [svg-set-property (-> string? symbol? any/c void?)]
+          [svg-use (->* (string?) (#:at? (cons/c natural? natural?)) void?)]
           [svg-rect-def (->* 
                  (natural? natural?)
                  (

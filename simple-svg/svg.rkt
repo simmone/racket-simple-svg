@@ -12,6 +12,7 @@
           [svg-set-property (-> string? symbol? any/c void?)]
           [svg-use (->* (string?) (#:at? (cons/c natural? natural?)) void?)]
           [*shape-index* parameter?]
+          [*add-shape* parameter?]
           ))
 
 (define *svg* (make-parameter #f))
@@ -21,6 +22,7 @@
 (define *set-property* (make-parameter #f))
 (define *add-group* (make-parameter #f))
 (define *size-func* (make-parameter #f))
+(define *current_group* (make-parameter #f))
 
 (define (svg-out output_port write_proc
                             #:padding? [padding? 10]
@@ -60,12 +62,18 @@
                             (when (> _height max_height) (set! max_height _height)))]
                          [*add-shape*
                           (lambda (_index shape)
-                            (hash-set! shapes_map _index shape)
-                            (hash-set! groups_map "default" `(,@(hash-ref groups_map "default" '()) ,_index)))]
+                            (hash-set! shapes_map _index shape))]
+                         [*add-group*
+                          (lambda (_index xy)
+                            (hash-set! groups_map
+                                       (*current_group*)
+                                       `(,@(hash-ref groups_map (*current_group*) '())
+                                         ,(list _index xy))))]
                          [*set-property*
                           (lambda (_index property value)
                             (let ([property_map (second (hash-ref shapes_map _index))])
                               (hash-set! property_map property value)))]
+                         [*current_group* "default"]
                          )
                       (write_proc))))])
            
@@ -94,3 +102,4 @@
 
 
 (define (svg-use index #:at? [at? '(0 . 0)])
+  ((*add-group*) index at?))
