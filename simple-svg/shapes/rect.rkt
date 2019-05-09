@@ -8,7 +8,7 @@
                  (
                   #:radius? (or/c #f (cons/c natural? natural?))
                   )
-                 void?)]
+                 string?)]
           ))
 
 (define (svg-rect-def width height

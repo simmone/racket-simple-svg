@@ -19,18 +19,23 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file rect_svg
-      (lambda (expected)
-        (call-with-input-string
-         (svg-out
-          #:canvas? '(1 "red" "white")
-          (lambda ()
-            (let ([rec (svg-rect-def 100 100)])
-              (svg-set-property rec 'fill "#BBC42A")
-              (svg-use rec #:at '(0 . 0))
-              (svg-show-default))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([rec (svg-rect-def 100 100)])
+                (svg-set-property rec 'fill "#BBC42A")
+                (svg-use rec)
+                (svg-show-default))))])
+      
+      (printf "~a\n" actual_svg)
+
+      (call-with-input-file rect_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
 ;   (test-case
 ;    "test-rect-y"

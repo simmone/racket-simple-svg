@@ -21,5 +21,5 @@
                  (
                   #:radius? (or/c #f (cons/c natural? natural?))
                   )
-                 void?)]
+                 string?)]
           ))

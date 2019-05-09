@@ -43,7 +43,7 @@
             "<svg\n    ~a\n    ~a\n    ~a\n"
             "version=\"1.1\""
             "xmlns=\"http://www.w3.org/2000/svg\""
-            "xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n"))
+            "xmlns:xlink=\"http://www.w3.org/1999/xlink\""))
          (lambda ()
            (let* ([max_width 0]
                   [max_height 0]
@@ -51,54 +51,34 @@
                   [groups_count 0]
                   [shapes_map (make-hash)]
                   [groups_map (make-hash)]
-                  [show_list '()]
-                  [content
-                   (call-with-output-string
-                    (lambda (svg_output_port)
-                      (parameterize
-                       (
-                        [*shape-index* (lambda () (set! shapes_count (add1 shapes_count)) shapes_count)]
-                        [*group-index* (lambda () (set! groups_count (add1 groups_count)) groups_count)]
-                        [*size-func* 
-                         (lambda (_width _height)
-                           (when (> _width max_width) (set! max_width _width))
-                           (when (> _height max_height) (set! max_height _height)))]
-                        [*add-shape*
-                         (lambda (_index shape)
-                           (hash-set! shapes_map _index shape))]
-                        [*groups_map* (make-hash)]
-                        [*add-group*
-                         (lambda (_index at)
-                           (hash-set! (*groups_map*)
-                                      (*current_group*)
-                                      `(,@(hash-ref groups_map (*current_group*) '())
-                                        ,(list _index at))))]
-                        [*add-to-show* (lambda (group_index) (set! show_list `(,@show_list ,group_index)))]
-                        [*set-property*
-                         (lambda (_index property value)
-                           (let ([property_map (second (hash-ref shapes_map _index))])
-                             (hash-set! property_map property value)))]
-                        [*current_group* "default"]
-                        )
-                       (write_proc))))])
-             
-             (printf "    width=\"~a\" height=\"~a\"\n"
-                     (if width? width? (+ max_width (* padding? 2)))
-                     (if height? height? (+ max_height (* padding? 2))))
-
-             (when viewBox?
-                   (printf "    viewBox=\"~a ~a ~a ~a\"\n"
-                           (first viewBox?) (second viewBox?) (third viewBox?) (fourth viewBox?)))
-             
-             (printf "    >\n")
-             
-             (when canvas?
-                   (printf "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n"
-                           (if width? width? (+ max_width (* padding? 2)))
-                           (if height? height? (+ max_height (* padding? 2)))
-                           (first canvas?) (second canvas?) (third canvas?)))
-             
-             (printf "~a" content)))
+                  [show_list '()])
+             (parameterize
+              (
+               [*shape-index* (lambda () (set! shapes_count (add1 shapes_count)) (format "s~a" shapes_count))]
+               [*group-index* (lambda () (set! groups_count (add1 groups_count)) (format "g~a" groups_count))]
+               [*size-func* 
+                (lambda (_width _height)
+                  (when (> _width max_width) (set! max_width _width))
+                  (when (> _height max_height) (set! max_height _height)))]
+               [*add-shape*
+                (lambda (_index shape)
+                  (hash-set! shapes_map _index shape)
+                  _index)]
+               [*groups_map* (make-hash)]
+               [*add-group*
+                (lambda (_index at)
+                  (hash-set! (*groups_map*)
+                             (*current_group*)
+                             `(,@(hash-ref groups_map (*current_group*) '())
+                               ,(list _index at))))]
+               [*add-to-show* (lambda (group_index) (set! show_list `(,@show_list ,group_index)))]
+               [*set-property*
+                (lambda (_index property value)
+                  (let ([property_map (hash-ref shapes_map _index)])
+                    (hash-set! property_map property value)))]
+               [*current_group* "default"]
+               )
+              (write_proc))))
          (lambda ()
            (flush-data)
            (printf "</svg>\n"))))))
