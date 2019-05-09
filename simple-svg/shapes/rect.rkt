@@ -16,6 +16,7 @@
   (let ([shape_id ((*shape-index*))]
         [properties_map (make-hash)])
 
+    (hash-set! properties_map 'type 'rect)
     (hash-set! properties_map 'width width)
     (hash-set! properties_map 'height height)
     (hash-set! properties_map 'radius radius?)
