@@ -30,9 +30,11 @@
 (define *current_group* (make-parameter #f))
 (define *debug_port* (make-parameter #f))
 (define *max-size* (make-parameter #f))
-(define *max_width* (make-parameter #f))
-(define *max_height* (make-parameter #f))
+(define *max-width* (make-parameter #f))
+(define *max-height* (make-parameter #f))
 (define *padding* (make-parameter #f))
+(define *canvas* (make-parameter #f))
+(define *shapes-list* (make-parameter #f))
 
 (define (svg-out write_proc
                  #:padding? [padding? 10]
@@ -44,6 +46,7 @@
         [max_height 0]
         [shapes_count 0]
         [groups_count 0]
+        [shapes_list '()]
         [shapes_map (make-hash)]
         [groups_map (make-hash)]
         [group_width_map (make-hash)]
@@ -51,14 +54,16 @@
         [show_list '()])
 
     (parameterize
-     ([*debug_port* (current-output-port)]
+     (
+      [*debug_port* (current-output-port)]
+      [*max-width* (lambda () max_width)]
+      [*max-height* (lambda () max_height)]
       [*max-size*
        (lambda (_width _height)
          (when (> _width max_width) (set! max_width _width))
          (when (> _height max_height) (set! max_height _height)))]
-      [*max_width* (lambda () max_width)]
-      [*max_height* (lambda () max_height)]
-      [*padding* (lambda () padding?)]
+      [*padding* padding?]
+      [*canvas* canvas?]
       [*shape-index* (lambda () (set! shapes_count (add1 shapes_count)) (format "s~a" shapes_count))]
       [*group-index* (lambda () (set! groups_count (add1 groups_count)) (format "g~a" groups_count))]
       [*size-func* 
@@ -67,14 +72,16 @@
                [group_height (hash-ref group_height_map _group 0)])
            (when (> _width group_width) (hash-set! group_width_map _group _width))
            (when (> _height group_height) (hash-set! group_height_map _group _height))))]
-      [*group_width_map* (lambda () group_width_map)]
-      [*group_height_map* (lambda () group_height_map)]
+      [*group_width_map* group_width_map]
+      [*group_height_map* group_height_map]
+      [*shapes-list* (lambda () shapes_list)]
       [*add-shape*
        (lambda (_index shape)
+         (set! shapes_list `(,@shapes_list ,_index))
          (hash-set! shapes_map _index shape)
          _index)]
-      [*groups_map* (lambda () groups_map)]
-      [*shapes_map* (lambda () shapes_map)]
+      [*groups_map* groups_map]
+      [*shapes_map* shapes_map]
       [*add-group*
        (lambda (_index at)
          (hash-set! groups_map
@@ -109,16 +116,16 @@
 (define (svg-use shape_index #:at? [at? '(0 . 0)])
   ((*add-group*) shape_index at?)
   
-  (fprintf (*debug_port*) "t0: ~a\n" ((*shapes_map*)))
+  (fprintf (*debug_port*) "t0: ~a\n" (*shapes_map*))
 
-  (let ([shape (hash-ref ((*shapes_map*)) shape_index)])
+  (let ([shape (hash-ref (*shapes_map*) shape_index)])
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
       ((*size-func*) (*current_group*) (+ (car at?) (hash-ref shape 'width)) (+ (cdr at?) (hash-ref shape 'height)))]
      ))
 
-  (fprintf (*debug_port*) "t1: ~a\n" ((*group_width_map*)))
-  (fprintf (*debug_port*) "t2: ~a\n" ((*group_height_map*)))
+  (fprintf (*debug_port*) "t1: ~a\n" (*group_width_map*))
+  (fprintf (*debug_port*) "t2: ~a\n" (*group_height_map*))
   )
 
 (define (svg-show-default)
@@ -128,10 +135,26 @@
   ((*add-to-show*) group_index)
 
   ((*max-size*)
-   (hash-ref ((*group_width_map*)) group_index)
-   (hash-ref ((*group_height_map*)) group_index)))
+   (hash-ref (*group_width_map*) group_index)
+   (hash-ref (*group_height_map*) group_index)))
 
 (define (flush-data)
   (printf "    width=\"~a\" height=\"~a\"\n    >\n"
-          (+ ((*max_width*)) (* ((*padding*)) 2))
-          (+ ((*max_height*)) (* ((*padding*)) 2))))
+          (+ ((*max-width*)) (* (*padding*) 2))
+          (+ ((*max-height*)) (* (*padding*) 2)))
+
+  (when (*canvas*)
+        (printf "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n\n"
+                (+ ((*max-width*)) (* (*padding*) 2))
+                (+ ((*max-height*)) (* (*padding*) 2))
+                (first (*canvas*))
+                (second (*canvas*))
+                (third (*canvas*))))
+  
+  (printf "  <defs>\n")
+  (let loop ([defs ((*shapes-list*))])
+    (when (not (null? defs))
+          (let ([shape (hash-ref (*shapes_map*) (car defs))])
+            (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
+          (loop (cdr defs))))
+  (printf "  </defs>\n"))
