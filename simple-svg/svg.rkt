@@ -35,6 +35,7 @@
 (define *padding* (make-parameter #f))
 (define *canvas* (make-parameter #f))
 (define *shapes-list* (make-parameter #f))
+(define *groups-list* (make-parameter #f))
 
 (define (svg-out write_proc
                  #:padding? [padding? 10]
@@ -48,11 +49,11 @@
         [groups_count 0]
         [shapes_list '()]
         [shapes_map (make-hash)]
+        [groups_list '()]
         [groups_map (make-hash)]
         [group_width_map (make-hash)]
         [group_height_map (make-hash)]
         [show_list '()])
-
     (parameterize
      (
       [*debug_port* (current-output-port)]
@@ -81,9 +82,11 @@
          (hash-set! shapes_map _index shape)
          _index)]
       [*groups_map* groups_map]
+      [*groups-list* (lambda () groups_list)]
       [*shapes_map* shapes_map]
       [*add-group*
        (lambda (_index at)
+         (set! shapes_list `(,@shapes_list ,_index))
          (hash-set! groups_map
                     (*current_group*)
                     `(,@(hash-ref groups_map (*current_group*) '())
@@ -157,4 +160,11 @@
           (let ([shape (hash-ref (*shapes_map*) (car defs))])
             (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
           (loop (cdr defs))))
-  (printf "  </defs>\n"))
+  (printf "  </defs>\n\n")
+
+  (let loop ([groups ((*shapes-list*))])
+    (when (not (null? defs))
+          (let ([shape (hash-ref (*shapes_map*) (car defs))])
+            (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
+          (loop (cdr defs))))
+  )
