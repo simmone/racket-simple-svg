@@ -6,6 +6,8 @@
 (provide (contract-out
           [svg-out (->* (procedure?)
                         (
+                         #:width? natural?
+                         #:height? natural?
                          #:padding? natural?
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          #:canvas? (or/c #f (list/c natural? string? string?))

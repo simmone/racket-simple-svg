@@ -3,6 +3,8 @@
 (provide (contract-out
           [svg-out (->* (procedure?)
                         (
+                         #:width? natural?
+                         #:height? natural?
                          #:padding? natural?
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          #:canvas? (or/c #f (list/c natural? string? string?))
@@ -41,8 +43,13 @@
 (define *shapes-list* (make-parameter #f))
 (define *groups-list* (make-parameter #f))
 (define *show-list* (make-parameter #f))
+(define *width* (make-parameter #f))
+(define *height* (make-parameter #f))
+(define *viewBox* (make-parameter #f))
 
 (define (svg-out write_proc
+                 #:width? [width? #f]
+                 #:height? [height? #f]
                  #:padding? [padding? 10]
                  #:viewBox? [viewBox? #f]
                  #:canvas? [canvas? #f]
@@ -98,6 +105,9 @@
       [*add-to-show* (lambda (group_index at?) (set! show_list `(,@show_list ,(list group_index at?))))]
       [*show-list* (lambda () show_list)]
       [*current_group* "default"]
+      [*width* width?]
+      [*height* height?]
+      [*viewBox* viewBox?]
       )
      (with-output-to-string
        (lambda ()
@@ -139,25 +149,43 @@
    (hash-ref (*group_height_map*) group_index)))
 
 (define (flush-data)
-  (printf "    width=\"~a\" height=\"~a\"\n    >\n"
-          (+ ((*max-width*)) (* (*padding*) 2))
-          (+ ((*max-height*)) (* (*padding*) 2)))
+  (let ([_width #f]
+        [_height #f])
 
-  (when (*canvas*)
+    (if (or (*width*) (*height*))
+        (begin
+          (set! _width (*width*))
+          (set! _height (*height*)))
+        (begin
+          (set! _width ((*max-width*)))
+          (set! _height ((*max-height*)))))
+
+      (printf "    width=\"~a\" height=\"~a\"\n"
+              (+ _width (* (*padding*) 2))
+              (+ _height (* (*padding*) 2)))
+
+      (when (*viewBox*)
+        (printf "    viewBox=\"~a ~a ~a ~a\"\n"
+                (first (*viewBox*)) (second (*viewBox*)) (third (*viewBox*)) (fourth (*viewBox*))))
+      
+      (printf "    >\n")
+
+      (when (*canvas*)
         (printf "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n\n"
-                (+ ((*max-width*)) (* (*padding*) 2))
-                (+ ((*max-height*)) (* (*padding*) 2))
+                (+ _width (* (*padding*) 2))
+                (+ _height (* (*padding*) 2))
                 (first (*canvas*))
                 (second (*canvas*))
-                (third (*canvas*))))
+                (third (*canvas*)))))
   
-  (printf "  <defs>\n")
-  (let loop ([defs ((*shapes-list*))])
-    (when (not (null? defs))
-          (let ([shape (hash-ref (*shapes_map*) (car defs))])
-            (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
-          (loop (cdr defs))))
-  (printf "  </defs>\n\n")
+  (when (not (null? ((*shapes-list*))))
+    (printf "  <defs>\n")
+    (let loop ([defs ((*shapes-list*))])
+      (when (not (null? defs))
+        (let ([shape (hash-ref (*shapes_map*) (car defs))])
+          (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
+        (loop (cdr defs))))
+    (printf "  </defs>\n\n"))
   
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))

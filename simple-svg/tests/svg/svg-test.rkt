@@ -18,52 +18,54 @@
    (test-case
     "test-empty-svg"
 
-    (call-with-input-file empty_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             (lambda ()
-               (void)))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            (lambda ()
+              (void)))])
+
+      (call-with-input-file empty_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    (test-case
     "test-size-svg"
 
-    (call-with-input-file size_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             #:width? 640
-             #:height? 320
-             #:canvas? '(1 "red" "white")
-             output
-             (lambda ()
-               (void)))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:width? 640
+            #:height? 320
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (void)))])
+      
+      (call-with-input-file size_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    (test-case
-    "test-size-svg"
+    "test-viewbox-svg"
 
-    (call-with-input-file viewBox_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             #:viewBox? '(60 0 120 120)
-             (lambda ()
-               (rect 100 100 "#BBC42A")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            #:viewBox? '(60 0 120 120)
+            (lambda ()
+              (let ([rec (svg-rect-def 100 100)])
+                (svg-use rec #:fill? "#BBC42A")
+                (svg-show-default))))])
+
+      (call-with-input-file viewBox_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 
