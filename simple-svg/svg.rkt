@@ -121,8 +121,6 @@
                  )
   ((*add-group*) shape_index at? fill? stroke?)
   
-  (fprintf (*debug_port*) "t0: ~a\n" (*shapes_map*))
-
   (let ([shape (hash-ref (*shapes_map*) shape_index)])
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
@@ -176,7 +174,7 @@
                       (with-output-to-string
                         (lambda ()
                           (when (not (equal? shape_at '(0 . 0)))
-                            (printf "x=~a y=~a " (car shape_at) (cdr shape_at)))
+                            (printf "x=\"~a\" y=\"~a\" " (car shape_at) (cdr shape_at)))
 
                           (when shape_fill
                             (printf "fill=\"~a\" " shape_fill))
@@ -196,7 +194,7 @@
                 (with-output-to-string
                   (lambda ()
                     (when (not (equal? group_at '(0 . 0)))
-                      (printf "x=~a y=~a " (car group_at) (cdr group_at)))
+                      (printf "x=\"~a\" y=\"~a\" " (car group_at) (cdr group_at)))
                     
                     (when (not (= (*padding*) 0))
                       (printf "transform=\"translate(~a ~a)\" " (*padding*) (*padding*)))

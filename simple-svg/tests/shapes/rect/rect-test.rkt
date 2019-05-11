@@ -46,8 +46,6 @@
                 (svg-use rec #:fill? "#BBC42A" #:at? '(50 . 50))
                 (svg-show-default))))])
       
-      (printf "~a\n" actual_svg)
-
       (call-with-input-file rect_y_svg
         (lambda (expected)
           (call-with-input-string
