@@ -24,8 +24,7 @@
             #:canvas? '(1 "red" "white")
             (lambda ()
               (let ([rec (svg-rect-def 100 100)])
-                (svg-set-property rec 'fill "#BBC42A")
-                (svg-use rec)
+                (svg-use rec #:fill? "#BBC42A")
                 (svg-show-default))))])
       
       (printf "~a\n" actual_svg)

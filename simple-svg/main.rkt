@@ -11,8 +11,13 @@
                          #:canvas? (or/c #f (list/c natural? string? string?))
                          )
                         string?)]
-          [svg-set-property (-> string? symbol? any/c void?)]
-          [svg-use (->* (string?) (#:at? (cons/c natural? natural?)) void?)]
+          [svg-use (->* (string?) 
+                        (
+                         #:at? (cons/c natural? natural?)
+                         #:fill? string?
+                         #:stroke? (cons/c natural? string?)
+                        )
+                        void?)]
           [svg-show-default (-> void?)]
           [svg-rect-def (->* 
                  (natural? natural?)

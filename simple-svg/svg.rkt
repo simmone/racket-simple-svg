@@ -8,8 +8,13 @@
                          #:canvas? (or/c #f (list/c natural? string? string?))
                          )
                         string?)]
-          [svg-set-property (-> string? symbol? any/c void?)]
-          [svg-use (->* (string?) (#:at? (cons/c natural? natural?)) void?)]
+          [svg-use (->* (string?) 
+                        (
+                         #:at? (cons/c natural? natural?)
+                         #:fill? string?
+                         #:stroke? (cons/c natural? string?)
+                        )
+                        void?)]
           [svg-show-default (-> void?)]
           [*shape-index* parameter?]
           [*add-shape* parameter?]
@@ -19,7 +24,6 @@
 (define *shape-index* (make-parameter #f))
 (define *group-index* (make-parameter #f))
 (define *add-shape* (make-parameter #f))
-(define *set-property* (make-parameter #f))
 (define *add-group* (make-parameter #f))
 (define *add-to-show* (make-parameter #f))
 (define *groups_map* (make-parameter #f))
@@ -36,6 +40,7 @@
 (define *canvas* (make-parameter #f))
 (define *shapes-list* (make-parameter #f))
 (define *groups-list* (make-parameter #f))
+(define *show-list* (make-parameter #f))
 
 (define (svg-out write_proc
                  #:padding? [padding? 10]
@@ -85,17 +90,13 @@
       [*groups-list* (lambda () groups_list)]
       [*shapes_map* shapes_map]
       [*add-group*
-       (lambda (_index at)
-         (set! shapes_list `(,@shapes_list ,_index))
+       (lambda (_index at? fill? stroke?)
          (hash-set! groups_map
                     (*current_group*)
                     `(,@(hash-ref groups_map (*current_group*) '())
-                      ,(list _index at))))]
-      [*add-to-show* (lambda (group_index) (set! show_list `(,@show_list ,group_index)))]
-      [*set-property*
-       (lambda (_index property value)
-         (let ([property_map (hash-ref shapes_map _index)])
-           (hash-set! property_map property value)))]
+                      ,(list _index at? fill? stroke?))))]
+      [*add-to-show* (lambda (group_index at?) (set! show_list `(,@show_list ,(list group_index at?))))]
+      [*show-list* (lambda () show_list)]
       [*current_group* "default"]
       )
      (with-output-to-string
@@ -113,11 +114,12 @@
                (flush-data)
                (printf "</svg>\n"))))))))
 
-(define (svg-set-property index property value)
-  ((*set-property*) index property value))
-
-(define (svg-use shape_index #:at? [at? '(0 . 0)])
-  ((*add-group*) shape_index at?)
+(define (svg-use shape_index
+                 #:at? [at? '(0 . 0)]
+                 #:fill? [fill? #f]
+                 #:stroke? [stroke? #f]
+                 )
+  ((*add-group*) shape_index at? fill? stroke?)
   
   (fprintf (*debug_port*) "t0: ~a\n" (*shapes_map*))
 
@@ -126,16 +128,13 @@
      [(eq? (hash-ref shape 'type) 'rect)
       ((*size-func*) (*current_group*) (+ (car at?) (hash-ref shape 'width)) (+ (cdr at?) (hash-ref shape 'height)))]
      ))
-
-  (fprintf (*debug_port*) "t1: ~a\n" (*group_width_map*))
-  (fprintf (*debug_port*) "t2: ~a\n" (*group_height_map*))
   )
 
 (define (svg-show-default)
   (svg-show "default"))
 
 (define (svg-show group_index #:at? [at? '(0 . 0)])
-  ((*add-to-show*) group_index)
+  ((*add-to-show*) group_index at?)
 
   ((*max-size*)
    (hash-ref (*group_width_map*) group_index)
@@ -162,9 +161,45 @@
           (loop (cdr defs))))
   (printf "  </defs>\n\n")
 
-  (let loop ([groups ((*shapes-list*))])
-    (when (not (null? defs))
-          (let ([shape (hash-ref (*shapes_map*) (car defs))])
-            (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
-          (loop (cdr defs))))
+  (let loop-group ([groups ((*show-list*))])
+    (when (not (null? groups))
+      (let ([group_index (list-ref (car groups) 0)])
+        (printf "  <symbol id=\"~a\">\n" group_index)
+        (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
+          (when (not (null? shapes))
+            (let ([shape_index (list-ref  (car shapes) 0)]
+                  [shape_at (list-ref (car shapes) 1)]
+                  [shape_fill (list-ref (car shapes) 2)]
+                  [shape_stroke (list-ref (car shapes) 3)])
+              (printf "    <use xlink:href=\"#~a\" ~a/>\n"
+                      shape_index
+                      (with-output-to-string
+                        (lambda ()
+                          (when (not (equal? shape_at '(0 . 0)))
+                            (printf "x=~a y=~a " (car shape_at) (cdr shape_at)))
+
+                          (when shape_fill
+                            (printf "fill=\"~a\" " shape_fill))
+                          
+                          (when shape_stroke
+                            (printf "stroke-width=~a stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke)))))))
+            (loop-shape (cdr shapes))))
+        (printf "  </symbol>\n\n")
+        (loop-group (cdr groups)))))
+    
+  (let loop-group ([groups ((*show-list*))])
+    (when (not (null? groups))
+      (let ([group_index (list-ref (car groups) 0)]
+            [group_at (list-ref (car groups) 1)])
+        (printf "  <use xlink:href=\"#~a\" ~a/>\n"
+                group_index
+                (with-output-to-string
+                  (lambda ()
+                    (when (not (equal? group_at '(0 . 0)))
+                      (printf "x=~a y=~a " (car group_at) (cdr group_at)))
+                    
+                    (when (not (= (*padding*) 0))
+                      (printf "transform=\"translate(~a ~a)\" " (*padding*) (*padding*)))
+                    ))))
+      (loop-group (cdr groups))))
   )
