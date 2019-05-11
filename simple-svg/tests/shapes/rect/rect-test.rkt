@@ -27,8 +27,6 @@
                 (svg-use rec #:fill? "#BBC42A")
                 (svg-show-default))))])
       
-      (printf "~a\n" actual_svg)
-
       (call-with-input-file rect_svg
         (lambda (expected)
           (call-with-input-string
@@ -36,23 +34,27 @@
            (lambda (actual)
              (check-lines? expected actual)))))))
 
-;   (test-case
-;    "test-rect-y"
-;
-;    (call-with-input-file rect_y_svg
-;      (lambda (expected)
-;        (call-with-input-string
-;         (call-with-output-string
-;          (lambda (output)
-;            (with-output-to-svg
-;             output
-;             #:padding? 0
-;             #:canvas? '(1 "red" "white")
-;             (lambda ()
-;               (rect 100 100 "#BBC42A" #:start_point? '(50 . 50))))))
-;         (lambda (actual)
-;           (check-lines? expected actual))))))
-;
+   (test-case
+    "test-rect-y"
+
+    (let ([actual_svg
+           (svg-out
+            #:padding? 0
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([rec (svg-rect-def 100 100)])
+                (svg-use rec #:fill? "#BBC42A" #:at? '(50 . 50))
+                (svg-show-default))))])
+      
+      (printf "~a\n" actual_svg)
+
+      (call-with-input-file rect_y_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
+
 ;   (test-case
 ;    "test-rect-radius"
 ;
