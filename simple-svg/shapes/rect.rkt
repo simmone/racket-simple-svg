@@ -40,5 +40,3 @@
                              )))))
 
     ((*add-shape*) shape_id properties_map)))
-
-

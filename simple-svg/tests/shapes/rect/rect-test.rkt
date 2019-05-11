@@ -53,40 +53,47 @@
            (lambda (actual)
              (check-lines? expected actual)))))))
 
-;   (test-case
-;    "test-rect-radius"
-;
-;    (call-with-input-file rect_radius_svg
-;      (lambda (expected)
-;        (call-with-input-string
-;         (call-with-output-string
-;          (lambda (output)
-;            (with-output-to-svg
-;             output
-;             #:canvas? '(1 "red" "white")
-;             (lambda ()
-;               (rect 100 100 "#BBC42A" #:radius? '(5 . 10))))))
-;         (lambda (actual)
-;           (check-lines? expected actual))))))
-;
-;   (test-case
-;    "test-multiple_rect"
-;
-;    (call-with-input-file m_rect_svg
-;      (lambda (expected)
-;        (call-with-input-string
-;         (call-with-output-string
-;          (lambda (output)
-;            (with-output-to-svg
-;             output
-;             #:canvas? '(1 "red" "white")
-;             (lambda ()
-;               (rect 150 150 "blue")
-;               (rect 100 100 "green")
-;               (rect 50 50 "red")
-;               ))))
-;         (lambda (actual)
-;           (check-lines? expected actual))))))
+   (test-case
+    "test-rect-radius"
+
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))])
+                (svg-use rec #:fill? "#BBC42A")
+                (svg-show-default))))])
+      
+    (call-with-input-file rect_radius_svg
+      (lambda (expected)
+        (call-with-input-string
+         actual_svg
+         (lambda (actual)
+           (check-lines? expected actual)))))))
+
+   (test-case
+    "test-multiple_rect"
+
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let (
+                    [blue_rec (svg-rect-def 150 150)]
+                    [green_rec (svg-rect-def 100 100)]
+                    [red_rec (svg-rect-def 50 50)]
+                    )
+                (svg-use blue_rec #:fill? "blue")
+                (svg-use green_rec #:fill? "green")
+                (svg-use red_rec #:fill? "red")
+                (svg-show-default))))])
+
+      (call-with-input-file m_rect_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 

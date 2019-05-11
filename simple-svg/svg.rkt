@@ -8,7 +8,7 @@
                          #:canvas? (or/c #f (list/c natural? string? string?))
                          )
                         string?)]
-          [svg-use (->* (string?) 
+          [svg-use (->* (string?)
                         (
                          #:at? (cons/c natural? natural?)
                          #:fill? string?
@@ -158,14 +158,14 @@
             (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
           (loop (cdr defs))))
   (printf "  </defs>\n\n")
-
+  
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
       (let ([group_index (list-ref (car groups) 0)])
         (printf "  <symbol id=\"~a\">\n" group_index)
         (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
           (when (not (null? shapes))
-            (let ([shape_index (list-ref  (car shapes) 0)]
+            (let ([shape_index (list-ref (car shapes) 0)]
                   [shape_at (list-ref (car shapes) 1)]
                   [shape_fill (list-ref (car shapes) 2)]
                   [shape_stroke (list-ref (car shapes) 3)])
