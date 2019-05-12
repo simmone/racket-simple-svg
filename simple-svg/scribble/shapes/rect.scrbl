@@ -15,7 +15,7 @@ draw a rectangle.
           [#:radius? radius? (or/c #f (cons/c natural? natural?)) #f]
         )
         void?]{
-  draw a rectangle.
+  define a rectangle.
 
   radius?: '(radiusX . radiusY)
 }
