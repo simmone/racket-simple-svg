@@ -84,8 +84,8 @@
                     [red_rec (svg-rect-def 50 50)]
                     )
                 (svg-use blue_rec #:fill? "blue")
-                (svg-use green_rec #:fill? "green")
-                (svg-use red_rec #:fill? "red")
+                (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
+                (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
                 (svg-show-default))))])
 
       (call-with-input-file m_rect_svg

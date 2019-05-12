@@ -9,17 +9,13 @@
 
 draw a rectangle.
 
-@defproc[(rect
+@defproc[(svg-rect-def
           [width natural?]
           [height natural?]
-          [fill string?]
-          [#:start_point? start_poiont? (or/c #f (cons/c natural? natural?)) #f]
           [#:radius? radius? (or/c #f (cons/c natural? natural?)) #f]
         )
         void?]{
   draw a rectangle.
-
-  start_point?: '(x .y)
 
   radius?: '(radiusX . radiusY)
 }
@@ -27,7 +23,9 @@ draw a rectangle.
 @section{rect}
 
 @codeblock{
-  (rect 100 100 "#BBC42A")
+  (let ([rec (svg-rect-def 100 100)])
+    (svg-use rec #:fill? "#BBC42A")
+    (svg-show-default))
 }
 
 @image{showcase/shapes/rect/rect.svg}
@@ -35,7 +33,9 @@ draw a rectangle.
 @section{rect with start point(no padding)}
 
 @codeblock{
-  (rect 100 100 "#BBC42A" #:start_point '(50 . 50))
+  (let ([rec (svg-rect-def 100 100)])
+    (svg-use rec #:fill? "#BBC42A" #:at? '(50 . 50))
+    (svg-show-default))
 }
 
 @image{showcase/shapes/rect/rect_y.svg}
@@ -43,7 +43,9 @@ draw a rectangle.
 @section{rect with radius}
 
 @codeblock{
-  (rect 100 100 "#BBC42A" #:radius? '(5 . 10))
+  (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))])
+    (svg-use rec #:fill? "#BBC42A")
+    (svg-show-default))
 }
 
 @image{showcase/shapes/rect/rect_radius.svg}
@@ -51,9 +53,15 @@ draw a rectangle.
 @section{multiple rect}
 
 @codeblock{
-  (rect 150 150 "blue")
-  (rect 100 100 "green")
-  (rect 50 50 "red")
+  (let (
+        [blue_rec (svg-rect-def 150 150)]
+        [green_rec (svg-rect-def 100 100)]
+        [red_rec (svg-rect-def 50 50)]
+        )
+    (svg-use blue_rec #:fill? "blue")
+    (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
+    (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
+    (svg-show-default))
 }
 
 @image{showcase/shapes/rect/m_rect.svg}

@@ -14,8 +14,8 @@
 
   <symbol id="default">
     <use xlink:href="#s1" fill="blue" />
-    <use xlink:href="#s2" fill="green" />
-    <use xlink:href="#s3" fill="red" />
+    <use xlink:href="#s2" x="25" y="25" fill="green" />
+    <use xlink:href="#s3" x="50" y="50" fill="red" />
   </symbol>
 
   <use xlink:href="#default" transform="translate(10 10)" />
