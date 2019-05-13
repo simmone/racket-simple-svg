@@ -142,6 +142,11 @@
        (*current_group*)
        (+ (car (hash-ref shape 'center_point)) (hash-ref shape 'radius))
        (+ (cdr (hash-ref shape 'center_point)) (hash-ref shape 'radius)))]
+     [(eq? (hash-ref shape 'type) 'ellipse)
+      ((*size-func*)
+       (*current_group*)
+       (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)))
+       (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius))))]
      ))
   )
 

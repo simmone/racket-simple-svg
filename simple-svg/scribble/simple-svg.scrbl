@@ -103,3 +103,5 @@ generated svg file:
 @include-section["shapes/rect.scrbl"]
 
 @include-section["shapes/circle.scrbl"]
+
+@include-section["shapes/ellipse.scrbl"]

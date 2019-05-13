@@ -137,13 +137,17 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## Ellipse
 
 ```racket
-(define (ellipse center_point radius_width radius_height fill))
+(define (svg-circle-def
+              center_point (cons/c natural? natural?)
+              radius (cons/c natural? natural?)))
 ```
-  draw a ellipse by center_point and radius.
+  draw a ellipse by center_point: '(x . y) and radius: '(width . height).
   
 ### ellipse
 ```racket
-(ellipse '(150 . 150) 100 50 "#7AA20D")
+  (let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
+    (svg-use ellipse #:fill? "#7AA20D")
+    (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/ellipse/ellipse.svg)
 

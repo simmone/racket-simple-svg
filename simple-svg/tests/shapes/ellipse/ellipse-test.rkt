@@ -16,18 +16,20 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file ellipse_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (ellipse '(150 . 100) '(100 . 50) "#7AA20D")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
+                (svg-use ellipse #:fill? "#7AA20D")
+                (svg-show-default))))])
+      
+      (call-with-input-file ellipse_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 

@@ -9,19 +9,21 @@
 
 draw a ellipse.
 
-@defproc[(ellipse
+@defproc[(svg-ellipse-def
           [center_point (cons/c natural? natural?)]
           [radius (cons/c natural? natural?)]
-          [fill string?]
         )
         void?]{
+
   draw a ellipse by center_point: '(x . y) and radius: '(width . height).
 }
 
 @section{ellipse}
 
 @codeblock{
-  (ellipse '(150 . 150) 100 50 "#7AA20D")
+  (let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
+    (svg-use ellipse #:fill? "#7AA20D")
+    (svg-show-default))
 }
 
 @image{showcase/shapes/ellipse/ellipse.svg}

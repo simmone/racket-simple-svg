@@ -3,19 +3,25 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [ellipse (-> (cons/c natural? natural?) (cons/c natural? natural?) string? void?)]
+          [svg-ellipse-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           ))
 
-(define (ellipse center_point radius fill)
-  ((*size-func*) (+ (car center_point) (car radius)) (+ (cdr center_point) (cdr radius)))
+(define (svg-ellipse-def center_point radius)
+  (let ([shape_id ((*shape-index*))]
+        [properties_map (make-hash)])
 
-  (fprintf (*svg*) "  <ellipse ~a/>\n"
-           (with-output-to-string
-             (lambda ()
-               (printf "cx=\"~a\" cy=\"~a\" rx=\"~a\" ry=\"~a\" fill=\"~a\" "
-                       (+ (car center_point) (*padding*))
-                       (+ (cdr center_point) (*padding*))
-                       (car radius)
-                       (cdr radius)
-                       fill)))))
+    (hash-set! properties_map 'type 'ellipse)
+    (hash-set! properties_map 'center_point center_point)
+    (hash-set! properties_map 'radius radius)
+    
+    (hash-set! properties_map 'format-def
+               (lambda (index ellipse)
+                 (format "    <ellipse id=\"~a\" cx=\"~a\" cy=\"~a\" rx=\"~a\" ry=\"~a\" />"
+                         index
+                         (car (hash-ref ellipse 'center_point))
+                         (cdr (hash-ref ellipse 'center_point))
+                         (car (hash-ref ellipse 'radius))
+                         (cdr (hash-ref ellipse 'radius)))))
+
+    ((*add-shape*) shape_id properties_map)))
 

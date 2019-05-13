@@ -1,8 +1,18 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="270" height="170"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="220" height="120"
     >
-  <rect width="270" height="170" stroke-width="1" stroke="red" fill="white" />
-  <ellipse cx="160" cy="110" rx="100" ry="50" fill="#7AA20D" />
+  <rect width="220" height="120" stroke-width="1" stroke="red" fill="white" />
+
+  <defs>
+    <ellipse id="s1" cx="100" cy="50" rx="100" ry="50" />
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" fill="#7AA20D" />
+  </symbol>
+
+  <use xlink:href="#default" transform="translate(10 10)" />
 </svg>
