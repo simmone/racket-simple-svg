@@ -1,8 +1,18 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="170" height="170"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="120" height="120"
     >
-  <rect width="170" height="170" stroke-width="1" stroke="red" fill="white" />
-  <circle cx="110" cy="110" r="50" fill="#ED6E46" />
+  <rect width="120" height="120" stroke-width="1" stroke="red" fill="white" />
+
+  <defs>
+    <circle id="s1" cx="50" cy="50" r="50" />
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" fill="#ED6E46" />
+  </symbol>
+
+  <use xlink:href="#default" transform="translate(10 10)" />
 </svg>

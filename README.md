@@ -119,13 +119,18 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## Circle
 
 ```racket
-(define (circle center_point radius fill))
+(define (svg-circle-def
+              center_point (cons/c natural? natural?)
+              radius natural?))
 ```
+
   draw a circle by center_point: '(x . y) and radius length.
   
 ### circle
 ```racket
-(circle '(100 . 100) 50 "#ED6E46")
+(let ([circle (svg-circle-def '(100 . 100) 50)])
+  (svg-use circle #:fill? "#ED6E46")
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/circle/circle.svg)
 

@@ -9,19 +9,22 @@
 
 draw a circle.
 
-@defproc[(circle
+@defproc[(svg-circle-def
           [center_point (cons/c natural? natural?)]
           [radius natural?]
-          [fill string?]
         )
         void?]{
+
   draw a circle by center_point: '(x . y) and radius length.
+
 }
 
 @section{circle}
 
 @codeblock{
-  (circle '(100 . 100) 50 "#ED6E46")
+  (let ([circle (svg-circle-def '(100 . 100) 50)])
+    (svg-use circle #:fill? "#ED6E46")
+    (svg-show-default))
 }
 
 @image{showcase/shapes/circle/circle.svg}

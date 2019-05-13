@@ -125,7 +125,7 @@
                (printf "</svg>\n"))))))))
 
 (define (svg-use shape_index
-                 #:at? [at? '(0 . 0)]
+                 #:at? [at? #f]
                  #:fill? [fill? #f]
                  #:stroke? [stroke? #f]
                  )
@@ -134,7 +134,14 @@
   (let ([shape (hash-ref (*shapes_map*) shape_index)])
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
-      ((*size-func*) (*current_group*) (+ (car at?) (hash-ref shape 'width)) (+ (cdr at?) (hash-ref shape 'height)))]
+      (if at?
+          ((*size-func*) (*current_group*) (+ (car at?) (hash-ref shape 'width)) (+ (cdr at?) (hash-ref shape 'height)))
+          ((*size-func*) (*current_group*) (hash-ref shape 'width) (hash-ref shape 'height)))]
+     [(eq? (hash-ref shape 'type) 'circle)
+      ((*size-func*)
+       (*current_group*)
+       (+ (car (hash-ref shape 'center_point)) (hash-ref shape 'radius))
+       (+ (cdr (hash-ref shape 'center_point)) (hash-ref shape 'radius)))]
      ))
   )
 
@@ -201,7 +208,7 @@
                       shape_index
                       (with-output-to-string
                         (lambda ()
-                          (when (not (equal? shape_at '(0 . 0)))
+                          (when shape_at
                             (printf "x=\"~a\" y=\"~a\" " (car shape_at) (cdr shape_at)))
 
                           (when shape_fill

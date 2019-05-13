@@ -16,18 +16,19 @@
    (test-case
     "test-basic"
 
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([circle (svg-circle-def '(100 . 100) 50)])
+                (svg-use circle #:fill? "#ED6E46")
+                (svg-show-default))))])
+
     (call-with-input-file circle_svg
       (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (circle '(100 . 100) 50 "#ED6E46")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+        actual_svg
+        (lambda (actual)
+          (check-lines? expected actual))))))
 
    ))
 
