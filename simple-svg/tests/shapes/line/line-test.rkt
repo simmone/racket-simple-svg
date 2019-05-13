@@ -16,18 +16,20 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file line_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (line '(0 . 0) '(100 . 100) "#765373" 8)))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([line (svg-line-def '(0 . 0) '(100 . 100))])
+                (svg-use line #:stroke? '(3 . "#765373"))
+                (svg-show-default))))])
+
+      (call-with-input-file line_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
    ))
 
 (run-tests test-all)

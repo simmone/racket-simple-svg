@@ -12,8 +12,6 @@ draw a line.
 @defproc[(line
           [start_point (cons/c natural? natural?)]
           [end_point (cons/c natural? natural?)]
-          [stroke_fill string?]
-          [stroke_width natural?]
         )
         void?]{
 }
@@ -21,7 +19,9 @@ draw a line.
 @section{line}
 
 @codeblock{
-  (line '(0 . 0) '(100 . 100) "#765373" 8)
+(let ([line (svg-line-def '(0 . 0) '(100 . 100))])
+  (svg-use line #:stroke? '(3 . "#765373"))
+  (svg-show-default))
 }
 
 @image{showcase/shapes/line/line.svg}

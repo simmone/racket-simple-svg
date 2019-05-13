@@ -147,6 +147,9 @@
        (*current_group*)
        (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)))
        (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius))))]
+     [(eq? (hash-ref shape 'type) 'line)
+      ((*size-func*) (*current_group*) (car (hash-ref shape 'start_point)) (cdr (hash-ref shape 'start_point)))
+      ((*size-func*) (*current_group*) (car (hash-ref shape 'end_point)) (cdr (hash-ref shape 'end_point)))]
      ))
   )
 
@@ -220,7 +223,7 @@
                             (printf "fill=\"~a\" " shape_fill))
                           
                           (when shape_stroke
-                            (printf "stroke-width=~a stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke)))))))
+                            (printf "stroke-width=\"~a\" stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke)))))))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
         (loop-group (cdr groups)))))

@@ -3,22 +3,24 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [line (-> (cons/c natural? natural?) (cons/c natural? natural?) string? natural? void?)]
+          [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           ))
 
-(define (line start_point end_point stroke_fill stroke_width)
+(define (svg-line-def start_point end_point)
+  (let ([shape_id ((*shape-index*))]
+        [properties_map (make-hash)])
 
-  ((*size-func*) (car start_point) (cdr start_point))
-  ((*size-func*) (car end_point) (cdr end_point))
+    (hash-set! properties_map 'type 'line)
+    (hash-set! properties_map 'start_point start_point)
+    (hash-set! properties_map 'end_point end_point)
+    
+    (hash-set! properties_map 'format-def
+               (lambda (index line)
+                 (format "    <line id=\"~a\" x1=\"~a\" y1=\"~a\" x2=\"~a\" y2=\"~a\" />"
+                         index
+                         (car (hash-ref line 'start_point))
+                         (cdr (hash-ref line 'start_point))
+                         (car (hash-ref line 'end_point))
+                         (cdr (hash-ref line 'end_point)))))
 
-  (fprintf (*svg*) "  <line ~a />\n"
-           (with-output-to-string
-             (lambda ()
-               (printf "x1=\"~a\" y1=\"~a\" x2=\"~a\" y2=\"~a\" stroke=\"~a\" stroke-width=\"~a\""
-                       (+ (car start_point) (*padding*))
-                       (+ (cdr start_point) (*padding*))
-                       (+ (car end_point) (*padding*))
-                       (+ (cdr end_point) (*padding*))
-                       stroke_fill
-                       stroke_width)))))
-
+    ((*add-shape*) shape_id properties_map)))
