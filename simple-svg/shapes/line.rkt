@@ -23,4 +23,16 @@
                          (car (hash-ref line 'end_point))
                          (cdr (hash-ref line 'end_point)))))
 
+    (let ([max_width 0]
+          [max_height 0])
+
+      (let loop ([loop_points (list start_point end_point)])
+        (when (not (null? loop_points))
+              (when (> (caar loop_points) max_width) (set! max_width (caar loop_points)))
+              (when (> (cdar loop_points) max_height) (set! max_height (cdar loop_points)))
+              (loop (cdr loop_points))))
+
+      (hash-set! properties_map 'max_width max_width)
+      (hash-set! properties_map 'max_height max_height))
+
     ((*add-shape*) shape_id properties_map)))

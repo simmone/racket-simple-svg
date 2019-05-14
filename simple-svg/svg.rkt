@@ -131,31 +131,34 @@
                  )
   ((*add-group*) shape_index at? fill? stroke?)
   
-  (let ([shape (hash-ref (*shapes_map*) shape_index)]
-        [stroke_width (if stroke? (car stroke?) 1)])
+  (let* ([shape (hash-ref (*shapes_map*) shape_index)]
+         [stroke_width (* (sub1 (if stroke? (car stroke?) 1)) 2)])
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
-      (if at?
-          ((*size-func*) (*current_group*) (+ (car at?) (hash-ref shape 'width)) (+ (cdr at?) (hash-ref shape 'height)))
-          ((*size-func*) (*current_group*) (hash-ref shape 'width) (hash-ref shape 'height)))]
+      ((*size-func*)
+       (*current_group*)
+       (+ (if at? (car at?) 0) (hash-ref shape 'width) stroke_width)
+       (+ (if at? (cdr at?) 0) (hash-ref shape 'height) stroke_width))]
      [(eq? (hash-ref shape 'type) 'circle)
       ((*size-func*)
        (*current_group*)
-       (+ (car (hash-ref shape 'center_point)) (hash-ref shape 'radius))
-       (+ (cdr (hash-ref shape 'center_point)) (hash-ref shape 'radius)))]
+       (+ (car (hash-ref shape 'center_point)) (hash-ref shape 'radius) stroke_width)
+       (+ (cdr (hash-ref shape 'center_point)) (hash-ref shape 'radius) stroke_width))]
      [(eq? (hash-ref shape 'type) 'ellipse)
       ((*size-func*)
        (*current_group*)
-       (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)))
-       (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius))))]
+       (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)) stroke_width)
+       (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius)) stroke_width))]
      [(eq? (hash-ref shape 'type) 'line)
-      ((*size-func*) (*current_group*) (car (hash-ref shape 'start_point)) (cdr (hash-ref shape 'start_point)))
-      ((*size-func*) (*current_group*) (car (hash-ref shape 'end_point)) (cdr (hash-ref shape 'end_point)))]
+      ((*size-func*)
+       (*current_group*)
+       (+ (hash-ref shape 'max_width) stroke_width)
+       (+ (hash-ref shape 'max_height) stroke_width))]
      [(eq? (hash-ref shape 'type) 'polygon)
       ((*size-func*)
        (*current_group*)
-       (+ (hash-ref shape 'max_width) (* (sub1 stroke_width) 2))
-       (+ (hash-ref shape 'max_height) (* (sub1 stroke_width) 2)))]
+       (+ (hash-ref shape 'max_width) stroke_width)
+       (+ (hash-ref shape 'max_height) stroke_width))]
      ))
   )
 
