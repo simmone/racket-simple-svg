@@ -149,12 +149,10 @@
        (*current_group*)
        (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)) stroke_width)
        (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius)) stroke_width))]
-     [(eq? (hash-ref shape 'type) 'line)
-      ((*size-func*)
-       (*current_group*)
-       (+ (hash-ref shape 'max_width) stroke_width)
-       (+ (hash-ref shape 'max_height) stroke_width))]
-     [(eq? (hash-ref shape 'type) 'polygon)
+     [(or 
+       (eq? (hash-ref shape 'type) 'line)
+       (eq? (hash-ref shape 'type) 'polygon)
+       (eq? (hash-ref shape 'type) 'polyline))
       ((*size-func*)
        (*current_group*)
        (+ (hash-ref shape 'max_width) stroke_width)

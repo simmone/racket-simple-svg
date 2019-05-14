@@ -6,6 +6,7 @@
 (require "shapes/ellipse.rkt")
 (require "shapes/line.rkt")
 (require "shapes/polygon.rkt")
+(require "shapes/polyline.rkt")
 
 (provide (contract-out
           [svg-out (->* (procedure?)
@@ -35,4 +36,5 @@
           [svg-ellipse-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
+          [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
           ))

@@ -16,20 +16,22 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file polyline_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (polyline 
-                '((0 . 40) (40 . 40) (40 . 80) (80 . 80) (80 . 120) (120 . 120) (120 . 160))
-                "#BBC42A" 6 "blue")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([polyline
+                     (svg-polyline-def
+                      '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
+                (svg-use polyline #:stroke? '(5 . "#BBC42A") #:fill? "blue")
+                (svg-show-default))))])
+      
+      (call-with-input-file polyline_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 

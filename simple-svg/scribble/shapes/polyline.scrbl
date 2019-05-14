@@ -9,22 +9,21 @@
 
 draw a polyline.
 
-@defproc[(polyline
+@defproc[(svg-polyline-def
           [points (listof (cons/c natural? natural?))]
-          [stroke_fill string?]
-          [stroke_width natural?]
-          [fill string?]
         )
-        void?]{
+        string?]{
   draw a polyline by points list.
 }
 
 @section{polyline}
 
 @codeblock{
-  (polyline 
-    '((0 . 40) (40 . 40) (40 . 80) (80 . 80) (80 . 120) (120 . 120) (120 . 160))
-    "#BBC42A" 6 "blue")
+(let ([polyline
+  (svg-polyline-def
+    '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
+  (svg-use polyline #:stroke? '(5 . "#BBC42A") #:fill? "blue")
+  (svg-show-default))
 }
 
 @image{showcase/shapes/polyline/polyline.svg}
