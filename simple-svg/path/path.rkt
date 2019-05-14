@@ -3,15 +3,7 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [path (->* 
-                 (procedure?)
-                 (
-                  #:fill? string?
-                  #:stroke-fill? string?
-                  #:stroke-width? natural?
-                  #:stroke-linejoin? string?
-                  )
-                 void?)]
+          [svg-path-def (-> procedure? string?)]
           [*position-set* parameter?]
           [*position-get* parameter?]
           [*sequence-set* parameter?]
@@ -24,12 +16,7 @@
 (define *sequence-set* (make-parameter #f))
 (define *sequence-get* (make-parameter #f))
 
-(define (path path_proc
-              #:fill? [fill? "none"]
-              #:stroke-fill? [stroke-fill? "#333333"]
-              #:stroke-width? [stroke-width? 1]
-              #:stroke-linejoin? [stroke-linejoin? "round"])
-  
+(define (path path_proc)
   (dynamic-wind
       (lambda ()
         (fprintf (*svg*) "  <path fill=\"~a\" stroke=\"~a\" stroke-width=\"~a\" stroke-linejoin=\"~a\"\n"

@@ -3,7 +3,7 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [raw-path (->* 
+          [svg-path-raw (->* 
                  (natural? natural? string?)
                  (
                   #:fill? string?
@@ -14,16 +14,17 @@
                  void?)]
           ))
 
-(define (raw-path width height raw_data
-              #:fill? [fill? "none"]
-              #:stroke-fill? [stroke-fill? "#333333"]
-              #:stroke-width? [stroke-width? 1]
-              #:stroke-linejoin? [stroke-linejoin? "round"])
+(define (svg-path-raw width height raw_data)
+  (let ([shape_id ((*shape-index*))]
+        [properties_map (make-hash)])
 
-  ((*size-func*) width height)
+    (hash-set! properties_map 'type 'rect)
+    (hash-set! properties_map 'width width)
+    (hash-set! properties_map 'height height)
 
-  (fprintf (*svg*) "  <path fill=\"~a\" stroke=\"~a\" stroke-width=\"~a\" stroke-linejoin=\"~a\"\n"
-           fill? stroke-fill? stroke-width? stroke-linejoin?)
-  
-  (fprintf (*svg*) "        d=\"~a\" />\n" raw_data))
+    (hash-set! properties_map 'format-def
+               (lambda (index path)
+                 (format "  <path d=\"~a\" />\n" raw_data)))
+
+    ((*add-shape*) shape_id properties_map)))
 
