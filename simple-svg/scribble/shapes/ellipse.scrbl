@@ -13,7 +13,7 @@ draw a ellipse.
           [center_point (cons/c natural? natural?)]
           [radius (cons/c natural? natural?)]
         )
-        void?]{
+        string?]{
 
   draw a ellipse by center_point: '(x . y) and radius: '(width . height).
 }

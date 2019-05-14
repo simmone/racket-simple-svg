@@ -13,7 +13,7 @@ draw a circle.
           [center_point (cons/c natural? natural?)]
           [radius natural?]
         )
-        void?]{
+        string?]{
 
   draw a circle by center_point: '(x . y) and radius length.
 

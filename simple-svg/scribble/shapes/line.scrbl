@@ -9,18 +9,18 @@
 
 draw a line.
 
-@defproc[(line
+@defproc[(svgf-line-def
           [start_point (cons/c natural? natural?)]
           [end_point (cons/c natural? natural?)]
         )
-        void?]{
+        string?]{
 }
 
 @section{line}
 
 @codeblock{
 (let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-  (svg-use line #:stroke? '(3 . "#765373"))
+  (svg-use line #:stroke? '(10 . "#765373"))
   (svg-show-default))
 }
 

@@ -14,7 +14,7 @@ draw a rectangle.
           [height natural?]
           [#:radius? radius? (or/c #f (cons/c natural? natural?)) #f]
         )
-        void?]{
+        string?]{
   define a rectangle.
 
   radius?: '(radiusX . radiusY)

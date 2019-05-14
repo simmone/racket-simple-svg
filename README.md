@@ -68,12 +68,11 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## Rectangle
 
 ```racket
-(define (svg-rect-def
-              width natural?
-              height natural?
-              #:radius? [radius? #f]))
+(svg-rect-def
+  width natural?
+  height natural?
+  #:radius? [radius? #f]
 ```
-
   define a rectangle.
 
   use radius to set corner radius: '(radiusX . radiusY).
@@ -104,26 +103,25 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ### multiple rect
 ```racket
-  (let (
-        [blue_rec (svg-rect-def 150 150)]
-        [green_rec (svg-rect-def 100 100)]
-        [red_rec (svg-rect-def 50 50)]
-        )
-    (svg-use blue_rec #:fill? "blue")
-    (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
-    (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
-    (svg-show-default))
+(let (
+  [blue_rec (svg-rect-def 150 150)]
+  [green_rec (svg-rect-def 100 100)]
+  [red_rec (svg-rect-def 50 50)]
+  )
+  (svg-use blue_rec #:fill? "blue")
+  (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
+  (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
 
 ## Circle
 
 ```racket
-(define (svg-circle-def
-              center_point (cons/c natural? natural?)
-              radius natural?))
+(svg-circle-def
+   center_point (cons/c natural? natural?)
+   radius natural?)
 ```
-
   draw a circle by center_point: '(x . y) and radius length.
   
 ### circle
@@ -137,30 +135,34 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## Ellipse
 
 ```racket
-(define (svg-circle-def
-              center_point (cons/c natural? natural?)
-              radius (cons/c natural? natural?)))
+(svg-ellipse-def
+  center_point (cons/c natural? natural?)
+  radius (cons/c natural? natural?))
 ```
   draw a ellipse by center_point: '(x . y) and radius: '(width . height).
   
 ### ellipse
 ```racket
-  (let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
-    (svg-use ellipse #:fill? "#7AA20D")
-    (svg-show-default))
+(let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
+  (svg-use ellipse #:fill? "#7AA20D")
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/ellipse/ellipse.svg)
 
 ## Line
 
 ```racket
-(define (line start_point end_point stroke_fill stroke_width))
+(svg-line-def
+    start_point (cons/c natural? natural?)
+    end_point (cons/c natural? natural?))
 ```
   draw a line by start, end point.
   
 ### line
 ```racket
-(line '(0 . 0) '(100 . 100) "#765373" 8)
+(let ([line (svg-line-def '(0 . 0) '(100 . 100))])
+  (svg-use line #:stroke? '(10 . "#765373"))
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/line/line.svg)
 
@@ -182,15 +184,18 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## Polygon
 
 ```racket
-(define (polygon points fill)
+(svg-polygon-def
+    points (listof (cons/c natural? natural?)))
 ```
   draw a polygon by points list.
   
 ### polygon
 ```racket
-(polygon 
-    '((50 . 5) (100 . 5) (125 . 30) (125 . 80) (100 . 105) (50 . 105) (25 . 80) (25 . 30))
-        "#ED6E46")
+(let ([polygon
+  (svg-polygon-def
+    '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
+    (svg-use polygon #:stroke? '(5 . "#765373") #:fill? "#ED6E46")
+    (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polygon/polygon.svg)
 
