@@ -16,21 +16,22 @@
    (test-case
     "test-basic"
 
-    (call-with-input-file polygon_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (polygon 
-                '((50 . 5) (100 . 5) (125 . 30) (125 . 80) (100 . 105) (50 . 105) (25 . 80) (25 . 30))
-                "#ED6E46")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
-
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([polygon
+                     (svg-polygon-def
+                      '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
+                (svg-use polygon #:stroke? '(5 . "#765373") #:fill? "#ED6E46")
+                (svg-show-default))))])
+      
+      (call-with-input-file polygon_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
    ))
 
 (run-tests test-all)

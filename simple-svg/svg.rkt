@@ -131,7 +131,8 @@
                  )
   ((*add-group*) shape_index at? fill? stroke?)
   
-  (let ([shape (hash-ref (*shapes_map*) shape_index)])
+  (let ([shape (hash-ref (*shapes_map*) shape_index)]
+        [stroke_width (if stroke? (car stroke?) 1)])
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
       (if at?
@@ -150,6 +151,11 @@
      [(eq? (hash-ref shape 'type) 'line)
       ((*size-func*) (*current_group*) (car (hash-ref shape 'start_point)) (cdr (hash-ref shape 'start_point)))
       ((*size-func*) (*current_group*) (car (hash-ref shape 'end_point)) (cdr (hash-ref shape 'end_point)))]
+     [(eq? (hash-ref shape 'type) 'polygon)
+      ((*size-func*)
+       (*current_group*)
+       (+ (hash-ref shape 'max_width) (* (sub1 stroke_width) 2))
+       (+ (hash-ref shape 'max_height) (* (sub1 stroke_width) 2)))]
      ))
   )
 
@@ -158,7 +164,7 @@
 
 (define (svg-show group_index #:at? [at? '(0 . 0)])
   ((*add-to-show*) group_index at?)
-
+  
   ((*max-size*)
    (hash-ref (*group_width_map*) group_index)
    (hash-ref (*group_height_map*) group_index)))
@@ -223,7 +229,11 @@
                             (printf "fill=\"~a\" " shape_fill))
                           
                           (when shape_stroke
-                            (printf "stroke-width=\"~a\" stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke)))))))
+                            (printf "stroke-width=\"~a\" stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke)))
+
+                          (when shape_stroke
+                            (printf "transform=\"translate(~a ~a)\" " (sub1 (car shape_stroke)) (sub1 (car shape_stroke))))
+                          ))))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
         (loop-group (cdr groups)))))
