@@ -3,7 +3,7 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-path-def (-> procedure? string?)]
+          [svg-path-def (-> natural? natural? procedure? string?)]
           [*add-path* parameter?]
           ))
 

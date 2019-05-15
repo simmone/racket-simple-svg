@@ -7,6 +7,8 @@
 (require "shapes/line.rkt")
 (require "shapes/polygon.rkt")
 (require "shapes/polyline.rkt")
+(require "path/path.rkt")
+(require "path/raw-path.rkt")
 
 (provide (contract-out
           [svg-out (->* (procedure?)
@@ -37,6 +39,6 @@
           [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
           [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
-          [svg-path-def (-> procedure? string?)]
+          [svg-path-def (-> natural? natural? procedure? string?)]
           [svg-path-raw (-> string? void?)]
           ))

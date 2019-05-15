@@ -230,9 +230,7 @@
                             (printf "fill=\"~a\" " shape_fill))
                           
                           (when shape_stroke
-                            (printf "stroke-width=\"~a\" stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke)))
-
-                          (when shape_stroke
+                            (printf "stroke-width=\"~a\" stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke))
                             (printf "transform=\"translate(~a ~a)\" " (sub1 (car shape_stroke)) (sub1 (car shape_stroke))))
                           ))))
             (loop-shape (cdr shapes))))
