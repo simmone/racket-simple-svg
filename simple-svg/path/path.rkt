@@ -4,32 +4,35 @@
 
 (provide (contract-out
           [svg-path-def (-> procedure? string?)]
-          [*position-set* parameter?]
-          [*position-get* parameter?]
-          [*sequence-set* parameter?]
-          [*sequence-get* parameter?]
           ))
 
-(define *position-set* (make-parameter #f))
-(define *position-get* (make-parameter #f))
+(define (svg-path-def width height path_proc)
+  (let ([shape_id ((*shape-index*))]
+        [properties_map (make-hash)])
 
-(define *sequence-set* (make-parameter #f))
-(define *sequence-get* (make-parameter #f))
+    (hash-set! properties_map 'type 'path)
+    (hash-set! properties_map 'width width)
+    (hash-set! properties_map 'height height)
+    (hash-set! properties_map 'defs '())
 
-(define (path path_proc)
-  (dynamic-wind
-      (lambda ()
-        (fprintf (*svg*) "  <path fill=\"~a\" stroke=\"~a\" stroke-width=\"~a\" stroke-linejoin=\"~a\"\n"
-                 fill? stroke-fill? stroke-width? stroke-linejoin?)
-        (fprintf (*svg*) "        d=\"\n"))
-      (lambda ()
-        (let ([position (cons 0 0)]
-              [sequence 0])
-          (parameterize
-              ([*position-get* (lambda () position)]
-               [*position-set* (lambda (_position) (set! position _position))]
-               [*sequence-get* (lambda () sequence)]
-               [*sequence-set* (lambda () (set! sequence (add1 sequence)))])
-            (path_proc))))
-      (lambda ()
-        (fprintf (*svg*) "          \"\n          />\n" ))))
+    (hash-set! properties_map 'format-def
+               (lambda (index path)
+                 (with-output-to-string
+                   (lambda ()
+                     (dynamic-wind
+                         (lambda ()
+                           (printf "  <path\n")
+                           (printf "        d=\"\n"))
+                         (lambda ()
+                           (let ([position (cons 0 0)]
+                                 [sequence 0])
+                             (parameterize
+                              ([*position-get* (lambda () position)]
+                               [*position-set* (lambda (_position) (set! position _position))]
+                               [*sequence-get* (lambda () sequence)]
+                               [*sequence-set* (lambda () (set! sequence (add1 sequence)))])
+                              (path_proc))))
+                         (lambda ()
+                           (printf "          \"\n          />\n" )))))))
+
+    ((*add-shape*) shape_id properties_map)))
