@@ -37,4 +37,6 @@
           [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
           [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
+          [svg-path-def (-> procedure? string?)]
+          [svg-path-raw (-> string? void?)]
           ))

@@ -1,22 +1,11 @@
 #lang racket
 
-(require "../svg.rkt")
+(require "path.rkt")
 
 (provide (contract-out
-          [svg-path-raw (-> natural? natural? string? void?)]
+          [svg-path-raw (-> string? void?)]
           )
 
-(define (svg-path-raw width height raw_data)
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)])
-
-    (hash-set! properties_map 'type 'rect)
-    (hash-set! properties_map 'width width)
-    (hash-set! properties_map 'height height)
-
-    (hash-set! properties_map 'format-def
-               (lambda (index path)
-                 (format "  ~a/>\n" raw_data)))
-
-    ((*add-shape*) shape_id properties_map)))
+(define (svg-path-raw raw_data)
+    ((*add-path*) raw_data))
 
