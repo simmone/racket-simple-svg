@@ -135,7 +135,8 @@
                  )
 
   (let ([properties_map (make-hash)])
-    (when at? (hash-set! properties_map 'at at?))
+    (hash-set! properties_map 'at at?)
+
     (when fill? (hash-set! properties_map 'fill fill?))
     (when stroke? (hash-set! properties_map 'stroke stroke?))
     (when stroke-width? (hash-set! properties_map 'stroke-width stroke-width?))

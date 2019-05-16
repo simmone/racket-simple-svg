@@ -20,8 +20,8 @@
            (svg-out
             #:canvas? '(1 "red" "white")
             (lambda ()
-              (let ([circle (svg-circle-def '(100 . 100) 50)])
-                (svg-use circle #:fill? "#ED6E46")
+              (let ([circle (svg-circle-def 50)])
+                (svg-use circle #:at '(100 . 100) #:fill? "#ED6E46")
                 (svg-show-default))))])
 
     (call-with-input-file circle_svg

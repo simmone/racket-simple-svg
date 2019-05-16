@@ -36,7 +36,7 @@
                   #:radius? (or/c #f (cons/c natural? natural?))
                   )
                  string?)]
-          [svg-circle-def (-> (cons/c natural? natural?) natural? string?)]
+          [svg-circle-def (-> natural? string?)]
           [svg-ellipse-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
