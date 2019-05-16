@@ -42,7 +42,7 @@
 (define *max-height* (make-parameter #f))
 (define *padding* (make-parameter #f))
 (define *canvas* (make-parameter #f))
-(define *shapes-list* (make-parameter #f))
+(define *shape-def-list* (make-parameter #f))
 (define *groups-list* (make-parameter #f))
 (define *show-list* (make-parameter #f))
 (define *width* (make-parameter #f))
@@ -61,7 +61,7 @@
         [max_height 0]
         [shapes_count 0]
         [groups_count 0]
-        [shapes_list '()]
+        [shape_def_list '()]
         [shapes_map (make-hash)]
         [groups_list '()]
         [groups_map (make-hash)]
@@ -89,10 +89,9 @@
            (when (> _height group_height) (hash-set! group_height_map _group _height))))]
       [*group_width_map* group_width_map]
       [*group_height_map* group_height_map]
-      [*shapes-list* (lambda () shapes_list)]
+      [*shape-def-list* (lambda () shape_def_list)]
       [*add-shape*
        (lambda (_index shape)
-         (set! shapes_list `(,@shapes_list ,_index))
          (hash-set! shapes_map _index shape)
          _index)]
       [*groups_map* groups_map]
@@ -218,9 +217,9 @@
                 (second (*canvas*))
                 (third (*canvas*)))))
   
-  (when (not (null? ((*shapes-list*))))
+  (when (not (null? ((*shape-def-list*))))
     (printf "  <defs>\n")
-    (let loop ([defs ((*shapes-list*))])
+    (let loop ([defs ((*shape-def-list*))])
       (when (not (null? defs))
         (let ([shape (hash-ref (*shapes_map*) (car defs))])
           (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
