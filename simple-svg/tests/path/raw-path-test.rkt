@@ -18,11 +18,12 @@
 
     (let ([actual_svg
            (svg-out
+            #:padding? 10
             #:canvas? '(1 "red" "white")
             (lambda ()
               (let ([path
                      (svg-path-def
-                      240 166
+                      260 186
                       (lambda ()
                         (svg-path-raw
                          "M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021
@@ -39,13 +40,13 @@
                          #:stroke-linejoin? 'round)
 
                 (svg-show-default))))])
-
-    (call-with-input-file raw_path_svg
-      (lambda (expected)
-        (call-with-input-string
-         actual_svg
-         (lambda (actual)
-           (check-lines? expected actual)))))))
+      
+      (call-with-input-file raw_path_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
    ))
 
 (run-tests test-all)

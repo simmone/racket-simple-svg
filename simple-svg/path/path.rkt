@@ -32,7 +32,7 @@
                    (lambda ()
                      (dynamic-wind
                          (lambda ()
-                           (printf "  <path\n")
+                           (printf "    <path id=\"~a\"\n" shape_id)
                            (printf "        d=\"\n"))
                          (lambda ()
                            (let loop ([_defs defs])
@@ -40,6 +40,6 @@
                                    (printf "        ~a\n" (car _defs))
                                    (loop (cdr _defs)))))
                          (lambda ()
-                           (printf "          \"\n          />\n" )))))))
+                           (printf "          \"\n          />" )))))))
 
     ((*add-shape*) shape_id properties_map)))

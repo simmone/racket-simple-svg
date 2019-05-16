@@ -127,7 +127,7 @@
                (printf "</svg>\n"))))))))
 
 (define (svg-use shape_index
-                 #:at? [at? #f]
+                 #:at? [at? '(0 . 0)]
                  #:fill? [fill? #f]
                  #:stroke? [stroke? #f]
                  #:stroke-width? [stroke-width? #f]
@@ -149,18 +149,18 @@
      [(eq? (hash-ref shape 'type) 'rect)
       ((*size-func*)
        (*current_group*)
-       (+ (if at? (car at?) 0) (hash-ref shape 'width) stroke_width)
-       (+ (if at? (cdr at?) 0) (hash-ref shape 'height) stroke_width))]
+       (+ (car at?) (hash-ref shape 'width) stroke_width)
+       (+ (cdr at?) (hash-ref shape 'height) stroke_width))]
      [(eq? (hash-ref shape 'type) 'circle)
       ((*size-func*)
        (*current_group*)
-       (+ (car (hash-ref shape 'center_point)) (hash-ref shape 'radius) stroke_width)
-       (+ (cdr (hash-ref shape 'center_point)) (hash-ref shape 'radius) stroke_width))]
+       (+ (car at?) (hash-ref shape 'radius) stroke_width)
+       (+ (cdr at?) (hash-ref shape 'radius) stroke_width))]
      [(eq? (hash-ref shape 'type) 'ellipse)
       ((*size-func*)
        (*current_group*)
-       (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)) stroke_width)
-       (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius)) stroke_width))]
+       (+ (car at?) (car (hash-ref shape 'radius)) stroke_width)
+       (+ (cdr at?) (cdr (hash-ref shape 'radius)) stroke_width))]
      [(or 
        (eq? (hash-ref shape 'type) 'line)
        (eq? (hash-ref shape 'type) 'polygon)
@@ -172,8 +172,8 @@
      [(eq? (hash-ref shape 'type) 'path)
       ((*size-func*)
        (*current_group*)
-       (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)) stroke_width)
-       (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius)) stroke_width))]
+       (+ (car at?) (hash-ref shape 'width) stroke_width)
+       (+ (cdr at?) (hash-ref shape 'height) stroke_width))]
      ))
   )
 
@@ -251,7 +251,7 @@
                                   (printf "stroke=\"~a\" " (hash-ref properties_map 'stroke)))
 
                           (when (hash-has-key? properties_map 'stroke-linejoin)
-                            (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-width))
+                            (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-linejoin))
 
                             (printf "transform=\"translate(~a ~a)\" " (sub1 (hash-ref properties_map 'stroke-width)) (sub1 (hash-ref properties_map 'stroke-width))))
 
