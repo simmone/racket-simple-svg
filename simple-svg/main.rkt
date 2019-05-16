@@ -20,11 +20,13 @@
                          #:canvas? (or/c #f (list/c natural? string? string?))
                          )
                         string?)]
-          [svg-use (->* (string?) 
+          [svg-use (->* (string?)
                         (
-                         #:at? (cons/c natural? natural?)
-                         #:fill? string?
-                         #:stroke? (cons/c natural? string?)
+                         #:at? (or/c #f (cons/c natural? natural?))
+                         #:fill? (or/c #f string?)
+                         #:stroke? (or/c #f string?)
+                         #:stroke-width? (or/c #f natural?)
+                         #:stroke-linejoin? (or/c #f 'miter 'round 'bevel)
                         )
                         void?)]
           [svg-show-default (-> void?)]

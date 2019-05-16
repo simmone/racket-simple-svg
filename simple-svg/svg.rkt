@@ -12,9 +12,11 @@
                         string?)]
           [svg-use (->* (string?)
                         (
-                         #:at? (cons/c natural? natural?)
-                         #:fill? string?
-                         #:stroke? (cons/c natural? string?)
+                         #:at? (or/c #f (cons/c natural? natural?))
+                         #:fill? (or/c #f string?)
+                         #:stroke? (or/c #f string?)
+                         #:stroke-width? (or/c #f natural?)
+                         #:stroke-linejoin? (or/c #f 'miter 'round 'bevel)
                         )
                         void?)]
           [svg-show-default (-> void?)]
@@ -97,11 +99,11 @@
       [*groups-list* (lambda () groups_list)]
       [*shapes_map* shapes_map]
       [*add-group*
-       (lambda (_index at? fill? stroke?)
+       (lambda (_index properties_map)
          (hash-set! groups_map
                     (*current_group*)
                     `(,@(hash-ref groups_map (*current_group*) '())
-                      ,(list _index at? fill? stroke?))))]
+                      ,(list _index properties_map))))]
       [*add-to-show* (lambda (group_index at?) (set! show_list `(,@show_list ,(list group_index at?))))]
       [*show-list* (lambda () show_list)]
       [*current_group* "default"]
@@ -128,11 +130,21 @@
                  #:at? [at? #f]
                  #:fill? [fill? #f]
                  #:stroke? [stroke? #f]
+                 #:stroke-width? [stroke-width? #f]
+                 #:stroke-linejoin? [stroke-linejoin? #f]
                  )
-  ((*add-group*) shape_index at? fill? stroke?)
+
+  (let ([properties_map (make-hash)])
+    (when at? (hash-set! properties_map 'at at?))
+    (when fill? (hash-set! properties_map 'fill fill?))
+    (when stroke? (hash-set! properties_map 'stroke stroke?))
+    (when stroke-width? (hash-set! properties_map 'stroke-width stroke-width?))
+    (when stroke-linejoin? (hash-set! properties_map 'stroke-linejoin stroke-linejoin?))
+
+    ((*add-group*) shape_index properties_map))
   
   (let* ([shape (hash-ref (*shapes_map*) shape_index)]
-         [stroke_width (* (sub1 (if stroke? (car stroke?) 1)) 2)])
+         [stroke_width (* (sub1 (if stroke-width? stroke-width? 1)) 2)])
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
       ((*size-func*)
@@ -157,6 +169,11 @@
        (*current_group*)
        (+ (hash-ref shape 'max_width) stroke_width)
        (+ (hash-ref shape 'max_height) stroke_width))]
+     [(eq? (hash-ref shape 'type) 'path)
+      ((*size-func*)
+       (*current_group*)
+       (+ (car (hash-ref shape 'center_point)) (car (hash-ref shape 'radius)) stroke_width)
+       (+ (cdr (hash-ref shape 'center_point)) (cdr (hash-ref shape 'radius)) stroke_width))]
      ))
   )
 
@@ -216,23 +233,29 @@
         (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
           (when (not (null? shapes))
             (let ([shape_index (list-ref (car shapes) 0)]
-                  [shape_at (list-ref (car shapes) 1)]
-                  [shape_fill (list-ref (car shapes) 2)]
-                  [shape_stroke (list-ref (car shapes) 3)])
+                  [properties_map (list-ref (car shapes) 1)])
               (printf "    <use xlink:href=\"#~a\" ~a/>\n"
                       shape_index
                       (with-output-to-string
                         (lambda ()
-                          (when shape_at
-                            (printf "x=\"~a\" y=\"~a\" " (car shape_at) (cdr shape_at)))
+                          (when (hash-has-key? properties_map 'at)
+                            (printf "x=\"~a\" y=\"~a\" " (car (hash-ref properties_map 'at)) (cdr (hash-ref properties_map 'at))))
 
-                          (when shape_fill
-                            (printf "fill=\"~a\" " shape_fill))
-                          
-                          (when shape_stroke
-                            (printf "stroke-width=\"~a\" stroke=\"~a\" " (car shape_stroke) (cdr shape_stroke))
-                            (printf "transform=\"translate(~a ~a)\" " (sub1 (car shape_stroke)) (sub1 (car shape_stroke))))
-                          ))))
+                          (when (hash-has-key? properties_map 'fill)
+                            (printf "fill=\"~a\" " (hash-ref properties_map 'fill)))
+
+                          (when (hash-has-key? properties_map 'stroke-width)
+                            (printf "stroke-width=\"~a\" " (hash-ref properties_map 'stroke-width))
+
+                            (when (hash-has-key? properties_map 'stroke)
+                                  (printf "stroke=\"~a\" " (hash-ref properties_map 'stroke)))
+
+                          (when (hash-has-key? properties_map 'stroke-linejoin)
+                            (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-width))
+
+                            (printf "transform=\"translate(~a ~a)\" " (sub1 (hash-ref properties_map 'stroke-width)) (sub1 (hash-ref properties_map 'stroke-width))))
+
+                          )))))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
         (loop-group (cdr groups)))))

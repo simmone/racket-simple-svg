@@ -34,8 +34,9 @@
 
                 (svg-use path
                          #:fill? "#7AA20D"
-                         #:stroke? '(9 . "#7AA20D")
-                         #:stroke-linejoin? "round")
+                         #:stroke-width? 9
+                         #:stroke? "#7AA20D"
+                         #:stroke-linejoin? 'round)
 
                 (svg-show-default))))])
 
