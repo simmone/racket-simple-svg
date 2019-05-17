@@ -43,6 +43,7 @@
 (define *padding* (make-parameter #f))
 (define *canvas* (make-parameter #f))
 (define *shape-def-list* (make-parameter #f))
+(define *add-to-shape-def-list* (make-parameter #f))
 (define *groups-list* (make-parameter #f))
 (define *show-list* (make-parameter #f))
 (define *width* (make-parameter #f))
@@ -90,6 +91,7 @@
       [*group_width_map* group_width_map]
       [*group_height_map* group_height_map]
       [*shape-def-list* (lambda () shape_def_list)]
+      [*add-to-shape-def-list* (lambda (shape_index) (set! shape_def_list `(,@shape_def_list ,shape_index)))]
       [*add-shape*
        (lambda (_index shape)
          (hash-set! shapes_map _index shape)
