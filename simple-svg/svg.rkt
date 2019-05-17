@@ -132,19 +132,32 @@
                  #:stroke-width? [stroke-width? #f]
                  #:stroke-linejoin? [stroke-linejoin? #f]
                  )
-
-  (let ([properties_map (make-hash)])
-    (hash-set! properties_map 'at at?)
+  
+  (let ([shape_indexes '()]
+        [shape (hash-ref (*shapes_map*) shape_index)]
+        [properties_map (make-hash)]
+        [new_shape_index shape_index]
+        [stroke_width (* (sub1 (if stroke-width? stroke-width? 1)) 2)])
+    (cond
+     [(eq? (hash-ref shape 'type) 'circle)
+      (set! new_shape_index (*shape-index*))
+      (hash-set! shape 'rx (car at?))
+      (hash-set! shape 'ry (car at?))
+      ((*add-shape*) new_shape_index shape)
+      ]
+     [else
+      ((*add-to-shape-def-list*) shape_index)
+      (hash-set! properties_map 'at at?)
+      ]
+     )
 
     (when fill? (hash-set! properties_map 'fill fill?))
     (when stroke? (hash-set! properties_map 'stroke stroke?))
     (when stroke-width? (hash-set! properties_map 'stroke-width stroke-width?))
     (when stroke-linejoin? (hash-set! properties_map 'stroke-linejoin stroke-linejoin?))
 
-    ((*add-group*) shape_index properties_map))
-  
-  (let* ([shape (hash-ref (*shapes_map*) shape_index)]
-         [stroke_width (* (sub1 (if stroke-width? stroke-width? 1)) 2)])
+    ((*add-group*) new_shape_index properties_map)
+    
     (cond
      [(eq? (hash-ref shape 'type) 'rect)
       ((*size-func*)
@@ -174,8 +187,7 @@
        (*current_group*)
        (+ (car at?) (hash-ref shape 'width) stroke_width)
        (+ (cdr at?) (hash-ref shape 'height) stroke_width))]
-     ))
-  )
+     )))
 
 (define (svg-show-default)
   (svg-show "default"))
