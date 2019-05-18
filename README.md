@@ -146,15 +146,14 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ```racket
 (svg-ellipse-def
-  center_point (cons/c natural? natural?)
   radius (cons/c natural? natural?))
 ```
-  draw a ellipse by center_point: '(x . y) and radius: '(width . height).
+  define a ellipse by radius length: '(width . height).
   
 ### ellipse
 ```racket
-(let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
-  (svg-use ellipse #:fill? "#7AA20D")
+(let ([ellipse (svg-ellipse-def '(100 . 50))])
+  (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/ellipse/ellipse.svg)
@@ -166,7 +165,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
     start_point (cons/c natural? natural?)
     end_point (cons/c natural? natural?))
 ```
-  draw a line by start, end point.
+  define a line by start, end point.
   
 ### line
 ```racket
@@ -181,7 +180,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```racket
 (define (polyline points stroke_fill stroke_width fill))
 ```
-  draw a polyline by points list.
+  define a polyline by points list.
   
 ### polyline
 ```racket
@@ -197,7 +196,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (svg-polygon-def
     points (listof (cons/c natural? natural?)))
 ```
-  draw a polygon by points list.
+  define a polygon by points list.
   
 ### polygon
 ```racket
@@ -218,7 +217,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
               #:stroke-width? [stroke-width? 1]
               #:stroke-linejoin? [stroke-linejoin? "round"])
 ```
-  draw a path by raw data.
+  define a path by raw data.
 
   raw data normally come from other svg tools.
 
@@ -251,7 +250,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
               #:stroke-width? [stroke-width? 1]
               #:stroke-linejoin? [stroke-linejoin? "round"])
 ```
-  draw a path programmtially.
+  define a path programmtially.
 
   fill?, stroke-fill?, stroke-width? stroke-linejoin? same as raw-path.
 

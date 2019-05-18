@@ -148,9 +148,21 @@
         (hash-set! new_shape 'cy (cdr at?))
         ((*add-shape*) new_shape_index new_shape)
         ((*add-to-shape-def-list*) new_shape_index))]
+     [(eq? (hash-ref shape 'type) 'ellipse)
+      (set! new_shape_index ((*shape-index*)))
+      (let ([new_shape (hash-copy shape)]
+            [radius (hash-ref shape 'radius)])
+        (hash-set! new_shape 'cx (car at?))
+        (hash-set! new_shape 'cy (cdr at?))
+        (hash-set! new_shape 'rx (car radius))
+        (hash-set! new_shape 'ry (cdr radius))
+        ((*add-shape*) new_shape_index new_shape)
+        ((*add-to-shape-def-list*) new_shape_index))]
      [else
-      ((*add-to-shape-def-list*) shape_index)
-      (hash-set! properties_map 'at at?)])
+      (set! new_shape_index shape_index)
+      ((*add-to-shape-def-list*) new_shape_index)
+      (when (not (equal? at? '(0 . 0)))
+        (hash-set! properties_map 'at at?))])
 
     (when fill? (hash-set! properties_map 'fill fill?))
     (when stroke? (hash-set! properties_map 'stroke stroke?))
@@ -259,16 +271,15 @@
 
                           (when (hash-has-key? properties_map 'stroke-width)
                             (printf "stroke-width=\"~a\" " (hash-ref properties_map 'stroke-width))
+                            (printf "transform=\"translate(~a ~a)\" "
+                                    (sub1 (hash-ref properties_map 'stroke-width))
+                                    (sub1 (hash-ref properties_map 'stroke-width))))
 
                             (when (hash-has-key? properties_map 'stroke)
                                   (printf "stroke=\"~a\" " (hash-ref properties_map 'stroke)))
 
                           (when (hash-has-key? properties_map 'stroke-linejoin)
-                            (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-linejoin))
-
-                            (printf "transform=\"translate(~a ~a)\" " (sub1 (hash-ref properties_map 'stroke-width)) (sub1 (hash-ref properties_map 'stroke-width))))
-
-                          )))))
+                            (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-linejoin)))))))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
         (loop-group (cdr groups)))))

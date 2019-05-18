@@ -21,7 +21,7 @@
             #:canvas? '(1 "red" "white")
             (lambda ()
               (let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-                (svg-use line #:stroke? '(10 . "#765373"))
+                (svg-use line #:stroke-width? 10 #:stroke? "#765373")
                 (svg-show-default))))])
 
       (call-with-input-file line_svg

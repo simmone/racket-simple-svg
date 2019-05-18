@@ -7,7 +7,7 @@
 
 @title{Rectangle}
 
-draw a rectangle.
+define a rectangle.
 
 @defproc[(svg-rect-def
           [width natural?]

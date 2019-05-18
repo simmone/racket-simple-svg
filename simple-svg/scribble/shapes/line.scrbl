@@ -7,13 +7,14 @@
 
 @title{Line}
 
-draw a line.
+define a line.
 
 @defproc[(svgf-line-def
           [start_point (cons/c natural? natural?)]
           [end_point (cons/c natural? natural?)]
         )
         string?]{
+  define a line by start point and end point.
 }
 
 @section{line}

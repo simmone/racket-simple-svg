@@ -7,15 +7,13 @@
 
 @title{Circle}
 
-draw a circle.
+define a circle.
 
 @defproc[(svg-circle-def
           [radius natural?]
         )
         string?]{
-
   define a circle by radius length.
-
 }
 
 @section{circle}
@@ -38,5 +36,3 @@ draw a circle.
 }
 
 @image{showcase/shapes/circle/circle3.svg}
-
-

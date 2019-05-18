@@ -37,7 +37,7 @@
                   )
                  string?)]
           [svg-circle-def (-> natural? string?)]
-          [svg-ellipse-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
+          [svg-ellipse-def (-> (cons/c natural? natural?) string?)]
           [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
           [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]

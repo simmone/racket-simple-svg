@@ -20,8 +20,8 @@
            (svg-out
             #:canvas? '(1 "red" "white")
             (lambda ()
-              (let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
-                (svg-use ellipse #:fill? "#7AA20D")
+              (let ([ellipse (svg-ellipse-def '(100 . 50))])
+                (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
                 (svg-show-default))))])
       
       (call-with-input-file ellipse_svg

@@ -7,22 +7,21 @@
 
 @title{Ellipse}
 
-draw a ellipse.
+define a ellipse.
 
 @defproc[(svg-ellipse-def
-          [center_point (cons/c natural? natural?)]
           [radius (cons/c natural? natural?)]
         )
         string?]{
 
-  draw a ellipse by center_point: '(x . y) and radius: '(width . height).
+  define a ellipse by radius length: '(x . y).
 }
 
 @section{ellipse}
 
 @codeblock{
-  (let ([ellipse (svg-ellipse-def '(100 . 50) '(100 . 50))])
-    (svg-use ellipse #:fill? "#7AA20D")
+  (let ([ellipse (svg-ellipse-def '(100 . 50))])
+    (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
     (svg-show-default))
 }
 
