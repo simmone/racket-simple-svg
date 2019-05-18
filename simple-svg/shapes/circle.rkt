@@ -17,8 +17,8 @@
                (lambda (index circle)
                  (format "    <circle id=\"~a\" cx=\"~a\" cy=\"~a\" r=\"~a\" />"
                          index
-                         (car (hash-ref circle 'at))
-                         (cdr (hash-ref circle 'at))
+                         (hash-ref circle 'cx)
+                         (hash-ref circle 'cy)
                          (hash-ref circle 'radius))))
 
     ((*add-shape*) shape_id properties_map)))

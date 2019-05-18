@@ -138,20 +138,19 @@
   (let ([shape_indexes '()]
         [shape (hash-ref (*shapes_map*) shape_index)]
         [properties_map (make-hash)]
-        [new_shape_index shape_index]
-        [stroke_width (* (sub1 (if stroke-width? stroke-width? 1)) 2)])
+        [stroke_width (* (sub1 (if stroke-width? stroke-width? 1)) 2)]
+        [new_shape_index #f])
     (cond
      [(eq? (hash-ref shape 'type) 'circle)
-      (set! new_shape_index (*shape-index*))
-      (hash-set! shape 'rx (car at?))
-      (hash-set! shape 'ry (car at?))
-      ((*add-shape*) new_shape_index shape)
-      ]
+      (set! new_shape_index ((*shape-index*)))
+      (let ([new_shape (hash-copy shape)])
+        (hash-set! new_shape 'cx (car at?))
+        (hash-set! new_shape 'cy (cdr at?))
+        ((*add-shape*) new_shape_index new_shape)
+        ((*add-to-shape-def-list*) new_shape_index))]
      [else
       ((*add-to-shape-def-list*) shape_index)
-      (hash-set! properties_map 'at at?)
-      ]
-     )
+      (hash-set! properties_map 'at at?)])
 
     (when fill? (hash-set! properties_map 'fill fill?))
     (when stroke? (hash-set! properties_map 'stroke stroke?))
