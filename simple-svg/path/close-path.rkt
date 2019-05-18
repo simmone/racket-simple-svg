@@ -4,10 +4,8 @@
 (require "path.rkt")
 
 (provide (contract-out
-          [close-path (-> void?)]
+          [svg-path-close (-> void?)]
           ))
 
-(define (close-path)
-  ((*sequence-set*))
-
-  (fprintf (*svg*) "           z\n"))
+(define (svg-path-close)
+  ((*add-path*) (format "z")))

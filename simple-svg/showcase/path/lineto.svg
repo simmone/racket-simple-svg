@@ -1,20 +1,33 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
     width="122" height="122"
     >
   <rect width="122" height="122" stroke-width="1" stroke="red" fill="white" />
-  <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
-        d="
-           M10,10
-           l100,100
-           h-100,0
-           l100,-100
-           z
-          "
-          />
-  <circle cx="10" cy="10" r="2" fill="red" />
-  <circle cx="110" cy="110" r="2" fill="red" />
-  <circle cx="10" cy="110" r="2" fill="red" />
-  <circle cx="110" cy="10" r="2" fill="red" />
+
+  <defs>
+    <path id="s1"
+          d="
+             M0,0
+             l100,100
+             h-100,0
+             l100,-100
+             z
+            "/>
+    <circle id="s3" cx="0" cy="0" r="2" />
+    <circle id="s4" cx="100" cy="100" r="2" />
+    <circle id="s5" cx="0" cy="100" r="2" />
+    <circle id="s6" cx="100" cy="0" r="2" />
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" fill="white" stroke-width="1" stroke="#7AA20D" stroke-linejoin="round" />
+    <use xlink:href="#s3" fill="red" />
+    <use xlink:href="#s4" fill="red" />
+    <use xlink:href="#s5" fill="red" />
+    <use xlink:href="#s6" fill="red" />
+  </symbol>
+
+  <use xlink:href="#default" transform="translate(10 10)" />
 </svg>

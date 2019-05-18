@@ -19,12 +19,12 @@
     (hash-set! properties_map 'height height)
 
     (parameterize
-     (
-      [*add-path*
-       (lambda (def)
-         (set! defs `(,@defs ,def)))])
-       
-       (path_proc))
+        (
+         [*add-path*
+          (lambda (def)
+            (set! defs `(,@defs ,def)))])
+      
+      (path_proc))
 
     (hash-set! properties_map 'format-def
                (lambda (index path)
@@ -33,13 +33,13 @@
                      (dynamic-wind
                          (lambda ()
                            (printf "    <path id=\"~a\"\n" shape_id)
-                           (printf "        d=\"\n"))
+                           (printf "          d=\"\n"))
                          (lambda ()
                            (let loop ([_defs defs])
                              (when (not (null? _defs))
-                                   (printf "        ~a\n" (car _defs))
-                                   (loop (cdr _defs)))))
+                               (printf "             ~a\n" (car _defs))
+                               (loop (cdr _defs)))))
                          (lambda ()
-                           (printf "          \"\n          />" )))))))
+                           (printf "            \"/>" )))))))
 
     ((*add-shape*) shape_id properties_map)))

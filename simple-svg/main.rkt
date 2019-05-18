@@ -9,6 +9,9 @@
 (require "shapes/polyline.rkt")
 (require "path/path.rkt")
 (require "path/raw-path.rkt")
+(require "path/moveto.rkt")
+(require "path/lineto.rkt")
+(require "path/close-path.rkt")
 
 (provide (contract-out
           [svg-out (->* (procedure?)
@@ -43,4 +46,14 @@
           [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
           [svg-path-def (-> natural? natural? procedure? string?)]
           [svg-path-raw (-> string? void?)]
+          [svg-path-lineto (-> (cons/c integer? integer?) void?)]
+          [svg-path-lineto* (-> (cons/c integer? integer?) void?)]
+          [svg-path-hlineto (-> (cons/c integer? integer?) void?)]
+          [svg-path-hlineto* (-> (cons/c integer? integer?) void?)]
+          [svg-path-vlineto (-> (cons/c integer? integer?) void?)]
+          [svg-path-vlineto* (-> (cons/c integer? integer?) void?)]
+          [svg-path-moveto (-> (cons/c integer? integer?) void?)]
+          [svg-path-moveto* (-> (cons/c integer? integer?) void?)]
+          [svg-path-close (-> void?)]
           ))
+

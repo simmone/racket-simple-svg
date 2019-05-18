@@ -16,31 +16,40 @@
    (test-case
     "test-lineto"
 
-    (call-with-input-file lineto_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (path
-                #:stroke-fill? "#333333"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(0 . 0))
-                  (lineto '(100 . 100))
-                  (hlineto '(-100 . 0))
-                  (lineto '(100 . -100))
-                  (close-path)))
-               (circle '(0 . 0) 2 "red")
-               (circle '(100 . 100) 2 "red")
-               (circle '(0 . 100) 2 "red")
-               (circle '(100 . 0) 2 "red")
-               ))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([path
+                     (svg-path-def
+                      100 100
+                      (lambda ()
+                        (svg-path-moveto* '(0 . 0))
+                        (svg-path-lineto '(100 . 100))
+                        (svg-path-hlineto '(-100 . 0))
+                        (svg-path-lineto '(100 . -100))
+                        (svg-path-close)))]
+                    [red_dot (svg-circle-def 2)])
+
+                (svg-use path
+                         #:fill? "white"
+                         #:stroke-width? 1
+                         #:stroke? "#7AA20D"
+                         #:stroke-linejoin? 'round)
+
+                (svg-use red_dot #:at? '(0 . 0) #:fill? "red")
+                (svg-use red_dot #:at? '(100 . 100) #:fill? "red")
+                (svg-use red_dot #:at? '(0 . 100) #:fill? "red")
+                (svg-use red_dot #:at? '(100 . 0) #:fill? "red")
+
+                (svg-show-default))))])
+      
+      (call-with-input-file lineto_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 

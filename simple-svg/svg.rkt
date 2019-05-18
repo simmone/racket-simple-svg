@@ -198,8 +198,8 @@
      [(eq? (hash-ref shape 'type) 'path)
       ((*size-func*)
        (*current_group*)
-       (+ (car at?) (hash-ref shape 'width) stroke_width)
-       (+ (cdr at?) (hash-ref shape 'height) stroke_width))]
+       (+ (car at?) (hash-ref shape 'width))
+       (+ (cdr at?) (hash-ref shape 'height)))]
      )))
 
 (define (svg-show-default)
@@ -257,8 +257,9 @@
         (printf "  <symbol id=\"~a\">\n" group_index)
         (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
           (when (not (null? shapes))
-            (let ([shape_index (list-ref (car shapes) 0)]
-                  [properties_map (list-ref (car shapes) 1)])
+            (let* ([shape_index (list-ref (car shapes) 0)]
+                   [shape (hash-ref (*shapes_map*) shape_index)]
+                   [properties_map (list-ref (car shapes) 1)])
               (printf "    <use xlink:href=\"#~a\" ~a/>\n"
                       shape_index
                       (with-output-to-string
@@ -271,9 +272,11 @@
 
                           (when (hash-has-key? properties_map 'stroke-width)
                             (printf "stroke-width=\"~a\" " (hash-ref properties_map 'stroke-width))
-                            (printf "transform=\"translate(~a ~a)\" "
-                                    (sub1 (hash-ref properties_map 'stroke-width))
-                                    (sub1 (hash-ref properties_map 'stroke-width))))
+                            
+                            (when (not (eq? (hash-ref shape 'type) 'path))
+                              (printf "transform=\"translate(~a ~a)\" "
+                                      (sub1 (hash-ref properties_map 'stroke-width))
+                                      (sub1 (hash-ref properties_map 'stroke-width)))))
 
                             (when (hash-has-key? properties_map 'stroke)
                                   (printf "stroke=\"~a\" " (hash-ref properties_map 'stroke)))
@@ -282,7 +285,7 @@
                             (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-linejoin)))))))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
-        (loop-group (cdr groups)))))
+         (loop-group (cdr groups)))))
     
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
