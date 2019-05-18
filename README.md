@@ -178,15 +178,17 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## Polyline
 
 ```racket
-(define (polyline points stroke_fill stroke_width fill))
+(define (polyline points))
 ```
   define a polyline by points list.
   
 ### polyline
 ```racket
-(polyline 
-    '((0 . 40) (40 . 40) (40 . 80) (80 . 80) (80 . 120) (120 . 120) (120 . 160))
-    "#BBC42A" 6 "blue")
+(let ([polyline
+  (svg-polyline-def
+    '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
+  (svg-use polyline #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polyline/polyline.svg)
 
@@ -203,7 +205,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (let ([polygon
   (svg-polygon-def
     '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
-    (svg-use polygon #:stroke? '(5 . "#765373") #:fill? "#ED6E46")
+    (svg-use polygon #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
     (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polygon/polygon.svg)

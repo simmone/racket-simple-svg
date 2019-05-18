@@ -23,7 +23,7 @@
               (let ([polygon
                      (svg-polygon-def
                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
-                (svg-use polygon #:stroke? '(5 . "#765373") #:fill? "#ED6E46")
+                (svg-use polygon #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
                 (svg-show-default))))])
       
       (call-with-input-file polygon_svg

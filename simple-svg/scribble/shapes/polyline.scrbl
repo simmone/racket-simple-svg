@@ -7,13 +7,13 @@
 
 @title{Polyline}
 
-draw a polyline.
+define a polyline.
 
 @defproc[(svg-polyline-def
           [points (listof (cons/c natural? natural?))]
         )
         string?]{
-  draw a polyline by points list.
+  define a polyline by points list.
 }
 
 @section{polyline}
@@ -22,7 +22,7 @@ draw a polyline.
 (let ([polyline
   (svg-polyline-def
     '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
-  (svg-use polyline #:stroke? '(5 . "#BBC42A") #:fill? "blue")
+  (svg-use polyline #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
   (svg-show-default))
 }
 

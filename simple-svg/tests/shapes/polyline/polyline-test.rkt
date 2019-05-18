@@ -23,7 +23,7 @@
               (let ([polyline
                      (svg-polyline-def
                       '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
-                (svg-use polyline #:stroke? '(5 . "#BBC42A") #:fill? "blue")
+                (svg-use polyline #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
                 (svg-show-default))))])
       
       (call-with-input-file polyline_svg
