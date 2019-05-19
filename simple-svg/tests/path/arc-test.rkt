@@ -16,48 +16,50 @@
    (test-case
     "test-arc"
 
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let (
+                    [arc1
+                     (svg-path-def
+                      (lambda ()
+                        (svg-path-moveto* '(120 . 35))
+                        (svg-path-arc* '(160 . 75) '(80 . 40) 'left_big '(160 . 75))))]
+                    [arc2
+                     (svg-path-def
+                      (lambda ()
+                        (svg-path-moveto* '(120 . 35))
+                        (svg-path-arc* '(160 . 75) '(80 . 40) 'left_small '(160 . 75))))]
+                    [arc3
+                     (svg-path-def
+                      (lambda ()
+                        (svg-path-moveto* '(120 . 35))
+                        (svg-path-arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 110))))]
+                    [arc4
+                     (svg-path-def
+                      (lambda ()
+                        (svg-path-moveto* '(120 . 35))
+                        (svg-path-arc* '(160 . 75) '(80 . 40) 'right_small '(160 . 75))))]
+                    [red_dot (svg-circle-def 2)]
+                    )
+
+                (svg-use arc1 #:stroke? "#ccccff" #:stroke-width? 3)
+                (svg-use arc2 #:stroke? "green" #:stroke-width? 3)
+                (svg-use arc3 #:stroke? "blue" #:stroke-width? 3)
+                (svg-use arc4 #:stroke? "yellow" #:stroke-width? 3)
+
+                (svg-use red_dot #:at? '(120 . 35) #:fill? "red")
+                (svg-use red_dot #:at? '(160 . 75) #:fill? "red")
+
+                (svg-show-default))))])
+
     (call-with-input-file arc_svg
       (lambda (expected)
         (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (path
-                #:stroke-fill? "#ccccff"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(120 . 35))
-                  (arc* '(160 . 75) '(80 . 40) 'left_big '(160 . 75))))
-
-               (path
-                #:stroke-fill? "green"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(120 . 35))
-                  (arc* '(160 . 75) '(80 . 40) 'left_small '(160 . 75))))
-
-               (path
-                #:stroke-fill? "blue"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(120 . 35))
-                  (arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 110))))
-
-               (path
-                #:stroke-fill? "yellow"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(120 . 35))
-                  (arc* '(160 . 75) '(80 . 40) 'right_small '(160 . 75))))
-
-               (circle '(120 . 35) 2 "red")
-               (circle '(160 . 75) 2 "red")
-               ))))
+         actual_svg
          (lambda (actual)
-           (check-lines? expected actual))))))
+           (check-lines? expected actual)))))))
 
    ))
 
