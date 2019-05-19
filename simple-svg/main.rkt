@@ -12,6 +12,7 @@
 (require "path/moveto.rkt")
 (require "path/lineto.rkt")
 (require "path/close-path.rkt")
+(require "path/qcurve.rkt")
 
 (provide (contract-out
           [svg-out (->* (procedure?)
@@ -55,5 +56,13 @@
           [svg-path-moveto (-> (cons/c integer? integer?) void?)]
           [svg-path-moveto* (-> (cons/c integer? integer?) void?)]
           [svg-path-close (-> void?)]
+          [svg-path-qcurve (-> 
+                            (cons/c integer? integer?)
+                            (cons/c integer? integer?)
+                            void?)]
+          [svg-path-qcurve* (->
+                             (cons/c integer? integer?)
+                             (cons/c integer? integer?)
+                             void?)]
           ))
 

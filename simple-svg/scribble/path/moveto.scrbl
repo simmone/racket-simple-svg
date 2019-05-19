@@ -5,19 +5,13 @@
 @(require (for-label racket))
 @(require (for-label "../../path/moveto.rkt"))
 
-@title{moveto/moveto*}
+@title{svg-path-moveto/svg-path-moveto*}
 
 move to a position.
 
-@defproc[(moveto*
-          [point (cons/c natural? natural?) void?]
-        )
+@defproc[(svg-path-moveto* [point (cons/c natural? natural?)])
         void?]{
   moveto* use absolute position.
 
   moveto use relative position.
-}
-
-@codeblock{
-  (moveto* '(100 . 100))
 }

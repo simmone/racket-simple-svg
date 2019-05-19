@@ -4,33 +4,47 @@
 
 @(require (for-label racket))
 @(require (for-label "../../path/lineto.rkt"))
-@(require (for-label "../../path/close-path.rkt"))
 
-@title{close-path/lineto/lineto*}
+@title{svg-path-lineto/lineto*/hlineto/hlineto*/vlineto/vlineto*}
 
-draw a line.
+define a line path.
 
-@defproc[(close-path)
-        void?]{
-  use close-path to draw a line from current point to start point.
+@defproc[(svg-path-lineto [point (cons/c integer? integer?)]) void?]{
+  svg-path-lineto* is the absolute version.
 }
 
-@defproc[(lineto
-           [point (cons/c integer? integer?) void?]
-         )
-         void?]{
-  lineto* is the absolute version.
+@defproc[(svg-path-hlineto [point (cons/c integer? integer?)]) void?]{
+  svg-path-hlineto* is the absolute version.
+}
 
-  horizontal line: hlineto and hlineto*.
-  vertical line: vlineto and vlineto*.
+@defproc[(svg-path-vlineto [point (cons/c integer? integer?)]) void?]{
+  svg-path-vlineto* is the absolute version.
 }
 
 @codeblock{
-  (moveto* '(0 . 0))
-  (lineto '(100 . 100))
-  (hlineto '(-100 . 0))
-  (lineto '(100 . -100))
-  (close-path)
+(let ([path
+  (svg-path-def
+    110 110
+    (lambda ()
+     (svg-path-moveto* '(10 . 10))
+     (svg-path-lineto '(100 . 100))
+     (svg-path-hlineto '(-100 . 0))
+     (svg-path-lineto '(100 . -100))
+     (svg-path-close)))]
+     [red_dot (svg-circle-def 2)])
+
+     (svg-use path
+       #:fill? "white"
+       #:stroke-width? 1
+       #:stroke? "#7AA20D"
+       #:stroke-linejoin? 'round)
+
+       (svg-use red_dot #:at? '(10 . 10) #:fill? "red")
+       (svg-use red_dot #:at? '(110 . 110) #:fill? "red")
+       (svg-use red_dot #:at? '(10 . 110) #:fill? "red")
+       (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
+
+       (svg-show-default))
 }
 
 @image{showcase/path/lineto.svg}

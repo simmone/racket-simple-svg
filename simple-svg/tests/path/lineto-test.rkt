@@ -22,9 +22,9 @@
             (lambda ()
               (let ([path
                      (svg-path-def
-                      100 100
+                      110 110
                       (lambda ()
-                        (svg-path-moveto* '(0 . 0))
+                        (svg-path-moveto* '(10 . 10))
                         (svg-path-lineto '(100 . 100))
                         (svg-path-hlineto '(-100 . 0))
                         (svg-path-lineto '(100 . -100))
@@ -37,10 +37,10 @@
                          #:stroke? "#7AA20D"
                          #:stroke-linejoin? 'round)
 
-                (svg-use red_dot #:at? '(0 . 0) #:fill? "red")
-                (svg-use red_dot #:at? '(100 . 100) #:fill? "red")
-                (svg-use red_dot #:at? '(0 . 100) #:fill? "red")
-                (svg-use red_dot #:at? '(100 . 0) #:fill? "red")
+                (svg-use red_dot #:at? '(10 . 10) #:fill? "red")
+                (svg-use red_dot #:at? '(110 . 110) #:fill? "red")
+                (svg-use red_dot #:at? '(10 . 110) #:fill? "red")
+                (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
 
                 (svg-show-default))))])
       

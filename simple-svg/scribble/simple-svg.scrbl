@@ -111,3 +111,5 @@ generated svg file:
 @include-section["shapes/polygon.scrbl"]
 
 @include-section["shapes/polyline.scrbl"]
+
+@include-section["path/path.scrbl"]

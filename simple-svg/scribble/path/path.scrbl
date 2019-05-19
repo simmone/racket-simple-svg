@@ -7,27 +7,21 @@
 
 @title{Path}
 
-draw a path programmtially.
+define a path programmtially.
 
-@defproc[(path
+@defproc[(svg-path-def
+          [width natural?]
+          [height natural?]
           [procedure procedure?]
-          [#:fill? fill? string?]
-          [#:stroke-fill? stroke-fill? string?]
-          [#:stroke-width? stroke-width? natural?]
-          [#:stroke-linejoin? stroke-linejoin? string?]
         )
         void?]{
-  fill?, stroke-fill?, stroke-width? stroke-linejoin? same as raw-path.
-
-  every path step should write in this procedure: moveto, curve etc.
+  all path actions should be include in this procedure: moveto, curve etc.
 }
+
+@include-section{raw-path.scrbl}
 
 @include-section{moveto.scrbl}
 
-@include-section{ccurve.scrbl}
-
-@include-section{qcurve.scrbl}
+@include-section{close.scrbl}
 
 @include-section{lineto.scrbl}
-
-@include-section{arc.scrbl}

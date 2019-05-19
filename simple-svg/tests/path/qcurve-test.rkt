@@ -17,58 +17,75 @@
    (test-case
     "test-qcurve*"
 
-    (call-with-input-file qcurve1_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (path
-                #:stroke-fill? "#333333"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(0 . 50))
-                  (qcurve* '(50 . 0) '(100 . 50))
-                  (qcurve* '(150 . 100) '(200 . 50))))
-               (circle '(0 . 50) 2 "red")
-               (circle '(50 . 0) 2 "red")
-               (circle '(100 . 50) 2 "red")
-               (circle '(150 . 100) 2 "red")
-               (circle '(200 . 50) 2 "red")
-               ))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([path
+                     (svg-path-def
+                      200 100
+                      (lambda ()
+                        (svg-path-moveto* '(0 . 50))
+                        (svg-path-qcurve* '(50 . 0) '(100 . 50))
+                        (svg-path-qcurve* '(150 . 100) '(200 . 50))))]
+                    [red_dot (svg-circle-def 2)])
+
+                (svg-use path
+                         #:fill? "white"
+                         #:stroke? "#333333"
+                         #:stroke-width? 3)
+
+                (svg-use red_dot #:at? '(0 . 50) #:fill? "red")
+                (svg-use red_dot #:at? '(50 . 0) #:fill? "red")
+                (svg-use red_dot #:at? '(100 . 50) #:fill? "red")
+                (svg-use red_dot #:at? '(150 . 100) #:fill? "red")
+                (svg-use red_dot #:at? '(200 . 50) #:fill? "red")
+
+                (svg-show-default))))])
+      
+      (call-with-input-file qcurve1_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    (test-case
     "test-qcurve"
 
-    (call-with-input-file qcurve2_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (path
-                #:stroke-fill? "#333333"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(0 . 50))
-                  (qcurve '(50 . -50) '(100 . 0))
-                  (qcurve '(50 . 50) '(100 . 0))))
-               (circle '(0 . 50) 2 "red")
-               (circle '(50 . 0) 2 "red")
-               (circle '(100 . 50) 2 "red")
-               (circle '(150 . 100) 2 "red")
-               (circle '(200 . 50) 2 "red")
-               ))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([path
+                     (svg-path-def
+                      200 100
+                      (lambda ()
+                        (svg-path-moveto* '(0 . 50))
+                        (svg-path-qcurve '(50 . -50) '(100 . 0))
+                        (svg-path-qcurve '(50 . 50) '(100 . 0))
+                        ))]
+                    [red_dot (svg-circle-def 2)])
+
+                (svg-use path
+                         #:fill? "white"
+                         #:stroke? "#333333"
+                         #:stroke-width? 3)
+
+                (svg-use red_dot #:at? '(0 . 50) #:fill? "red")
+                (svg-use red_dot #:at? '(50 . 0) #:fill? "red")
+                (svg-use red_dot #:at? '(100 . 50) #:fill? "red")
+                (svg-use red_dot #:at? '(150 . 100) #:fill? "red")
+                (svg-use red_dot #:at? '(200 . 50) #:fill? "red")
+
+                (svg-show-default))))])
+      
+      (call-with-input-file qcurve2_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 
