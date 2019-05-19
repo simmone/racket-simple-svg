@@ -344,13 +344,17 @@ close a path.
   qcurve use relative position, relative to the start position.
 
 ```racket
-(let ([path
-  (svg-path-def
-    (lambda ()
-      (svg-path-moveto* '(10 . 60))
-      (svg-path-qcurve* '(60 . 10) '(110 . 60))
-      (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
-    [red_dot (svg-circle-def 2)])
+(svg-out
+  #:canvas? '(1 "red" "white")
+  (lambda ()
+    (let ([path
+            (svg-path-def
+              (lambda ()
+              (svg-path-moveto* '(10 . 60))
+              (svg-path-qcurve* '(60 . 10) '(110 . 60))
+              (svg-path-qcurve* '(160 . 110) '(210 . 60))))
+            ]
+          [red_dot (svg-circle-def 2)])
 
     (svg-use path
       #:fill? "white"
@@ -363,7 +367,7 @@ close a path.
       (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
       (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
 
-      (svg-show-default))
+      (svg-show-default))))
 ```
 
 ```racket
@@ -372,6 +376,53 @@ close a path.
 (svg-path-qcurve '(50 . 50) '(100 . 0))
 ```
 ![ScreenShot](simple-svg/showcase/path/qcurve1.svg)
+
+### Cubic Bezier Curve
+
+```racket
+(define (svg-path-ccurve point1 point2 point3)
+(define (svg-path-ccurve* point1 point2 point3)
+```
+  use three control points to draw a Cubic Bezier Curve.
+
+  ccurve* use absolute position.
+
+  ccurve use relative position, relative to the start position.
+
+```racket
+(svg-out
+  #:canvas? '(1 "red" "white")
+  (lambda ()
+    (let ([path
+            (svg-path-def
+              (lambda ()
+              (svg-path-moveto* '(10 . 60))
+              (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
+              (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
+            ))]
+          [red_dot (svg-circle-def 2)])
+
+          (svg-use path
+            #:stroke? "#333333"
+            #:stroke-width? 3)
+
+          (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+          (svg-use red_dot #:at? '(30 . 15) #:fill? "red")
+          (svg-use red_dot #:at? '(80 . 15) #:fill? "red")
+          (svg-use red_dot #:at? '(100 . 60) #:fill? "red")
+          (svg-use red_dot #:at? '(120 . 105) #:fill? "red")
+          (svg-use red_dot #:at? '(170 . 105) #:fill? "red")
+          (svg-use red_dot #:at? '(190 . 60) #:fill? "red")
+
+          (svg-show-default))))
+```
+
+```racket
+(svg-path-moveto* '(10 . 60))
+(svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
+(svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
+```
+![ScreenShot](simple-svg/showcase/path/ccurve1.svg)
 
 ### arc
 

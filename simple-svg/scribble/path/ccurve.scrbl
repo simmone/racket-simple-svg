@@ -5,16 +5,16 @@
 @(require (for-label racket))
 @(require (for-label "../../path/ccurve.rkt"))
 
-@title{ccurve/ccurve*}
+@title{svg-path-ccurve/ccurve*}
 
 @image{showcase/path/ccurve.jpg}
 
 use three control points to draw a Cubic Bezier Curve.
 
 @defproc[(ccurve
-          [point1 (cons/c natural? natural?) void?]
-          [point2 (cons/c natural? natural?) void?]
-          [point3 (cons/c natural? natural?) void?]
+          [point1 (cons/c natural? natural?)]
+          [point2 (cons/c natural? natural?)]
+          [point3 (cons/c natural? natural?)]
         )
         void?]{
 }
@@ -22,25 +22,39 @@ use three control points to draw a Cubic Bezier Curve.
 ccurve* use absolute position.
 
 @codeblock{
-  (path
-    #:stroke-fill? "#333333"
-    #:stroke-width? 3
-    (lambda ()
-      (moveto* '(0 . 50))
-      (ccurve* '(20 . 5) '(70 . 5) '(90 . 50))
-      (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
+(svg-out
+  #:canvas? '(1 "red" "white")
+  (lambda ()
+    (let ([path
+            (svg-path-def
+              (lambda ()
+              (svg-path-moveto* '(10 . 60))
+              (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
+              (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
+            ))]
+          [red_dot (svg-circle-def 2)])
+
+          (svg-use path
+            #:stroke? "#333333"
+            #:stroke-width? 3)
+
+          (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+          (svg-use red_dot #:at? '(30 . 15) #:fill? "red")
+          (svg-use red_dot #:at? '(80 . 15) #:fill? "red")
+          (svg-use red_dot #:at? '(100 . 60) #:fill? "red")
+          (svg-use red_dot #:at? '(120 . 105) #:fill? "red")
+          (svg-use red_dot #:at? '(170 . 105) #:fill? "red")
+          (svg-use red_dot #:at? '(190 . 60) #:fill? "red")
+
+          (svg-show-default))))
 }
 
 ccurve use relative position, relative to the start position.
 
 @codeblock{
-  (path
-    #:stroke-fill? "#333333"
-    #:stroke-width? 3
-    (lambda ()
-      (moveto* '(0 . 50))
-      (ccurve '(20 . -45) '(70 . -45) '(90 . 0))
-      (ccurve '(20 . 45) '(70 . 45) '(90 . 0))))
+(svg-path-moveto* '(10 . 60))
+(svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
+(svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
 }
 
 little red pots show the control points.

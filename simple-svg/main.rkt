@@ -13,6 +13,8 @@
 (require "path/lineto.rkt")
 (require "path/close-path.rkt")
 (require "path/qcurve.rkt")
+(require "path/ccurve.rkt")
+(require "path/arc.rkt")
 
 (provide (contract-out
           [svg-out (->* (procedure?)
@@ -64,5 +66,27 @@
                              (cons/c integer? integer?)
                              (cons/c integer? integer?)
                              void?)]
+          [svg-path-ccurve (-> 
+                            (cons/c integer? integer?)
+                            (cons/c integer? integer?)
+                            (cons/c integer? integer?)
+                            void?)]
+          [svg-path-ccurve* (->
+                             (cons/c integer? integer?)
+                             (cons/c integer? integer?)
+                             (cons/c integer? integer?)
+                             void?)]
+          [svg-path-arc (->
+                (cons/c integer? integer?)
+                (cons/c natural? natural?)
+                (or/c 'left_big 'left_small 'right_big 'right_small)
+                (cons/c natural? natural?)
+                void?)]
+          [svg-path-arc* (->
+                 (cons/c integer? integer?)
+                 (cons/c natural? natural?)
+                 (or/c 'left_big 'left_small 'right_big 'right_small)
+                 (cons/c natural? natural?)
+                 void?)]
           ))
 

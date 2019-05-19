@@ -25,7 +25,7 @@
 (define (action type point radius direction size)
   ((*set-position*) point)
 
-  ((*size-func*) (cons (+ (car point) (car radius)) (+ (cdr point) (cdr radius))))
+  ((*size-func*) (cons (car size) (cdr size)))
   
   (let ([section #f])
     (cond
@@ -37,13 +37,12 @@
       (set! section "1,1")]
      [(eq? direction 'right_small)
       (set! section "0,1")])
-
-    (if (eq? type 'A)
-          (fprintf (*svg*) "           A~a,~a 0 ~a ~a,~a\n"
-                   (car radius) (cdr radius)
-                   section
-                   (+ (car point) (*padding*)) (+ (cdr point) (*padding*)))
-          (fprintf (*svg*) "           a~a,~a 0 ~a ~a,~a\n"
-                   (car radius) (cdr radius)
-                   section
-                   (car point) (cdr point)))))
+    
+    ((*add-path*)
+     (format "~a~a,~a 0 ~a ~a,~a"
+             type
+             (car radius)
+             (cdr radius)
+             section
+             (car point)
+             (cdr point)))))

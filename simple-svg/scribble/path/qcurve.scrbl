@@ -12,8 +12,8 @@
 use two control points to draw a Quadratic Bezier Curve.
 
 @defproc[(svg-path-qcurve
-          [point1 (cons/c natural? natural?) void?]
-          [point2 (cons/c natural? natural?) void?]
+          [point1 (cons/c natural? natural?)]
+          [point2 (cons/c natural? natural?)]
         )
         void?]{
 }
@@ -21,13 +21,17 @@ use two control points to draw a Quadratic Bezier Curve.
 qcurve* use absolute position.
 
 @codeblock{
-(let ([path
-  (svg-path-def
-    (lambda ()
-      (svg-path-moveto* '(10 . 60))
-      (svg-path-qcurve* '(60 . 10) '(110 . 60))
-      (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
-    [red_dot (svg-circle-def 2)])
+(svg-out
+  #:canvas? '(1 "red" "white")
+  (lambda ()
+    (let ([path
+            (svg-path-def
+              (lambda ()
+              (svg-path-moveto* '(10 . 60))
+              (svg-path-qcurve* '(60 . 10) '(110 . 60))
+              (svg-path-qcurve* '(160 . 110) '(210 . 60))))
+            ]
+          [red_dot (svg-circle-def 2)])
 
     (svg-use path
       #:fill? "white"
@@ -40,7 +44,7 @@ qcurve* use absolute position.
       (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
       (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
 
-      (svg-show-default))
+      (svg-show-default))))
 }
 
 qcurve use relative position, relative to the start position.

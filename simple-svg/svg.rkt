@@ -13,7 +13,7 @@
           [svg-use (->* (string?)
                         (
                          #:at? (or/c #f (cons/c natural? natural?))
-                         #:fill? (or/c #f string?)
+                         #:fill? string?
                          #:stroke? (or/c #f string?)
                          #:stroke-width? (or/c #f natural?)
                          #:stroke-linejoin? (or/c #f 'miter 'round 'bevel)
@@ -129,7 +129,7 @@
 
 (define (svg-use shape_index
                  #:at? [at? '(0 . 0)]
-                 #:fill? [fill? #f]
+                 #:fill? [fill? "none"]
                  #:stroke? [stroke? #f]
                  #:stroke-width? [stroke-width? #f]
                  #:stroke-linejoin? [stroke-linejoin? #f]
@@ -164,7 +164,9 @@
       (when (not (equal? at? '(0 . 0)))
         (hash-set! properties_map 'at at?))])
 
-    (when fill? (hash-set! properties_map 'fill fill?))
+    (when (not (eq? (hash-ref shape 'type) 'line))
+      (hash-set! properties_map 'fill fill?))
+
     (when stroke? (hash-set! properties_map 'stroke stroke?))
     (when stroke-width? (hash-set! properties_map 'stroke-width stroke-width?))
     (when stroke-linejoin? (hash-set! properties_map 'stroke-linejoin stroke-linejoin?))

@@ -10,4 +10,3 @@
   ((*size-func*) (cons width height))
 
   ((*add-path*) raw_data))
-

@@ -1,21 +1,37 @@
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    width="202" height="117"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="212" height="127"
     >
-  <rect width="202" height="117" stroke-width="1" stroke="red" fill="white" />
-  <path fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round"
-        d="
-           M10,60
-           c20,-45 70,-45 90,0
-           c20,45 70,45 90,0
-          "
-          />
-  <circle cx="10" cy="60" r="2" fill="red" />
-  <circle cx="30" cy="15" r="2" fill="red" />
-  <circle cx="80" cy="15" r="2" fill="red" />
-  <circle cx="100" cy="60" r="2" fill="red" />
-  <circle cx="120" cy="105" r="2" fill="red" />
-  <circle cx="170" cy="105" r="2" fill="red" />
-  <circle cx="190" cy="60" r="2" fill="red" />
+  <rect width="212" height="127" stroke-width="1" stroke="red" fill="white" />
+
+  <defs>
+    <path id="s1"
+          d="
+             M10,60
+             c20,-45 70,-45 90,0
+             c20,45 70,45 90,0
+            "/>
+    <circle id="s3" cx="10" cy="60" r="2" />
+    <circle id="s4" cx="30" cy="15" r="2" />
+    <circle id="s5" cx="80" cy="15" r="2" />
+    <circle id="s6" cx="100" cy="60" r="2" />
+    <circle id="s7" cx="120" cy="105" r="2" />
+    <circle id="s8" cx="170" cy="105" r="2" />
+    <circle id="s9" cx="190" cy="60" r="2" />
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" fill="none" stroke-width="3" stroke="#333333" />
+    <use xlink:href="#s3" fill="red" />
+    <use xlink:href="#s4" fill="red" />
+    <use xlink:href="#s5" fill="red" />
+    <use xlink:href="#s6" fill="red" />
+    <use xlink:href="#s7" fill="red" />
+    <use xlink:href="#s8" fill="red" />
+    <use xlink:href="#s9" fill="red" />
+  </symbol>
+
+  <use xlink:href="#default" transform="translate(10 10)" />
 </svg>

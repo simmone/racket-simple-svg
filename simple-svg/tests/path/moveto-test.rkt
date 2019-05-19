@@ -17,44 +17,62 @@
    (test-case
     "test-moveto*"
 
-    (call-with-input-file moveto1_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (path
-                #:stroke-fill? "#333333"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto* '(20 . 60))))
-               (circle '(20 . 60) 1 "red")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([path
+                     (svg-path-def
+                      (lambda ()
+                        (svg-path-moveto* '(20 . 60))))]
+                    [red_dot (svg-circle-def 2)])
+
+                (svg-use path
+                         #:fill? "white"
+                         #:stroke-width? 1
+                         #:stroke? "#7AA20D"
+                         #:stroke-linejoin? 'round)
+
+                (svg-use red_dot #:at? '(20 . 60) #:fill? "red")
+
+                (svg-show-default))))])
+      
+      (call-with-input-file moveto1_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    (test-case
     "test-moveto"
 
-    (call-with-input-file moveto2_svg
-      (lambda (expected)
-        (call-with-input-string
-         (call-with-output-string
-          (lambda (output)
-            (with-output-to-svg
-             output
-             #:canvas? '(1 "red" "white")
-             (lambda ()
-               (path
-                #:stroke-fill? "#333333"
-                #:stroke-width? 3
-                (lambda ()
-                  (moveto '(20 . 60))))
-               (circle '(20 . 60) 1 "red")))))
-         (lambda (actual)
-           (check-lines? expected actual))))))
+    (let ([actual_svg
+           (svg-out
+            #:canvas? '(1 "red" "white")
+            (lambda ()
+              (let ([path
+                     (svg-path-def
+                      (lambda ()
+                        (svg-path-moveto '(20 . 60))))]
+                    [red_dot (svg-circle-def 2)])
+
+                (svg-use path
+                         #:fill? "white"
+                         #:stroke-width? 1
+                         #:stroke? "#7AA20D"
+                         #:stroke-linejoin? 'round)
+
+                (svg-use red_dot #:at? '(20 . 60) #:fill? "red")
+
+                (svg-show-default))))])
+      
+      (call-with-input-file moveto2_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    ))
 

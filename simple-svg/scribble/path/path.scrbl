@@ -25,3 +25,7 @@ define a path programmtially.
 @include-section{lineto.scrbl}
 
 @include-section{qcurve.scrbl}
+
+@include-section{ccurve.scrbl}
+
+@include-section{arc.scrbl}

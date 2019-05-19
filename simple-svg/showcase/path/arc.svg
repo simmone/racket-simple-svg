@@ -2,46 +2,42 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="300" height="130"
+    width="310" height="140"
     >
-  <rect width="300" height="130" stroke-width="1" stroke="red" fill="white" />
+  <rect width="310" height="140" stroke-width="1" stroke="red" fill="white" />
 
   <defs>
-    <path id="p1" fill="none" stroke="#ccccff" stroke-width="3" stroke-linejoin="round"
+    <path id="s1"
           d="
-             M120,35
-             A80,40 0 1,0 160,75
-            "
-            />
-    <path id="p2" fill="none" stroke="green" stroke-width="3" stroke-linejoin="round"
+             M130,45
+             A80,40 0 1,0 170,85
+            "/>
+    <path id="s2"
           d="
-             M120,35
-             A80,40 0 0,0 160,75
-            "
-            />
-    <path id="p3" fill="none" stroke="blue" stroke-width="3" stroke-linejoin="round"
+             M130,45
+             A80,40 0 0,0 170,85
+            "/>
+    <path id="s3"
           d="
-             M120,35
-             A80,40 0 1,1 160,75
-            "
-            />
-    <path id="p4" fill="none" stroke="yellow" stroke-width="3" stroke-linejoin="round"
+             M130,45
+             A80,40 0 1,1 170,85
+            "/>
+    <path id="s4"
           d="
-             M120,35
-             A80,40 0 0,1 160,75
-            "
-            />
-    <circle id="p5" cx="120" cy="35" r="2" fill="red" />
-    <circle id="p6" cx="160" cy="75" r="2" fill="red" />
+             M130,45
+             A80,40 0 0,1 170,85
+            "/>
+    <circle id="s6" cx="130" cy="45" r="2" />
+    <circle id="s7" cx="170" cy="85" r="2" />
   </defs>
-  
+
   <symbol id="default">
-    <use xlink:href="#p1" />
-    <use xlink:href="#p2" />
-    <use xlink:href="#p3" />
-    <use xlink:href="#p4" />
-    <use xlink:href="#p5" />
-    <use xlink:href="#p6" />
+    <use xlink:href="#s1" fill="none" stroke-width="3" stroke="#ccccff" />
+    <use xlink:href="#s2" fill="none" stroke-width="3" stroke="green" />
+    <use xlink:href="#s3" fill="none" stroke-width="3" stroke="blue" />
+    <use xlink:href="#s4" fill="none" stroke-width="3" stroke="yellow" />
+    <use xlink:href="#s6" fill="red" />
+    <use xlink:href="#s7" fill="red" />
   </symbol>
 
   <use xlink:href="#default" transform="translate(10 10)" />
