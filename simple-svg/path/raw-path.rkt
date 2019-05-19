@@ -3,9 +3,11 @@
 (require "path.rkt")
 
 (provide (contract-out
-          [svg-path-raw (-> string? void?)]
+          [svg-path-raw (-> natural? natural? string? void?)]
           ))
 
-(define (svg-path-raw raw_data)
-    ((*add-path*) raw_data))
+(define (svg-path-raw width height raw_data)
+  ((*size-func*) (cons width height))
+
+  ((*add-path*) raw_data))
 

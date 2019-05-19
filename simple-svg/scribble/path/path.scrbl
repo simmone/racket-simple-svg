@@ -10,8 +10,6 @@
 define a path programmtially.
 
 @defproc[(svg-path-def
-          [width natural?]
-          [height natural?]
           [procedure procedure?]
         )
         void?]{

@@ -20,4 +20,19 @@
 (define (svg-path-vlineto* point) (line 'V point))
 
 (define (line type point)
+  (cond
+   [(or
+     (eq? type 'l)
+     (eq? type 'h)
+     (eq? type 'v))
+    (let ([current_position
+           (cons
+            (+ (car ((*get-position*))) (car point))
+            (+ (cdr ((*get-position*))) (cdr point)))])
+      ((*size-func*) current_position)
+      ((*set-position*) current_position))]
+   [else
+    ((*size-func*) point)
+    ((*set-position*) point)])
+  
   ((*add-path*) (format "~a~a,~a" type (car point) (cdr point))))

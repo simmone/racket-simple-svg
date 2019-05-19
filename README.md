@@ -216,8 +216,6 @@ define a path programmtially.
 
 ```racket
 (define (svg-path-def
-          width natural?
-          height natural?
           path_proc procedure?))
 ```
   all path actions should be include in this procedure: moveto, curve etc.
@@ -226,17 +224,21 @@ define a path programmtially.
 
 ```racket
 (define (svg-path-raw
+          width natural?
+          height natural?
           raw_data string?))
 ```
   define a bunch path by raw data.
 
-  raw data normally come from other svg tools.
+  as raw data normally come from other svg tools, it's size can't be calculated.
+
+  so you should specify it manully.
 
 ### rawpath
 ```racket
 (let ([path
        (svg-path-def
-         260 186
+         276 202
          (lambda ()
          (svg-path-raw
          "M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021
@@ -283,7 +285,6 @@ close a path.
 ```racket
 (let ([path
   (svg-path-def
-    110 110
     (lambda ()
      (svg-path-moveto* '(10 . 10))
      (svg-path-lineto '(100 . 100))
@@ -333,8 +334,8 @@ close a path.
 ### Quadratic Bezier Curve
 
 ```racket
-(define (qcurve point1 point2)
-(define (qcurve* point1 point2)
+(define (svg-path-qcurve point1 point2)
+(define (svg-path-qcurve* point1 point2)
 ```
   use two control points to draw a Quadratic Bezier Curve.
 
@@ -343,9 +344,32 @@ close a path.
   qcurve use relative position, relative to the start position.
 
 ```racket
-  (moveto* '(0 . 50))
-  (qcurve* '(50 . 0) '(100 . 50))
-  (qcurve* '(150 . 100) '(200 . 50))))
+(let ([path
+  (svg-path-def
+    (lambda ()
+      (svg-path-moveto* '(10 . 60))
+      (svg-path-qcurve* '(60 . 10) '(110 . 60))
+      (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
+    [red_dot (svg-circle-def 2)])
+
+    (svg-use path
+      #:fill? "white"
+      #:stroke? "#333333"
+      #:stroke-width? 3)
+
+      (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+      (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
+      (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
+      (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
+      (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
+
+      (svg-show-default))
+```
+
+```racket
+(svg-path-moveto* '(10 . 60))
+(svg-path-qcurve '(50 . -50) '(100 . 0))
+(svg-path-qcurve '(50 . 50) '(100 . 0))
 ```
 ![ScreenShot](simple-svg/showcase/path/qcurve1.svg)
 

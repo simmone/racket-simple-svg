@@ -2,22 +2,22 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="222" height="122"
+    width="232" height="132"
     >
-  <rect width="222" height="122" stroke-width="1" stroke="red" fill="white" />
+  <rect width="232" height="132" stroke-width="1" stroke="red" fill="white" />
 
   <defs>
     <path id="s1"
           d="
-             M0,50
-             Q50,0 100,50
-             Q150,100 200,50
+             M10,60
+             Q60,10 110,60
+             Q160,110 210,60
             "/>
-    <circle id="s3" cx="0" cy="50" r="2" />
-    <circle id="s4" cx="50" cy="0" r="2" />
-    <circle id="s5" cx="100" cy="50" r="2" />
-    <circle id="s6" cx="150" cy="100" r="2" />
-    <circle id="s7" cx="200" cy="50" r="2" />
+    <circle id="s3" cx="10" cy="60" r="2" />
+    <circle id="s4" cx="60" cy="10" r="2" />
+    <circle id="s5" cx="110" cy="60" r="2" />
+    <circle id="s6" cx="160" cy="110" r="2" />
+    <circle id="s7" cx="210" cy="60" r="2" />
   </defs>
 
   <symbol id="default">

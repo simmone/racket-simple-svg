@@ -22,7 +22,6 @@
             (lambda ()
               (let ([path
                      (svg-path-def
-                      110 110
                       (lambda ()
                         (svg-path-moveto* '(10 . 10))
                         (svg-path-lineto '(100 . 100))

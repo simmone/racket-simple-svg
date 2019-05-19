@@ -10,18 +10,22 @@
 define a bunch path by raw data.
 
 @defproc[(svg-path-raw
+          [width natural?]
+          [height natural?]
           [data string?]
         )
         void?]{
-  raw data normally come from other svg tools.
+  as raw data normally come from other svg tools, it's size can't be calculated.
+
+  so you should specify it manully.
 }
 
 @codeblock{
 (let ([path
        (svg-path-def
-         260 186
          (lambda ()
          (svg-path-raw
+         276 202
          "M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021
          c-10.035,37.291-51.174,65.206-100.414,65.206 c-49.261,0-90.443-27.979-100.435-65.334
          c-0.765,0.106-1.531,0.149-2.317,0.149c-9.78,0-17.71-7.93-17.71-17.731

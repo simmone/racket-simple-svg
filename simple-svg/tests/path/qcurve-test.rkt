@@ -23,11 +23,10 @@
             (lambda ()
               (let ([path
                      (svg-path-def
-                      200 100
                       (lambda ()
-                        (svg-path-moveto* '(0 . 50))
-                        (svg-path-qcurve* '(50 . 0) '(100 . 50))
-                        (svg-path-qcurve* '(150 . 100) '(200 . 50))))]
+                        (svg-path-moveto* '(10 . 60))
+                        (svg-path-qcurve* '(60 . 10) '(110 . 60))
+                        (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
                     [red_dot (svg-circle-def 2)])
 
                 (svg-use path
@@ -35,11 +34,11 @@
                          #:stroke? "#333333"
                          #:stroke-width? 3)
 
-                (svg-use red_dot #:at? '(0 . 50) #:fill? "red")
-                (svg-use red_dot #:at? '(50 . 0) #:fill? "red")
-                (svg-use red_dot #:at? '(100 . 50) #:fill? "red")
-                (svg-use red_dot #:at? '(150 . 100) #:fill? "red")
-                (svg-use red_dot #:at? '(200 . 50) #:fill? "red")
+                (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+                (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
+                (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
+                (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
+                (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
 
                 (svg-show-default))))])
       
@@ -59,9 +58,8 @@
             (lambda ()
               (let ([path
                      (svg-path-def
-                      200 100
                       (lambda ()
-                        (svg-path-moveto* '(0 . 50))
+                        (svg-path-moveto* '(10 . 60))
                         (svg-path-qcurve '(50 . -50) '(100 . 0))
                         (svg-path-qcurve '(50 . 50) '(100 . 0))
                         ))]
@@ -72,11 +70,11 @@
                          #:stroke? "#333333"
                          #:stroke-width? 3)
 
-                (svg-use red_dot #:at? '(0 . 50) #:fill? "red")
-                (svg-use red_dot #:at? '(50 . 0) #:fill? "red")
-                (svg-use red_dot #:at? '(100 . 50) #:fill? "red")
-                (svg-use red_dot #:at? '(150 . 100) #:fill? "red")
-                (svg-use red_dot #:at? '(200 . 50) #:fill? "red")
+                (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+                (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
+                (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
+                (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
+                (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
 
                 (svg-show-default))))])
       
