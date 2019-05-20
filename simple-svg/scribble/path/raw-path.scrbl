@@ -21,7 +21,10 @@ define a bunch path by raw data.
 }
 
 @codeblock{
-(let ([path
+(svg-out
+  #:canvas? '(1 "red" "white")
+  (lambda ()
+    (let ([path
        (svg-path-def
          (lambda ()
          (svg-path-raw
@@ -39,7 +42,7 @@ define a bunch path by raw data.
            #:stroke? "#7AA20D"
            #:stroke-linejoin? 'round)
 
-         (svg-show-default))
+         (svg-show-default))))
 }
 
 @image{showcase/path/raw_path.svg}

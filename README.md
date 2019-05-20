@@ -273,24 +273,28 @@ define a path programmtially.
 ```
 close a path.
 
-### svg-path-lineto/lineto*/hlineto/hlineto*/vlineto/vlineto*
+### svg-path-lineto/lineto*/hlineto/vlineto
 
 ```racket
 (define (svg-path-lineto point)
 ```
   lineto* is the absolute version.
-  horizontal line: hlineto and hlineto*.
-  vertical line: vlineto and vlineto*.
+  horizontal line: hlineto.
+  vertical line: vlineto.
 
 ```racket
-(let ([path
-  (svg-path-def
-    (lambda ()
-     (svg-path-moveto* '(10 . 10))
-     (svg-path-lineto '(100 . 100))
-     (svg-path-hlineto '(-100 . 0))
-     (svg-path-lineto '(100 . -100))
-     (svg-path-close)))]
+(svg-out
+  #:canvas? '(1 "red" "white")
+  (lambda ()
+    (let ([path
+      (svg-path-def
+        (lambda ()
+          (svg-path-moveto* '(10 . 10))
+          (svg-path-hlineto 100)
+          (svg-path-vlineto 100)
+          (svg-path-lineto '(-50 . 50))
+          (svg-path-lineto '(-50 . -50))
+          (svg-path-close)))]
      [red_dot (svg-circle-def 2)])
 
      (svg-use path
@@ -304,7 +308,7 @@ close a path.
        (svg-use red_dot #:at? '(10 . 110) #:fill? "red")
        (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
 
-       (svg-show-default))
+       (svg-show-default))))
 ```
 ![ScreenShot](simple-svg/showcase/path/lineto.svg)
 

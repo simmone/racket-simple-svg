@@ -24,9 +24,10 @@
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto* '(10 . 10))
-                        (svg-path-lineto '(100 . 100))
-                        (svg-path-hlineto '(-100 . 0))
-                        (svg-path-lineto '(100 . -100))
+                        (svg-path-hlineto 100)
+                        (svg-path-vlineto 100)
+                        (svg-path-lineto '(-50 . 50))
+                        (svg-path-lineto '(-50 . -50))
                         (svg-path-close)))]
                     [red_dot (svg-circle-def 2)])
 
@@ -39,6 +40,8 @@
                 (svg-use red_dot #:at? '(10 . 10) #:fill? "red")
                 (svg-use red_dot #:at? '(110 . 110) #:fill? "red")
                 (svg-use red_dot #:at? '(10 . 110) #:fill? "red")
+                (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
+                (svg-use red_dot #:at? '(60 . 160) #:fill? "red")
                 (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
 
                 (svg-show-default))))])
