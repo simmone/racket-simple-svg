@@ -27,21 +27,15 @@ raco pkg install simple-svg
 @section{Usage}
 
 @defproc[(svg-out
+          [width natural?]
+          [height natural?]
           [procedure procedure?]
-          [#:width? width? (or/c #f natural?) #f]
-          [#:height? height? (or/c #f natural?) #f]
-          [#:padding? padding? natural? 10]
           [#:viewBox? viewBox? (or/c #f (list/c natural? natural? natural? natural?)) #f]
-          [#:canvas? canvas? (or/c #f (list/c natural? string? string?)) #f]
         )
         string?]{
-  canvas size is automatically calculated.
-  default generate a svg with a 10 padding.
-  you can set size manully by #:width? and #:height?.
-
+  specify width and height manully.
+  
   viewBox?: '(x y width height), if needed.
-
-  canvas?: '(stroke-width stroke-fill fill), if needed.
 }
 
 @subsection{basic usage}
@@ -51,7 +45,7 @@ raco pkg install simple-svg
   @item{all svg drawings should occur in the svg-out's procedure.}
   @item{use svg-...-def define shape first.}
   @item{svg-use reuse the shape in group, if not specify which group, all svg-use included in the default group.}
-  @item{svg-show-default shows default group, or svg-show the specific group.}
+  @item{svg-show-default shows default group at '(0 . 0), or svg-show the specific group at any point.}
 ]
 
 define shape first, then define group, reuse shape in group(s) any times and styles, show group(s) in canvas any times.
@@ -64,7 +58,7 @@ ie: define a rect by width and height, then resue it by svg-use any times,
 
 @codeblock{
   (svg-out
-    #:canvas? '(1 "red" "white")
+    100 100
     (lambda ()
       (let ([rec (svg-rect-def 100 100)])
         (svg-use rec #:fill? "#BBC42A")
@@ -75,7 +69,7 @@ generated svg file:
 
 @verbatim{
   @(svg-out
-    #:canvas? '(1 "red" "white")
+    100 100
     (lambda ()
       (let ([rec (svg-rect-def 100 100)])
         (svg-use rec #:fill? "#BBC42A")
@@ -107,9 +101,3 @@ generated svg file:
 @include-section["shapes/ellipse.scrbl"]
 
 @include-section["shapes/line.scrbl"]
-
-@include-section["shapes/polygon.scrbl"]
-
-@include-section["shapes/polyline.scrbl"]
-
-@include-section["path/path.scrbl"]

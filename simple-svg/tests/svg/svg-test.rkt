@@ -20,6 +20,7 @@
 
     (let ([actual_svg
            (svg-out
+            20 20
             (lambda ()
               (void)))])
 
@@ -35,9 +36,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:width? 640
-            #:height? 320
-            #:canvas? '(1 "red" "white")
+            640 320
             (lambda ()
               (void)))])
       
@@ -53,13 +52,13 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
-            #:viewBox? '(60 0 120 120)
+            100 100
+            #:viewBox? '(50 0 100 100)
             (lambda ()
               (let ([rec (svg-rect-def 100 100)])
                 (svg-use rec #:fill? "#BBC42A")
                 (svg-show-default))))])
-
+      
       (call-with-input-file viewBox_svg
         (lambda (expected)
           (call-with-input-string

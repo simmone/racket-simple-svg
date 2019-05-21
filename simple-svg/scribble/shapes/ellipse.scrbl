@@ -20,9 +20,9 @@ define a ellipse.
 @section{ellipse}
 
 @codeblock{
-  (let ([ellipse (svg-ellipse-def '(100 . 50))])
-    (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
-    (svg-show-default))
+(let ([ellipse (svg-ellipse-def '(100 . 50))])
+  (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
+  (svg-show-default))
 }
 
 @image{showcase/shapes/ellipse/ellipse.svg}

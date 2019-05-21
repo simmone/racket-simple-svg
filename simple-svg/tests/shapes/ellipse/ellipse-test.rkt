@@ -18,7 +18,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            200 100
             (lambda ()
               (let ([ellipse (svg-ellipse-def '(100 . 50))])
                 (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")

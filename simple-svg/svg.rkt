@@ -1,13 +1,9 @@
 #lang racket
 
 (provide (contract-out
-          [svg-out (->* (procedure?)
+          [svg-out (->* (natural? natural? procedure?)
                         (
-                         #:width? natural?
-                         #:height? natural?
-                         #:padding? natural?
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
-                         #:canvas? (or/c #f (list/c natural? string? string?))
                          )
                         string?)]
           [svg-use (->* (string?)
@@ -20,6 +16,7 @@
                         )
                         void?)]
           [svg-show-default (-> void?)]
+          [svg-show (-> string? (cons/c natural? natural?) void?)]
           [*shape-index* parameter?]
           [*add-shape* parameter?]
           ))
@@ -37,59 +34,33 @@
 (define *size-func* (make-parameter #f))
 (define *current_group* (make-parameter #f))
 (define *debug_port* (make-parameter #f))
-(define *max-size* (make-parameter #f))
-(define *max-width* (make-parameter #f))
-(define *max-height* (make-parameter #f))
-(define *padding* (make-parameter #f))
 (define *canvas* (make-parameter #f))
 (define *shape-def-list* (make-parameter #f))
 (define *add-to-shape-def-list* (make-parameter #f))
 (define *groups-list* (make-parameter #f))
 (define *show-list* (make-parameter #f))
+(define *viewBox* (make-parameter #f))
 (define *width* (make-parameter #f))
 (define *height* (make-parameter #f))
-(define *viewBox* (make-parameter #f))
 
-(define (svg-out write_proc
-                 #:width? [width? #f]
-                 #:height? [height? #f]
-                 #:padding? [padding? 10]
+(define (svg-out width height write_proc
                  #:viewBox? [viewBox? #f]
-                 #:canvas? [canvas? #f]
                  )
 
-  (let ([max_width 0]
-        [max_height 0]
-        [shapes_count 0]
+  (let ([shapes_count 0]
         [groups_count 0]
         [shape_def_list '()]
         [shapes_map (make-hash)]
         [groups_list '()]
         [groups_map (make-hash)]
-        [group_width_map (make-hash)]
-        [group_height_map (make-hash)]
         [show_list '()])
     (parameterize
      (
+      [*width* width]
+      [*height* height]
       [*debug_port* (current-output-port)]
-      [*max-width* (lambda () max_width)]
-      [*max-height* (lambda () max_height)]
-      [*max-size*
-       (lambda (_width _height)
-         (when (> _width max_width) (set! max_width _width))
-         (when (> _height max_height) (set! max_height _height)))]
-      [*padding* padding?]
-      [*canvas* canvas?]
       [*shape-index* (lambda () (set! shapes_count (add1 shapes_count)) (format "s~a" shapes_count))]
       [*group-index* (lambda () (set! groups_count (add1 groups_count)) (format "g~a" groups_count))]
-      [*size-func* 
-       (lambda (_group _width _height)
-         (let ([group_width (hash-ref group_width_map _group 0)]
-               [group_height (hash-ref group_height_map _group 0)])
-           (when (> _width group_width) (hash-set! group_width_map _group _width))
-           (when (> _height group_height) (hash-set! group_height_map _group _height))))]
-      [*group_width_map* group_width_map]
-      [*group_height_map* group_height_map]
       [*shape-def-list* (lambda () shape_def_list)]
       [*add-to-shape-def-list* (lambda (shape_index) (set! shape_def_list `(,@shape_def_list ,shape_index)))]
       [*add-shape*
@@ -108,8 +79,6 @@
       [*add-to-show* (lambda (group_index at?) (set! show_list `(,@show_list ,(list group_index at?))))]
       [*show-list* (lambda () show_list)]
       [*current_group* "default"]
-      [*width* width?]
-      [*height* height?]
       [*viewBox* viewBox?]
       )
      (with-output-to-string
@@ -173,77 +142,23 @@
 
     ((*add-group*) new_shape_index properties_map)
     
-    (cond
-     [(eq? (hash-ref shape 'type) 'rect)
-      ((*size-func*)
-       (*current_group*)
-       (+ (car at?) (hash-ref shape 'width) stroke_width)
-       (+ (cdr at?) (hash-ref shape 'height) stroke_width))]
-     [(eq? (hash-ref shape 'type) 'circle)
-      ((*size-func*)
-       (*current_group*)
-       (+ (car at?) (hash-ref shape 'radius) stroke_width)
-       (+ (cdr at?) (hash-ref shape 'radius) stroke_width))]
-     [(eq? (hash-ref shape 'type) 'ellipse)
-      ((*size-func*)
-       (*current_group*)
-       (+ (car at?) (car (hash-ref shape 'radius)) stroke_width)
-       (+ (cdr at?) (cdr (hash-ref shape 'radius)) stroke_width))]
-     [(or 
-       (eq? (hash-ref shape 'type) 'line)
-       (eq? (hash-ref shape 'type) 'polygon)
-       (eq? (hash-ref shape 'type) 'polyline))
-      ((*size-func*)
-       (*current_group*)
-       (+ (hash-ref shape 'max_width) stroke_width)
-       (+ (hash-ref shape 'max_height) stroke_width))]
-     [(eq? (hash-ref shape 'type) 'path)
-      ((*size-func*)
-       (*current_group*)
-       (+ (car at?) (hash-ref shape 'width))
-       (+ (cdr at?) (hash-ref shape 'height)))]
-     )))
+    ))
 
 (define (svg-show-default)
-  (svg-show "default"))
+  (svg-show "default" '(0 . 0)))
 
-(define (svg-show group_index #:at? [at? '(0 . 0)])
-  ((*add-to-show*) group_index at?)
-  
-  ((*max-size*)
-   (hash-ref (*group_width_map*) group_index)
-   (hash-ref (*group_height_map*) group_index)))
+(define (svg-show group_index at)
+  ((*add-to-show*) group_index at))
 
 (define (flush-data)
-  (let ([_width #f]
-        [_height #f])
+  (printf "    width=\"~a\" height=\"~a\"\n" (*width*) (*height*))
 
-    (if (or (*width*) (*height*))
-        (begin
-          (set! _width (*width*))
-          (set! _height (*height*)))
-        (begin
-          (set! _width ((*max-width*)))
-          (set! _height ((*max-height*)))))
-
-      (printf "    width=\"~a\" height=\"~a\"\n"
-              (+ _width (* (*padding*) 2))
-              (+ _height (* (*padding*) 2)))
-
-      (when (*viewBox*)
-        (printf "    viewBox=\"~a ~a ~a ~a\"\n"
-                (first (*viewBox*)) (second (*viewBox*)) (third (*viewBox*)) (fourth (*viewBox*))))
+  (when (*viewBox*)
+    (printf "    viewBox=\"~a ~a ~a ~a\"\n"
+            (first (*viewBox*)) (second (*viewBox*)) (third (*viewBox*)) (fourth (*viewBox*))))
       
-      (printf "    >\n")
+  (printf "    >\n")
 
-      (when (*canvas*)
-        (printf "  <rect width=\"~a\" height=\"~a\" stroke-width=\"~a\" stroke=\"~a\" fill=\"~a\" />\n\n"
-                (+ _width (* (*padding*) 2))
-                (+ _height (* (*padding*) 2))
-                (first (*canvas*))
-                (second (*canvas*))
-                (third (*canvas*)))))
-  
   (when (not (null? ((*shape-def-list*))))
     (printf "  <defs>\n")
     (let loop ([defs ((*shape-def-list*))])
@@ -275,19 +190,14 @@
                           (when (hash-has-key? properties_map 'stroke-width)
                             (printf "stroke-width=\"~a\" " (hash-ref properties_map 'stroke-width))
                             
-                            (when (not (eq? (hash-ref shape 'type) 'path))
-                              (printf "transform=\"translate(~a ~a)\" "
-                                      (sub1 (hash-ref properties_map 'stroke-width))
-                                      (sub1 (hash-ref properties_map 'stroke-width)))))
-
                             (when (hash-has-key? properties_map 'stroke)
                                   (printf "stroke=\"~a\" " (hash-ref properties_map 'stroke)))
 
-                          (when (hash-has-key? properties_map 'stroke-linejoin)
-                            (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-linejoin)))))))
+                            (when (hash-has-key? properties_map 'stroke-linejoin)
+                              (printf "stroke-linejoin=\"~a\" " (hash-ref properties_map 'stroke-linejoin))))))))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
-         (loop-group (cdr groups)))))
+        (loop-group (cdr groups)))))
     
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
@@ -299,9 +209,6 @@
                   (lambda ()
                     (when (not (equal? group_at '(0 . 0)))
                       (printf "x=\"~a\" y=\"~a\" " (car group_at) (cdr group_at)))
-                    
-                    (when (not (= (*padding*) 0))
-                      (printf "transform=\"translate(~a ~a)\" " (*padding*) (*padding*)))
                     ))))
       (loop-group (cdr groups))))
   )

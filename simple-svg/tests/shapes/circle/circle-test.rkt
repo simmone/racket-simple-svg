@@ -19,7 +19,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            100 100
             (lambda ()
               (let ([circle (svg-circle-def 50)])
                 (svg-use circle #:at? '(50 . 50) #:fill? "#ED6E46")
@@ -37,7 +37,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            200 200
             (lambda ()
               (let ([circle (svg-circle-def 50)])
                 (svg-use circle #:at? '(50 . 50) #:fill? "red")

@@ -21,7 +21,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)])
                 (svg-use rec #:fill? "#BBC42A")
@@ -39,13 +39,12 @@
 
     (let ([actual_svg
            (svg-out
-            #:padding? 0
-            #:canvas? '(1 "red" "white")
+            100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)])
                 (svg-use rec #:fill? "#BBC42A" #:at? '(50 . 50))
                 (svg-show-default))))])
-      
+
       (call-with-input-file rect_y_svg
         (lambda (expected)
           (call-with-input-string
@@ -58,25 +57,25 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))])
                 (svg-use rec #:fill? "#BBC42A")
                 (svg-show-default))))])
-      
-    (call-with-input-file rect_radius_svg
-      (lambda (expected)
-        (call-with-input-string
-         actual_svg
-         (lambda (actual)
-           (check-lines? expected actual)))))))
+
+      (call-with-input-file rect_radius_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
 
    (test-case
     "test-multiple_rect"
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            150 150
             (lambda ()
               (let (
                     [blue_rec (svg-rect-def 150 150)]

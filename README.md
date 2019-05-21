@@ -9,7 +9,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 # Basic Usage
 ```racket
 (svg-out
-  #:canvas? '(1 "red" "white")
+  100 100
   (lambda ()
     (let ([rec (svg-rect-def 100 100)])
       (svg-use rec #:fill? "#BBC42A")
@@ -20,27 +20,21 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ## svg-out
 ```racket
 (svg-out
+  width natural?
+  height natural?
   procedure procedure?
-  [#:width? width? (or/c #f natural?) #f]
-  [#:height? height? (or/c #f natural?) #f]
-  [#:padding? padding? natural? 10]
   [#:viewBox? viewBox? (or/c #f (list/c natural? natural? natural? natural?)) #f]
-  [#:canvas? canvas? (or/c #f (list/c natural? string? string?)) #f])
 ```
-  canvas size is automatically calculated.
-  default generate a svg with a 10 padding.
-  you can set size manully by #:width? and #:height?.
+  specify width and height manully.
 
   viewBox?: '(x y width height), if needed.
-
-  canvas?: '(stroke-width stroke-fill fill), if needed.
 
 ## basic usage
 
   1. all svg drawings should occur in the svg-out's procedure.
   2. use svg-...-def define shape first.
   3. svg-use reuse the shape in group, if not specify which group, all svg-use included in the default group.
-  4. svg-show-default shows default group, or svg-show the specific group.
+  4. svg-show-default shows default group at '(0 . 0), or svg-show the specific group at any point.
 
   define shape first, then define group, reuse shape in group(s) any times and styles, show group(s) in canvas any times.
 
@@ -51,15 +45,15 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
       each svg-use can use different axis, fill or stroke.
 
 ```racket
-  (let (
-        [blue_rec (svg-rect-def 150 150)]
-        [green_rec (svg-rect-def 100 100)]
-        [red_rec (svg-rect-def 50 50)]
-        )
-    (svg-use blue_rec #:fill? "blue")
-    (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
-    (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
-    (svg-show-default))
+(let (
+      [blue_rec (svg-rect-def 150 150)]
+      [green_rec (svg-rect-def 100 100)]
+      [red_rec (svg-rect-def 50 50)]
+      )
+  (svg-use blue_rec #:fill? "blue")
+  (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
+  (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
 

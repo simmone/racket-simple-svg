@@ -17,13 +17,9 @@
 (require "path/arc.rkt")
 
 (provide (contract-out
-          [svg-out (->* (procedure?)
+          [svg-out (->* (natural? natural? procedure?)
                         (
-                         #:width? natural?
-                         #:height? natural?
-                         #:padding? natural?
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
-                         #:canvas? (or/c #f (list/c natural? string? string?))
                          )
                         string?)]
           [svg-use (->* (string?)
@@ -36,6 +32,7 @@
                         )
                         void?)]
           [svg-show-default (-> void?)]
+          [svg-show (-> string? (cons/c natural? natural?) void?)]
           [svg-rect-def (->* 
                  (natural? natural?)
                  (
