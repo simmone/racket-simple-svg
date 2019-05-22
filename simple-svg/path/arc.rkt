@@ -23,10 +23,6 @@
 (define (svg-path-arc* point radius direction size) (action 'A point radius direction size))
 
 (define (action type point radius direction size)
-  ((*set-position*) point)
-
-  ((*size-func*) (cons (car size) (cdr size)))
-  
   (let ([section #f])
     (cond
      [(eq? direction 'left_big)

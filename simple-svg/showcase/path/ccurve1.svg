@@ -2,10 +2,8 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="212" height="127"
+    width="200" height="120"
     >
-  <rect width="212" height="127" stroke-width="1" stroke="red" fill="white" />
-
   <defs>
     <path id="s1"
           d="
@@ -13,13 +11,13 @@
              C30,15 80,15 100,60
              C120,105 170,105 190,60
             "/>
-    <circle id="s3" cx="10" cy="60" r="2" />
-    <circle id="s4" cx="30" cy="15" r="2" />
-    <circle id="s5" cx="80" cy="15" r="2" />
-    <circle id="s6" cx="100" cy="60" r="2" />
-    <circle id="s7" cx="120" cy="105" r="2" />
-    <circle id="s8" cx="170" cy="105" r="2" />
-    <circle id="s9" cx="190" cy="60" r="2" />
+    <circle id="s3" cx="10" cy="60" r="5" />
+    <circle id="s4" cx="30" cy="15" r="5" />
+    <circle id="s5" cx="80" cy="15" r="5" />
+    <circle id="s6" cx="100" cy="60" r="5" />
+    <circle id="s7" cx="120" cy="105" r="5" />
+    <circle id="s8" cx="170" cy="105" r="5" />
+    <circle id="s9" cx="190" cy="60" r="5" />
   </defs>
 
   <symbol id="default">
@@ -33,5 +31,5 @@
     <use xlink:href="#s9" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" transform="translate(10 10)" />
+  <use xlink:href="#default" />
 </svg>

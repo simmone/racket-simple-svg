@@ -218,21 +218,14 @@ define a path programmtially.
 
 ```racket
 (define (svg-path-raw
-          width natural?
-          height natural?
           raw_data string?))
 ```
   define a bunch path by raw data.
-
-  as raw data normally come from other svg tools, it's size can't be calculated.
-
-  so you should specify it manully.
 
 ### rawpath
 ```racket
 (let ([path
        (svg-path-def
-         276 202
          (lambda ()
          (svg-path-raw
          "M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021
@@ -277,22 +270,18 @@ close a path.
   vertical line: vlineto.
 
 ```racket
-(svg-out
-  #:canvas? '(1 "red" "white")
-  (lambda ()
-    (let ([path
-      (svg-path-def
-        (lambda ()
-          (svg-path-moveto* '(10 . 10))
-          (svg-path-hlineto 100)
-          (svg-path-vlineto 100)
-          (svg-path-lineto '(-50 . 50))
-          (svg-path-lineto '(-50 . -50))
-          (svg-path-close)))]
+(let ([path
+  (svg-path-def
+    (lambda ()
+      (svg-path-moveto* '(10 . 10))
+      (svg-path-hlineto 100)
+      (svg-path-vlineto 100)
+      (svg-path-lineto '(-50 . 50))
+      (svg-path-lineto '(-50 . -50))
+      (svg-path-close)))]
      [red_dot (svg-circle-def 2)])
 
      (svg-use path
-       #:fill? "white"
        #:stroke-width? 1
        #:stroke? "#7AA20D"
        #:stroke-linejoin? 'round)
@@ -302,7 +291,7 @@ close a path.
        (svg-use red_dot #:at? '(10 . 110) #:fill? "red")
        (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
 
-       (svg-show-default))))
+     (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/path/lineto.svg)
 

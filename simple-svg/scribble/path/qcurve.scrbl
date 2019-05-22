@@ -21,30 +21,26 @@ use two control points to draw a Quadratic Bezier Curve.
 qcurve* use absolute position.
 
 @codeblock{
-(svg-out
-  #:canvas? '(1 "red" "white")
-  (lambda ()
-    (let ([path
-            (svg-path-def
-              (lambda ()
-              (svg-path-moveto* '(10 . 60))
-              (svg-path-qcurve* '(60 . 10) '(110 . 60))
-              (svg-path-qcurve* '(160 . 110) '(210 . 60))))
-            ]
-          [red_dot (svg-circle-def 2)])
+(let ([path
+        (svg-path-def
+          (lambda ()
+          (svg-path-moveto* '(10 . 60))
+          (svg-path-qcurve* '(60 . 10) '(110 . 60))
+          (svg-path-qcurve* '(160 . 110) '(210 . 60))))
+        ]
+      [red_dot (svg-circle-def 5)])
 
     (svg-use path
-      #:fill? "white"
       #:stroke? "#333333"
       #:stroke-width? 3)
 
-      (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
-      (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
-      (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
-      (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
-      (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
+    (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+    (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
+    (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
+    (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
+    (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
 
-      (svg-show-default))))
+    (svg-show-default))
 }
 
 qcurve use relative position, relative to the start position.

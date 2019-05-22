@@ -19,7 +19,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            200 120
             (lambda ()
               (let ([path
                      (svg-path-def
@@ -28,7 +28,7 @@
                         (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
                         (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
                         ))]
-                    [red_dot (svg-circle-def 2)])
+                    [red_dot (svg-circle-def 5)])
 
                 (svg-use path
                          #:stroke? "#333333"
@@ -56,7 +56,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            200 120
             (lambda ()
               (let ([path
                      (svg-path-def
@@ -65,7 +65,7 @@
                         (svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
                         (svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
                         ))]
-                    [red_dot (svg-circle-def 2)])
+                    [red_dot (svg-circle-def 5)])
 
                 (svg-use path
                          #:stroke? "#333333"
@@ -80,7 +80,7 @@
                 (svg-use red_dot #:at? '(190 . 60) #:fill? "red")
 
                 (svg-show-default))))])
-
+      
       (call-with-input-file ccurve2_svg
         (lambda (expected)
           (call-with-input-string

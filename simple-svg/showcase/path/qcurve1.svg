@@ -2,10 +2,8 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="232" height="132"
+    width="220" height="120"
     >
-  <rect width="232" height="132" stroke-width="1" stroke="red" fill="white" />
-
   <defs>
     <path id="s1"
           d="
@@ -13,15 +11,15 @@
              Q60,10 110,60
              Q160,110 210,60
             "/>
-    <circle id="s3" cx="10" cy="60" r="2" />
-    <circle id="s4" cx="60" cy="10" r="2" />
-    <circle id="s5" cx="110" cy="60" r="2" />
-    <circle id="s6" cx="160" cy="110" r="2" />
-    <circle id="s7" cx="210" cy="60" r="2" />
+    <circle id="s3" cx="10" cy="60" r="5" />
+    <circle id="s4" cx="60" cy="10" r="5" />
+    <circle id="s5" cx="110" cy="60" r="5" />
+    <circle id="s6" cx="160" cy="110" r="5" />
+    <circle id="s7" cx="210" cy="60" r="5" />
   </defs>
 
   <symbol id="default">
-    <use xlink:href="#s1" fill="white" stroke-width="3" stroke="#333333" />
+    <use xlink:href="#s1" fill="none" stroke-width="3" stroke="#333333" />
     <use xlink:href="#s3" fill="red" />
     <use xlink:href="#s4" fill="red" />
     <use xlink:href="#s5" fill="red" />
@@ -29,5 +27,5 @@
     <use xlink:href="#s7" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" transform="translate(10 10)" />
+  <use xlink:href="#default" />
 </svg>

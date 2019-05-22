@@ -19,7 +19,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            220 120
             (lambda ()
               (let ([path
                      (svg-path-def
@@ -27,10 +27,9 @@
                         (svg-path-moveto* '(10 . 60))
                         (svg-path-qcurve* '(60 . 10) '(110 . 60))
                         (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
-                    [red_dot (svg-circle-def 2)])
+                    [red_dot (svg-circle-def 5)])
 
                 (svg-use path
-                         #:fill? "white"
                          #:stroke? "#333333"
                          #:stroke-width? 3)
 
@@ -41,7 +40,7 @@
                 (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
 
                 (svg-show-default))))])
-      
+
       (call-with-input-file qcurve1_svg
         (lambda (expected)
           (call-with-input-string
@@ -54,7 +53,7 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            220 120
             (lambda ()
               (let ([path
                      (svg-path-def
@@ -66,7 +65,6 @@
                     [red_dot (svg-circle-def 2)])
 
                 (svg-use path
-                         #:fill? "white"
                          #:stroke? "#333333"
                          #:stroke-width? 3)
 

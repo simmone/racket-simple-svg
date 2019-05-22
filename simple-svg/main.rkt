@@ -45,7 +45,7 @@
           [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
           [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
           [svg-path-def (-> procedure? string?)]
-          [svg-path-raw (-> natural? natural? string? void?)]
+          [svg-path-raw (-> string? void?)]
           [svg-path-lineto (-> (cons/c integer? integer?) void?)]
           [svg-path-lineto* (-> (cons/c integer? integer?) void?)]
           [svg-path-hlineto (-> integer? void?)]
