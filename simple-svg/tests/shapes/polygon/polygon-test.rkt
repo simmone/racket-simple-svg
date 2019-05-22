@@ -18,12 +18,12 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            110 110
             (lambda ()
               (let ([polygon
                      (svg-polygon-def
                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
-                (svg-use polygon #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
+                (svg-use polygon #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
                 (svg-show-default))))])
       
       (call-with-input-file polygon_svg

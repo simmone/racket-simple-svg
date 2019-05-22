@@ -21,8 +21,8 @@
             110 110
             (lambda ()
               (let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-                (svg-use line #:stroke-width? 10 #:stroke? "#765373")
-                (svg-show "default" '(5 . 5)))))])
+                (svg-use line #:at? '(5 . 5) #:stroke-width? 10 #:stroke? "#765373")
+                (svg-show-default))))])
       
       (call-with-input-file line_svg
         (lambda (expected)

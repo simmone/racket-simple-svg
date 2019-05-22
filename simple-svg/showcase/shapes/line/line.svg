@@ -9,8 +9,8 @@
   </defs>
 
   <symbol id="default">
-    <use xlink:href="#s1" stroke-width="10" stroke="#765373" />
+    <use xlink:href="#s1" x="5" y="5" stroke-width="10" stroke="#765373" />
   </symbol>
 
-  <use xlink:href="#default" x="5" y="5" />
+  <use xlink:href="#default" />
 </svg>

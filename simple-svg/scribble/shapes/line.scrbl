@@ -21,8 +21,8 @@ define a line.
 
 @codeblock{
 (let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-  (svg-use line #:stroke? '(10 . "#765373"))
-  (svg-show "default" '(5 . 5)))
+  (svg-use line #:at? '(5 .5) #:stroke? '(10 . "#765373"))
+  (svg-show-default))
 }
 @image{showcase/shapes/line/line.svg}
 

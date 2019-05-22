@@ -164,7 +164,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### line
 ```racket
 (let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-  (svg-use line #:stroke? '(10 . "#765373"))
+  (svg-use line #:at? '(5 . 5) #:stroke? '(10 . "#765373"))
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/line/line.svg)
@@ -181,7 +181,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (let ([polyline
   (svg-polyline-def
     '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
-  (svg-use polyline #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
+  (svg-use polyline #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polyline/polyline.svg)
@@ -199,7 +199,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (let ([polygon
   (svg-polygon-def
     '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
-    (svg-use polygon #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
+    (svg-use polygon #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
     (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polygon/polygon.svg)
