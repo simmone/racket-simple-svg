@@ -75,13 +75,11 @@
                 (cons/c integer? integer?)
                 (cons/c natural? natural?)
                 (or/c 'left_big 'left_small 'right_big 'right_small)
-                (cons/c natural? natural?)
                 void?)]
           [svg-path-arc* (->
                  (cons/c integer? integer?)
                  (cons/c natural? natural?)
                  (or/c 'left_big 'left_small 'right_big 'right_small)
-                 (cons/c natural? natural?)
                  void?)]
           ))
 

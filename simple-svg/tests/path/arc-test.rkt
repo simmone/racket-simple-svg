@@ -18,30 +18,30 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            300 130
             (lambda ()
               (let (
                     [arc1
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto* '(130 . 45))
-                        (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big '(170 . 85))))]
+                        (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big)))]
                     [arc2
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto* '(130 . 45))
-                        (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small '(170 . 85))))]
+                        (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small)))]
                     [arc3
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto* '(130 . 45))
-                        (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big '(290 . 120))))]
+                        (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big)))]
                     [arc4
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto* '(130 . 45))
-                        (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small '(170 . 85))))]
-                    [red_dot (svg-circle-def 2)]
+                        (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
+                    [red_dot (svg-circle-def 5)]
                     )
 
                 (svg-use arc1 #:stroke? "#ccccff" #:stroke-width? 3)

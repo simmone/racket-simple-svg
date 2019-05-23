@@ -298,8 +298,8 @@ close a path.
 ### Cubic Bezier Curve
 
 ```racket
-(define (ccurve point1 point2 point3)
-(define (ccurve* point1 point2 point3)
+(define (svg-path-ccurve point1 point2 point3)
+(define (svg-path-ccurve* point1 point2 point3)
 ```
   use three control points to draw a Cubic Bezier Curve.
 
@@ -308,13 +308,13 @@ close a path.
   ccurve use relative position, relative to the start position.
 
 ```racket
-  (path
-    #:stroke-fill? "#333333"
-    #:stroke-width? 3
-    (lambda ()
-      (moveto* '(0 . 50))
-      (ccurve* '(20 . 5) '(70 . 5) '(90 . 50))
-      (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
+(path
+  #:stroke-fill? "#333333"
+  #:stroke-width? 3
+  (lambda ()
+    (moveto* '(0 . 50))
+    (ccurve* '(20 . 5) '(70 . 5) '(90 . 50))
+    (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
 ```
 ![ScreenShot](simple-svg/showcase/path/ccurve1.svg)
 
@@ -331,20 +331,15 @@ close a path.
   qcurve use relative position, relative to the start position.
 
 ```racket
-(svg-out
-  #:canvas? '(1 "red" "white")
-  (lambda ()
-    (let ([path
-            (svg-path-def
-              (lambda ()
-              (svg-path-moveto* '(10 . 60))
-              (svg-path-qcurve* '(60 . 10) '(110 . 60))
-              (svg-path-qcurve* '(160 . 110) '(210 . 60))))
-            ]
-          [red_dot (svg-circle-def 2)])
+(let ([path
+        (svg-path-def
+          (lambda ()
+            (svg-path-moveto* '(10 . 60))
+            (svg-path-qcurve* '(60 . 10) '(110 . 60))
+            (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
+      [red_dot (svg-circle-def 5)])
 
     (svg-use path
-      #:fill? "white"
       #:stroke? "#333333"
       #:stroke-width? 3)
 
@@ -414,7 +409,7 @@ close a path.
 ### arc
 
 ```racket
-(define (arc point radius direction size)
+(define (svg-path-arc point radius direction)
 ```
   arc* is the absolute version.
 
@@ -423,35 +418,40 @@ close a path.
   radius spcify the ellipse's size.
   
   direction is a simplified large-arc-flag and sweep-flag's comibination.
-  
-  as the arc's size can't be calculated, so should set the arc size manully.
 ```racket
-(path
-  #:stroke-fill? "#ccccff"
-  #:stroke-width? 3
-  (lambda ()
-    (moveto* '(120 . 35))
-    (arc* '(160 . 75) '(80 . 40) 'left_big '(160 . 75))))
+(let (
+      [arc1
+        (svg-path-def
+          (lambda ()
+            (svg-path-moveto* '(130 . 45))
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big)))]
+      [arc2
+        (svg-path-def
+          (lambda ()
+            (svg-path-moveto* '(130 . 45))
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small)))]
+      [arc3
+        (svg-path-def
+          (lambda ()
+            (svg-path-moveto* '(130 . 45))
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big)))]
+      [arc4
+        (svg-path-def
+          (lambda ()
+            (svg-path-moveto* '(130 . 45))
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
+      [red_dot (svg-circle-def 5)]
+    )
 
-(path
-  #:stroke-fill? "green"
-  #:stroke-width? 3
-  (lambda ()
-    (moveto* '(120 . 35))
-    (arc* '(160 . 75) '(80 . 40) 'left_small '(160 . 75))))
+  (svg-use arc1 #:stroke? "#ccccff" #:stroke-width? 3)
+  (svg-use arc2 #:stroke? "green" #:stroke-width? 3)
+  (svg-use arc3 #:stroke? "blue" #:stroke-width? 3)
+  (svg-use arc4 #:stroke? "yellow" #:stroke-width? 3)
 
-(path
-  #:stroke-fill? "blue"
-  #:stroke-width? 3
-  (lambda ()
-    (moveto* '(120 . 35))
-    (arc* '(160 . 75) '(80 . 40) 'right_big '(280 . 110))))
+  (svg-use red_dot #:at? '(130 . 45) #:fill? "red")
+  (svg-use red_dot #:at? '(170 . 85) #:fill? "red")
 
-(path
-  #:stroke-fill? "yellow"
-  #:stroke-width? 3
-  (lambda ()
-    (moveto* '(120 . 35))
-    (arc* '(160 . 75) '(80 . 40) 'right_small '(160 . 75))))
+  (svg-show-default))
+}
 ```
 ![ScreenShot](simple-svg/showcase/path/arc.svg)

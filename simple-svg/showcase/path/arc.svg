@@ -2,10 +2,8 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="310" height="140"
+    width="300" height="130"
     >
-  <rect width="310" height="140" stroke-width="1" stroke="red" fill="white" />
-
   <defs>
     <path id="s1"
           d="
@@ -27,8 +25,8 @@
              M130,45
              A80,40 0 0,1 170,85
             "/>
-    <circle id="s6" cx="130" cy="45" r="2" />
-    <circle id="s7" cx="170" cy="85" r="2" />
+    <circle id="s6" cx="130" cy="45" r="5" />
+    <circle id="s7" cx="170" cy="85" r="5" />
   </defs>
 
   <symbol id="default">
@@ -40,5 +38,5 @@
     <use xlink:href="#s7" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" transform="translate(10 10)" />
+  <use xlink:href="#default" />
 </svg>

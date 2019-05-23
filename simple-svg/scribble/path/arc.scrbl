@@ -17,7 +17,6 @@ the arc is a part of ellipse, through start and end point.
            [point (cons/c integer? integer?)]
            [radius (cons/c natural? natural?)]
            [direction (or/c 'left_big 'left_small 'right_big 'right_small)]
-           [size (cons/c natural? natural?)]
          )
          void?]{
   arc* is the absolute version.
@@ -27,36 +26,31 @@ the arc is a part of ellipse, through start and end point.
   radius specify the ellipse's size.
   
   direction is a simplified large-arc-flag and sweep-flag's comibination.
-  
-  as the arc's size can't be calculated, so should set the arc size manully.
 }
 
 @codeblock{
-(svg-out
-  #:canvas? '(1 "red" "white")
-  (lambda ()
-    (let (
+(let (
       [arc1
         (svg-path-def
           (lambda ()
             (svg-path-moveto* '(130 . 45))
-            (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big '(170 . 85))))]
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big)))]
       [arc2
         (svg-path-def
           (lambda ()
             (svg-path-moveto* '(130 . 45))
-            (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small '(170 . 85))))]
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small)))]
       [arc3
         (svg-path-def
           (lambda ()
             (svg-path-moveto* '(130 . 45))
-            (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big '(280 . 110))))]
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big)))]
       [arc4
         (svg-path-def
           (lambda ()
             (svg-path-moveto* '(130 . 45))
-            (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small '(170 . 85))))]
-      [red_dot (svg-circle-def 2)]
+            (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
+      [red_dot (svg-circle-def 5)]
     )
 
   (svg-use arc1 #:stroke? "#ccccff" #:stroke-width? 3)
@@ -67,7 +61,6 @@ the arc is a part of ellipse, through start and end point.
   (svg-use red_dot #:at? '(130 . 45) #:fill? "red")
   (svg-use red_dot #:at? '(170 . 85) #:fill? "red")
 
-  (svg-show-default))))
+  (svg-show-default))
 }
-
 @image{showcase/path/arc.svg}

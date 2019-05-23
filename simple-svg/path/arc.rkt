@@ -8,21 +8,19 @@
                 (cons/c integer? integer?)
                 (cons/c natural? natural?)
                 (or/c 'left_big 'left_small 'right_big 'right_small)
-                (cons/c natural? natural?)
                 void?)]
           [svg-path-arc* (->
                  (cons/c integer? integer?)
                  (cons/c natural? natural?)
                  (or/c 'left_big 'left_small 'right_big 'right_small)
-                 (cons/c natural? natural?)
                  void?)]
           ))
 
-(define (svg-path-arc point radius direction size) (action 'a point radius direction size))
+(define (svg-path-arc point radius direction) (action 'a point radius direction))
 
-(define (svg-path-arc* point radius direction size) (action 'A point radius direction size))
+(define (svg-path-arc* point radius direction) (action 'A point radius direction))
 
-(define (action type point radius direction size)
+(define (action type point radius direction)
   (let ([section #f])
     (cond
      [(eq? direction 'left_big)
