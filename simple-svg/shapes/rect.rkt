@@ -13,8 +13,7 @@
 
 (define (svg-rect-def width height
               #:radius? [radius? #f])
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)])
+  (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'rect)
     (hash-set! properties_map 'width width)
@@ -39,4 +38,4 @@
                              
                              )))))
 
-    ((*add-shape*) shape_id properties_map)))
+    ((*add-shape*) properties_map)))
