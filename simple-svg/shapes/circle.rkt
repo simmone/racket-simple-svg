@@ -7,8 +7,7 @@
           ))
 
 (define (svg-circle-def radius)
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)])
+  (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'circle)
     (hash-set! properties_map 'radius radius)
@@ -21,4 +20,4 @@
                          (hash-ref circle 'cy)
                          (hash-ref circle 'radius))))
 
-    ((*add-shape*) shape_id properties_map)))
+    ((*add-shape*) properties_map)))

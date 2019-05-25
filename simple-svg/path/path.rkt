@@ -10,8 +10,7 @@
 (define *add-path* (make-parameter #f))
 
 (define (svg-path-def path_proc)
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)]
+  (let ([properties_map (make-hash)]
         [defs '()])
 
     (hash-set! properties_map 'type 'path)
@@ -28,7 +27,7 @@
                    (lambda ()
                      (dynamic-wind
                          (lambda ()
-                           (printf "    <path id=\"~a\"\n" shape_id)
+                           (printf "    <path id=\"~a\"\n" index)
                            (printf "          d=\"\n"))
                          (lambda ()
                            (let loop ([_defs defs])
@@ -38,4 +37,4 @@
                          (lambda ()
                            (printf "            \"/>" )))))))
 
-    ((*add-shape*) shape_id properties_map)))
+    ((*add-shape*) properties_map)))

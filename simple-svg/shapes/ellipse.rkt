@@ -7,8 +7,7 @@
           ))
 
 (define (svg-ellipse-def radius)
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)])
+  (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'ellipse)
     (hash-set! properties_map 'radius radius)
@@ -22,5 +21,5 @@
                          (car (hash-ref ellipse 'radius))
                          (cdr (hash-ref ellipse 'radius)))))
 
-    ((*add-shape*) shape_id properties_map)))
+    ((*add-shape*) properties_map)))
 

@@ -7,8 +7,7 @@
           ))
 
 (define (svg-polygon-def points)
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)])
+  (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'polygon)
     (hash-set! properties_map 'points points)
@@ -25,4 +24,4 @@
                                      (when (> (length loop_points) 1) (printf " "))
                                      (loop (cdr loop_points)))))))))
 
-    ((*add-shape*) shape_id properties_map)))
+    ((*add-shape*) properties_map)))

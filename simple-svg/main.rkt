@@ -1,5 +1,6 @@
 #lang racket
 
+(require "lib/display.rkt")
 (require "svg.rkt")
 (require "shapes/rect.rkt")
 (require "shapes/circle.rkt")
@@ -22,17 +23,9 @@
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          )
                         string?)]
-          [svg-use (->* (string?)
-                        (
-                         #:at? (or/c #f (cons/c natural? natural?))
-                         #:fill? (or/c #f string?)
-                         #:stroke? (or/c #f string?)
-                         #:stroke-width? (or/c #f natural?)
-                         #:stroke-linejoin? (or/c #f 'miter 'round 'bevel)
-                        )
-                        void?)]
+          [svg-use-shape (-> string? display? void?)]
+          [svg-show-group (-> string? display? void?)]
           [svg-show-default (-> void?)]
-          [svg-show (-> string? (cons/c natural? natural?) void?)]
           [svg-rect-def (->* 
                  (natural? natural?)
                  (

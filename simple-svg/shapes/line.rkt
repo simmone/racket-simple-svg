@@ -7,8 +7,7 @@
           ))
 
 (define (svg-line-def start_point end_point)
-  (let ([shape_id ((*shape-index*))]
-        [properties_map (make-hash)])
+  (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'line)
     (hash-set! properties_map 'start_point start_point)
@@ -23,4 +22,4 @@
                          (car (hash-ref line 'end_point))
                          (cdr (hash-ref line 'end_point)))))
 
-    ((*add-shape*) shape_id properties_map)))
+    ((*add-shape*) properties_map)))

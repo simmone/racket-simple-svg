@@ -16,5 +16,5 @@
     <use xlink:href="#s3" x="50" y="50" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#default" fill="none" />
 </svg>

@@ -18,11 +18,13 @@
 (define *shape-index* (make-parameter #f))
 (define *group-index* (make-parameter #f))
 (define *add-shape* (make-parameter #f))
+(define *set-shapes-map* (make-parameter #f))
 (define *add-group* (make-parameter #f))
 (define *add-to-show* (make-parameter #f))
 (define *groups_map* (make-parameter #f))
 (define *shapes_map* (make-parameter #f))
 (define *displays_map* (make-parameter #f))
+(define *set-displays-map* (make-parameter #f))
 (define *current_group* (make-parameter #f))
 (define *debug_port* (make-parameter #f))
 (define *shape-def-list* (make-parameter #f))
@@ -54,25 +56,26 @@
       [*group-index* (lambda () (set! groups_count (add1 groups_count)) (format "g~a" groups_count))]
       [*shape-def-list* (lambda () shape_def_list)]
       [*add-to-shape-def-list* (lambda (shape_index) (set! shape_def_list `(,@shape_def_list ,shape_index)))]
+      [*set-shapes-map* (lambda (shape_index shape) (hash-set! shapes_map shape_index shape))]
       [*add-shape*
-       (lambda (shape _display)
-         (let ([shape_index (*shape-index*)])
-           (hash-set! shapes_map shape_index shape)
-           (hash-set! displays_map shape_index _display)
+       (lambda (shape)
+         (let ([shape_index ((*shape-index*))])
+           ((*set-shapes-map*) shape_index shape)
            shape_index))]
       [*groups_map* groups_map]
       [*groups-list* (lambda () groups_list)]
       [*shapes_map* shapes_map]
-      [*displays_map* groups_map]
+      [*displays_map* displays_map]
+      [*set-displays-map* (lambda (_index _display) (hash-set! displays_map _index _display))]
       [*add-group*
-       (lambda (_index )
+       (lambda (_index)
          (hash-set! groups_map
                     (*current_group*)
                     `(,@(hash-ref groups_map (*current_group*) '())
-                      ,(list _index properties_map))))]
+                      ,_index)))]
       [*add-to-show*
        (lambda (group_index _display)
-         (hash-set! displays_map group_index)
+         ((*set-displays-map*) group_index _display)
          (set! show_list `(,@show_list ,group_index)))]
       [*show-list* (lambda () show_list)]
       [*current_group* "default"]
@@ -94,34 +97,28 @@
                (printf "</svg>\n"))))))))
 
 (define (svg-use-shape shape_index _display)
-  (let ([shape_indexes '()]
-        [shape (hash-ref (*shapes_map*) shape_index)]
-        [properties_map (make-hash)]
-        [new_shape_index #f])
+  (let* ([shape (hash-ref (*shapes_map*) shape_index)]
+         [new_shape_index shape_index]
+         [new_shape shape])
     (cond
      [(eq? (hash-ref shape 'type) 'circle)
       (set! new_shape_index ((*shape-index*)))
-      (let ([new_shape (hash-copy shape)])
-        (hash-set! new_shape 'cx (car at?))
-        (hash-set! new_shape 'cy (cdr at?))
-        ((*add-shape*) new_shape_index new_shape)
-        ((*add-to-shape-def-list*) new_shape_index))]
+      (set! new_shape (hash-copy shape))
+      (hash-set! new_shape 'cx (car (display-pos _display)))
+      (hash-set! new_shape 'cy (cdr (display-pos _display)))]
      [(eq? (hash-ref shape 'type) 'ellipse)
       (set! new_shape_index ((*shape-index*)))
-      (let ([new_shape (hash-copy shape)]
-            [radius (hash-ref shape 'radius)])
-        (hash-set! new_shape 'cx (car at?))
-        (hash-set! new_shape 'cy (cdr at?))
+      (set! new_shape (hash-copy shape))
+      (let ([radius (hash-ref shape 'radius)])
+        (hash-set! new_shape 'cx (car (display-pos _display)))
+        (hash-set! new_shape 'cy (cdr (display-pos _display)))
         (hash-set! new_shape 'rx (car radius))
-        (hash-set! new_shape 'ry (cdr radius))
-        ((*add-shape*) new_shape_index new_shape)
-        ((*add-to-shape-def-list*) new_shape_index))]
-     [else
-      (set! new_shape_index shape_index)
-      ((*add-to-shape-def-list*) new_shape_index)])
+        (hash-set! new_shape 'ry (cdr radius)))])
 
-    ((*add-group*) new_shape_index properties_map)
-    
+    ((*add-to-shape-def-list*) new_shape_index)
+    ((*set-shapes-map*) new_shape_index new_shape)
+    ((*set-displays-map*) new_shape_index _display)
+    ((*add-group*) new_shape_index)
     ))
 
 (define (svg-show-default)
@@ -150,21 +147,21 @@
   
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
-      (let ([group_index (list-ref (car groups) 0)])
+      (let ([group_index (car groups)])
         (printf "  <symbol id=\"~a\">\n" group_index)
         (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
           (when (not (null? shapes))
-            (let* ([shape_index (caar shapes)]
+            (let* ([shape_index (car shapes)]
                    [shape (hash-ref (*shapes_map*) shape_index)]
-                   [_display (cdar shapes)])
-              (printf "    <use xlink:href=\"#~a\" ~a/>\n" shape_index (format-display _display))
+                   [_display (hash-ref (*displays_map*) shape_index)])
+              (printf "    <use xlink:href=\"#~a\" ~a/>\n" shape_index (format-display _display)))
             (loop-shape (cdr shapes))))
-          (printf "  </symbol>\n\n")
-          (loop-group (cdr groups))))))
+        (printf "  </symbol>\n\n")
+        (loop-group (cdr groups)))))
     
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
-      (let ([group_index (caar groups)]
-            [_display (cdar groups)])
+      (let* ([group_index (car groups)]
+             [_display (hash-ref (*displays_map*) group_index)])
         (printf "  <use xlink:href=\"#~a\" ~a/>\n" group_index (format-display _display)))
       (loop-group (cdr groups)))))

@@ -12,5 +12,5 @@
     <use xlink:href="#s1" fill="#BBC42A" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#default" fill="none" />
 </svg>

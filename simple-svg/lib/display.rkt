@@ -3,8 +3,7 @@
 (provide (contract-out
           [struct display
                   (
-                   (x (or/c #f natural?))
-                   (y (or/c #f natural?))
+                   (pos (or/c #f (cons/c natural? natural?)))
                    (fill string?)
                    (stroke (or/c #f string?))
                    (stroke-width (or/c natural?))
@@ -13,13 +12,11 @@
           [default-display (-> display?)]
           [format-display (-> display? string?)]))
 
-(struct display (x y fill stroke stroke-width stroke-linejoin #:transparent))
+(struct display (pos fill stroke stroke-width stroke-linejoin) #:transparent #:mutable)
 
 (define (default-display)
   (display
-;; x   
-   #f
-;; y
+;; pos   
    #f
 ;; fill color
    "none"
@@ -33,9 +30,10 @@
 (define (format-display _display)
   (with-output-to-string
     (lambda ()
-      (when (display-x _display) (printf "x=\"~a\" " (display-x _display)))
-
-      (when (display-y _display) (printf "y=\"~a\" " (display-y _display)))
+      (when (display-pos _display)
+        (printf "x=\"~a\" y=\"~a\" "
+                (car (display-pos _display))
+                (cdr (display-pos _display))))
 
       (printf "fill=\"~a\" " (display-fill _display))
 
