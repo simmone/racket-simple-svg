@@ -9,12 +9,12 @@
                    (stroke-width (or/c natural?))
                    (stroke-linejoin (or/c #f "miter" "round" "bevel"))
                    )]
-          [default-display (-> display?)]
+          [new-display (-> display?)]
           [format-display (-> display? string?)]))
 
 (struct display (pos fill stroke stroke-width stroke-linejoin) #:transparent #:mutable)
 
-(define (default-display)
+(define (new-display)
   (display
 ;; pos   
    #f

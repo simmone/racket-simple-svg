@@ -105,7 +105,8 @@
       (set! new_shape_index ((*shape-index*)))
       (set! new_shape (hash-copy shape))
       (hash-set! new_shape 'cx (car (display-pos _display)))
-      (hash-set! new_shape 'cy (cdr (display-pos _display)))]
+      (hash-set! new_shape 'cy (cdr (display-pos _display)))
+      (set-display-pos! _display #f)]
      [(eq? (hash-ref shape 'type) 'ellipse)
       (set! new_shape_index ((*shape-index*)))
       (set! new_shape (hash-copy shape))
@@ -113,7 +114,8 @@
         (hash-set! new_shape 'cx (car (display-pos _display)))
         (hash-set! new_shape 'cy (cdr (display-pos _display)))
         (hash-set! new_shape 'rx (car radius))
-        (hash-set! new_shape 'ry (cdr radius)))])
+        (hash-set! new_shape 'ry (cdr radius)))
+      (set-display-pos! _display #f)])
 
     ((*add-to-shape-def-list*) new_shape_index)
     ((*set-shapes-map*) new_shape_index new_shape)
@@ -122,7 +124,7 @@
     ))
 
 (define (svg-show-default)
-  (svg-show-group "default" (default-display)))
+  (svg-show-group "default" (new-display)))
 
 (define (svg-show-group group_index display)
   ((*add-to-show*) group_index display))

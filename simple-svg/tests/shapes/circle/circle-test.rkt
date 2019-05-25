@@ -4,6 +4,7 @@
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
+(require "../../../lib/display.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -21,8 +22,11 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([circle (svg-circle-def 50)])
-                (svg-use circle #:at? '(50 . 50) #:fill? "#ED6E46")
+              (let ([circle (svg-circle-def 50)]
+                    [_display (new-display)])
+                (set-display-fill! _display "#BBC42A")
+                (set-display-pos! _display '(50 . 50))
+                (svg-use-shape circle _display)
                 (svg-show-default))))])
       
       (call-with-input-file circle_svg
@@ -39,13 +43,30 @@
            (svg-out
             200 200
             (lambda ()
-              (let ([circle (svg-circle-def 50)])
-                (svg-use circle #:at? '(50 . 50) #:fill? "red")
-                (svg-use circle #:at? '(150 . 50) #:fill? "yellow")
-                (svg-use circle #:at? '(50 . 150) #:fill? "blue")
-                (svg-use circle #:at? '(150 . 150) #:fill? "green")
-                (svg-show-default))))])
+              (let ([circle (svg-circle-def 50)]
+                    [red_display (new-display)]
+                    [yellow_display (new-display)]
+                    [blue_display (new-display)]
+                    [green_display (new-display)])
+                
+                (set-display-fill! red_display "red")
+                (set-display-pos! red_display '(50 . 50))
+                (svg-use-shape circle red_display)
 
+                (set-display-fill! yellow_display "yellow")
+                (set-display-pos! yellow_display '(150 . 50))
+                (svg-use-shape circle yellow_display)
+
+                (set-display-fill! blue_display "blue")
+                (set-display-pos! blue_display '(50 . 150))
+                (svg-use-shape circle blue_display)
+
+                (set-display-fill! green_display "green")
+                (set-display-pos! green_display '(150 . 150))
+                (svg-use-shape circle green_display)
+
+                (svg-show-default))))])
+      
       (call-with-input-file circle3_svg
         (lambda (expected)
           (call-with-input-string
