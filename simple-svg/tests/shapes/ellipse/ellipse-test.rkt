@@ -20,8 +20,11 @@
            (svg-out
             200 100
             (lambda ()
-              (let ([ellipse (svg-ellipse-def '(100 . 50))])
-                (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
+              (let ([ellipse (svg-ellipse-def '(100 . 50))]
+                    [_display (new-display)])
+                (set-display-fill! _display "#7AA20D")
+                (set-display-pos! _display '(100 . 50))
+                (svg-use-shape ellipse _display)
                 (svg-show-default))))])
       
       (call-with-input-file ellipse_svg

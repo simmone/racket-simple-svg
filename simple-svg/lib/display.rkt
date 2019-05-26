@@ -1,18 +1,23 @@
 #lang racket
+
+(provide (struct-out display))
  
 (provide (contract-out
-          [struct display
-                  (
-                   (pos (or/c #f (cons/c natural? natural?)))
-                   (fill string?)
-                   (stroke (or/c #f string?))
-                   (stroke-width (or/c natural?))
-                   (stroke-linejoin (or/c #f "miter" "round" "bevel"))
-                   )]
+          [display/c contract?]
           [new-display (-> display?)]
           [format-display (-> display? string?)]))
 
 (struct display (pos fill stroke stroke-width stroke-linejoin) #:transparent #:mutable)
+
+(define display/c
+  (struct/dc
+   display
+     [pos (or/c #f (cons/c natural? natural?))]
+     [fill string?]
+     [stroke (or/c #f string?)]
+     [stroke-width (or/c natural?)]
+     [stroke-linejoin (or/c #f "miter" "round" "bevel")]
+    ))
 
 (define (new-display)
   (display

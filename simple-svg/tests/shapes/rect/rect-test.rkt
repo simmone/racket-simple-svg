@@ -4,7 +4,6 @@
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
-(require "../../../lib/display.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -25,7 +24,7 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_display (default-display)])
+                    [_display (new-display)])
                 (set-display-fill! _display "#BBC42A")
                 (svg-use-shape rec _display)
                 (svg-show-default))))])
@@ -45,7 +44,7 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_display (default-display)])
+                    [_display (new-display)])
                 (set-display-fill! _display "#BBC42A")
                 (set-display-pos! _display '(50 . 50))
                 (svg-use-shape rec _display)
@@ -66,7 +65,7 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))]
-                    [_display (default-display)])
+                    [_display (new-display)])
                 (set-display-fill! _display "#BBC42A")
                 (svg-use-shape rec _display)
                 (svg-show-default))))])
@@ -87,11 +86,11 @@
             (lambda ()
               (let (
                     [blue_rec (svg-rect-def 150 150)]
-                    [_blue_display (default-display)]
+                    [_blue_display (new-display)]
                     [green_rec (svg-rect-def 100 100)]
-                    [_green_display (default-display)]
+                    [_green_display (new-display)]
                     [red_rec (svg-rect-def 50 50)]
-                    [_red_display (default-display)])
+                    [_red_display (new-display)])
 
                 (set-display-fill! _blue_display "blue")
                 (svg-use-shape blue_rec _blue_display)

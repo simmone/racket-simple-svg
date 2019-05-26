@@ -4,7 +4,6 @@
 (require rackunit/text-ui)
 
 (require "../../../lib/lib.rkt")
-(require "../../../lib/display.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)

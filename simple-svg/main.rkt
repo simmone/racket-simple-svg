@@ -17,14 +17,18 @@
 (require "path/ccurve.rkt")
 (require "path/arc.rkt")
 
+(provide (struct-out display))
+
 (provide (contract-out
           [svg-out (->* (natural? natural? procedure?)
                         (
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          )
                         string?)]
-          [svg-use-shape (-> string? display? void?)]
-          [svg-show-group (-> string? display? void?)]
+          [new-display (-> display/c)]
+          [format-display (-> display/c string?)]
+          [svg-use-shape (-> string? display/c void?)]
+          [svg-show-group (-> string? display/c void?)]
           [svg-show-default (-> void?)]
           [svg-rect-def (->* 
                  (natural? natural?)
@@ -75,4 +79,3 @@
                  (or/c 'left_big 'left_small 'right_big 'right_small)
                  void?)]
           ))
-

@@ -3,8 +3,6 @@
 (require rackunit/text-ui)
 
 (require "../../lib/lib.rkt")
-(require "../../lib/display.rkt")
-
 (require rackunit "../../main.rkt")
 
 (require racket/runtime-path)
@@ -57,7 +55,7 @@
             #:viewBox? '(50 0 100 100)
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_display (default-display)])
+                    [_display (new-display)])
                 (set-display-fill! _display "#BBC42A")
                 (svg-use-shape rec _display)
                 (svg-show-default))))])

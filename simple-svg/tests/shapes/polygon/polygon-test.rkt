@@ -22,8 +22,13 @@
             (lambda ()
               (let ([polygon
                      (svg-polygon-def
-                      '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
-                (svg-use polygon #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
+                      '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
+                    [_display (new-display)])
+                (set-display-pos! _display '(5 . 5))
+                (set-display-stroke-width! _display 5)
+                (set-display-stroke! _display "#765373")
+                (set-display-fill! _display "#ED6E46")
+                (svg-use-shape polygon _display)
                 (svg-show-default))))])
       
       (call-with-input-file polygon_svg
