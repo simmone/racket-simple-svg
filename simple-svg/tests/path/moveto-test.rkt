@@ -19,21 +19,23 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            30 70
             (lambda ()
               (let ([path
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto* '(20 . 60))))]
-                    [red_dot (svg-circle-def 2)])
+                    [red_dot (svg-circle-def 5)]
+                    [display_path (new-display)]
+                    [display_red_dot (new-display)])
+                
+                (set-display-stroke-width! display_path 1)
+                (set-display-stroke! display_path "#7AA20D")
+                (svg-use-shape path display_path)
 
-                (svg-use path
-                         #:fill? "white"
-                         #:stroke-width? 1
-                         #:stroke? "#7AA20D"
-                         #:stroke-linejoin? 'round)
-
-                (svg-use red_dot #:at? '(20 . 60) #:fill? "red")
+                (set-display-pos! display_red_dot '(20 . 60))
+                (set-display-fill! display_red_dot "red")
+                (svg-use-shape red_dot display_red_dot)
 
                 (svg-show-default))))])
       
@@ -49,21 +51,23 @@
 
     (let ([actual_svg
            (svg-out
-            #:canvas? '(1 "red" "white")
+            30 70
             (lambda ()
               (let ([path
                      (svg-path-def
                       (lambda ()
                         (svg-path-moveto '(20 . 60))))]
-                    [red_dot (svg-circle-def 2)])
+                    [red_dot (svg-circle-def 5)]
+                    [display_path (new-display)]
+                    [display_red_dot (new-display)])
+                
+                (set-display-stroke-width! display_path 1)
+                (set-display-stroke! display_path "#7AA20D")
+                (svg-use-shape path display_path)
 
-                (svg-use path
-                         #:fill? "white"
-                         #:stroke-width? 1
-                         #:stroke? "#7AA20D"
-                         #:stroke-linejoin? 'round)
-
-                (svg-use red_dot #:at? '(20 . 60) #:fill? "red")
+                (set-display-pos! display_red_dot '(20 . 60))
+                (set-display-fill! display_red_dot "red")
+                (svg-use-shape red_dot display_red_dot)
 
                 (svg-show-default))))])
       

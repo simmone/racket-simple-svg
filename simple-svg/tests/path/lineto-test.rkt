@@ -28,12 +28,13 @@
                         (svg-path-vlineto 100)
                         (svg-path-lineto '(-50 . 50))
                         (svg-path-lineto '(-50 . -50))
-                        (svg-path-close)))])
+                        (svg-path-close)))]
+                    [display_path (new-display)])
 
-                (svg-use path
-                         #:stroke-width? 5
-                         #:stroke? "#7AA20D"
-                         #:stroke-linejoin? 'round)
+                (set-display-stroke-width! display_path 5)
+                (set-display-stroke! display_path "#7AA20D")
+                (set-display-stroke-linejoin! display_path 'round)
+                (svg-use-shape path display_path)
 
                 (svg-show-default))))])
       

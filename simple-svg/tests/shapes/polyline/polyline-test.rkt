@@ -27,7 +27,7 @@
                 (set-display-pos! _display '(5 . 5))
                 (set-display-stroke-width! _display 5)
                 (set-display-stroke! _display "#BBC42A")
-                (set-display-fill! _display "#blue")
+                (set-display-fill! _display "blue")
                 (svg-use-shape polyline _display)
                 (svg-show-default))))])
       
