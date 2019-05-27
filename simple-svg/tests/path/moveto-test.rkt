@@ -33,9 +33,8 @@
                 (set-sstyle-stroke! sstyle_path "#7AA20D")
                 (svg-use-shape path sstyle_path)
 
-                (set-sstyle-pos! sstyle_red_dot '(20 . 60))
                 (set-sstyle-fill! sstyle_red_dot "red")
-                (svg-use-shape red_dot sstyle_red_dot)
+                (svg-use-shape red_dot sstyle_red_dot #:at? '(20 . 60))
 
                 (svg-show-default))))])
       
@@ -65,9 +64,8 @@
                 (set-sstyle-stroke! sstyle_path "#7AA20D")
                 (svg-use-shape path sstyle_path)
 
-                (set-sstyle-pos! sstyle_red_dot '(20 . 60))
                 (set-sstyle-fill! sstyle_red_dot "red")
-                (svg-use-shape red_dot sstyle_red_dot)
+                (svg-use-shape red_dot sstyle_red_dot #:at? '(20 . 60))
 
                 (svg-show-default))))])
       

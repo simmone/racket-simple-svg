@@ -11,11 +11,11 @@
              q50,-50 100,0
              q50,50 100,0
             "/>
-    <circle id="s3" cx="10" cy="60" r="2" />
-    <circle id="s4" cx="60" cy="10" r="2" />
-    <circle id="s5" cx="110" cy="60" r="2" />
-    <circle id="s6" cx="160" cy="110" r="2" />
-    <circle id="s7" cx="210" cy="60" r="2" />
+    <circle id="s3" cx="10" cy="60" r="5" />
+    <circle id="s4" cx="60" cy="10" r="5" />
+    <circle id="s5" cx="110" cy="60" r="5" />
+    <circle id="s6" cx="160" cy="110" r="5" />
+    <circle id="s7" cx="210" cy="60" r="5" />
   </defs>
 
   <symbol id="default">
@@ -27,5 +27,5 @@
     <use xlink:href="#s7" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#default" fill="none" />
 </svg>

@@ -22,10 +22,9 @@
             (lambda ()
               (let ([line (svg-line-def '(0 . 0) '(100 . 100))]
                     [_sstyle (new-sstyle)])
-                (set-sstyle-pos! _sstyle '(5 . 5))
                 (set-sstyle-stroke-width! _sstyle 10)
                 (set-sstyle-stroke! _sstyle "#765373")
-                (svg-use-shape line _sstyle)
+                (svg-use-shape line _sstyle #:at? '(5 . 5))
                 (svg-show-default))))])
       
       (call-with-input-file line_svg

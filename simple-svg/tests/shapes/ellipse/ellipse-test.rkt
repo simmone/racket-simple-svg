@@ -23,8 +23,7 @@
               (let ([ellipse (svg-ellipse-def '(100 . 50))]
                     [_sstyle (new-sstyle)])
                 (set-sstyle-fill! _sstyle "#7AA20D")
-                (set-sstyle-pos! _sstyle '(100 . 50))
-                (svg-use-shape ellipse _sstyle)
+                (svg-use-shape ellipse _sstyle #:at? '(100 . 50))
                 (svg-show-default))))])
       
       (call-with-input-file ellipse_svg
