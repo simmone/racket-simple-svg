@@ -27,13 +27,18 @@
                         (svg-path-moveto* '(10 . 60))
                         (svg-path-qcurve* '(60 . 10) '(110 . 60))
                         (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
-                    [red_dot (svg-circle-def 5)])
+                    [path_style (new-sstyle)]
+                    [red_dot (svg-circle-def 5)]
+                    [dot_style (new-sstyle)])
+                    )
 
-                (svg-use path
-                         #:stroke? "#333333"
-                         #:stroke-width? 3)
+              (set-sstyle-stroke! path_style "#333333")
+              (set-sstyle-stroke-width! path_style 3)
+              (svg-use path path_style)
 
-                (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
+              (set-sstyle-fill! dot_style "red")
+
+              (svg-use red_dot dot_style #:at? '(10 . 60))
                 (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
                 (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
                 (svg-use red_dot #:at? '(160 . 110) #:fill? "red")

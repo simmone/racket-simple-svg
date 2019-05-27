@@ -26,16 +26,16 @@
                       (lambda ()
                         (svg-path-moveto* '(20 . 60))))]
                     [red_dot (svg-circle-def 5)]
-                    [svgview_path (new-svgview)]
-                    [svgview_red_dot (new-svgview)])
+                    [sstyle_path (new-sstyle)]
+                    [sstyle_red_dot (new-sstyle)])
                 
-                (set-svgview-stroke-width! svgview_path 1)
-                (set-svgview-stroke! svgview_path "#7AA20D")
-                (svg-use-shape path svgview_path)
+                (set-sstyle-stroke-width! sstyle_path 1)
+                (set-sstyle-stroke! sstyle_path "#7AA20D")
+                (svg-use-shape path sstyle_path)
 
-                (set-svgview-pos! svgview_red_dot '(20 . 60))
-                (set-svgview-fill! svgview_red_dot "red")
-                (svg-use-shape red_dot svgview_red_dot)
+                (set-sstyle-pos! sstyle_red_dot '(20 . 60))
+                (set-sstyle-fill! sstyle_red_dot "red")
+                (svg-use-shape red_dot sstyle_red_dot)
 
                 (svg-show-default))))])
       
@@ -58,16 +58,16 @@
                       (lambda ()
                         (svg-path-moveto '(20 . 60))))]
                     [red_dot (svg-circle-def 5)]
-                    [svgview_path (new-svgview)]
-                    [svgview_red_dot (new-svgview)])
+                    [sstyle_path (new-sstyle)]
+                    [sstyle_red_dot (new-sstyle)])
                 
-                (set-svgview-stroke-width! svgview_path 1)
-                (set-svgview-stroke! svgview_path "#7AA20D")
-                (svg-use-shape path svgview_path)
+                (set-sstyle-stroke-width! sstyle_path 1)
+                (set-sstyle-stroke! sstyle_path "#7AA20D")
+                (svg-use-shape path sstyle_path)
 
-                (set-svgview-pos! svgview_red_dot '(20 . 60))
-                (set-svgview-fill! svgview_red_dot "red")
-                (svg-use-shape red_dot svgview_red_dot)
+                (set-sstyle-pos! sstyle_red_dot '(20 . 60))
+                (set-sstyle-fill! sstyle_red_dot "red")
+                (svg-use-shape red_dot sstyle_red_dot)
 
                 (svg-show-default))))])
       

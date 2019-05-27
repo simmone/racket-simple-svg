@@ -1,15 +1,23 @@
 #lang racket
 
-(require "lib/svgview.rkt")
+(require "lib/sstyle.rkt")
 
 (provide (contract-out
           [svg-out (->* (natural? natural? procedure?)
                         (
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
-                         )
+                        )
                         string?)]
-          [svg-use-shape (-> string? svgview/c void?)]
-          [svg-show-group (-> string? svgview/c void?)]
+          [svg-use-shape (->* (string? sstyle/c) 
+                              (
+                               #:at? (cons/c natural? natural?)
+                              )
+                              void?)]
+          [svg-show-group (->* (string? sstyle/c)
+                              (
+                               #:at? (cons/c natural? natural?)
+                              )
+                              void?)]
           [svg-show-default (-> void?)]
           [*add-shape* parameter?]
           ))
@@ -23,8 +31,8 @@
 (define *add-to-show* (make-parameter #f))
 (define *groups_map* (make-parameter #f))
 (define *shapes_map* (make-parameter #f))
-(define *displays_map* (make-parameter #f))
-(define *set-displays-map* (make-parameter #f))
+(define *sstyles_map* (make-parameter #f))
+(define *set-sstyles-map* (make-parameter #f))
 (define *current_group* (make-parameter #f))
 (define *debug_port* (make-parameter #f))
 (define *shape-def-list* (make-parameter #f))
@@ -45,7 +53,7 @@
         [shapes_map (make-hash)]
         [groups_list '()]
         [groups_map (make-hash)]
-        [displays_map (make-hash)]
+        [sstyles_map (make-hash)]
         [show_list '()])
     (parameterize
      (
@@ -65,18 +73,18 @@
       [*groups_map* groups_map]
       [*groups-list* (lambda () groups_list)]
       [*shapes_map* shapes_map]
-      [*displays_map* displays_map]
-      [*set-displays-map* (lambda (_index _svgview) (hash-set! displays_map _index _svgview))]
+      [*sstyles_map* sstyles_map]
+      [*set-sstyles-map* (lambda (_index _sstyle) (hash-set! sstyles_map _index _sstyle))]
       [*add-group*
-       (lambda (_index)
+       (lambda (_index at?)
          (hash-set! groups_map
                     (*current_group*)
                     `(,@(hash-ref groups_map (*current_group*) '())
-                      ,_index)))]
+                      ,(cons _index at?))))]
       [*add-to-show*
-       (lambda (group_index _svgview)
-         ((*set-displays-map*) group_index _svgview)
-         (set! show_list `(,@show_list ,group_index)))]
+       (lambda (group_index _sstyle at?)
+         ((*set-sstyles-map*) group_index _sstyle)
+         (set! show_list `(,@show_list ,(cons group_index at?))))]
       [*show-list* (lambda () show_list)]
       [*current_group* "default"]
       [*viewBox* viewBox?]
@@ -96,38 +104,43 @@
                (flush-data)
                (printf "</svg>\n"))))))))
 
-(define (svg-use-shape shape_index _svgview)
+(define (svg-use-shape shape_index _sstyle
+                       #:at? [at? #f])
   (let* ([shape (hash-ref (*shapes_map*) shape_index)]
          [new_shape_index shape_index]
-         [new_shape shape])
+         [new_shape shape]
+         [new_at? at?])
     (cond
      [(eq? (hash-ref shape 'type) 'circle)
       (set! new_shape_index ((*shape-index*)))
       (set! new_shape (hash-copy shape))
-      (hash-set! new_shape 'cx (car (svgview-pos _svgview)))
-      (hash-set! new_shape 'cy (cdr (svgview-pos _svgview)))
-      (set-svgview-pos! _svgview #f)]
+      (when at?
+            (hash-set! new_shape 'cx (car new_at?))
+            (hash-set! new_shape 'cy (cdr new_at?)))
+      (set! new_at? #f)]
      [(eq? (hash-ref shape 'type) 'ellipse)
       (set! new_shape_index ((*shape-index*)))
       (set! new_shape (hash-copy shape))
       (let ([radius (hash-ref shape 'radius)])
-        (hash-set! new_shape 'cx (car (svgview-pos _svgview)))
-        (hash-set! new_shape 'cy (cdr (svgview-pos _svgview)))
+        (when at?
+              (hash-set! new_shape 'cx (car new_at?))
+              (hash-set! new_shape 'cy (cdr new_at?)))
+        (set! new_at? #f)
         (hash-set! new_shape 'rx (car radius))
-        (hash-set! new_shape 'ry (cdr radius)))
-      (set-svgview-pos! _svgview #f)])
+        (hash-set! new_shape 'ry (cdr radius)))])
 
     ((*add-to-shape-def-list*) new_shape_index)
     ((*set-shapes-map*) new_shape_index new_shape)
-    ((*set-displays-map*) new_shape_index _svgview)
-    ((*add-group*) new_shape_index)
+    ((*set-sstyles-map*) new_shape_index _sstyle)
+    ((*add-group*) new_shape_index new_at?)
     ))
 
 (define (svg-show-default)
-  (svg-show-group "default" (new-svgview)))
+  (svg-show-group "default" (new-sstyle)))
 
-(define (svg-show-group group_index display)
-  ((*add-to-show*) group_index display))
+(define (svg-show-group group_index sstyle
+                        #:at? [at? #f])
+  ((*add-to-show*) group_index sstyle at?))
 
 (define (flush-data)
   (printf "    width=\"~a\" height=\"~a\"\n" (*width*) (*height*))
@@ -149,21 +162,33 @@
   
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
-      (let ([group_index (car groups)])
+      (let ([group_index (caar groups)])
         (printf "  <symbol id=\"~a\">\n" group_index)
         (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
           (when (not (null? shapes))
-            (let* ([shape_index (car shapes)]
+            (let* ([shape_index (caar shapes)]
+                   [shape_at? (cdar shapes)]
                    [shape (hash-ref (*shapes_map*) shape_index)]
-                   [_svgview (hash-ref (*displays_map*) shape_index)])
-              (printf "    <use xlink:href=\"#~a\" ~a/>\n" shape_index (format-svgview _svgview)))
+                   [_sstyle (hash-ref (*sstyles_map*) shape_index)])
+              (printf "    <use xlink:href=\"#~a\" " shape_index)
+              
+              (when shape_at?
+                    (printf "x=\"~a\" y=\"~a\" " (car shape_at?) (cdr shape_at?)))
+              
+              (printf "~a/>\n" (format-sstyle _sstyle)))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
         (loop-group (cdr groups)))))
     
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
-      (let* ([group_index (car groups)]
-             [_svgview (hash-ref (*displays_map*) group_index)])
-        (printf "  <use xlink:href=\"#~a\" ~a/>\n" group_index (format-svgview _svgview)))
+      (let* ([group_index (caar groups)]
+             [group_at? (cdar groups)]
+             [_sstyle (hash-ref (*sstyles_map*) group_index)])
+        (printf "  <use xlink:href=\"#~a\" " group_index)
+        
+        (when group_at?
+              (printf "x=\"~a\" y=\"~a\" " (car group_at?) (cdr group_at?)))
+
+        (printf "~a/>\n" (format-sstyle _sstyle)))
       (loop-group (cdr groups)))))

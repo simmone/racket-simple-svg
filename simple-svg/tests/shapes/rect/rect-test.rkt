@@ -24,9 +24,9 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_svgview (new-svgview)])
-                (set-svgview-fill! _svgview "#BBC42A")
-                (svg-use-shape rec _svgview)
+                    [_sstyle (new-sstyle)])
+                (set-sstyle-fill! _sstyle "#BBC42A")
+                (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
       
       (call-with-input-file rect_svg
@@ -44,10 +44,9 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_svgview (new-svgview)])
-                (set-svgview-fill! _svgview "#BBC42A")
-                (set-svgview-pos! _svgview '(50 . 50))
-                (svg-use-shape rec _svgview)
+                    [_sstyle (new-sstyle)])
+                (set-sstyle-fill! _sstyle "#BBC42A")
+                (svg-use-shape rec _sstyle #:at? '(50 . 50))
                 (svg-show-default))))])
 
       (call-with-input-file rect_y_svg
@@ -65,9 +64,9 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))]
-                    [_svgview (new-svgview)])
-                (set-svgview-fill! _svgview "#BBC42A")
-                (svg-use-shape rec _svgview)
+                    [_sstyle (new-sstyle)])
+                (set-sstyle-fill! _sstyle "#BBC42A")
+                (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
 
       (call-with-input-file rect_radius_svg
@@ -86,22 +85,20 @@
             (lambda ()
               (let (
                     [blue_rec (svg-rect-def 150 150)]
-                    [_blue_svgview (new-svgview)]
+                    [_blue_sstyle (new-sstyle)]
                     [green_rec (svg-rect-def 100 100)]
-                    [_green_svgview (new-svgview)]
+                    [_green_sstyle (new-sstyle)]
                     [red_rec (svg-rect-def 50 50)]
-                    [_red_svgview (new-svgview)])
+                    [_red_sstyle (new-sstyle)])
 
-                (set-svgview-fill! _blue_svgview "blue")
-                (svg-use-shape blue_rec _blue_svgview)
+                (set-sstyle-fill! _blue_sstyle "blue")
+                (svg-use-shape blue_rec _blue_sstyle)
 
-                (set-svgview-fill! _green_svgview "green")
-                (set-svgview-pos! _green_svgview '(25 . 25))
-                (svg-use-shape green_rec _green_svgview)
+                (set-sstyle-fill! _green_sstyle "green")
+                (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
 
-                (set-svgview-fill! _red_svgview "red")
-                (set-svgview-pos! _red_svgview '(50 . 50))
-                (svg-use-shape red_rec _red_svgview)
+                (set-sstyle-fill! _red_sstyle "red")
+                (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
 
                 (svg-show-default))))])
 
