@@ -1,6 +1,6 @@
 #lang racket
 
-(require "lib/display.rkt")
+(require "lib/svgview.rkt")
 (require "svg.rkt")
 (require "shapes/rect.rkt")
 (require "shapes/circle.rkt")
@@ -17,7 +17,7 @@
 (require "path/ccurve.rkt")
 (require "path/arc.rkt")
 
-(provide (struct-out display))
+(provide (struct-out svgview))
 
 (provide (contract-out
           [svg-out (->* (natural? natural? procedure?)
@@ -25,10 +25,10 @@
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          )
                         string?)]
-          [new-display (-> display/c)]
-          [format-display (-> display/c string?)]
-          [svg-use-shape (-> string? display/c void?)]
-          [svg-show-group (-> string? display/c void?)]
+          [new-svgview (-> svgview/c)]
+          [format-svgview (-> svgview/c string?)]
+          [svg-use-shape (-> string? svgview/c void?)]
+          [svg-show-group (-> string? svgview/c void?)]
           [svg-show-default (-> void?)]
           [svg-rect-def (->* 
                  (natural? natural?)

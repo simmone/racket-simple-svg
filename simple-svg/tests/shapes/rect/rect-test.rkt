@@ -24,9 +24,9 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_display (new-display)])
-                (set-display-fill! _display "#BBC42A")
-                (svg-use-shape rec _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-fill! _svgview "#BBC42A")
+                (svg-use-shape rec _svgview)
                 (svg-show-default))))])
       
       (call-with-input-file rect_svg
@@ -44,10 +44,10 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_display (new-display)])
-                (set-display-fill! _display "#BBC42A")
-                (set-display-pos! _display '(50 . 50))
-                (svg-use-shape rec _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-fill! _svgview "#BBC42A")
+                (set-svgview-pos! _svgview '(50 . 50))
+                (svg-use-shape rec _svgview)
                 (svg-show-default))))])
 
       (call-with-input-file rect_y_svg
@@ -65,9 +65,9 @@
             100 100
             (lambda ()
               (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))]
-                    [_display (new-display)])
-                (set-display-fill! _display "#BBC42A")
-                (svg-use-shape rec _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-fill! _svgview "#BBC42A")
+                (svg-use-shape rec _svgview)
                 (svg-show-default))))])
 
       (call-with-input-file rect_radius_svg
@@ -86,22 +86,22 @@
             (lambda ()
               (let (
                     [blue_rec (svg-rect-def 150 150)]
-                    [_blue_display (new-display)]
+                    [_blue_svgview (new-svgview)]
                     [green_rec (svg-rect-def 100 100)]
-                    [_green_display (new-display)]
+                    [_green_svgview (new-svgview)]
                     [red_rec (svg-rect-def 50 50)]
-                    [_red_display (new-display)])
+                    [_red_svgview (new-svgview)])
 
-                (set-display-fill! _blue_display "blue")
-                (svg-use-shape blue_rec _blue_display)
+                (set-svgview-fill! _blue_svgview "blue")
+                (svg-use-shape blue_rec _blue_svgview)
 
-                (set-display-fill! _green_display "green")
-                (set-display-pos! _green_display '(25 . 25))
-                (svg-use-shape green_rec _green_display)
+                (set-svgview-fill! _green_svgview "green")
+                (set-svgview-pos! _green_svgview '(25 . 25))
+                (svg-use-shape green_rec _green_svgview)
 
-                (set-display-fill! _red_display "red")
-                (set-display-pos! _red_display '(50 . 50))
-                (svg-use-shape red_rec _red_display)
+                (set-svgview-fill! _red_svgview "red")
+                (set-svgview-pos! _red_svgview '(50 . 50))
+                (svg-use-shape red_rec _red_svgview)
 
                 (svg-show-default))))])
 

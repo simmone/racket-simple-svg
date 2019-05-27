@@ -23,12 +23,12 @@
               (let ([polygon
                      (svg-polygon-def
                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
-                    [_display (new-display)])
-                (set-display-pos! _display '(5 . 5))
-                (set-display-stroke-width! _display 5)
-                (set-display-stroke! _display "#765373")
-                (set-display-fill! _display "#ED6E46")
-                (svg-use-shape polygon _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-pos! _svgview '(5 . 5))
+                (set-svgview-stroke-width! _svgview 5)
+                (set-svgview-stroke! _svgview "#765373")
+                (set-svgview-fill! _svgview "#ED6E46")
+                (svg-use-shape polygon _svgview)
                 (svg-show-default))))])
       
       (call-with-input-file polygon_svg

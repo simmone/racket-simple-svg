@@ -23,12 +23,12 @@
               (let ([polyline
                      (svg-polyline-def
                       '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
-                    [_display (new-display)])
-                (set-display-pos! _display '(5 . 5))
-                (set-display-stroke-width! _display 5)
-                (set-display-stroke! _display "#BBC42A")
-                (set-display-fill! _display "blue")
-                (svg-use-shape polyline _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-pos! _svgview '(5 . 5))
+                (set-svgview-stroke-width! _svgview 5)
+                (set-svgview-stroke! _svgview "#BBC42A")
+                (set-svgview-fill! _svgview "blue")
+                (svg-use-shape polyline _svgview)
                 (svg-show-default))))])
       
       (call-with-input-file polyline_svg

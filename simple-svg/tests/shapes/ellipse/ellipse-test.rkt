@@ -21,10 +21,10 @@
             200 100
             (lambda ()
               (let ([ellipse (svg-ellipse-def '(100 . 50))]
-                    [_display (new-display)])
-                (set-display-fill! _display "#7AA20D")
-                (set-display-pos! _display '(100 . 50))
-                (svg-use-shape ellipse _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-fill! _svgview "#7AA20D")
+                (set-svgview-pos! _svgview '(100 . 50))
+                (svg-use-shape ellipse _svgview)
                 (svg-show-default))))])
       
       (call-with-input-file ellipse_svg

@@ -22,10 +22,10 @@
             100 100
             (lambda ()
               (let ([circle (svg-circle-def 50)]
-                    [_display (new-display)])
-                (set-display-fill! _display "#BBC42A")
-                (set-display-pos! _display '(50 . 50))
-                (svg-use-shape circle _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-fill! _svgview "#BBC42A")
+                (set-svgview-pos! _svgview '(50 . 50))
+                (svg-use-shape circle _svgview)
                 (svg-show-default))))])
       
       (call-with-input-file circle_svg
@@ -43,26 +43,26 @@
             200 200
             (lambda ()
               (let ([circle (svg-circle-def 50)]
-                    [red_display (new-display)]
-                    [yellow_display (new-display)]
-                    [blue_display (new-display)]
-                    [green_display (new-display)])
+                    [red_svgview (new-svgview)]
+                    [yellow_svgview (new-svgview)]
+                    [blue_svgview (new-svgview)]
+                    [green_svgview (new-svgview)])
                 
-                (set-display-fill! red_display "red")
-                (set-display-pos! red_display '(50 . 50))
-                (svg-use-shape circle red_display)
+                (set-svgview-fill! red_svgview "red")
+                (set-svgview-pos! red_svgview '(50 . 50))
+                (svg-use-shape circle red_svgview)
 
-                (set-display-fill! yellow_display "yellow")
-                (set-display-pos! yellow_display '(150 . 50))
-                (svg-use-shape circle yellow_display)
+                (set-svgview-fill! yellow_svgview "yellow")
+                (set-svgview-pos! yellow_svgview '(150 . 50))
+                (svg-use-shape circle yellow_svgview)
 
-                (set-display-fill! blue_display "blue")
-                (set-display-pos! blue_display '(50 . 150))
-                (svg-use-shape circle blue_display)
+                (set-svgview-fill! blue_svgview "blue")
+                (set-svgview-pos! blue_svgview '(50 . 150))
+                (svg-use-shape circle blue_svgview)
 
-                (set-display-fill! green_display "green")
-                (set-display-pos! green_display '(150 . 150))
-                (svg-use-shape circle green_display)
+                (set-svgview-fill! green_svgview "green")
+                (set-svgview-pos! green_svgview '(150 . 150))
+                (svg-use-shape circle green_svgview)
 
                 (svg-show-default))))])
       

@@ -21,11 +21,11 @@
             110 110
             (lambda ()
               (let ([line (svg-line-def '(0 . 0) '(100 . 100))]
-                    [_display (new-display)])
-                (set-display-pos! _display '(5 . 5))
-                (set-display-stroke-width! _display 10)
-                (set-display-stroke! _display "#765373")
-                (svg-use-shape line _display)
+                    [_svgview (new-svgview)])
+                (set-svgview-pos! _svgview '(5 . 5))
+                (set-svgview-stroke-width! _svgview 10)
+                (set-svgview-stroke! _svgview "#765373")
+                (svg-use-shape line _svgview)
                 (svg-show-default))))])
       
       (call-with-input-file line_svg
