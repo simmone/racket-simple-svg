@@ -107,7 +107,7 @@ generated svg file:
 
 @image{showcase/shapes/rect/m_rect.svg}
 
-include-section["shapes/rect.scrbl"]
+@include-section["shapes/rect.scrbl"]
 
 include-section["shapes/circle.scrbl"]
 
