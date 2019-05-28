@@ -50,16 +50,32 @@ the arc is a part of ellipse, through start and end point.
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
+      [arc_style (new-sstyle)]
       [red_dot (svg-circle-def 5)]
-    )
+      [dot_style (new-sstyle)]
+     )
 
-  (svg-use arc1 #:stroke? "#ccccff" #:stroke-width? 3)
-  (svg-use arc2 #:stroke? "green" #:stroke-width? 3)
-  (svg-use arc3 #:stroke? "blue" #:stroke-width? 3)
-  (svg-use arc4 #:stroke? "yellow" #:stroke-width? 3)
+  (set-sstyle-stroke-width! arc_style 3)
+               
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "#ccccff")
+    (svg-use-shape arc1 _arc_style))
 
-  (svg-use red_dot #:at? '(130 . 45) #:fill? "red")
-  (svg-use red_dot #:at? '(170 . 85) #:fill? "red")
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "green")
+    (svg-use-shape arc2 _arc_style))
+
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "blue")
+    (svg-use-shape arc3 _arc_style))
+
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "yellow")
+    (svg-use-shape arc4 _arc_style))
+
+  (set-sstyle-fill! dot_style "red")
+  (svg-use-shape red_dot dot_style #:at? '(130 . 45))
+  (svg-use-shape red_dot dot_style #:at? '(170 . 85))
 
   (svg-show-default))
 }

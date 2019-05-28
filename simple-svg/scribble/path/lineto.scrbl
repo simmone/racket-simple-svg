@@ -28,13 +28,14 @@ define a line path.
       (svg-path-vlineto 100)
       (svg-path-lineto '(-50 . 50))
       (svg-path-lineto '(-50 . -50))
-      (svg-path-close)))])
+      (svg-path-close)))]
+     [sstyle_path (new-sstyle)])
 
-   (svg-use path
-     #:stroke-width? 5
-     #:stroke? "#7AA20D"
-     #:stroke-linejoin? 'round)
+  (set-sstyle-stroke-width! sstyle_path 5)
+  (set-sstyle-stroke! sstyle_path "#7AA20D")
+  (set-sstyle-stroke-linejoin! sstyle_path 'round)
+  (svg-use-shape path sstyle_path)
 
-   (svg-show-default))
+  (svg-show-default))
 }
 @image{showcase/path/lineto.svg}

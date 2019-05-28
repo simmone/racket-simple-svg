@@ -20,8 +20,12 @@ define a line.
 @section{line}
 
 @codeblock{
-(let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-  (svg-use line #:at? '(5 .5) #:stroke? '(10 . "#765373"))
+(let ([line (svg-line-def '(0 . 0) '(100 . 100))]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-stroke-width! _sstyle 10)
+  (set-sstyle-stroke! _sstyle "#765373")
+  (svg-use-shape line _sstyle #:at? '(5 . 5))
   (svg-show-default))
 }
 @image{showcase/shapes/line/line.svg}

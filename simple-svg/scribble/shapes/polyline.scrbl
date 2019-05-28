@@ -20,11 +20,16 @@ define a polyline.
 
 @codeblock{
 (let ([polyline
-  (svg-polyline-def
-    '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
-  (svg-use polyline #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
+         (svg-polyline-def
+           '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-stroke-width! _sstyle 5)
+  (set-sstyle-stroke! _sstyle "#BBC42A")
+  (set-sstyle-fill! _sstyle "blue")
+
+  (svg-use-shape polyline _sstyle #:at? '(5 . 5))
   (svg-show-default))
 }
-
 @image{showcase/shapes/polyline/polyline.svg}
 
