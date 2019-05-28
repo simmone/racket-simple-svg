@@ -11,8 +11,11 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (svg-out
   100 100
   (lambda ()
-    (let ([rec (svg-rect-def 100 100)])
-      (svg-use rec #:fill? "#BBC42A")
+    (let ([rec (svg-rect-def 100 100)]
+          [_sstyle (new-sstyle)])
+
+      (set-sstyle-fill! _sstyle "#BBC42A")
+      (svg-use-shape rec _sstyle)
       (svg-show-default))))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/rect.svg)
@@ -31,29 +34,36 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ## basic usage
 
-  1. all svg drawings should occur in the svg-out's procedure.
-  2. use svg-...-def define shape first.
-  3. svg-use reuse the shape in group, if not specify which group, all svg-use included in the default group.
-  4. svg-show-default shows default group at '(0 . 0), or svg-show the specific group at any point.
+  1. use svg-out to generate svg content
+  2. all svg drawings should occur in the svg-out's procedure.
+  3. you should specify the svg whole size manully.
+  4. use svg-...-def define shape first, it includes shape's baisc properties: width, height, radius etc.
+  5. use sstyle struct to give shape style properties: stroke, fill etc.
+  6. svg-use-shape to claim how to show a shape in a group by style(sstyle) and position(#:at?). if not specify which group, all svg-use included in the default group.
+  7. svg-show-default shows default group at '(0 . 0).
 
-  define shape first, then define group, reuse shape in group(s) any times and styles, show group(s) in canvas any times.
-
-  the shape's define just contains it's basic properties.
-  svg-use add the axis, fill, stroke etcs.
-
-  ie: define a rect by width and height, then resue it by svg-use any times,
-      each svg-use can use different axis, fill or stroke.
+  define shape first, then define group, reuse shape and style in group(s), show group(s) with style in canvas.
 
 ```racket
 (let (
       [blue_rec (svg-rect-def 150 150)]
+      [_blue_sstyle (new-sstyle)]
       [green_rec (svg-rect-def 100 100)]
+      [_green_sstyle (new-sstyle)]
       [red_rec (svg-rect-def 50 50)]
-      )
-  (svg-use blue_rec #:fill? "blue")
-  (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
-  (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
-  (svg-show-default))
+      [_red_sstyle (new-sstyle)]
+     )
+
+      (set-sstyle-fill! _blue_sstyle "blue")
+      (svg-use-shape blue_rec _blue_sstyle)
+
+      (set-sstyle-fill! _green_sstyle "green")
+      (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
+
+      (set-sstyle-fill! _red_sstyle "red")
+      (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
+
+      (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
 
@@ -81,16 +91,21 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ### with start_point(no padding)
 ```racket
-(let ([rec (svg-rect-def 100 100)])
-  (svg-use rec #:fill? "#BBC42A" #:at? '(50 . 50))
+(let ([rec (svg-rect-def 100 100)]
+      [_sstyle (new-sstyle)])
+  (set-sstyle-fill! _sstyle "#BBC42A")
+  (svg-use-shape rec _sstyle)
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/rect_y.svg)
 
 ### corner radius
 ```racket
-(let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))])
-  (svg-use rec #:fill? "#BBC42A")
+(let ([rec (svg-rect-def 100 100)]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-fill! _sstyle "#BBC42A")
+  (svg-use-shape rec _sstyle #:at? '(50 . 50))
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/rect_radius.svg)
@@ -98,13 +113,22 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### multiple rect
 ```racket
 (let (
-  [blue_rec (svg-rect-def 150 150)]
-  [green_rec (svg-rect-def 100 100)]
-  [red_rec (svg-rect-def 50 50)]
-  )
-  (svg-use blue_rec #:fill? "blue")
-  (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
-  (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
+      [blue_rec (svg-rect-def 150 150)]
+      [_blue_sstyle (new-sstyle)]
+      [green_rec (svg-rect-def 100 100)]
+      [_green_sstyle (new-sstyle)]
+      [red_rec (svg-rect-def 50 50)]
+      [_red_sstyle (new-sstyle)])
+
+  (set-sstyle-fill! _blue_sstyle "blue")
+  (svg-use-shape blue_rec _blue_sstyle)
+
+  (set-sstyle-fill! _green_sstyle "green")
+  (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
+
+  (set-sstyle-fill! _red_sstyle "red")
+  (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
+
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
@@ -119,20 +143,36 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   
 ### circle
 ```racket
-(let ([circle (svg-circle-def 50)])
-  (svg-use circle #:at? '(50 . 50) #:fill? "#ED6E46")
+(let ([circle (svg-circle-def 50)]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-fill! _sstyle "#BBC42A")
+  (svg-use-shape circle _sstyle #:at? '(50 . 50))
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/circle/circle.svg)
 
 ### multiple circle
 ```racket
-  (let ([circle (svg-circle-def 50)])
-    (svg-use circle #:at? '(50 . 50) #:fill? "red")
-    (svg-use circle #:at? '(150 . 50) #:fill? "yellow")
-    (svg-use circle #:at? '(50 . 150) #:fill? "blue")
-    (svg-use circle #:at? '(150 . 150) #:fill? "green")
-    (svg-show-default))
+(let ([circle (svg-circle-def 50)]
+      [red_sstyle (new-sstyle)]
+      [yellow_sstyle (new-sstyle)]
+      [blue_sstyle (new-sstyle)]
+      [green_sstyle (new-sstyle)])
+
+  (set-sstyle-fill! red_sstyle "red")
+  (svg-use-shape circle red_sstyle #:at? '(50 . 50))
+
+  (set-sstyle-fill! yellow_sstyle "yellow")
+  (svg-use-shape circle yellow_sstyle #:at? '(150 . 50))
+
+  (set-sstyle-fill! blue_sstyle "blue")
+  (svg-use-shape circle blue_sstyle #:at? '(50 . 150))
+
+  (set-sstyle-fill! green_sstyle "green")
+  (svg-use-shape circle green_sstyle #:at? '(150 . 150))
+
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/circle/circle3.svg)
 
@@ -146,8 +186,11 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   
 ### ellipse
 ```racket
-(let ([ellipse (svg-ellipse-def '(100 . 50))])
-  (svg-use ellipse #:at? '(100 . 50) #:fill? "#7AA20D")
+(let ([ellipse (svg-ellipse-def '(100 . 50))]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-fill! _sstyle "#7AA20D")
+  (svg-use-shape ellipse _sstyle #:at? '(100 . 50))
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/ellipse/ellipse.svg)
@@ -163,8 +206,12 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   
 ### line
 ```racket
-(let ([line (svg-line-def '(0 . 0) '(100 . 100))])
-  (svg-use line #:at? '(5 . 5) #:stroke? '(10 . "#765373"))
+(let ([line (svg-line-def '(0 . 0) '(100 . 100))]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-stroke-width! _sstyle 10)
+  (set-sstyle-stroke! _sstyle "#765373")
+  (svg-use-shape line _sstyle #:at? '(5 . 5))
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/line/line.svg)
@@ -179,9 +226,15 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### polyline
 ```racket
 (let ([polyline
-  (svg-polyline-def
-    '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))])
-  (svg-use polyline #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#BBC42A" #:fill? "blue")
+         (svg-polyline-def
+           '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-stroke-width! _sstyle 5)
+  (set-sstyle-stroke! _sstyle "#BBC42A")
+  (set-sstyle-fill! _sstyle "blue")
+
+  (svg-use-shape polyline _sstyle #:at? '(5 . 5))
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polyline/polyline.svg)
@@ -197,10 +250,16 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### polygon
 ```racket
 (let ([polygon
-  (svg-polygon-def
-    '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))])
-    (svg-use polygon #:at? '(5 . 5) #:stroke-width? 5 #:stroke? "#765373" #:fill? "#ED6E46")
-    (svg-show-default))
+         (svg-polygon-def
+           '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
+      [_sstyle (new-sstyle)])
+
+  (set-sstyle-stroke-width! _sstyle 5)
+  (set-sstyle-stroke! _sstyle "#765373")
+  (set-sstyle-fill! _sstyle "#ED6E46")
+
+  (svg-use-shape polygon _sstyle #:at? '(5 . 5))
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/polygon/polygon.svg)
 
@@ -233,15 +292,17 @@ define a path programmtially.
          c-0.765,0.106-1.531,0.149-2.317,0.149c-9.78,0-17.71-7.93-17.71-17.731
          c0-9.78,7.93-17.71,17.71-17.71c0.787,0,1.552,0.042,2.317,0.149
          C39.238,37.084,80.419,9.083,129.702,9.083c49.24,0,90.379,27.937,100.414,65.228h0.021
-         c0.298-0.021,0.617-0.021,0.914-0.021C240.831,74.29,248.761,82.22,248.761,92z")))])
+         c0.298-0.021,0.617-0.021,0.914-0.021C240.831,74.29,248.761,82.22,248.761,92z")))]
+      [sstyle_path (new-sstyle)])
 
-         (svg-use path
-           #:fill? "#7AA20D"
-           #:stroke-width? 9
-           #:stroke? "#7AA20D"
-           #:stroke-linejoin? 'round)
+    (set-sstyle-fill! sstyle_path "#7AA20D")
+    (set-sstyle-stroke-width! sstyle_path 9)
+    (set-sstyle-stroke! sstyle_path "#7AA20D")
+    (set-sstyle-stroke-linejoin! sstyle_path 'round)
+                
+    (svg-use-shape path sstyle_path)
 
-         (svg-show-default))
+    (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/path/raw_path.svg)
 
@@ -273,50 +334,22 @@ close a path.
 (let ([path
   (svg-path-def
     (lambda ()
-      (svg-path-moveto* '(10 . 10))
+      (svg-path-moveto* '(5 . 5))
       (svg-path-hlineto 100)
       (svg-path-vlineto 100)
       (svg-path-lineto '(-50 . 50))
       (svg-path-lineto '(-50 . -50))
       (svg-path-close)))]
-     [red_dot (svg-circle-def 2)])
+     [sstyle_path (new-sstyle)])
 
-     (svg-use path
-       #:stroke-width? 1
-       #:stroke? "#7AA20D"
-       #:stroke-linejoin? 'round)
+  (set-sstyle-stroke-width! sstyle_path 5)
+  (set-sstyle-stroke! sstyle_path "#7AA20D")
+  (set-sstyle-stroke-linejoin! sstyle_path 'round)
+  (svg-use-shape path sstyle_path)
 
-       (svg-use red_dot #:at? '(10 . 10) #:fill? "red")
-       (svg-use red_dot #:at? '(110 . 110) #:fill? "red")
-       (svg-use red_dot #:at? '(10 . 110) #:fill? "red")
-       (svg-use red_dot #:at? '(110 . 10) #:fill? "red")
-
-     (svg-show-default))
+  (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/path/lineto.svg)
-
-### Cubic Bezier Curve
-
-```racket
-(define (svg-path-ccurve point1 point2 point3)
-(define (svg-path-ccurve* point1 point2 point3)
-```
-  use three control points to draw a Cubic Bezier Curve.
-
-  ccurve* use absolute position.
-
-  ccurve use relative position, relative to the start position.
-
-```racket
-(path
-  #:stroke-fill? "#333333"
-  #:stroke-width? 3
-  (lambda ()
-    (moveto* '(0 . 50))
-    (ccurve* '(20 . 5) '(70 . 5) '(90 . 50))
-    (ccurve* '(110 . 95) '(160 . 95) '(180 . 50))))
-```
-![ScreenShot](simple-svg/showcase/path/ccurve1.svg)
 
 ### Quadratic Bezier Curve
 
@@ -334,22 +367,26 @@ close a path.
 (let ([path
         (svg-path-def
           (lambda ()
-            (svg-path-moveto* '(10 . 60))
-            (svg-path-qcurve* '(60 . 10) '(110 . 60))
-            (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
-      [red_dot (svg-circle-def 5)])
+          (svg-path-moveto* '(10 . 60))
+          (svg-path-qcurve* '(60 . 10) '(110 . 60))
+          (svg-path-qcurve* '(160 . 110) '(210 . 60))))
+        ]
+        [path_style (new-sstyle)]
+        [red_dot (svg-circle-def 5)]
+        [dot_style (new-sstyle)])
 
-    (svg-use path
-      #:stroke? "#333333"
-      #:stroke-width? 3)
+        (set-sstyle-stroke! path_style "#333333")
+        (set-sstyle-stroke-width! path_style 3)
+        (svg-use-shape path path_style)
 
-      (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
-      (svg-use red_dot #:at? '(60 . 10) #:fill? "red")
-      (svg-use red_dot #:at? '(110 . 60) #:fill? "red")
-      (svg-use red_dot #:at? '(160 . 110) #:fill? "red")
-      (svg-use red_dot #:at? '(210 . 60) #:fill? "red")
+  (set-sstyle-fill! dot_style "red")
+  (svg-use-shape red_dot dot_style #:at? '(10 . 60))
+  (svg-use-shape red_dot dot_style #:at? '(60 . 10))
+  (svg-use-shape red_dot dot_style #:at? '(110 . 60))
+  (svg-use-shape red_dot dot_style #:at? '(160 . 110))
+  (svg-use-shape red_dot dot_style #:at? '(210 . 60))
 
-      (svg-show-default))))
+  (svg-show-default))
 ```
 
 ```racket
@@ -372,31 +409,31 @@ close a path.
   ccurve use relative position, relative to the start position.
 
 ```racket
-(svg-out
-  #:canvas? '(1 "red" "white")
-  (lambda ()
-    (let ([path
-            (svg-path-def
-              (lambda ()
-              (svg-path-moveto* '(10 . 60))
-              (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
-              (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
-            ))]
-          [red_dot (svg-circle-def 2)])
+(let ([path
+        (svg-path-def
+          (lambda ()
+            (svg-path-moveto* '(10 . 60))
+            (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
+            (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
+          ))]
+      [path_style (new-sstyle)]
+      [red_dot (svg-circle-def 5)]
+      [dot_style (new-sstyle)])
 
-          (svg-use path
-            #:stroke? "#333333"
-            #:stroke-width? 3)
+  (set-sstyle-stroke! path_style "#333333")
+  (set-sstyle-stroke-width! path_style 3)
+  (svg-use-shape path path_style)
 
-          (svg-use red_dot #:at? '(10 . 60) #:fill? "red")
-          (svg-use red_dot #:at? '(30 . 15) #:fill? "red")
-          (svg-use red_dot #:at? '(80 . 15) #:fill? "red")
-          (svg-use red_dot #:at? '(100 . 60) #:fill? "red")
-          (svg-use red_dot #:at? '(120 . 105) #:fill? "red")
-          (svg-use red_dot #:at? '(170 . 105) #:fill? "red")
-          (svg-use red_dot #:at? '(190 . 60) #:fill? "red")
+  (set-sstyle-fill! dot_style "red")
+  (svg-use-shape red_dot dot_style #:at? '(10 . 60))
+  (svg-use-shape red_dot dot_style #:at? '(30 . 15))
+  (svg-use-shape red_dot dot_style #:at? '(80 . 15))
+  (svg-use-shape red_dot dot_style #:at? '(100 . 60))
+  (svg-use-shape red_dot dot_style #:at? '(120 . 105))
+  (svg-use-shape red_dot dot_style #:at? '(170 . 105))
+  (svg-use-shape red_dot dot_style #:at? '(190 . 60))
 
-          (svg-show-default))))
+  (svg-show-default))
 ```
 
 ```racket
@@ -440,16 +477,32 @@ close a path.
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
+      [arc_style (new-sstyle)]
       [red_dot (svg-circle-def 5)]
-    )
+      [dot_style (new-sstyle)]
+     )
 
-  (svg-use arc1 #:stroke? "#ccccff" #:stroke-width? 3)
-  (svg-use arc2 #:stroke? "green" #:stroke-width? 3)
-  (svg-use arc3 #:stroke? "blue" #:stroke-width? 3)
-  (svg-use arc4 #:stroke? "yellow" #:stroke-width? 3)
+  (set-sstyle-stroke-width! arc_style 3)
+               
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "#ccccff")
+    (svg-use-shape arc1 _arc_style))
 
-  (svg-use red_dot #:at? '(130 . 45) #:fill? "red")
-  (svg-use red_dot #:at? '(170 . 85) #:fill? "red")
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "green")
+    (svg-use-shape arc2 _arc_style))
+
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "blue")
+    (svg-use-shape arc3 _arc_style))
+
+  (let ([_arc_style (sstyle-clone arc_style)])
+    (set-sstyle-stroke! _arc_style "yellow")
+    (svg-use-shape arc4 _arc_style))
+
+  (set-sstyle-fill! dot_style "red")
+  (svg-use-shape red_dot dot_style #:at? '(130 . 45))
+  (svg-use-shape red_dot dot_style #:at? '(170 . 85))
 
   (svg-show-default))
 }
