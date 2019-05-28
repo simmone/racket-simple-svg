@@ -23,7 +23,7 @@
               (let ([polygon
                      (svg-polygon-def
                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
-                    [_sstyle (new-sstyle)])
+                    [_sstyle (sstyle-new)])
 
                 (set-sstyle-stroke-width! _sstyle 5)
                 (set-sstyle-stroke! _sstyle "#765373")

@@ -136,7 +136,7 @@
     ))
 
 (define (svg-show-default)
-  (svg-show-group "default" (new-sstyle)))
+  (svg-show-group "default" (sstyle-new)))
 
 (define (svg-show-group group_index sstyle
                         #:at? [at? #f])
@@ -175,7 +175,7 @@
               (when shape_at?
                     (printf "x=\"~a\" y=\"~a\" " (car shape_at?) (cdr shape_at?)))
               
-              (printf "~a/>\n" (format-sstyle _sstyle)))
+              (printf "~a/>\n" (sstyle-format _sstyle)))
             (loop-shape (cdr shapes))))
         (printf "  </symbol>\n\n")
         (loop-group (cdr groups)))))
@@ -190,5 +190,5 @@
         (when group_at?
               (printf "x=\"~a\" y=\"~a\" " (car group_at?) (cdr group_at?)))
 
-        (printf "~a/>\n" (format-sstyle _sstyle)))
+        (printf "~a/>\n" (sstyle-format _sstyle)))
       (loop-group (cdr groups)))))

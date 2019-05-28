@@ -41,9 +41,9 @@
                       (lambda ()
                         (svg-path-moveto* '(130 . 45))
                         (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
-                    [arc_style (new-sstyle)]
+                    [arc_style (sstyle-new)]
                     [red_dot (svg-circle-def 5)]
-                    [dot_style (new-sstyle)]
+                    [dot_style (sstyle-new)]
                     )
 
                 (set-sstyle-stroke-width! arc_style 3)

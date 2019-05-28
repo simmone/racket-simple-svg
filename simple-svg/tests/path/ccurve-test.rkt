@@ -28,9 +28,9 @@
                         (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
                         (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
                         ))]
-                    [path_style (new-sstyle)]
+                    [path_style (sstyle-new)]
                     [red_dot (svg-circle-def 5)]
-                    [dot_style (new-sstyle)])
+                    [dot_style (sstyle-new)])
 
                 (set-sstyle-stroke! path_style "#333333")
                 (set-sstyle-stroke-width! path_style 3)
@@ -68,9 +68,9 @@
                         (svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
                         (svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
                         ))]
-                    [path_style (new-sstyle)]
+                    [path_style (sstyle-new)]
                     [red_dot (svg-circle-def 5)]
-                    [dot_style (new-sstyle)])
+                    [dot_style (sstyle-new)])
 
                 (set-sstyle-stroke! path_style "#333333")
                 (set-sstyle-stroke-width! path_style 3)

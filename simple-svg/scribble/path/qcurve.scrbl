@@ -28,9 +28,9 @@ qcurve* use absolute position.
           (svg-path-qcurve* '(60 . 10) '(110 . 60))
           (svg-path-qcurve* '(160 . 110) '(210 . 60))))
         ]
-        [path_style (new-sstyle)]
+        [path_style (sstyle-new)]
         [red_dot (svg-circle-def 5)]
-        [dot_style (new-sstyle)])
+        [dot_style (sstyle-new)])
 
         (set-sstyle-stroke! path_style "#333333")
         (set-sstyle-stroke-width! path_style 3)

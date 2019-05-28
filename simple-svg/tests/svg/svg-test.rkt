@@ -55,7 +55,7 @@
             #:viewBox? '(50 0 100 100)
             (lambda ()
               (let ([rec (svg-rect-def 100 100)]
-                    [_sstyle (new-sstyle)])
+                    [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#BBC42A")
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])

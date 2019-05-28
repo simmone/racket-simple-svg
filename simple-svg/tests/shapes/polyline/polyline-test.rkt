@@ -23,7 +23,7 @@
               (let ([polyline
                      (svg-polyline-def
                       '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
-                    [_sstyle (new-sstyle)])
+                    [_sstyle (sstyle-new)])
                 (set-sstyle-stroke-width! _sstyle 5)
                 (set-sstyle-stroke! _sstyle "#BBC42A")
                 (set-sstyle-fill! _sstyle "blue")

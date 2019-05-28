@@ -29,7 +29,7 @@ define a line path.
       (svg-path-lineto '(-50 . 50))
       (svg-path-lineto '(-50 . -50))
       (svg-path-close)))]
-     [sstyle_path (new-sstyle)])
+     [sstyle_path (sstyle-new)])
 
   (set-sstyle-stroke-width! sstyle_path 5)
   (set-sstyle-stroke! sstyle_path "#7AA20D")

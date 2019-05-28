@@ -24,7 +24,7 @@ define a rectangle.
 
 @codeblock{
 (let ([rec (svg-rect-def 100 100)]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape rec _sstyle)
   (svg-show-default))
@@ -36,7 +36,7 @@ define a rectangle.
 
 @codeblock{
 (let ([rec (svg-rect-def 100 100)]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape rec _sstyle #:at? '(50 . 50))
@@ -49,7 +49,7 @@ define a rectangle.
 
 @codeblock{
 (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape rec _sstyle)
   (svg-show-default))
@@ -62,11 +62,11 @@ define a rectangle.
 @codeblock{
 (let (
       [blue_rec (svg-rect-def 150 150)]
-      [_blue_sstyle (new-sstyle)]
+      [_blue_sstyle (sstyle-new)]
       [green_rec (svg-rect-def 100 100)]
-      [_green_sstyle (new-sstyle)]
+      [_green_sstyle (sstyle-new)]
       [red_rec (svg-rect-def 50 50)]
-      [_red_sstyle (new-sstyle)])
+      [_red_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _blue_sstyle "blue")
   (svg-use-shape blue_rec _blue_sstyle)

@@ -58,7 +58,7 @@ define shape first, then define group, reuse shape and style in group(s), show g
   100 100
   (lambda ()
     (let ([rec (svg-rect-def 100 100)]
-          [_sstyle (new-sstyle)])
+          [_sstyle (sstyle-new)])
 
       (set-sstyle-fill! _sstyle "#BBC42A")
       (svg-use-shape rec _sstyle)
@@ -72,7 +72,7 @@ generated svg file:
   100 100
   (lambda ()
     (let ([rec (svg-rect-def 100 100)]
-          [_sstyle (new-sstyle)])
+          [_sstyle (sstyle-new)])
 
       (set-sstyle-fill! _sstyle "#BBC42A")
       (svg-use-shape rec _sstyle)
@@ -86,11 +86,11 @@ generated svg file:
 @codeblock{
 (let (
       [blue_rec (svg-rect-def 150 150)]
-      [_blue_sstyle (new-sstyle)]
+      [_blue_sstyle (sstyle-new)]
       [green_rec (svg-rect-def 100 100)]
-      [_green_sstyle (new-sstyle)]
+      [_green_sstyle (sstyle-new)]
       [red_rec (svg-rect-def 50 50)]
-      [_red_sstyle (new-sstyle)]
+      [_red_sstyle (sstyle-new)]
      )
 
       (set-sstyle-fill! _blue_sstyle "blue")
@@ -107,16 +107,11 @@ generated svg file:
 
 @image{showcase/shapes/rect/m_rect.svg}
 
-@include-section["shapes/rect.scrbl"]
-
+@include-section["sstyle.scrbl"]
+@include-section["shapes/rect.scrbl"] 
 @include-section["shapes/circle.scrbl"]
-
 @include-section["shapes/ellipse.scrbl"]
-
 @include-section["shapes/line.scrbl"]
-
 @include-section["shapes/polyline.scrbl"]
-
 @include-section["shapes/polygon.scrbl"]
-
 @include-section["path/path.scrbl"]

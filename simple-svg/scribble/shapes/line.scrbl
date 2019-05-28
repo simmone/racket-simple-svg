@@ -21,7 +21,7 @@ define a line.
 
 @codeblock{
 (let ([line (svg-line-def '(0 . 0) '(100 . 100))]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-stroke-width! _sstyle 10)
   (set-sstyle-stroke! _sstyle "#765373")

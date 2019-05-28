@@ -20,7 +20,7 @@ define a circle.
 
 @codeblock{
 (let ([circle (svg-circle-def 50)]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape circle _sstyle #:at? '(50 . 50))
@@ -32,10 +32,10 @@ define a circle.
 
 @codeblock{
 (let ([circle (svg-circle-def 50)]
-      [red_sstyle (new-sstyle)]
-      [yellow_sstyle (new-sstyle)]
-      [blue_sstyle (new-sstyle)]
-      [green_sstyle (new-sstyle)])
+      [red_sstyle (sstyle-new)]
+      [yellow_sstyle (sstyle-new)]
+      [blue_sstyle (sstyle-new)]
+      [green_sstyle (sstyle-new)])
 
   (set-sstyle-fill! red_sstyle "red")
   (svg-use-shape circle red_sstyle #:at? '(50 . 50))

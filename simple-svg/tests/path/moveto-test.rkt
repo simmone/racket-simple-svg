@@ -26,8 +26,8 @@
                       (lambda ()
                         (svg-path-moveto* '(20 . 60))))]
                     [red_dot (svg-circle-def 5)]
-                    [sstyle_path (new-sstyle)]
-                    [sstyle_red_dot (new-sstyle)])
+                    [sstyle_path (sstyle-new)]
+                    [sstyle_red_dot (sstyle-new)])
                 
                 (set-sstyle-stroke-width! sstyle_path 1)
                 (set-sstyle-stroke! sstyle_path "#7AA20D")
@@ -57,8 +57,8 @@
                       (lambda ()
                         (svg-path-moveto '(20 . 60))))]
                     [red_dot (svg-circle-def 5)]
-                    [sstyle_path (new-sstyle)]
-                    [sstyle_red_dot (new-sstyle)])
+                    [sstyle_path (sstyle-new)]
+                    [sstyle_red_dot (sstyle-new)])
                 
                 (set-sstyle-stroke-width! sstyle_path 1)
                 (set-sstyle-stroke! sstyle_path "#7AA20D")

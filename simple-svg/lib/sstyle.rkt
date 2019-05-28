@@ -4,8 +4,8 @@
  
 (provide (contract-out
           [sstyle/c contract?]
-          [new-sstyle (-> sstyle/c)]
-          [format-sstyle (-> sstyle/c string?)]
+          [sstyle-new (-> sstyle/c)]
+          [sstyle-format (-> sstyle/c string?)]
           [sstyle-clone (-> sstyle/c sstyle/c)]
           ))
 
@@ -27,7 +27,7 @@
    (sstyle-stroke-width sv)
    (sstyle-stroke-linejoin sv)))
 
-(define (new-sstyle)
+(define (sstyle-new)
   (sstyle
 ;; fill color
    "none"
@@ -38,7 +38,7 @@
 ;; stroke-linejoin
    #f))
 
-(define (format-sstyle _sstyle)
+(define (sstyle-format _sstyle)
   (with-output-to-string
     (lambda ()
       (printf "fill=\"~a\" " (sstyle-fill _sstyle))

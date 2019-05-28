@@ -12,7 +12,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   100 100
   (lambda ()
     (let ([rec (svg-rect-def 100 100)]
-          [_sstyle (new-sstyle)])
+          [_sstyle (sstyle-new)])
 
       (set-sstyle-fill! _sstyle "#BBC42A")
       (svg-use-shape rec _sstyle)
@@ -47,11 +47,11 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```racket
 (let (
       [blue_rec (svg-rect-def 150 150)]
-      [_blue_sstyle (new-sstyle)]
+      [_blue_sstyle (sstyle-new)]
       [green_rec (svg-rect-def 100 100)]
-      [_green_sstyle (new-sstyle)]
+      [_green_sstyle (sstyle-new)]
       [red_rec (svg-rect-def 50 50)]
-      [_red_sstyle (new-sstyle)]
+      [_red_sstyle (sstyle-new)]
      )
 
       (set-sstyle-fill! _blue_sstyle "blue")
@@ -92,7 +92,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### with start_point(no padding)
 ```racket
 (let ([rec (svg-rect-def 100 100)]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape rec _sstyle)
   (svg-show-default))
@@ -102,7 +102,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### corner radius
 ```racket
 (let ([rec (svg-rect-def 100 100)]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape rec _sstyle #:at? '(50 . 50))
@@ -114,11 +114,11 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```racket
 (let (
       [blue_rec (svg-rect-def 150 150)]
-      [_blue_sstyle (new-sstyle)]
+      [_blue_sstyle (sstyle-new)]
       [green_rec (svg-rect-def 100 100)]
-      [_green_sstyle (new-sstyle)]
+      [_green_sstyle (sstyle-new)]
       [red_rec (svg-rect-def 50 50)]
-      [_red_sstyle (new-sstyle)])
+      [_red_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _blue_sstyle "blue")
   (svg-use-shape blue_rec _blue_sstyle)
@@ -144,7 +144,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### circle
 ```racket
 (let ([circle (svg-circle-def 50)]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape circle _sstyle #:at? '(50 . 50))
@@ -155,10 +155,10 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### multiple circle
 ```racket
 (let ([circle (svg-circle-def 50)]
-      [red_sstyle (new-sstyle)]
-      [yellow_sstyle (new-sstyle)]
-      [blue_sstyle (new-sstyle)]
-      [green_sstyle (new-sstyle)])
+      [red_sstyle (sstyle-new)]
+      [yellow_sstyle (sstyle-new)]
+      [blue_sstyle (sstyle-new)]
+      [green_sstyle (sstyle-new)])
 
   (set-sstyle-fill! red_sstyle "red")
   (svg-use-shape circle red_sstyle #:at? '(50 . 50))
@@ -187,7 +187,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### ellipse
 ```racket
 (let ([ellipse (svg-ellipse-def '(100 . 50))]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#7AA20D")
   (svg-use-shape ellipse _sstyle #:at? '(100 . 50))
@@ -207,7 +207,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ### line
 ```racket
 (let ([line (svg-line-def '(0 . 0) '(100 . 100))]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-stroke-width! _sstyle 10)
   (set-sstyle-stroke! _sstyle "#765373")
@@ -228,7 +228,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (let ([polyline
          (svg-polyline-def
            '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-stroke-width! _sstyle 5)
   (set-sstyle-stroke! _sstyle "#BBC42A")
@@ -252,7 +252,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (let ([polygon
          (svg-polygon-def
            '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
-      [_sstyle (new-sstyle)])
+      [_sstyle (sstyle-new)])
 
   (set-sstyle-stroke-width! _sstyle 5)
   (set-sstyle-stroke! _sstyle "#765373")
@@ -293,7 +293,7 @@ define a path programmtially.
          c0-9.78,7.93-17.71,17.71-17.71c0.787,0,1.552,0.042,2.317,0.149
          C39.238,37.084,80.419,9.083,129.702,9.083c49.24,0,90.379,27.937,100.414,65.228h0.021
          c0.298-0.021,0.617-0.021,0.914-0.021C240.831,74.29,248.761,82.22,248.761,92z")))]
-      [sstyle_path (new-sstyle)])
+      [sstyle_path (sstyle-new)])
 
     (set-sstyle-fill! sstyle_path "#7AA20D")
     (set-sstyle-stroke-width! sstyle_path 9)
@@ -340,7 +340,7 @@ close a path.
       (svg-path-lineto '(-50 . 50))
       (svg-path-lineto '(-50 . -50))
       (svg-path-close)))]
-     [sstyle_path (new-sstyle)])
+     [sstyle_path (sstyle-new)])
 
   (set-sstyle-stroke-width! sstyle_path 5)
   (set-sstyle-stroke! sstyle_path "#7AA20D")
@@ -371,9 +371,9 @@ close a path.
           (svg-path-qcurve* '(60 . 10) '(110 . 60))
           (svg-path-qcurve* '(160 . 110) '(210 . 60))))
         ]
-        [path_style (new-sstyle)]
+        [path_style (sstyle-new)]
         [red_dot (svg-circle-def 5)]
-        [dot_style (new-sstyle)])
+        [dot_style (sstyle-new)])
 
         (set-sstyle-stroke! path_style "#333333")
         (set-sstyle-stroke-width! path_style 3)
@@ -416,9 +416,9 @@ close a path.
             (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
             (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
           ))]
-      [path_style (new-sstyle)]
+      [path_style (sstyle-new)]
       [red_dot (svg-circle-def 5)]
-      [dot_style (new-sstyle)])
+      [dot_style (sstyle-new)])
 
   (set-sstyle-stroke! path_style "#333333")
   (set-sstyle-stroke-width! path_style 3)
@@ -477,9 +477,9 @@ close a path.
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
-      [arc_style (new-sstyle)]
+      [arc_style (sstyle-new)]
       [red_dot (svg-circle-def 5)]
-      [dot_style (new-sstyle)]
+      [dot_style (sstyle-new)]
      )
 
   (set-sstyle-stroke-width! arc_style 3)
