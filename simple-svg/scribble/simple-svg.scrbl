@@ -42,38 +42,41 @@ raco pkg install simple-svg
 
 @itemlist[
   #:style 'ordered
+  @item{use svg-out to generate svg content}
   @item{all svg drawings should occur in the svg-out's procedure.}
-  @item{use svg-...-def define shape first.}
-  @item{svg-use reuse the shape in group, if not specify which group, all svg-use included in the default group.}
-  @item{svg-show-default shows default group at '(0 . 0), or svg-show the specific group at any point.}
+  @item{you should specify the svg whole size manully.}
+  @item{use svg-...-def define shape first, it includes shape's baisc properties: width, height, radius etc.}
+  @item{use sstyle struct to give shape style properties: stroke, fill etc.}
+  @item{svg-use-shape to claim how to show a shape in a group by style(sstyle) and position(#:at?). if not specify which group, all svg-use included in the default group.}
+  @item{svg-show-default shows default group at '(0 . 0)}
 ]
 
-define shape first, then define group, reuse shape in group(s) any times and styles, show group(s) in canvas any times.
-
-the shape's define just contains it's basic properties.
-svg-use add the axis, fill, stroke etcs.
-
-ie: define a rect by width and height, then resue it by svg-use any times,
-    each svg-use can use different axis, fill or stroke.
+define shape first, then define group, reuse shape and style in group(s), show group(s) with style in canvas.
 
 @codeblock{
-  (svg-out
-    100 100
-    (lambda ()
-      (let ([rec (svg-rect-def 100 100)])
-        (svg-use rec #:fill? "#BBC42A")
-        (svg-show-default))))
+(svg-out
+  100 100
+  (lambda ()
+    (let ([rec (svg-rect-def 100 100)]
+          [_sstyle (new-sstyle)])
+
+      (set-sstyle-fill! _sstyle "#BBC42A")
+      (svg-use-shape rec _sstyle)
+      (svg-show-default))))
 }
 
 generated svg file:
 
 @verbatim{
-  @(svg-out
-    100 100
-    (lambda ()
-      (let ([rec (svg-rect-def 100 100)])
-        (svg-use rec #:fill? "#BBC42A")
-        (svg-show-default))))
+@(svg-out
+  100 100
+  (lambda ()
+    (let ([rec (svg-rect-def 100 100)]
+          [_sstyle (new-sstyle)])
+
+      (set-sstyle-fill! _sstyle "#BBC42A")
+      (svg-use-shape rec _sstyle)
+      (svg-show-default))))
 }
 
 @image{showcase/shapes/rect/rect.svg}
@@ -81,29 +84,39 @@ generated svg file:
 @subsection{multiple shapes}
 
 @codeblock{
-  (let (
-        [blue_rec (svg-rect-def 150 150)]
-        [green_rec (svg-rect-def 100 100)]
-        [red_rec (svg-rect-def 50 50)]
-        )
-    (svg-use blue_rec #:fill? "blue")
-    (svg-use green_rec #:fill? "green" #:at? '(25 . 25))
-    (svg-use red_rec #:fill? "red" #:at? '(50 . 50))
-    (svg-show-default))
+(let (
+      [blue_rec (svg-rect-def 150 150)]
+      [_blue_sstyle (new-sstyle)]
+      [green_rec (svg-rect-def 100 100)]
+      [_green_sstyle (new-sstyle)]
+      [red_rec (svg-rect-def 50 50)]
+      [_red_sstyle (new-sstyle)]
+     )
+
+      (set-sstyle-fill! _blue_sstyle "blue")
+      (svg-use-shape blue_rec _blue_sstyle)
+
+      (set-sstyle-fill! _green_sstyle "green")
+      (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
+
+      (set-sstyle-fill! _red_sstyle "red")
+      (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
+
+      (svg-show-default))
 }
 
 @image{showcase/shapes/rect/m_rect.svg}
 
-@include-section["shapes/rect.scrbl"]
+include-section["shapes/rect.scrbl"]
 
-@include-section["shapes/circle.scrbl"]
+include-section["shapes/circle.scrbl"]
 
-@include-section["shapes/ellipse.scrbl"]
+include-section["shapes/ellipse.scrbl"]
 
-@include-section["shapes/line.scrbl"]
+include-section["shapes/line.scrbl"]
 
-@include-section["shapes/polyline.scrbl"]
+include-section["shapes/polyline.scrbl"]
 
-@include-section["shapes/polygon.scrbl"]
+include-section["shapes/polygon.scrbl"]
 
-@include-section["path/path.scrbl"]
+include-section["path/path.scrbl"]
