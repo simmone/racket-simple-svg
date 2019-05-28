@@ -67,6 +67,29 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
 
+# Svg Style
+
+each shape and group can have multiple styles: stroke, fill etc.
+
+sstyle is a struct, it represent a shape or group's style.
+
+svg-use-shape and svg-show-group should use the sstyle.
+
+```racket
+(define sstyle/c
+  (struct/dc
+   sstyle
+     [fill string?]
+     [stroke (or/c #f string?)]
+     [stroke-width (or/c #f natural?)]
+     [stroke-linejoin (or/c #f 'miter 'round 'bevel)]
+    ))
+```
+
+(sstyle-new) generate a default sstyle.
+
+(ssylte-clone sstyle) clone a exist sstyle.
+
 # Shapes
 
 ## Rectangle
