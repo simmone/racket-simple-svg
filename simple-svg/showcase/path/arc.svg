@@ -38,5 +38,5 @@
     <use xlink:href="#s7" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#default" fill="none" />
 </svg>

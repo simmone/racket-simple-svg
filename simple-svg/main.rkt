@@ -38,6 +38,7 @@
           [svg-show-default (-> void?)]
           [new-sstyle (-> sstyle/c)]
           [format-sstyle (-> sstyle/c string?)]
+          [sstyle-clone (-> sstyle/c sstyle/c)]
           [svg-rect-def (->* 
                  (natural? natural?)
                  (
