@@ -9,7 +9,7 @@
           [sstyle-clone (-> sstyle/c sstyle/c)]
           ))
 
-(struct sstyle (fill stroke stroke-width stroke-linejoin translate rotate) #:transparent #:mutable)
+(struct sstyle (fill stroke stroke-width stroke-linejoin translate rotate scale skewX skewY) #:transparent #:mutable)
 
 (define sstyle/c
   (struct/dc
@@ -20,6 +20,9 @@
      [stroke-linejoin (or/c #f 'miter 'round 'bevel)]
      [translate (or/c #f (cons/c natural? natural?))]
      [rotate (or/c #f integer?)]
+     [scale (or/c #f natural? (cons/c natural? natural?))]
+     [skewX (or/c #f natural?)]
+     [skewY (or/c #f natural?)]
     ))
 
 (define (sstyle-clone sv)
@@ -30,6 +33,9 @@
    (sstyle-stroke-linejoin sv)
    (sstyle-translate sv)
    (sstyle-rotate sv)
+   (sstyle-scale sv)
+   (sstyle-skewX sv)
+   (sstyle-skewY sv)
    ))
 
 (define (sstyle-new)
@@ -45,6 +51,12 @@
 ;; translate
    #f
 ;; rotate
+   #f
+;; scale
+   #f
+;; skewX
+   #f
+;; skewY
    #f
    ))
 
@@ -65,6 +77,9 @@
       (when (or
              (sstyle-translate _sstyle)
              (sstyle-rotate _sstyle)
+             (sstyle-scale _sstyle)
+             (sstyle-skewX _sstyle)
+             (sstyle-skewY _sstyle)
              )
             (printf "transform=\"")
 
@@ -75,6 +90,19 @@
             
             (when (sstyle-rotate _sstyle)
                   (printf "rotate(~a) " (sstyle-rotate _sstyle)))
+
+            (when (sstyle-scale _sstyle)
+                  (if (pair? (sstyle-scale _sstyle))
+                      (printf "scale(~a ~a) "
+                              (car (sstyle-scale _sstyle))
+                              (cdr (sstyle-scale _sstyle)))
+                      (printf "scale(~a) " (sstyle-scale _sstyle))))
+            
+            (when (sstyle-skewX _sstyle)
+                  (printf "skewX(~a) " (sstyle-skewX _sstyle)))
+
+            (when (sstyle-skewY _sstyle)
+                  (printf "skewY(~a) " (sstyle-skewY _sstyle)))
             
             (printf "\""))
       )))
