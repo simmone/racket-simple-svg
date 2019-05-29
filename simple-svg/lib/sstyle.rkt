@@ -9,7 +9,7 @@
           [sstyle-clone (-> sstyle/c sstyle/c)]
           ))
 
-(struct sstyle (fill stroke stroke-width stroke-linejoin) #:transparent #:mutable)
+(struct sstyle (fill stroke stroke-width stroke-linejoin translate rotate) #:transparent #:mutable)
 
 (define sstyle/c
   (struct/dc
@@ -18,6 +18,8 @@
      [stroke (or/c #f string?)]
      [stroke-width (or/c #f natural?)]
      [stroke-linejoin (or/c #f 'miter 'round 'bevel)]
+     [translate (or/c #f (cons/c natural? natural?))]
+     [rotate (or/c #f integer?)]
     ))
 
 (define (sstyle-clone sv)
@@ -25,7 +27,10 @@
    (sstyle-fill sv)
    (sstyle-stroke sv)
    (sstyle-stroke-width sv)
-   (sstyle-stroke-linejoin sv)))
+   (sstyle-stroke-linejoin sv)
+   (sstyle-translate sv)
+   (sstyle-rotate sv)
+   ))
 
 (define (sstyle-new)
   (sstyle
@@ -36,7 +41,12 @@
 ;; stroke width
    #f
 ;; stroke-linejoin
-   #f))
+   #f
+;; translate
+   #f
+;; rotate
+   #f
+   ))
 
 (define (sstyle-format _sstyle)
   (with-output-to-string
@@ -51,5 +61,21 @@
 
             (when (sstyle-stroke-linejoin _sstyle)
                   (printf "stroke-linejoin=\"~a\" " (sstyle-stroke-linejoin _sstyle))))
+      
+      (when (or
+             (sstyle-translate _sstyle)
+             (sstyle-rotate _sstyle)
+             )
+            (printf "transform=\"")
+
+            (when (sstyle-translate _sstyle)
+                  (printf "translate(~a ~a) "
+                          (car (sstyle-translate _sstyle))
+                          (cdr (sstyle-translate _sstyle))))
+            
+            (when (sstyle-rotate _sstyle)
+                  (printf "rotate(~a) " (sstyle-rotate _sstyle)))
+            
+            (printf "\""))
       )))
 
