@@ -93,8 +93,14 @@
                  (
                   #:font-size? (or/c #f natural?)
                   #:font-family? (or/c #f string?)
-                  #:dx? (or/c integer?)
-                  #:dy? (or/c integer?)
+                  #:dx? (or/c #f integer?)
+                  #:dy? (or/c #f integer?)
+                  #:rotate? (or/c #f (listof integer?))
+                  #:textLength? (or/c #f natural?)
+                  #:kerning? (or/c #f natural? 'auto 'inherit)
+                  #:letter-space? (or/c #f natural? 'normal 'inherit)
+                  #:word-space? (or/c #f natural? 'normal 'inherit)
+                  #:text-decoration? (or/c #f 'overline 'underline 'line-through)
                  )
                  string?)]
           ))

@@ -1,0 +1,16 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="350" height="120"
+    >
+  <defs>
+    <text id="s1" font-size="50" rotate="10 20 30 40 50 " textLength="300" >城春草木深</text>
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" x="30" y="60" fill="#ED6E46" />
+  </symbol>
+
+  <use xlink:href="#default" fill="none" />
+</svg>
