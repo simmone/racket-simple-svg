@@ -2,10 +2,10 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="310" height="80"
+    width="310" height="70"
     >
   <defs>
-    <text id="s1" font-size="50" font-family="Arial">城春草木深</text>
+    <text id="s1" font-size="50" >城春草木深</text>
   </defs>
 
   <symbol id="default">

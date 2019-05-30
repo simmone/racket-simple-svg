@@ -16,6 +16,7 @@
 (require "path/qcurve.rkt")
 (require "path/ccurve.rkt")
 (require "path/arc.rkt")
+(require "text/text.rkt")
 
 (provide (struct-out sstyle))
 
@@ -87,4 +88,13 @@
                  (cons/c natural? natural?)
                  (or/c 'left_big 'left_small 'right_big 'right_small)
                  void?)]
+          [svg-text-def (->* 
+                 (string?)
+                 (
+                  #:font-size? (or/c #f natural?)
+                  #:font-family? (or/c #f string?)
+                  #:dx? (or/c integer?)
+                  #:dy? (or/c integer?)
+                 )
+                 string?)]
           ))

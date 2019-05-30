@@ -3,11 +3,11 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../../lib/lib.rkt")
-(require "../../../main.rkt")
+(require "../../lib/lib.rkt")
+(require "../../main.rkt")
 
 (require racket/runtime-path)
-(define-runtime-path text1_svg "../../../showcase/shapes/text/text1.svg")
+(define-runtime-path text1_svg "../../showcase/text/text1.svg")
 
 (define test-all
   (test-suite
@@ -18,15 +18,15 @@
 
     (let ([actual_svg
            (svg-out
-            100 100
+            310 70
             (lambda ()
-              (let ([text (svg-text-def "城春草木深" 50)]
+              (let ([text (svg-text-def "城春草木深" #:font-size? 50)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
-                (svg-use-shape rec _sstyle)
+                (set-sstyle-fill! _sstyle "#ED6E46")
+                (svg-use-shape text _sstyle #:at? '(30 . 60))
                 (svg-show-default))))])
-      
-      (call-with-input-file text_svg
+
+      (call-with-input-file text1_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg
