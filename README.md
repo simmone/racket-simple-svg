@@ -571,6 +571,7 @@ rotate: a list of rotate angles, it represent each letter's rotate, only one mea
     (svg-use-shape text _sstyle #:at? '(30 . 60))
     (svg-show-default))
 }
+```
 ![ScreenShot](simple-svg/showcase/text/text2.svg)
 
 ```racket
