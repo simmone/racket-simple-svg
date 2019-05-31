@@ -560,6 +560,7 @@ define a text programmtially.
           [#:word-space? word-space? (or/c #f natural? 'normal 'inherit)]
           [#:text-decoration? text-decoration? (or/c #f 'overline 'underline 'line-through)]
 ```
+![ScreenShot](simple-svg/showcase/text/text1.svg)
 
 rotate: a list of rotate angles, it represent each letter's rotate, only one means each letter have same angle.
 
@@ -570,9 +571,9 @@ rotate: a list of rotate angles, it represent each letter's rotate, only one mea
     (svg-use-shape text _sstyle #:at? '(30 . 60))
     (svg-show-default))
 }
-@image{showcase/text/text2.svg}
+![ScreenShot](simple-svg/showcase/text/text2.svg)
 
-@codeblock{
+```racket
 (let (
      [text1 (svg-text-def "国破山河在" #:font-size? 50 #:text-decoration? 'overline)]
      [text2 (svg-text-def "国破山河在" #:font-size? 50 #:text-decoration? 'underline)]
@@ -585,5 +586,6 @@ rotate: a list of rotate angles, it represent each letter's rotate, only one mea
    (svg-use-shape text3 _sstyle #:at? '(30 . 260))
    (svg-show-default))
 }
-@image{showcase/text/text3.svg}
+```
+![ScreenShot](simple-svg/showcase/text/text3.svg)
 
