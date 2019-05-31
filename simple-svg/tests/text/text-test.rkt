@@ -25,7 +25,7 @@
               (let ([text (svg-text-def "城春草木深" #:font-size? 50)]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#ED6E46")
-                (svg-use-shape text _sstyle #:at? '(30 . 60))
+                (svg-use-shape text _sstyle #:at? '(30 . 50))
                 (svg-show-default))))])
 
       (call-with-input-file text1_svg
@@ -60,7 +60,7 @@
 
     (let ([actual_svg
            (svg-out
-            350 300
+            310 280
             (lambda ()
               (let (
                     [text1 (svg-text-def "国破山河在" #:font-size? 50 #:text-decoration? 'overline)]
