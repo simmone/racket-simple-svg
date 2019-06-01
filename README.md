@@ -556,9 +556,9 @@ define a text programmtially.
           [#:rotate? rotate? (or/c #f (listof integer?)) #f]
           [#:textLength? textLength? (or/c #f natural?) #f]
           [#:kerning? kerning? (or/c #f natural? 'auto 'inherit) #f]
-          [#:letter-space? letter-space? (or/c #f natural? 'normal 'inherit)]
-          [#:word-space? word-space? (or/c #f natural? 'normal 'inherit)]
-          [#:text-decoration? text-decoration? (or/c #f 'overline 'underline 'line-through)]
+          [#:letter-space? letter-space? (or/c #f natural? 'normal 'inherit) #f]
+          [#:word-space? word-space? (or/c #f natural? 'normal 'inherit) #f]
+          [#:text-decoration? text-decoration? (or/c #f 'overline 'underline 'line-through) #f]
 ```
 ![ScreenShot](simple-svg/showcase/text/text1.svg)
 
@@ -590,3 +590,23 @@ rotate: a list of rotate angles, it represent each letter's rotate, only one mea
 ```
 ![ScreenShot](simple-svg/showcase/text/text3.svg)
 
+let text follow a path:
+```racket
+(let* ([path
+        (svg-path-def
+         (lambda ()
+           (svg-path-moveto* '(10 . 60))
+           (svg-path-qcurve* '(110 . 10) '(210 . 60))
+           (svg-path-qcurve* '(310 . 110) '(410 . 60))))]
+       [path_sstyle (sstyle-new)]
+       [text
+        (svg-text-def "国破山河在 城春草木深 感时花溅泪 恨别鸟惊心"
+                      #:path? path
+                      #:path-startOffset? 5)]
+       [text_sstyle (sstyle-new)])
+  (set-sstyle-fill! text_sstyle "#ED6E46")
+  (svg-use-shape path path_sstyle #:hidden? #t)
+  (svg-use-shape text text_sstyle)
+  (svg-show-default))
+```
+![ScreenShot](simple-svg/showcase/text/text4.svg)

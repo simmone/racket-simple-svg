@@ -16,6 +16,8 @@
                   #:letter-space? (or/c #f natural? 'normal 'inherit)
                   #:word-space? (or/c #f natural? 'normal 'inherit)
                   #:text-decoration? (or/c #f 'overline 'underline 'line-through)
+                  #:path? (or/c #f string?)
+                  #:path-startOffset? (or/c #f (integer-in 0 100))
                  )
                  string?)]
           ))
@@ -31,6 +33,8 @@
               #:letter-space? [letter-space? #f]
               #:word-space? [word-space? #f]
               #:text-decoration? [text-decoration? #f]
+              #:path? [path? #f]
+              #:path-startOffset? [path-startOffset? #f]
               )
   (let ([properties_map (make-hash)])
 
@@ -66,6 +70,12 @@
 
     (when text-decoration?
           (hash-set! properties_map 'text-decoration text-decoration?))
+
+    (when path?
+          (hash-set! properties_map 'path path?))
+
+    (when path-startOffset?
+          (hash-set! properties_map 'path-startOffset path-startOffset?))
 
     (hash-set! properties_map 'format-def
                (lambda (index text)
@@ -104,6 +114,14 @@
                                    (printf "text-decoration=\"~a\" " (hash-ref text 'text-decoration)))
 
                              ))
-                         (hash-ref text 'text))))
+                         (if (hash-has-key? text 'path)
+                             (with-output-to-string
+                              (lambda ()
+                                (printf "\n      <textPath xlink:href=\"#~a\" " (hash-ref text 'path))
+                                (when (hash-has-key? text 'path-startOffset)
+                                  (printf "startOffset=\"~a%\" " (hash-ref text 'path-startOffset)))
+                                (printf ">~a</textPath>\n    " (hash-ref text 'text))))
+                             (hash-ref text 'text))
+                         )))
 
     ((*add-shape*) properties_map)))

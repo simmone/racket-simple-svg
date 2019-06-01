@@ -1,0 +1,24 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="500" height="100"
+    >
+  <defs>
+    <path id="s1"
+          d="
+             M10,60
+             Q110,10 210,60
+             Q310,110 410,60
+            "/>
+    <text id="s2" >
+      <textPath xlink:href="#s1" startOffset="5%" >国破山河在 城春草木深 感时花溅泪 恨别鸟惊心</textPath>
+    </text>
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s2" fill="#ED6E46" />
+  </symbol>
+
+  <use xlink:href="#default" fill="none" />
+</svg>

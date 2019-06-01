@@ -11,6 +11,7 @@
           [svg-use-shape (->* (string? sstyle/c) 
                               (
                                #:at? (cons/c natural? natural?)
+                               #:hidden? boolean?
                               )
                               void?)]
           [svg-show-group (->* (string? sstyle/c)
@@ -105,7 +106,9 @@
                (printf "</svg>\n"))))))))
 
 (define (svg-use-shape shape_index _sstyle
-                       #:at? [at? #f])
+                       #:at? [at? #f]
+                       #:hidden? [hidden? #f]
+                       )
   (let* ([shape (hash-ref (*shapes_map*) shape_index)]
          [new_shape_index shape_index]
          [new_shape shape]
@@ -132,7 +135,8 @@
     ((*add-to-shape-def-list*) new_shape_index)
     ((*set-shapes-map*) new_shape_index new_shape)
     ((*set-sstyles-map*) new_shape_index _sstyle)
-    ((*add-group*) new_shape_index new_at?)
+    (when (not hidden?)
+      ((*add-group*) new_shape_index new_at?))
     ))
 
 (define (svg-show-default)

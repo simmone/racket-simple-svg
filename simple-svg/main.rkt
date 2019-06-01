@@ -29,6 +29,7 @@
           [svg-use-shape (->* (string? sstyle/c) 
                               (
                                #:at? (cons/c natural? natural?)
+                               #:hidden? boolean?
                               )
                               void?)]
           [svg-show-group (->* (string? sstyle/c)
@@ -101,6 +102,8 @@
                   #:letter-space? (or/c #f natural? 'normal 'inherit)
                   #:word-space? (or/c #f natural? 'normal 'inherit)
                   #:text-decoration? (or/c #f 'overline 'underline 'line-through)
+                  #:path? (or/c #f string?)
+                  #:path-startOffset? (or/c #f (integer-in 0 100))
                  )
                  string?)]
           ))
