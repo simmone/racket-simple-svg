@@ -559,7 +559,11 @@ define a text programmtially.
           [#:letter-space? letter-space? (or/c #f natural? 'normal 'inherit) #f]
           [#:word-space? word-space? (or/c #f natural? 'normal 'inherit) #f]
           [#:text-decoration? text-decoration? (or/c #f 'overline 'underline 'line-through) #f]
+          [#:path? path? (or/c #f string?) #f]
+          [#:path-startOffset? path-startOffset? (or/c #f (integer-in 0 100)) #f]
 ```
+  dx, dy: relative position.
+  kerning, letter-space, word-space: all about letter and word spaces.
 ![ScreenShot](simple-svg/showcase/text/text1.svg)
 
 rotate: a list of rotate angles, it represent each letter's rotate, only one means each letter have same angle.

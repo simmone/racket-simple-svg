@@ -21,6 +21,8 @@ define a text programmtially.
           [#:letter-space? letter-space? (or/c #f natural? 'normal 'inherit) #f]
           [#:word-space? word-space? (or/c #f natural? 'normal 'inherit) #f]
           [#:text-decoration? text-decoration? (or/c #f 'overline 'underline 'line-through) #f]
+          [#:path? path? (or/c #f string?) #f]
+          [#:path-startOffset? path-startOffset? (or/c #f (integer-in 0 100)) #f]
          )
         string?]{
   dx, dy: relative position.
