@@ -32,6 +32,33 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
   viewBox?: '(x y width height), if needed.
 
+## svg-use-shape
+```racket
+(svg-use-shape
+  [shape_index string?]
+  [shape_style sstyle/c]
+  [#:at? at? (cons/c natural? natural?) '(0 . 0)]
+  [#:hidden? hidden? boolean? #f]
+```
+  use a shape in group.
+  
+  hidden? set to true means just use it, but not show it. 
+
+## svg-show-group
+```racket
+(svg-show-group
+  [group_index string?]
+  [group_style sstyle/c]
+  [#:at? at? (cons/c natural? natural?) '(0 . 0)]
+```
+  show a group with style and position.
+
+## svg-show-default
+```racket
+(svg-show-default)
+```
+  (svg-show-group "default" (sstyle-new))
+
 ## basic usage
 
   1. use svg-out to generate svg content

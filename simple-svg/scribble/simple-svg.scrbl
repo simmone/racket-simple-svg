@@ -38,6 +38,33 @@ raco pkg install simple-svg
   viewBox?: '(x y width height), if needed.
 }
 
+@defproc[(svg-use-shape
+          [shape_index string?]
+          [shape_style sstyle/c]
+          [#:at? at? (cons/c natural? natural?) '(0 . 0)]
+          [#:hidden? hidden? boolean? #f]
+        )
+        string?]{
+  use a shape in group.
+  
+  hidden? set to true means just use it, but not show it. 
+}
+
+@defproc[(svg-show-group
+          [group_index string?]
+          [group_style sstyle/c]
+          [#:at? at? (cons/c natural? natural?) '(0 . 0)]
+          )
+          void?]{
+  show a group with style and position.
+}
+
+@defproc[(svg-show-default
+          )
+          void?]{
+  (svg-show-group "default" (sstyle-new))
+}
+
 @subsection{basic usage}
 
 @itemlist[
