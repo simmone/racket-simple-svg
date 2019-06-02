@@ -25,6 +25,7 @@
                 scale
                 skewX
                 skewY
+                fill-gradient
                 ) #:transparent #:mutable)
 
 (define sstyle/c
@@ -45,6 +46,7 @@
      [scale (or/c #f natural? (cons/c natural? natural?))]
      [skewX (or/c #f natural?)]
      [skewY (or/c #f natural?)]
+     [fill-gradient (or/c #f string?)]
     ))
 
 (define (sstyle-clone sv)
