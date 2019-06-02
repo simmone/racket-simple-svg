@@ -3,7 +3,7 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-rect-def (->* 
+          [svg-def-rect (->* 
                  (natural? natural?)
                  (
                   #:radius? (or/c #f (cons/c natural? natural?))
@@ -11,7 +11,7 @@
                  string?)]
           ))
 
-(define (svg-rect-def width height
+(define (svg-def-rect width height
               #:radius? [radius? #f])
   (let ([properties_map (make-hash)])
 

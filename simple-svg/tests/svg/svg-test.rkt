@@ -2,7 +2,7 @@
 
 (require rackunit/text-ui)
 
-(require "../../lib/lib.rkt")
+(require "../../src/lib/lib.rkt")
 (require rackunit "../../main.rkt")
 
 (require racket/runtime-path)
@@ -54,7 +54,7 @@
             100 100
             #:viewBox? '(50 0 100 100)
             (lambda ()
-              (let ([rec (svg-rect-def 100 100)]
+              (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#BBC42A")
                 (svg-use-shape rec _sstyle)

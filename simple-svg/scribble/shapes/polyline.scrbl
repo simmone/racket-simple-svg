@@ -9,7 +9,7 @@
 
 define a polyline.
 
-@defproc[(svg-polyline-def
+@defproc[(svg-def-polyline
           [points (listof (cons/c natural? natural?))]
         )
         string?]{
@@ -20,7 +20,7 @@ define a polyline.
 
 @codeblock{
 (let ([polyline
-         (svg-polyline-def
+         (svg-def-polyline
            '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
       [_sstyle (sstyle-new)])
 

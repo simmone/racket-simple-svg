@@ -9,7 +9,7 @@
 
 define a ellipse.
 
-@defproc[(svg-ellipse-def
+@defproc[(svg-def-ellipse
           [radius (cons/c natural? natural?)]
         )
         string?]{
@@ -20,7 +20,7 @@ define a ellipse.
 @section{ellipse}
 
 @codeblock{
-(let ([ellipse (svg-ellipse-def '(100 . 50))]
+(let ([ellipse (svg-def-ellipse '(100 . 50))]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#7AA20D")

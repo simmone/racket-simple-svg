@@ -3,10 +3,10 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-ellipse-def (-> (cons/c natural? natural?) string?)]
+          [svg-def-ellipse (-> (cons/c natural? natural?) string?)]
           ))
 
-(define (svg-ellipse-def radius)
+(define (svg-def-ellipse radius)
   (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'ellipse)

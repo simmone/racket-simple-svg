@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../../lib/lib.rkt")
+(require "../../../src/lib/lib.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -23,7 +23,7 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-rect-def 100 100)]
+              (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#BBC42A")
                 (svg-use-shape rec _sstyle)
@@ -43,7 +43,7 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-rect-def 100 100)]
+              (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#BBC42A")
                 (svg-use-shape rec _sstyle #:at? '(50 . 50))
@@ -63,7 +63,7 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-rect-def 100 100 #:radius? '(5 . 10))]
+              (let ([rec (svg-def-rect 100 100 #:radius? '(5 . 10))]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#BBC42A")
                 (svg-use-shape rec _sstyle)
@@ -84,11 +84,11 @@
             150 150
             (lambda ()
               (let (
-                    [blue_rec (svg-rect-def 150 150)]
+                    [blue_rec (svg-def-rect 150 150)]
                     [_blue_sstyle (sstyle-new)]
-                    [green_rec (svg-rect-def 100 100)]
+                    [green_rec (svg-def-rect 100 100)]
                     [_green_sstyle (sstyle-new)]
-                    [red_rec (svg-rect-def 50 50)]
+                    [red_rec (svg-def-rect 50 50)]
                     [_red_sstyle (sstyle-new)])
 
                 (set-sstyle-fill! _blue_sstyle "blue")

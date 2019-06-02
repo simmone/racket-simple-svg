@@ -84,7 +84,7 @@ define shape first, then define group, reuse shape and style in group(s), show g
 (svg-out
   100 100
   (lambda ()
-    (let ([rec (svg-rect-def 100 100)]
+    (let ([rec (svg-def-rect 100 100)]
           [_sstyle (sstyle-new)])
 
       (set-sstyle-fill! _sstyle "#BBC42A")
@@ -98,7 +98,7 @@ generated svg file:
 @(svg-out
   100 100
   (lambda ()
-    (let ([rec (svg-rect-def 100 100)]
+    (let ([rec (svg-def-rect 100 100)]
           [_sstyle (sstyle-new)])
 
       (set-sstyle-fill! _sstyle "#BBC42A")
@@ -112,11 +112,11 @@ generated svg file:
 
 @codeblock{
 (let (
-      [blue_rec (svg-rect-def 150 150)]
+      [blue_rec (svg-def-rect 150 150)]
       [_blue_sstyle (sstyle-new)]
-      [green_rec (svg-rect-def 100 100)]
+      [green_rec (svg-def-rect 100 100)]
       [_green_sstyle (sstyle-new)]
-      [red_rec (svg-rect-def 50 50)]
+      [red_rec (svg-def-rect 50 50)]
       [_red_sstyle (sstyle-new)]
      )
 

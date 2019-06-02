@@ -21,7 +21,7 @@ define a line path.
 
 @codeblock{
 (let ([path
-  (svg-path-def
+  (svg-def-path
     (lambda ()
       (svg-path-moveto* '(5 . 5))
       (svg-path-hlineto 100)

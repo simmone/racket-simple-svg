@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../../lib/lib.rkt")
+(require "../../../src/lib/lib.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -21,7 +21,7 @@
             110 110
             (lambda ()
               (let ([polygon
-                     (svg-polygon-def
+                     (svg-def-polygon
                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
                     [_sstyle (sstyle-new)])
 

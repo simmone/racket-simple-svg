@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../../lib/lib.rkt")
+(require "../../../src/lib/lib.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -20,7 +20,7 @@
            (svg-out
             200 100
             (lambda ()
-              (let ([ellipse (svg-ellipse-def '(100 . 50))]
+              (let ([ellipse (svg-def-ellipse '(100 . 50))]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#7AA20D")
                 (svg-use-shape ellipse _sstyle #:at? '(100 . 50))

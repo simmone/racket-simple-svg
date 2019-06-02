@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../lib/lib.rkt")
+(require "../../src/lib/lib.rkt")
 (require "../../main.rkt")
 
 (require racket/runtime-path)
@@ -22,10 +22,10 @@
             30 70
             (lambda ()
               (let ([path
-                     (svg-path-def
+                     (svg-def-path
                       (lambda ()
                         (svg-path-moveto* '(20 . 60))))]
-                    [red_dot (svg-circle-def 5)]
+                    [red_dot (svg-def-circle 5)]
                     [sstyle_path (sstyle-new)]
                     [sstyle_red_dot (sstyle-new)])
                 
@@ -53,10 +53,10 @@
             30 70
             (lambda ()
               (let ([path
-                     (svg-path-def
+                     (svg-def-path
                       (lambda ()
                         (svg-path-moveto '(20 . 60))))]
-                    [red_dot (svg-circle-def 5)]
+                    [red_dot (svg-def-circle 5)]
                     [sstyle_path (sstyle-new)]
                     [sstyle_red_dot (sstyle-new)])
                 

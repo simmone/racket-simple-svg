@@ -9,7 +9,7 @@
 
 define a circle.
 
-@defproc[(svg-circle-def
+@defproc[(svg-def-circle
           [radius natural?]
         )
         string?]{
@@ -19,7 +19,7 @@ define a circle.
 @section{circle}
 
 @codeblock{
-(let ([circle (svg-circle-def 50)]
+(let ([circle (svg-def-circle 50)]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
@@ -31,7 +31,7 @@ define a circle.
 @section{multiple circle}
 
 @codeblock{
-(let ([circle (svg-circle-def 50)]
+(let ([circle (svg-def-circle 50)]
       [red_sstyle (sstyle-new)]
       [yellow_sstyle (sstyle-new)]
       [blue_sstyle (sstyle-new)]

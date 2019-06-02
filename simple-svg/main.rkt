@@ -42,18 +42,18 @@
           [sstyle-new (-> sstyle/c)]
           [sstyle-format (-> sstyle/c string?)]
           [sstyle-clone (-> sstyle/c sstyle/c)]
-          [svg-rect-def (->* 
+          [svg-def-rect (->* 
                  (natural? natural?)
                  (
                   #:radius? (or/c #f (cons/c natural? natural?))
                   )
                  string?)]
-          [svg-circle-def (-> natural? string?)]
-          [svg-ellipse-def (-> (cons/c natural? natural?) string?)]
-          [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
-          [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
-          [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
-          [svg-path-def (-> procedure? string?)]
+          [svg-def-circle (-> natural? string?)]
+          [svg-def-ellipse (-> (cons/c natural? natural?) string?)]
+          [svg-def-line (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
+          [svg-def-polygon (-> (listof (cons/c natural? natural?)) string?)]
+          [svg-def-polyline (-> (listof (cons/c natural? natural?)) string?)]
+          [svg-def-path (-> procedure? string?)]
           [svg-path-raw (-> string? void?)]
           [svg-path-lineto (-> (cons/c integer? integer?) void?)]
           [svg-path-lineto* (-> (cons/c integer? integer?) void?)]
@@ -90,7 +90,7 @@
                  (cons/c natural? natural?)
                  (or/c 'left_big 'left_small 'right_big 'right_small)
                  void?)]
-          [svg-text-def (->* 
+          [svg-def-text (->* 
                  (string?)
                  (
                   #:font-size? (or/c #f natural?)
@@ -116,13 +116,25 @@
                                    #:opacity? (between/c 0 1)
                                   )
                                   (list/c (integer-in 0 100) string? (between/c 0 1)))]
-          [svg-def-lineargradient (->*
+          [svg-def-linear-gradient (->*
                  ((listof (list/c (integer-in 0 100) string? (between/c 0 1))))
                  (
                   #:x1? (or/c #f natural?)
                   #:y1? (or/c #f natural?)
                   #:x2? (or/c #f natural?)
                   #:y2? (or/c #f natural?)
+                  #:gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox)
+                  #:spreadMethod? (or/c #f 'pad 'repeat 'reflect)
+                 )
+                 string?)]
+          [svg-def-radial-gradient (->*
+                 ((listof (list/c (integer-in 0 100) string? (between/c 0 1))))
+                 (
+                  #:cx? (or/c #f (integer-in 0 100))
+                  #:cy? (or/c #f (integer-in 0 100))
+                  #:fx? (or/c #f (integer-in 0 100))
+                  #:fy? (or/c #f (integer-in 0 100))
+                  #:r? (or/c #f natural?)
                   #:gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox)
                   #:spreadMethod? (or/c #f 'pad 'repeat 'reflect)
                  )

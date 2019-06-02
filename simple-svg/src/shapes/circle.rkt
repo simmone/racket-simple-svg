@@ -3,10 +3,10 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-circle-def (-> natural? string?)]
+          [svg-def-circle (-> natural? string?)]
           ))
 
-(define (svg-circle-def radius)
+(define (svg-def-circle radius)
   (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'circle)

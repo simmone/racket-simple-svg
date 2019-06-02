@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../../lib/lib.rkt")
+(require "../../../src/lib/lib.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -21,7 +21,7 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([circle (svg-circle-def 50)]
+              (let ([circle (svg-def-circle 50)]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill! _sstyle "#BBC42A")
                 (svg-use-shape circle _sstyle #:at? '(50 . 50))
@@ -41,7 +41,7 @@
            (svg-out
             200 200
             (lambda ()
-              (let ([circle (svg-circle-def 50)]
+              (let ([circle (svg-def-circle 50)]
                     [red_sstyle (sstyle-new)]
                     [yellow_sstyle (sstyle-new)]
                     [blue_sstyle (sstyle-new)]

@@ -9,7 +9,7 @@
 
 define a path programmtially.
 
-@defproc[(svg-path-def
+@defproc[(svg-def-path
           [procedure procedure?]
         )
         void?]{

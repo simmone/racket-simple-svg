@@ -3,10 +3,10 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-polyline-def (-> (listof (cons/c natural? natural?)) string?)]
+          [svg-def-polyline (-> (listof (cons/c natural? natural?)) string?)]
           ))
 
-(define (svg-polyline-def points)
+(define (svg-def-polyline points)
   (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'polyline)

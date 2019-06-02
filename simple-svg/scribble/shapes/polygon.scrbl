@@ -9,7 +9,7 @@
 
 define a polygon.
 
-@defproc[(svg-polygon-def
+@defproc[(svg-def-polygon
           [points (listof pair?)]
         )
         string?]{
@@ -20,7 +20,7 @@ define a polygon.
 
 @codeblock{
 (let ([polygon
-         (svg-polygon-def
+         (svg-def-polygon
            '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
       [_sstyle (sstyle-new)])
 

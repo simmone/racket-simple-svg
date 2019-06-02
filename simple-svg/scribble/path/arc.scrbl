@@ -31,27 +31,27 @@ the arc is a part of ellipse, through start and end point.
 @codeblock{
 (let (
       [arc1
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big)))]
       [arc2
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small)))]
       [arc3
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big)))]
       [arc4
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
       [arc_style (sstyle-new)]
-      [red_dot (svg-circle-def 5)]
+      [red_dot (svg-def-circle 5)]
       [dot_style (sstyle-new)]
      )
 

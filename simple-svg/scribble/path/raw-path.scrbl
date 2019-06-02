@@ -17,7 +17,7 @@ define a bunch path by raw data.
 
 @codeblock{
 (let ([path
-  (svg-path-def
+  (svg-def-path
     (lambda ()
       (svg-path-raw
        "M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021

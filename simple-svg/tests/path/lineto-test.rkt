@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../lib/lib.rkt")
+(require "../../src/lib/lib.rkt")
 (require "../../main.rkt")
 
 (require racket/runtime-path)
@@ -21,7 +21,7 @@
             110 160
             (lambda ()
               (let ([path
-                     (svg-path-def
+                     (svg-def-path
                       (lambda ()
                         (svg-path-moveto* '(5 . 5))
                         (svg-path-hlineto 100)

@@ -3,7 +3,7 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-text-def (->*
+          [svg-def-text (->*
                  (string?)
                  (
                   #:font-size? (or/c #f natural?)
@@ -22,7 +22,7 @@
                  string?)]
           ))
 
-(define (svg-text-def text
+(define (svg-def-text text
               #:font-size? [font-size? #f]
               #:font-family? [font-family? #f]
               #:dx? [dx? #f]

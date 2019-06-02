@@ -3,7 +3,7 @@
 (require rackunit)
 (require rackunit/text-ui)
 
-(require "../../../lib/lib.rkt")
+(require "../../../src/lib/lib.rkt")
 (require "../../../main.rkt")
 
 (require racket/runtime-path)
@@ -20,7 +20,7 @@
            (svg-out
             110 110
             (lambda ()
-              (let ([line (svg-line-def '(0 . 0) '(100 . 100))]
+              (let ([line (svg-def-line '(0 . 0) '(100 . 100))]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-stroke-width! _sstyle 10)
                 (set-sstyle-stroke! _sstyle "#765373")

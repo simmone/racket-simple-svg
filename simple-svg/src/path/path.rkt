@@ -3,13 +3,13 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-path-def (-> procedure? string?)]
+          [svg-def-path (-> procedure? string?)]
           [*add-path* parameter?]
           ))
 
 (define *add-path* (make-parameter #f))
 
-(define (svg-path-def path_proc)
+(define (svg-def-path path_proc)
   (let ([properties_map (make-hash)]
         [defs '()])
 

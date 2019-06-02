@@ -3,10 +3,10 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-polygon-def (-> (listof (cons/c natural? natural?)) string?)]
+          [svg-def-polygon (-> (listof (cons/c natural? natural?)) string?)]
           ))
 
-(define (svg-polygon-def points)
+(define (svg-def-polygon points)
   (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'polygon)

@@ -11,7 +11,7 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 (svg-out
   100 100
   (lambda ()
-    (let ([rec (svg-rect-def 100 100)]
+    (let ([rec (svg-def-rect 100 100)]
           [_sstyle (sstyle-new)])
 
       (set-sstyle-fill! _sstyle "#BBC42A")
@@ -73,11 +73,11 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 
 ```racket
 (let (
-      [blue_rec (svg-rect-def 150 150)]
+      [blue_rec (svg-def-rect 150 150)]
       [_blue_sstyle (sstyle-new)]
-      [green_rec (svg-rect-def 100 100)]
+      [green_rec (svg-def-rect 100 100)]
       [_green_sstyle (sstyle-new)]
-      [red_rec (svg-rect-def 50 50)]
+      [red_rec (svg-def-rect 50 50)]
       [_red_sstyle (sstyle-new)]
      )
 
@@ -132,7 +132,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 ## Rectangle
 
 ```racket
-(svg-rect-def
+(svg-def-rect
   width natural?
   height natural?
   #:radius? [radius? #f]
@@ -143,7 +143,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 
 ### rect
 ```racket
-(let ([rec (svg-rect-def 100 100)])
+(let ([rec (svg-def-rect 100 100)])
   (svg-use rec #:fill? "#BBC42A")
   (svg-show-default))
 ```
@@ -151,7 +151,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 
 ### with start_point(no padding)
 ```racket
-(let ([rec (svg-rect-def 100 100)]
+(let ([rec (svg-def-rect 100 100)]
       [_sstyle (sstyle-new)])
   (set-sstyle-fill! _sstyle "#BBC42A")
   (svg-use-shape rec _sstyle)
@@ -161,7 +161,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 
 ### corner radius
 ```racket
-(let ([rec (svg-rect-def 100 100)]
+(let ([rec (svg-def-rect 100 100)]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
@@ -173,11 +173,11 @@ svg-use-shape and svg-show-group should use the sstyle.
 ### multiple rect
 ```racket
 (let (
-      [blue_rec (svg-rect-def 150 150)]
+      [blue_rec (svg-def-rect 150 150)]
       [_blue_sstyle (sstyle-new)]
-      [green_rec (svg-rect-def 100 100)]
+      [green_rec (svg-def-rect 100 100)]
       [_green_sstyle (sstyle-new)]
-      [red_rec (svg-rect-def 50 50)]
+      [red_rec (svg-def-rect 50 50)]
       [_red_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _blue_sstyle "blue")
@@ -196,14 +196,14 @@ svg-use-shape and svg-show-group should use the sstyle.
 ## Circle
 
 ```racket
-(svg-circle-def
+(svg-def-circle
    radius natural?)
 ```
   define a circle by radius length.
   
 ### circle
 ```racket
-(let ([circle (svg-circle-def 50)]
+(let ([circle (svg-def-circle 50)]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#BBC42A")
@@ -214,7 +214,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 
 ### multiple circle
 ```racket
-(let ([circle (svg-circle-def 50)]
+(let ([circle (svg-def-circle 50)]
       [red_sstyle (sstyle-new)]
       [yellow_sstyle (sstyle-new)]
       [blue_sstyle (sstyle-new)]
@@ -239,14 +239,14 @@ svg-use-shape and svg-show-group should use the sstyle.
 ## Ellipse
 
 ```racket
-(svg-ellipse-def
+(svg-def-ellipse
   radius (cons/c natural? natural?))
 ```
   define a ellipse by radius length: '(width . height).
   
 ### ellipse
 ```racket
-(let ([ellipse (svg-ellipse-def '(100 . 50))]
+(let ([ellipse (svg-def-ellipse '(100 . 50))]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-fill! _sstyle "#7AA20D")
@@ -258,7 +258,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 ## Line
 
 ```racket
-(svg-line-def
+(svg-def-line
     start_point (cons/c natural? natural?)
     end_point (cons/c natural? natural?))
 ```
@@ -266,7 +266,7 @@ svg-use-shape and svg-show-group should use the sstyle.
   
 ### line
 ```racket
-(let ([line (svg-line-def '(0 . 0) '(100 . 100))]
+(let ([line (svg-def-line '(0 . 0) '(100 . 100))]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-stroke-width! _sstyle 10)
@@ -286,7 +286,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 ### polyline
 ```racket
 (let ([polyline
-         (svg-polyline-def
+         (svg-def-polyline
            '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120)))]
       [_sstyle (sstyle-new)])
 
@@ -302,7 +302,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 ## Polygon
 
 ```racket
-(svg-polygon-def
+(svg-def-polygon
     points (listof (cons/c natural? natural?)))
 ```
   define a polygon by points list.
@@ -310,7 +310,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 ### polygon
 ```racket
 (let ([polygon
-         (svg-polygon-def
+         (svg-def-polygon
            '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
       [_sstyle (sstyle-new)])
 
@@ -328,7 +328,7 @@ svg-use-shape and svg-show-group should use the sstyle.
 define a path programmtially.
 
 ```racket
-(define (svg-path-def
+(define (svg-def-path
           path_proc procedure?))
 ```
   all path actions should be include in this procedure: moveto, curve etc.
@@ -344,7 +344,7 @@ define a path programmtially.
 ### rawpath
 ```racket
 (let ([path
-       (svg-path-def
+       (svg-def-path
          (lambda ()
          (svg-path-raw
          "M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021
@@ -392,7 +392,7 @@ close a path.
 
 ```racket
 (let ([path
-  (svg-path-def
+  (svg-def-path
     (lambda ()
       (svg-path-moveto* '(5 . 5))
       (svg-path-hlineto 100)
@@ -425,14 +425,14 @@ close a path.
 
 ```racket
 (let ([path
-        (svg-path-def
+        (svg-def-path
           (lambda ()
           (svg-path-moveto* '(10 . 60))
           (svg-path-qcurve* '(60 . 10) '(110 . 60))
           (svg-path-qcurve* '(160 . 110) '(210 . 60))))
         ]
         [path_style (sstyle-new)]
-        [red_dot (svg-circle-def 5)]
+        [red_dot (svg-def-circle 5)]
         [dot_style (sstyle-new)])
 
         (set-sstyle-stroke! path_style "#333333")
@@ -470,14 +470,14 @@ close a path.
 
 ```racket
 (let ([path
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(10 . 60))
             (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
             (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
           ))]
       [path_style (sstyle-new)]
-      [red_dot (svg-circle-def 5)]
+      [red_dot (svg-def-circle 5)]
       [dot_style (sstyle-new)])
 
   (set-sstyle-stroke! path_style "#333333")
@@ -518,27 +518,27 @@ close a path.
 ```racket
 (let (
       [arc1
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big)))]
       [arc2
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'left_small)))]
       [arc3
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_big)))]
       [arc4
-        (svg-path-def
+        (svg-def-path
           (lambda ()
             (svg-path-moveto* '(130 . 45))
             (svg-path-arc* '(170 . 85) '(80 . 40) 'right_small)))]
       [arc_style (sstyle-new)]
-      [red_dot (svg-circle-def 5)]
+      [red_dot (svg-def-circle 5)]
       [dot_style (sstyle-new)]
      )
 
@@ -624,7 +624,7 @@ rotate: a list of rotate angles, it represent each letter's rotate, only one mea
 let text follow a path:
 ```racket
 (let* ([path
-        (svg-path-def
+        (svg-def-path
          (lambda ()
            (svg-path-moveto* '(10 . 60))
            (svg-path-qcurve* '(110 . 10) '(210 . 60))

@@ -20,7 +20,7 @@ define a line.
 @section{line}
 
 @codeblock{
-(let ([line (svg-line-def '(0 . 0) '(100 . 100))]
+(let ([line (svg-def-line '(0 . 0) '(100 . 100))]
       [_sstyle (sstyle-new)])
 
   (set-sstyle-stroke-width! _sstyle 10)

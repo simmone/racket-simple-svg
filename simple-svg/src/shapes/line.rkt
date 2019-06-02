@@ -3,10 +3,10 @@
 (require "../svg.rkt")
 
 (provide (contract-out
-          [svg-line-def (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
+          [svg-def-line (-> (cons/c natural? natural?) (cons/c natural? natural?) string?)]
           ))
 
-(define (svg-line-def start_point end_point)
+(define (svg-def-line start_point end_point)
   (let ([properties_map (make-hash)])
 
     (hash-set! properties_map 'type 'line)
