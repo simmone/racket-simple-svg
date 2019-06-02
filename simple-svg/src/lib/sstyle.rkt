@@ -66,6 +66,7 @@
    (sstyle-scale sv)
    (sstyle-skewX sv)
    (sstyle-skewY sv)
+   (sstyle-fill-gradient sv)
    ))
 
 (define (sstyle-new)
@@ -100,18 +101,25 @@
    #f
 ;; skewY
    #f
+;; fill-gradient
+   #f
    ))
 
 (define (sstyle-format _sstyle)
   (with-output-to-string
     (lambda ()
-      (printf "fill=\"~a\" " (sstyle-fill _sstyle))
+      (cond
+       [(sstyle-fill-gradient _sstyle)
+        (printf "fill=\"url(#~a)\" " (sstyle-fill-gradient _sstyle))]
+       [else
+        (printf "fill=\"~a\" " (sstyle-fill _sstyle))])
 
       (when (sstyle-fill-rule _sstyle)
             (printf "fill-rule=\"~a\" " (sstyle-fill-rule _sstyle)))
 
       (when (sstyle-fill-opacity _sstyle)
             (printf "fill-opacity=\"~a\" " (sstyle-fill-opacity _sstyle)))
+
 
       (when (sstyle-stroke-width _sstyle)
             (printf "stroke-width=\"~a\" " (sstyle-stroke-width _sstyle))

@@ -5,11 +5,11 @@
     width="100" height="100"
     >
   <defs>
-    <rect id="s1" width="100" height="100" />
-    <linearGradient id="s2">
+    <linearGradient id="s2" >
       <stop offset="0%" stop-color="#BBC42A" />
       <stop offset="100%" stop-color="#ED6E46" />
     </linearGradient>
+    <rect id="s1" width="100" height="100" />
   </defs>
 
   <symbol id="default">

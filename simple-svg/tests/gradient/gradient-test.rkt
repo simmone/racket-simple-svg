@@ -1,9 +1,9 @@
 #lang racket
 
 (require rackunit)
-(require rackunit/gradient-ui)
+(require rackunit/text-ui)
 
-(require "../../lib/lib.rkt")
+(require "../../src/lib/lib.rkt")
 (require "../../main.rkt")
 
 (require racket/runtime-path)
@@ -20,12 +20,19 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-def-rect 100 100)]
-                    [gradient (svg-def-linear-gradient '( (0 . "#BBC42A") (100 . "#ED6E46") ))]
+              (let ([rec (svg-rect-def 100 100)]
+                    [gradient
+                     (svg-def-lineargradient
+                      (list
+                       (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
+                       (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
+                       ))]
                     [_sstyle (sstyle-new)])
                 (set-sstyle-fill-gradient! _sstyle gradient)
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
+      
+      (printf "~a\n" actual_svg)
 
       (call-with-input-file gradient1_svg
         (lambda (expected)

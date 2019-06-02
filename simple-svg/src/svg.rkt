@@ -21,6 +21,7 @@
                               void?)]
           [svg-show-default (-> void?)]
           [*add-shape* parameter?]
+          [*add-to-shape-def-list* parameter?]
           ))
 
 (define *svg* (make-parameter #f))

@@ -1,22 +1,23 @@
 #lang racket
 
-(require "lib/sstyle.rkt")
-(require "svg.rkt")
-(require "shapes/rect.rkt")
-(require "shapes/circle.rkt")
-(require "shapes/ellipse.rkt")
-(require "shapes/line.rkt")
-(require "shapes/polygon.rkt")
-(require "shapes/polyline.rkt")
-(require "path/path.rkt")
-(require "path/raw-path.rkt")
-(require "path/moveto.rkt")
-(require "path/lineto.rkt")
-(require "path/close-path.rkt")
-(require "path/qcurve.rkt")
-(require "path/ccurve.rkt")
-(require "path/arc.rkt")
-(require "text/text.rkt")
+(require "src/lib/sstyle.rkt")
+(require "src/svg.rkt")
+(require "src/shapes/rect.rkt")
+(require "src/shapes/circle.rkt")
+(require "src/shapes/ellipse.rkt")
+(require "src/shapes/line.rkt")
+(require "src/shapes/polygon.rkt")
+(require "src/shapes/polyline.rkt")
+(require "src/path/path.rkt")
+(require "src/path/raw-path.rkt")
+(require "src/path/moveto.rkt")
+(require "src/path/lineto.rkt")
+(require "src/path/close-path.rkt")
+(require "src/path/qcurve.rkt")
+(require "src/path/ccurve.rkt")
+(require "src/path/arc.rkt")
+(require "src/text/text.rkt")
+(require "src/gradient/gradient.rkt")
 
 (provide (struct-out sstyle))
 
@@ -104,6 +105,26 @@
                   #:text-decoration? (or/c #f 'overline 'underline 'line-through)
                   #:path? (or/c #f string?)
                   #:path-startOffset? (or/c #f (integer-in 0 100))
+                 )
+                 string?)]
+          [svg-def-gradient-stop (->* 
+                                  (
+                                   #:offset (integer-in 0 100)
+                                   #:color string?
+                                  )
+                                  (
+                                   #:opacity? (between/c 0 1)
+                                  )
+                                  (list/c (integer-in 0 100) string? (between/c 0 1)))]
+          [svg-def-lineargradient (->*
+                 ((listof (list/c (integer-in 0 100) string? (between/c 0 1))))
+                 (
+                  #:x1? (or/c #f natural?)
+                  #:y1? (or/c #f natural?)
+                  #:x2? (or/c #f natural?)
+                  #:y2? (or/c #f natural?)
+                  #:gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox)
+                  #:spreadMethod? (or/c #f 'pad 'repeat 'reflect)
                  )
                  string?)]
           ))
