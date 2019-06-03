@@ -569,7 +569,7 @@ close a path.
 ```
 ![ScreenShot](simple-svg/showcase/path/arc.svg)
 
-### text
+## text
 
 define a text programmtially.
 
@@ -641,3 +641,80 @@ let text follow a path:
   (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/text/text4.svg)
+
+## Gradient
+
+define a gradient programmtially.
+
+```racket
+(svg-def-gradient-stop
+   [#:offset offset (integer-in 0 100)]
+   [#:color color string?]
+   [#:opacity? opacity? (between/c 0 1) 1]
+   )
+   (list/c (integer-in 0 100) string? (between/c 0 1))
+```
+offset from 0 to 100, means the distance of the color gradient.
+ 
+lineargradient and radialgradient both have a stop list.
+
+```racket
+(svg-def-linear-gradient
+   [stop_list (listof (list/c (integer-in 0 100) string? (between/c 0 1)))]
+   [#:x1? x1? (or/c #f natural?) #f]
+   [#:y1? y1? (or/c #f natural?) #f]
+   [#:x2? x2? (or/c #f natural?) #f]
+   [#:y2? y2? (or/c #f natural?) #f]
+   [#:gradientUnits? gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox) #f]
+   [#:spreadMethod? spreadMethod? (or/c #f 'pad 'repeat 'reflect) #f]
+ )
+ string?
+```
+use x1, y1, x2, y2 justify gradient's direction and position.
+
+default is from left to right, x1=0, y1=0, x2=100, y2=0.
+
+```racket
+(let ([rec (svg-def-rect 100 100)]
+      [gradient
+        (svg-def-linear-gradient
+          (list
+            (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
+            (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
+           ))]
+     [_sstyle (sstyle-new)])
+   (set-sstyle-fill-gradient! _sstyle gradient)
+   (svg-use-shape rec _sstyle)
+   (svg-show-default))
+```
+![ScreenShot](simple-svg/showcase/gradient/gradient1.svg)
+
+```racket
+(svg-def-radial-gradient
+   [stop_list (listof (list/c (integer-in 0 100) string? (between/c 0 1)))]
+   [#:cx? cx? (or/c #f natural?) #f]
+   [#:cy? cy? (or/c #f natural?) #f]
+   [#:fx? fx? (or/f #f natural?) #f]
+   [#:fy? fy? (or/f #f natural?) #f]
+   [#:r? r? (or/c #f natural?) #f]
+   [#:gradientUnits? gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox) #f]
+   [#:spreadMethod? spreadMethod? (or/c #f 'pad 'repeat 'reflect) #f]
+ )
+ string?
+```
+cx, cy, fx, fy has value 0 - 100, means 0% - 100%, use them to justify gradient's position and direction.
+
+```racket
+(let ([rec (svg-def-rect 100 100)]
+      [gradient
+       (svg-def-radial-gradient
+        (list
+         (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
+         (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
+         ))]
+      [_sstyle (sstyle-new)])
+  (set-sstyle-fill-gradient! _sstyle gradient)
+  (svg-use-shape rec _sstyle)
+  (svg-show-default))
+```
+![ScreenShot](simple-svg/showcase/gradient/gradient2.svg)
