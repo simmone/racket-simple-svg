@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../shapes/circle.rkt"))
+@(require (for-label "../../src/shapes/circle.rkt"))
 
 @title{Circle}
 

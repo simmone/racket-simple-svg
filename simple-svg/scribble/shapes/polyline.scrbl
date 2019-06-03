@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../shapes/polyline.rkt"))
+@(require (for-label "../../src/shapes/polyline.rkt"))
 
 @title{Polyline}
 

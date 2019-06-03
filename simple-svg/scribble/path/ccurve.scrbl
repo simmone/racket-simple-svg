@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../path/ccurve.rkt"))
+@(require (for-label "../../src/path/ccurve.rkt"))
 
 @title{svg-path-ccurve/ccurve*}
 

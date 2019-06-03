@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../shapes/rect.rkt"))
+@(require (for-label "../../src/shapes/rect.rkt"))
 
 @title{Rectangle}
 

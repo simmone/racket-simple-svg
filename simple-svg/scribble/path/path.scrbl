@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../path/path.rkt"))
+@(require (for-label "../../src/path/path.rkt"))
 
 @title{Path}
 

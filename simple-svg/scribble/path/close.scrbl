@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../path/close-path.rkt"))
+@(require (for-label "../../src/path/close-path.rkt"))
 
 @title{svg-path-close}
 

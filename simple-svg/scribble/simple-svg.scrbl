@@ -143,3 +143,4 @@ generated svg file:
 @include-section["shapes/polygon.scrbl"]
 @include-section["path/path.scrbl"]
 @include-section["text/text.scrbl"]
+@include-section["gradient/gradient.scrbl"]

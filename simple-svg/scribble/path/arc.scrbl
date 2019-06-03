@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../path/arc.rkt"))
+@(require (for-label "../../src/path/arc.rkt"))
 
 @title{svg-path-arc/arc*}
 

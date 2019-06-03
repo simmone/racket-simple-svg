@@ -3,7 +3,7 @@
 @(require "../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../lib/sstyle.rkt"))
+@(require (for-label "../src/lib/sstyle.rkt"))
 
 @title{Svg Style}
 
@@ -29,6 +29,7 @@ svg-use-shape and svg-show-group should use the sstyle.
      [scale (or/c #f natural? (cons/c natural? natural?))]
      [skewX (or/c #f natural?)]
      [skewY (or/c #f natural?)]
+     [fil-gradient (or/c #f string?)]
      )]{
 }
 

@@ -3,7 +3,7 @@
 @(require "../../main.rkt")
 
 @(require (for-label racket))
-@(require (for-label "../../path/lineto.rkt"))
+@(require (for-label "../../src/path/lineto.rkt"))
 
 @title{svg-path-lineto/lineto*/hlineto/vlineto}
 
