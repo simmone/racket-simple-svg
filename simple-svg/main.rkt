@@ -27,6 +27,7 @@
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          )
                         string?)]
+          [svg-def-group (-> string? procedure? void?)]
           [svg-use-shape (->* (string? sstyle/c) 
                               (
                                #:at? (cons/c natural? natural?)

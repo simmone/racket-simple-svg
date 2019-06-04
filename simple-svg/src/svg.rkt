@@ -8,7 +8,7 @@
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                         )
                         string?)]
-          [svg-def-group (->* string? procedure?)]
+          [svg-def-group (-> string? procedure? void?)]
           [svg-use-shape (->* (string? sstyle/c) 
                               (
                                #:at? (cons/c natural? natural?)
@@ -107,10 +107,9 @@
                (flush-data)
                (printf "</svg>\n"))))))))
 
-(define (svg-def-group group_name proc)
-  (parameterize ([*current-group* group_name])
-    (lambda ()
-      (proc))))
+(define (svg-def-group group_name shapes-proc)
+  (parameterize ([*current_group* group_name])
+                (shapes-proc)))
       
 (define (svg-use-shape shape_index _sstyle
                        #:at? [at? #f]
