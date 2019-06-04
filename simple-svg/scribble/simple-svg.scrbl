@@ -39,10 +39,10 @@ raco pkg install simple-svg
 }
 
 @defproc[(svg-use-shape
-          [shape_index string?]
-          [shape_style sstyle/c]
-          [#:at? at? (cons/c natural? natural?) '(0 . 0)]
-          [#:hidden? hidden? boolean? #f]
+           [shape_index string?]
+           [shape_style sstyle/c]
+           [#:at? at? (cons/c natural? natural?) '(0 . 0)]
+           [#:hidden? hidden? boolean? #f]
         )
         string?]{
   use a shape in group.
@@ -50,18 +50,29 @@ raco pkg install simple-svg
   hidden? set to true means just use it, but not show it. 
 }
 
-@defproc[(svg-show-group
-          [group_index string?]
-          [group_style sstyle/c]
-          [#:at? at? (cons/c natural? natural?) '(0 . 0)]
-          )
-          void?]{
-  show a group with style and position.
+@defproc[(svg-def-group
+           [group_name string?]
+           [use-proc procedure?]
+         )
+         void?]{
+  default, all svg-use-* will be added to "default" group.
+
+  use svg-def-group to define a named group to use later.
+
+  all svg-use-* in use-proc will be added to the group.
 }
 
-@defproc[(svg-show-default
+@defproc[(svg-show-group
+           [group_name string?]
+           [group_style sstyle/c]
+           [#:at? at? (cons/c natural? natural?) '(0 . 0)]
           )
           void?]{
+  show a group by name with style and position.
+}
+
+@defproc[(svg-show-default)
+         void?]{
   (svg-show-group "default" (sstyle-new))
 }
 
@@ -132,7 +143,33 @@ generated svg file:
       (svg-show-default))
 }
 
-@image{showcase/shapes/rect/m_rect.svg}
+@subsection{use group}
+
+@codeblock{
+(let (
+     [line1 (svg-def-line '(0 . 0) '(30 . 30))]
+     [line2 (svg-def-line '(0 . 15) '(30 . 15))]
+     [line3 (svg-def-line '(15 . 0) '(15 . 30))]
+     [line4 (svg-def-line '(30 . 0) '(0 . 30))]
+     [_sstyle (sstyle-new)]
+     [group_sstyle (sstyle-new)])
+
+  (set-sstyle-stroke-width! _sstyle 5)
+  (set-sstyle-stroke! _sstyle "#765373")
+  (svg-def-group
+   "pattern"
+   (lambda ()
+     (svg-use-shape line1 _sstyle #:at? '(5 . 5))
+     (svg-use-shape line2 _sstyle #:at? '(5 . 5))
+     (svg-use-shape line3 _sstyle #:at? '(5 . 5))
+     (svg-use-shape line4 _sstyle #:at? '(5 . 5))))
+  (svg-show-group "pattern" group_sstyle #:at? '(50 . 50))
+  (svg-show-group "pattern" group_sstyle #:at? '(100 . 100))
+  (svg-show-group "pattern" group_sstyle #:at? '(80 . 200))
+  (svg-show-group "pattern" group_sstyle #:at? '(150 . 100))
+  )
+}
+@image{showcase/group/group1.svg}
 
 @include-section["sstyle.scrbl"]
 @include-section["shapes/rect.scrbl"] 

@@ -44,14 +44,26 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   
   hidden? set to true means just use it, but not show it. 
 
+## svg-def-group
+```racket
+(svg-def-group
+  [group_name string?]
+  [use-proc procedure?]
+```
+  default, all svg-use-* will be added to "default" group.
+
+  use svg-def-group to define a named group to use later.
+
+  all svg-use-* in use-proc will be added to the group.
+
 ## svg-show-group
 ```racket
 (svg-show-group
-  [group_index string?]
+  [group_name string?]
   [group_style sstyle/c]
   [#:at? at? (cons/c natural? natural?) '(0 . 0)]
 ```
-  show a group with style and position.
+  show a group by name with style and position.
 
 ## svg-show-default
 ```racket
@@ -93,6 +105,32 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
       (svg-show-default))
 ```
 ![ScreenShot](simple-svg/showcase/shapes/rect/m_rect.svg)
+
+```racket
+(let (
+     [line1 (svg-def-line '(0 . 0) '(30 . 30))]
+     [line2 (svg-def-line '(0 . 15) '(30 . 15))]
+     [line3 (svg-def-line '(15 . 0) '(15 . 30))]
+     [line4 (svg-def-line '(30 . 0) '(0 . 30))]
+     [_sstyle (sstyle-new)]
+     [group_sstyle (sstyle-new)])
+
+  (set-sstyle-stroke-width! _sstyle 5)
+  (set-sstyle-stroke! _sstyle "#765373")
+  (svg-def-group
+   "pattern"
+   (lambda ()
+     (svg-use-shape line1 _sstyle #:at? '(5 . 5))
+     (svg-use-shape line2 _sstyle #:at? '(5 . 5))
+     (svg-use-shape line3 _sstyle #:at? '(5 . 5))
+     (svg-use-shape line4 _sstyle #:at? '(5 . 5))))
+  (svg-show-group "pattern" group_sstyle #:at? '(50 . 50))
+  (svg-show-group "pattern" group_sstyle #:at? '(100 . 100))
+  (svg-show-group "pattern" group_sstyle #:at? '(80 . 200))
+  (svg-show-group "pattern" group_sstyle #:at? '(150 . 100))
+  )
+```
+![ScreenShot](simple-svg/showcase/group/group1.svg)
 
 # Svg Style
 
