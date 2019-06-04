@@ -170,25 +170,24 @@
         (loop (cdr defs))))
     (printf "  </defs>\n\n"))
   
-  (let loop-group ([groups ((*show-list*))])
+  (let loop-group ([groups (sort (hash-keys (*groups_map*)) string<?)])
     (when (not (null? groups))
-      (let ([group_index (caar groups)])
-        (printf "  <symbol id=\"~a\">\n" group_index)
-        (let loop-shape ([shapes (hash-ref (*groups_map*) group_index)])
-          (when (not (null? shapes))
-            (let* ([shape_index (caar shapes)]
-                   [shape_at? (cdar shapes)]
-                   [shape (hash-ref (*shapes_map*) shape_index)]
-                   [_sstyle (hash-ref (*sstyles_map*) shape_index)])
-              (printf "    <use xlink:href=\"#~a\" " shape_index)
+          (printf "  <symbol id=\"~a\">\n" (car groups))
+          (let loop-shape ([shapes (hash-ref (*groups_map*) (car groups))])
+            (when (not (null? shapes))
+                  (let* ([shape_index (caar shapes)]
+                         [shape_at? (cdar shapes)]
+                         [shape (hash-ref (*shapes_map*) shape_index)]
+                         [_sstyle (hash-ref (*sstyles_map*) shape_index)])
+                    (printf "    <use xlink:href=\"#~a\" " shape_index)
               
-              (when shape_at?
-                    (printf "x=\"~a\" y=\"~a\" " (car shape_at?) (cdr shape_at?)))
+                    (when shape_at?
+                          (printf "x=\"~a\" y=\"~a\" " (car shape_at?) (cdr shape_at?)))
               
-              (printf "~a/>\n" (sstyle-format _sstyle)))
-            (loop-shape (cdr shapes))))
-        (printf "  </symbol>\n\n")
-        (loop-group (cdr groups)))))
+                    (printf "~a/>\n" (sstyle-format _sstyle)))
+                  (loop-shape (cdr shapes))))
+          (printf "  </symbol>\n\n")
+          (loop-group (cdr groups))))
     
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))

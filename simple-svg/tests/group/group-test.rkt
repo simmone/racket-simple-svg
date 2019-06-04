@@ -42,8 +42,6 @@
                 (svg-show-group "pattern" group_sstyle #:at? '(150 . 100))
                 )))])
 
-      (printf "~a\n" actual_svg)
-      
       (call-with-input-file group1_svg
         (lambda (expected)
           (call-with-input-string
