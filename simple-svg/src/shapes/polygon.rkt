@@ -14,7 +14,7 @@
     
     (hash-set! properties_map 'format-def
                (lambda (index line)
-                 (format "    <polygon id=\"~a\" points=\"~a\" />"
+                 (format "    <polygon id=\"~a\" points=\"~a\" />\n"
                          index
                          (with-output-to-string
                            (lambda ()

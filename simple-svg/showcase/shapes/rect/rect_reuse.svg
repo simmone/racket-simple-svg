@@ -1,0 +1,18 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="190" height="190"
+    >
+  <defs>
+    <rect id="s1" width="50" height="50" />
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" x="10" y="10" fill="blue" />
+    <use xlink:href="#s1" x="70" y="70" fill="blue" />
+    <use xlink:href="#s1" x="130" y="130" fill="blue" />
+  </symbol>
+
+  <use xlink:href="#default" fill="none" />
+</svg>

@@ -69,7 +69,7 @@
                 (svg-use-shape red_dot dot_style #:at? '(170 . 85))
 
                 (svg-show-default))))])
-      
+
       (call-with-input-file arc_svg
         (lambda (expected)
           (call-with-input-string

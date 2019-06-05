@@ -11,6 +11,7 @@
 (define-runtime-path rect_y_svg "../../../showcase/shapes/rect/rect_y.svg")
 (define-runtime-path rect_radius_svg "../../../showcase/shapes/rect/rect_radius.svg")
 (define-runtime-path m_rect_svg "../../../showcase/shapes/rect/m_rect.svg")
+(define-runtime-path rect_reuse_svg "../../../showcase/shapes/rect/rect_reuse.svg")
 
 (define test-all
   (test-suite
@@ -103,6 +104,32 @@
                 (svg-show-default))))])
 
       (call-with-input-file m_rect_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
+
+   (test-case
+    "test-reuse-rect"
+
+    (let ([actual_svg
+           (svg-out
+            190 190
+            (lambda ()
+              (let (
+                    [rec (svg-def-rect 50 50)]
+                    [rec_sstyle (sstyle-new)])
+
+                (set-sstyle-fill! rec_sstyle "blue")
+
+                (svg-use-shape rec rec_sstyle #:at? '(10 . 10))
+                (svg-use-shape rec rec_sstyle #:at? '(70 . 70))
+                (svg-use-shape rec rec_sstyle #:at? '(130 . 130))
+
+                (svg-show-default))))])
+
+      (call-with-input-file rect_reuse_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg

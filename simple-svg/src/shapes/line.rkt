@@ -15,7 +15,7 @@
     
     (hash-set! properties_map 'format-def
                (lambda (index line)
-                 (format "    <line id=\"~a\" x1=\"~a\" y1=\"~a\" x2=\"~a\" y2=\"~a\" />"
+                 (format "    <line id=\"~a\" x1=\"~a\" y1=\"~a\" x2=\"~a\" y2=\"~a\" />\n"
                          index
                          (car (hash-ref line 'start_point))
                          (cdr (hash-ref line 'start_point))

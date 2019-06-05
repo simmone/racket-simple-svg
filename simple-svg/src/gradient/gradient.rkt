@@ -96,13 +96,10 @@
                          (printf "/>\n")
                          (loop (cdr stops))))
                      
-                     (printf "    </linearGradient>")
+                     (printf "    </linearGradient>\n")
                      ))))
     
-    (let ([shape_index ((*add-shape*) properties_map)])
-      ((*add-to-shape-def-list*) shape_index)
-      
-      shape_index)))
+    ((*add-shape*) properties_map)))
 
 (define (svg-def-radial-gradient
          stop_list
@@ -169,11 +166,7 @@
                          (printf "/>\n")
                          (loop (cdr stops))))
                      
-                     (printf "    </radialGradient>")
+                     (printf "    </radialGradient>\n")
                      ))))
     
-    (let ([shape_index ((*add-shape*) properties_map)])
-      ((*add-to-shape-def-list*) shape_index)
-      
-      shape_index)))
-
+    ((*add-shape*) properties_map)))

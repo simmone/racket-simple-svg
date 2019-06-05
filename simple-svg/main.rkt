@@ -27,6 +27,7 @@
                          #:viewBox? (or/c #f (list/c natural? natural? natural? natural?))
                          )
                         string?)]
+          [*debug_port* parameter?]
           [svg-def-group (-> string? procedure? void?)]
           [svg-use-shape (->* (string? sstyle/c) 
                               (

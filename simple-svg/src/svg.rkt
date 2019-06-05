@@ -22,7 +22,7 @@
                               void?)]
           [svg-show-default (-> void?)]
           [*add-shape* parameter?]
-          [*add-to-shape-def-list* parameter?]
+          [*debug_port* parameter?]
           ))
 
 (define *svg* (make-parameter #f))
@@ -30,6 +30,7 @@
 (define *group-index* (make-parameter #f))
 (define *add-shape* (make-parameter #f))
 (define *set-shapes-map* (make-parameter #f))
+(define *remove-shapes-map* (make-parameter #f))
 (define *add-group* (make-parameter #f))
 (define *add-to-show* (make-parameter #f))
 (define *groups_map* (make-parameter #f))
@@ -38,9 +39,6 @@
 (define *set-sstyles-map* (make-parameter #f))
 (define *current_group* (make-parameter #f))
 (define *debug_port* (make-parameter #f))
-(define *shape-def-list* (make-parameter #f))
-(define *add-to-shape-def-list* (make-parameter #f))
-(define *groups-list* (make-parameter #f))
 (define *show-list* (make-parameter #f))
 (define *viewBox* (make-parameter #f))
 (define *width* (make-parameter #f))
@@ -65,16 +63,14 @@
       [*debug_port* (current-output-port)]
       [*shape-index* (lambda () (set! shapes_count (add1 shapes_count)) (format "s~a" shapes_count))]
       [*group-index* (lambda () (set! groups_count (add1 groups_count)) (format "g~a" groups_count))]
-      [*shape-def-list* (lambda () shape_def_list)]
-      [*add-to-shape-def-list* (lambda (shape_index) (set! shape_def_list `(,@shape_def_list ,shape_index)))]
       [*set-shapes-map* (lambda (shape_index shape) (hash-set! shapes_map shape_index shape))]
+      [*remove-shapes-map* (lambda (shape_index shape) (hash-remove! shapes_map shape_index))]
       [*add-shape*
        (lambda (shape)
          (let ([shape_index ((*shape-index*))])
            ((*set-shapes-map*) shape_index shape)
            shape_index))]
       [*groups_map* groups_map]
-      [*groups-list* (lambda () groups_list)]
       [*shapes_map* shapes_map]
       [*sstyles_map* sstyles_map]
       [*set-sstyles-map* (lambda (_index _sstyle) (hash-set! sstyles_map _index _sstyle))]
@@ -119,6 +115,7 @@
          [new_shape_index shape_index]
          [new_shape shape]
          [new_at? at?])
+
     (cond
      [(eq? (hash-ref shape 'type) 'circle)
       (set! new_shape_index ((*shape-index*)))
@@ -138,7 +135,6 @@
         (hash-set! new_shape 'rx (car radius))
         (hash-set! new_shape 'ry (cdr radius)))])
 
-    ((*add-to-shape-def-list*) new_shape_index)
     ((*set-shapes-map*) new_shape_index new_shape)
     ((*set-sstyles-map*) new_shape_index _sstyle)
     (when (not hidden?)
@@ -161,13 +157,13 @@
       
   (printf "    >\n")
 
-  (when (not (null? ((*shape-def-list*))))
+  (when (not (= (hash-count (*shapes_map*)) 0))
     (printf "  <defs>\n")
-    (let loop ([defs ((*shape-def-list*))])
+    (let loop-def ([defs (sort (hash-keys (*shapes_map*)) string<?)])
       (when (not (null? defs))
         (let ([shape (hash-ref (*shapes_map*) (car defs))])
-          (printf "~a\n" ((hash-ref shape 'format-def) (car defs) shape)))
-        (loop (cdr defs))))
+          (printf "~a" ((hash-ref shape 'format-def) (car defs) shape)))
+        (loop-def (cdr defs))))
     (printf "  </defs>\n\n"))
   
   (let loop-group ([groups (sort (hash-keys (*groups_map*)) string<?)])

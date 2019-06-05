@@ -23,7 +23,7 @@
     
     (hash-set! properties_map 'format-def
                (lambda (index rect)
-                 (format "    <rect id=\"~a\" ~a/>"
+                 (format "    <rect id=\"~a\" ~a/>\n"
                          index
                          (with-output-to-string
                            (lambda ()

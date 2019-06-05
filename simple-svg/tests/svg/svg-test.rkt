@@ -22,7 +22,7 @@
             20 20
             (lambda ()
               (void)))])
-
+      
       (call-with-input-file empty_svg
         (lambda (expected)
           (call-with-input-string

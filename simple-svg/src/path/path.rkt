@@ -35,6 +35,6 @@
                                (printf "             ~a\n" (car _defs))
                                (loop (cdr _defs)))))
                          (lambda ()
-                           (printf "            \"/>" )))))))
+                           (printf "            \"/>\n" )))))))
 
     ((*add-shape*) properties_map)))

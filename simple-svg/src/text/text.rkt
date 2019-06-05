@@ -79,7 +79,7 @@
 
     (hash-set! properties_map 'format-def
                (lambda (index text)
-                 (format "    <text id=\"~a\" ~a>~a</text>"
+                 (format "    <text id=\"~a\" ~a>~a</text>\n"
                          index
                          (with-output-to-string
                            (lambda ()

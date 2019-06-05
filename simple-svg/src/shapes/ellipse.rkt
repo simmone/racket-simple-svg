@@ -14,12 +14,14 @@
     
     (hash-set! properties_map 'format-def
                (lambda (index ellipse)
-                 (format "    <ellipse id=\"~a\" cx=\"~a\" cy=\"~a\" rx=\"~a\" ry=\"~a\" />"
-                         index
-                         (hash-ref ellipse 'cx)
-                         (hash-ref ellipse 'cy)
-                         (car (hash-ref ellipse 'radius))
-                         (cdr (hash-ref ellipse 'radius)))))
+                 (if (hash-has-key? ellipse 'cx)
+                     (format "    <ellipse id=\"~a\" cx=\"~a\" cy=\"~a\" rx=\"~a\" ry=\"~a\" />\n"
+                             index
+                             (hash-ref ellipse 'cx)
+                             (hash-ref ellipse 'cy)
+                             (car (hash-ref ellipse 'radius))
+                             (cdr (hash-ref ellipse 'radius)))
+                     "")))
 
     ((*add-shape*) properties_map)))
 
