@@ -25,7 +25,7 @@
             (lambda ()
               (let ([text (svg-def-text "城春草木深" #:font-size? 50)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#ED6E46")
+                (sstyle-set! _sstyle 'fill "#ED6E46")
                 (svg-use-shape text _sstyle #:at? '(30 . 50))
                 (svg-show-default))))])
 
@@ -45,7 +45,7 @@
             (lambda ()
               (let ([text (svg-def-text "城春草木深" #:font-size? 50 #:rotate? '(10 20 30 40 50) #:textLength? 300)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#ED6E46")
+                (sstyle-set! _sstyle 'fill "#ED6E46")
                 (svg-use-shape text _sstyle #:at? '(30 . 60))
                 (svg-show-default))))])
 
@@ -68,7 +68,7 @@
                     [text2 (svg-def-text "国破山河在" #:font-size? 50 #:text-decoration? 'underline)]
                     [text3 (svg-def-text "国破山河在" #:font-size? 50 #:text-decoration? 'line-through)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#ED6E46")
+                (sstyle-set! _sstyle 'fill "#ED6E46")
                 (svg-use-shape text1 _sstyle #:at? '(30 . 60))
                 (svg-use-shape text2 _sstyle #:at? '(30 . 160))
                 (svg-use-shape text3 _sstyle #:at? '(30 . 260))
@@ -100,7 +100,7 @@
                                     #:path? path
                                     #:path-startOffset? 5)]
                      [text_sstyle (sstyle-new)])
-                (set-sstyle-fill! text_sstyle "#ED6E46")
+                (sstyle-set! text_sstyle 'fill "#ED6E46")
                 (svg-use-shape path path_sstyle #:hidden? #t)
                 (svg-use-shape text text_sstyle)
                 (svg-show-default))))])

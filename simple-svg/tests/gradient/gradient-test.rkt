@@ -29,7 +29,7 @@
                        (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
                        ))]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill-gradient! _sstyle gradient)
+                (sstyle-set! _sstyle 'fill-gradient gradient)
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
       
@@ -55,7 +55,7 @@
                        (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
                        ))]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill-gradient! _sstyle gradient)
+                (sstyle-set! _sstyle 'fill-gradient gradient)
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
       

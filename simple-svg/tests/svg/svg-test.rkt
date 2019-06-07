@@ -56,7 +56,7 @@
             (lambda ()
               (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
+                (sstyle-set! _sstyle 'fill "#BBC42A")
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
       

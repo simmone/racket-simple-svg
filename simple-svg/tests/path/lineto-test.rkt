@@ -31,9 +31,9 @@
                         (svg-path-close)))]
                     [sstyle_path (sstyle-new)])
 
-                (set-sstyle-stroke-width! sstyle_path 5)
-                (set-sstyle-stroke! sstyle_path "#7AA20D")
-                (set-sstyle-stroke-linejoin! sstyle_path 'round)
+                (sstyle-set! sstyle_path 'stroke-width 5)
+                (sstyle-set! sstyle_path 'stroke "#7AA20D")
+                (sstyle-set! sstyle_path 'stroke-linejoin 'round)
                 (svg-use-shape path sstyle_path)
 
                 (svg-show-default))))])
