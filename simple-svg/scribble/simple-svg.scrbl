@@ -1,9 +1,9 @@
 #lang scribble/manual
 
-@(require "../main.rkt")
+@(require simple-svg)
 
 @(require (for-label racket))
-@(require (for-label "../main.rkt"))
+@(require (for-label simple-svg))
 
 @title{Simple-Svg: Scalable Vector Graphics}
 
@@ -138,7 +138,7 @@ sstyle used in svg-use-shape and svg-show-group.
      [scale (or/c #f natural? (cons/c natural? natural?))]
      [skewX (or/c #f natural?)]
      [skewY (or/c #f natural?)]
-     [fil-gradient (or/c #f string?)]
+     [fill-gradient (or/c #f string?)]
      )]{
 }
 
