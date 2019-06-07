@@ -22,7 +22,8 @@
             (lambda ()
               (let ([ellipse (svg-def-ellipse '(100 . 50))]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#7AA20D")
+                
+                (sstyle-set! _sstyle 'fill "#7AA20D")
                 (svg-use-shape ellipse _sstyle #:at? '(100 . 50))
                 (svg-show-default))))])
       

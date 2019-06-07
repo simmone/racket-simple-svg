@@ -27,8 +27,8 @@
                     [line4 (svg-def-line '(30 . 0) '(0 . 30))]
                     [_sstyle (sstyle-new)]
                     [group_sstyle (sstyle-new)])
-                (set-sstyle-stroke-width! _sstyle 5)
-                (set-sstyle-stroke! _sstyle "#765373")
+                (sstyle-set! _sstyle 'stroke-width 5)
+                (sstyle-set! _sstyle 'stroke "#765373")
                 (svg-def-group
                  "pattern"
                  (lambda ()

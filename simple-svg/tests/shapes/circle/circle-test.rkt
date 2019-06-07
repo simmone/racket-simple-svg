@@ -23,7 +23,8 @@
             (lambda ()
               (let ([circle (svg-def-circle 50)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
+
+                (sstyle-set! _sstyle 'fill "#BBC42A")
                 (svg-use-shape circle _sstyle #:at? '(50 . 50))
                 (svg-show-default))))])
       
@@ -47,16 +48,16 @@
                     [blue_sstyle (sstyle-new)]
                     [green_sstyle (sstyle-new)])
                 
-                (set-sstyle-fill! red_sstyle "red")
+                (sstyle-set! red_sstyle 'fill "red")
                 (svg-use-shape circle red_sstyle #:at? '(50 . 50))
 
-                (set-sstyle-fill! yellow_sstyle "yellow")
+                (sstyle-set! yellow_sstyle 'fill "yellow")
                 (svg-use-shape circle yellow_sstyle #:at? '(150 . 50))
 
-                (set-sstyle-fill! blue_sstyle "blue")
+                (sstyle-set! blue_sstyle 'fill "blue")
                 (svg-use-shape circle blue_sstyle #:at? '(50 . 150))
 
-                (set-sstyle-fill! green_sstyle "green")
+                (sstyle-set! green_sstyle 'fill "green")
                 (svg-use-shape circle green_sstyle #:at? '(150 . 150))
 
                 (svg-show-default))))])

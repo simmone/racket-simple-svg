@@ -23,9 +23,9 @@
             (lambda ()
               (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
-                (set-sstyle-translate! _sstyle '(75 . 5))
-                (set-sstyle-rotate! _sstyle 45)
+                (sstyle-set! _sstyle 'fill "#BBC42A")
+                (sstyle-set! _sstyle 'translate '(75 . 5))
+                (sstyle-set! _sstyle 'rotate 45)
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
 
@@ -45,9 +45,9 @@
             (lambda ()
               (let ([rec (svg-def-circle 50)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
-                (set-sstyle-scale! _sstyle 2)
-                (set-sstyle-skewX! _sstyle 20)
+                (sstyle-set! _sstyle 'fill "#BBC42A")
+                (sstyle-set! _sstyle 'scale 2)
+                (sstyle-set! _sstyle 'skewX 20)
                 (svg-use-shape rec _sstyle #:at? '(40 . 60))
                 (svg-show-default))))])
 

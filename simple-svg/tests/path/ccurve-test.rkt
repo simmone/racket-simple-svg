@@ -32,11 +32,11 @@
                     [red_dot (svg-def-circle 5)]
                     [dot_style (sstyle-new)])
 
-                (set-sstyle-stroke! path_style "#333333")
-                (set-sstyle-stroke-width! path_style 3)
+                (sstyle-set! path_style 'stroke "#333333")
+                (sstyle-set! path_style 'stroke-width 3)
                 (svg-use-shape path path_style)
 
-                (set-sstyle-fill! dot_style "red")
+                (sstyle-set! dot_style 'fill "red")
                 (svg-use-shape red_dot dot_style #:at? '(10 . 60))
                 (svg-use-shape red_dot dot_style #:at? '(30 . 15))
                 (svg-use-shape red_dot dot_style #:at? '(80 . 15))
@@ -72,11 +72,11 @@
                     [red_dot (svg-def-circle 5)]
                     [dot_style (sstyle-new)])
 
-                (set-sstyle-stroke! path_style "#333333")
-                (set-sstyle-stroke-width! path_style 3)
+                (sstyle-set! path_style 'stroke "#333333")
+                (sstyle-set! path_style 'stroke-width 3)
                 (svg-use-shape path path_style)
 
-                (set-sstyle-fill! dot_style "red")
+                (sstyle-set! dot_style 'fill "red")
                 (svg-use-shape red_dot dot_style #:at? '(10 . 60))
                 (svg-use-shape red_dot dot_style #:at? '(30 . 15))
                 (svg-use-shape red_dot dot_style #:at? '(80 . 15))

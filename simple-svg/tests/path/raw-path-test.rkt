@@ -32,10 +32,10 @@
            c0.298-0.021,0.617-0.021,0.914-0.021C240.831,74.29,248.761,82.22,248.761,92z")))]
                     [sstyle_path (sstyle-new)])
 
-                (set-sstyle-fill! sstyle_path "#7AA20D")
-                (set-sstyle-stroke-width! sstyle_path 9)
-                (set-sstyle-stroke! sstyle_path "#7AA20D")
-                (set-sstyle-stroke-linejoin! sstyle_path 'round)
+                (sstyle-set! sstyle_path 'fill "#7AA20D")
+                (sstyle-set! sstyle_path 'stroke-width 9)
+                (sstyle-set! sstyle_path 'stroke "#7AA20D")
+                (sstyle-set! sstyle_path 'stroke-linejoin 'round)
                 
                 (svg-use-shape path sstyle_path)
 
