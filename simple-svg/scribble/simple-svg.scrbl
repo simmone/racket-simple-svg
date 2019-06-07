@@ -95,7 +95,7 @@ define shape first, then define group, reuse shape and style in group(s), show g
     (let ([rec (svg-def-rect 100 100)]
           [_sstyle (sstyle-new)])
 
-      (set-sstyle-fill! _sstyle "#BBC42A")
+      (sstyle-set! _sstyle 'fill "#BBC42A")
       (svg-use-shape rec _sstyle)
       (svg-show-default))))
 }
@@ -109,7 +109,7 @@ generated svg file:
     (let ([rec (svg-def-rect 100 100)]
           [_sstyle (sstyle-new)])
 
-      (set-sstyle-fill! _sstyle "#BBC42A")
+      (sstyle-set! _sstyle 'fill "#BBC42A")
       (svg-use-shape rec _sstyle)
       (svg-show-default))))
 ]
@@ -120,7 +120,7 @@ generated svg file:
 
 each shape and group can have multiple styles: stroke, fill etc.
 
-sstyle is a struct, it represent a shape or group's style.
+sstyle is a struct, use sstyle-get and sstyle-set! to use it.
 
 svg-use-shape and svg-show-group should use the sstyle.
 
@@ -154,6 +154,21 @@ svg-use-shape and svg-show-group should use the sstyle.
   init a empty svg style.                    
 }
 
+@defproc[(sstyle-get
+           [sstyle sstyle/c]
+           [key symbol?]
+         ) sstyle/c]{
+  get a sstyle property.
+}
+
+@defproc[(sstyle-set!
+           [sstyle sstyle/c]
+           [key symbol?]
+           [val any/c]
+         ) void?]{
+  set a sstyle property.
+}
+
 @subsection{Rectangle}
 
 define a rectangle.
@@ -174,11 +189,11 @@ define a rectangle.
 @codeblock{
 (let ([rec (svg-def-rect 100 100)]
       [_sstyle (sstyle-new)])
-  (set-sstyle-fill! _sstyle "#BBC42A")
+
+  (sstyle-set! _sstyle 'fill "#BBC42A")
   (svg-use-shape rec _sstyle)
   (svg-show-default))
 }
-
 @image{showcase/shapes/rect/rect.svg}
 
 @subsubsection{rect with start point(no padding)}
@@ -187,24 +202,13 @@ define a rectangle.
 (let ([rec (svg-def-rect 100 100)]
       [_sstyle (sstyle-new)])
 
-  (set-sstyle-fill! _sstyle "#BBC42A")
+  (sstyle-set! _sstyle 'fill "#BBC42A")
   (svg-use-shape rec _sstyle #:at? '(50 . 50))
   (svg-show-default))
 }
-
 @image{showcase/shapes/rect/rect_y.svg}
 
 @subsubsection{rect with radius}
-
-@codeblock{
-(let ([rec (svg-def-rect 100 100 #:radius? '(5 . 10))]
-      [_sstyle (sstyle-new)])
-  (set-sstyle-fill! _sstyle "#BBC42A")
-  (svg-use-shape rec _sstyle)
-  (svg-show-default))
-}
-
-@image{showcase/shapes/rect/rect_radius.svg}
 
 @subsubsection{multiple rect}
 
@@ -217,16 +221,15 @@ define a rectangle.
       [red_rec (svg-def-rect 50 50)]
       [_red_sstyle (sstyle-new)])
 
-  (set-sstyle-fill! _blue_sstyle "blue")
-  (svg-use-shape blue_rec _blue_sstyle)
+    (sstyle-set! _blue_sstyle 'fill "blue")
+    (svg-use-shape blue_rec _blue_sstyle)
 
-  (set-sstyle-fill! _green_sstyle "green")
-  (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
+    (sstyle-set! _green_sstyle 'fill "green")
+    (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
 
-  (set-sstyle-fill! _red_sstyle "red")
-  (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
+    (sstyle-set! _red_sstyle 'fill "red")
+    (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
 
   (svg-show-default))
 }
-
 @image{showcase/shapes/rect/m_rect.svg}

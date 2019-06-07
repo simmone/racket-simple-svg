@@ -26,7 +26,7 @@
             (lambda ()
               (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
+                (sstyle-set! _sstyle 'fill "#BBC42A")
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
       
@@ -46,7 +46,7 @@
             (lambda ()
               (let ([rec (svg-def-rect 100 100)]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
+                (sstyle-set! _sstyle 'fill "#BBC42A")
                 (svg-use-shape rec _sstyle #:at? '(50 . 50))
                 (svg-show-default))))])
 
@@ -66,7 +66,7 @@
             (lambda ()
               (let ([rec (svg-def-rect 100 100 #:radius? '(5 . 10))]
                     [_sstyle (sstyle-new)])
-                (set-sstyle-fill! _sstyle "#BBC42A")
+                (sstyle-set! _sstyle 'fill "#BBC42A")
                 (svg-use-shape rec _sstyle)
                 (svg-show-default))))])
 
@@ -92,13 +92,13 @@
                     [red_rec (svg-def-rect 50 50)]
                     [_red_sstyle (sstyle-new)])
 
-                (set-sstyle-fill! _blue_sstyle "blue")
+                (sstyle-set! _blue_sstyle 'fill "blue")
                 (svg-use-shape blue_rec _blue_sstyle)
 
-                (set-sstyle-fill! _green_sstyle "green")
+                (sstyle-set! _green_sstyle 'fill "green")
                 (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
 
-                (set-sstyle-fill! _red_sstyle "red")
+                (sstyle-set! _red_sstyle 'fill "red")
                 (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
 
                 (svg-show-default))))])
@@ -121,7 +121,7 @@
                     [rec (svg-def-rect 50 50)]
                     [rec_sstyle (sstyle-new)])
 
-                (set-sstyle-fill! rec_sstyle "blue")
+                (sstyle-set! rec_sstyle 'fill "blue")
 
                 (svg-use-shape rec rec_sstyle #:at? '(10 . 10))
                 (svg-use-shape rec rec_sstyle #:at? '(70 . 70))

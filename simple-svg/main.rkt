@@ -19,8 +19,6 @@
 (require "src/text/text.rkt")
 (require "src/gradient/gradient.rkt")
 
-(provide (struct-out sstyle))
-
 (provide (contract-out
           [svg-out (->* (natural? natural? procedure?)
                         (
@@ -44,6 +42,8 @@
           [sstyle-new (-> sstyle/c)]
           [sstyle-format (-> sstyle/c string?)]
           [sstyle-clone (-> sstyle/c sstyle/c)]
+          [sstyle-set! (-> sstyle/c symbol? any/c void?)]
+          [sstyle-get (-> sstyle/c symbol? any/c)]
           [svg-def-rect (->* 
                  (natural? natural?)
                  (

@@ -1,12 +1,12 @@
 #lang racket
 
-(provide (struct-out sstyle))
- 
 (provide (contract-out
           [sstyle/c contract?]
           [sstyle-new (-> sstyle/c)]
           [sstyle-format (-> sstyle/c string?)]
           [sstyle-clone (-> sstyle/c sstyle/c)]
+          [sstyle-set! (-> sstyle/c symbol? any/c void?)]
+          [sstyle-get (-> sstyle/c symbol? any/c)]
           ))
 
 (struct sstyle (
@@ -48,6 +48,46 @@
      [skewY (or/c #f natural?)]
      [fill-gradient (or/c #f string?)]
     ))
+
+(define (sstyle-set! _sstyle key value)
+  (cond
+   [(eq? key 'fill) (set-sstyle-fill! _sstyle value)]
+   [(eq? key 'fill-rule) (set-sstyle-fill-rule! _sstyle value)]
+   [(eq? key 'fill-opacity) (set-sstyle-fill-opacity! _sstyle value)]
+   [(eq? key 'stroke) (set-sstyle-stroke! _sstyle value)]
+   [(eq? key 'stroke-width) (set-sstyle-stroke-width! _sstyle value)]
+   [(eq? key 'stroke-linecap) (set-sstyle-stroke-linecap! _sstyle value)]
+   [(eq? key 'stroke-linejoin) (set-sstyle-stroke-linejoin! _sstyle value)]
+   [(eq? key 'stroke-miterlimit) (set-sstyle-stroke-miterlimit! _sstyle value)]
+   [(eq? key 'stroke-dasharray) (set-sstyle-stroke-dasharray! _sstyle value)]
+   [(eq? key 'stroke-dashoffset) (set-sstyle-stroke-dashoffset! _sstyle value)]
+   [(eq? key 'translate) (set-sstyle-translate! _sstyle value)]
+   [(eq? key 'rotate) (set-sstyle-rotate! _sstyle value)]
+   [(eq? key 'scale) (set-sstyle-scale! _sstyle value)]
+   [(eq? key 'skewX) (set-sstyle-skewX! _sstyle value)]
+   [(eq? key 'skewY) (set-sstyle-skewY! _sstyle value)]
+   [(eq? key 'fill-gradient) (set-sstyle-fill-gradient! _sstyle value)]
+   ))
+
+(define (sstyle-get _sstyle key)
+  (cond
+   [(eq? key 'fill) (sstyle-fill _sstyle)]
+   [(eq? key 'fill-rule) (sstyle-fill-rule _sstyle)]
+   [(eq? key 'fill-opacity) (sstyle-fill-opacity _sstyle)]
+   [(eq? key 'stroke) (sstyle-stroke _sstyle)]
+   [(eq? key 'stroke-width) (sstyle-stroke-width _sstyle)]
+   [(eq? key 'stroke-linecap) (sstyle-stroke-linecap _sstyle)]
+   [(eq? key 'stroke-linejoin) (sstyle-stroke-linejoin _sstyle)]
+   [(eq? key 'stroke-miterlimit) (sstyle-stroke-miterlimit _sstyle)]
+   [(eq? key 'stroke-dasharray) (sstyle-stroke-dasharray _sstyle)]
+   [(eq? key 'stroke-dashoffset) (sstyle-stroke-dashoffset _sstyle)]
+   [(eq? key 'translate) (sstyle-translate _sstyle)]
+   [(eq? key 'rotate) (sstyle-rotate _sstyle)]
+   [(eq? key 'scale) (sstyle-scale _sstyle)]
+   [(eq? key 'skewX) (sstyle-skewX _sstyle)]
+   [(eq? key 'skewY) (sstyle-skewY _sstyle)]
+   [(eq? key 'fill-gradient) (sstyle-fill-gradient _sstyle)]
+   ))
 
 (define (sstyle-clone sv)
   (sstyle
