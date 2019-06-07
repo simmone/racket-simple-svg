@@ -1,9 +1,9 @@
 #lang scribble/manual
 
-@(require "../main.rkt")
+@(require simple-svg)
 
 @(require (for-label racket))
-@(require (for-label "../src/lib/sstyle.rkt"))
+@(require (for-label simple-svg))
 
 @title{Svg Style}
 
@@ -12,6 +12,8 @@ each shape and group can have multiple styles: stroke, fill etc.
 sstyle is a struct, it represent a shape or group's style.
 
 svg-use-shape and svg-show-group should use the sstyle.
+
+@defmodule[simple-svg]
 
 @defstruct*[sstyle (
      [fill string?]

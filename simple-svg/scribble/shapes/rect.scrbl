@@ -1,13 +1,15 @@
 #lang scribble/manual
 
-@(require "../../main.rkt")
+@(require simple-svg)
 
 @(require (for-label racket))
-@(require (for-label "../../src/shapes/rect.rkt"))
+@(require (for-label simple-svg))
 
 @title{Rectangle}
 
 define a rectangle.
+
+@defmodule[simple-svg]
 
 @defproc[(svg-def-rect
           [width natural?]
