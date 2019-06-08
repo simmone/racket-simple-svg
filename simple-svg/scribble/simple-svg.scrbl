@@ -44,4 +44,3 @@ raco pkg install simple-svg
 
 @defmodule[simple-svg]
 @include-section["gradient/gradient.scrbl"]
-
