@@ -41,18 +41,6 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
 ![ScreenShot](simple-svg/showcase/example/recursive.svg)
 
 # Basic Usage
-```racket
-(svg-out
-  100 100
-  (lambda ()
-    (let ([rec (svg-def-rect 100 100)]
-          [_sstyle (sstyle-new)])
-
-      (set-sstyle-fill! _sstyle "#BBC42A")
-      (svg-use-shape rec _sstyle)
-      (svg-show-default))))
-```
-![ScreenShot](simple-svg/showcase/shapes/rect/rect.svg)
 
 ## svg-out
 ```racket
@@ -116,6 +104,19 @@ A SVG(Scalable Vector Graphics) generate tool for Racket
   7. svg-show-default shows default group at '(0 . 0).
 
   define shape first, then define group, reuse shape and style in group(s), show group(s) with style in canvas.
+
+```racket
+(svg-out
+  100 100
+  (lambda ()
+    (let ([rec (svg-def-rect 100 100)]
+          [_sstyle (sstyle-new)])
+
+      (set-sstyle-fill! _sstyle "#BBC42A")
+      (svg-use-shape rec _sstyle)
+      (svg-show-default))))
+```
+![ScreenShot](simple-svg/showcase/shapes/rect/rect.svg)
 
 ```racket
 (let (
