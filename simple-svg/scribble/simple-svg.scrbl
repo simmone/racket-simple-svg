@@ -6,6 +6,8 @@
 
 simple-svg package is a simple tool to write svg.
 
+thanks to Joni's tutorial: @hyperlink["http://svgpocketguide.com/"]{"Svg Pocket Guide"}.
+
 @table-of-contents[]
 
 @section[#:tag "install"]{Install}

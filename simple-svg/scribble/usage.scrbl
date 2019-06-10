@@ -7,7 +7,7 @@
 
 @title{Usage}
 
-@defmodule[simple-svg #:link-target? #f]
+@defmodule[simple-svg]
 
 @section{Example: Recursive Circle}
 

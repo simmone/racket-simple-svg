@@ -3,6 +3,8 @@
 A SVG(Scalable Vector Graphics) generate tool for Racket
 ==================
 
+thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
+
 # Install
     raco pkg install simple-svg
 
