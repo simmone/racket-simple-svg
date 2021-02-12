@@ -9,3 +9,5 @@
                "racket-doc"
                "scribble-lib"
                ))
+
+(define test-omit-paths '("info.rkt"))
