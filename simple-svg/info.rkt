@@ -3,6 +3,6 @@
   '(("scribble/simple-svg.scrbl" (multi-page))))
 
 (define compile-omit-paths '("tests" "refs"))
-(define test-includes-paths '("tests"))
+(define test-omit-paths '("src" "main.rkt" "info.rkt" "scribble" "refs" "showcase"))
 
 
