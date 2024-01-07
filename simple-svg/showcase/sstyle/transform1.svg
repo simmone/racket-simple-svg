@@ -12,5 +12,5 @@
     <use xlink:href="#s1" fill="#BBC42A" transform="translate(75 5) rotate(45) "/>
   </symbol>
 
-  <use xlink:href="#default" fill="none" />
+  <use xlink:href="#default" />
 </svg>

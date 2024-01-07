@@ -33,7 +33,7 @@
                                #:hidden? boolean?
                               )
                               void?)]
-          [svg-show-group (->* (string? sstyle/c)
+          [svg-show-group (->* (string?)
                               (
                                #:at? (cons/c natural? natural?)
                               )

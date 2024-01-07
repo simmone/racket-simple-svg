@@ -15,7 +15,7 @@
                               )
                               void?)]
           [svg-def-group (-> string? procedure? void?)]
-          [svg-show-group (->* (string? sstyle/c)
+          [svg-show-group (->* (string?)
                               (
                                #:at? (cons/c natural? natural?)
                               )
@@ -81,8 +81,7 @@
                     `(,@(hash-ref groups_map (*current_group*) '())
                       ,(cons _index at?))))]
       [*add-to-show*
-       (lambda (group_index _sstyle at?)
-         ((*set-sstyles-map*) group_index _sstyle)
+       (lambda (group_index at?)
          (set! show_list `(,@show_list ,(cons group_index at?))))]
       [*show-list* (lambda () show_list)]
       [*current_group* "default"]
@@ -142,11 +141,10 @@
     ))
 
 (define (svg-show-default)
-  (svg-show-group "default" (sstyle-new)))
+  (svg-show-group "default"))
 
-(define (svg-show-group group_index sstyle
-                        #:at? [at? #f])
-  ((*add-to-show*) group_index sstyle at?))
+(define (svg-show-group group_index #:at? [at? #f])
+  ((*add-to-show*) group_index at?))
 
 (define (flush-data)
   (printf "    width=\"~a\" height=\"~a\"\n" (*width*) (*height*))
@@ -165,7 +163,7 @@
           (printf "~a" ((hash-ref shape 'format-def) (car defs) shape)))
         (loop-def (cdr defs))))
     (printf "  </defs>\n\n"))
-  
+
   (let loop-group ([groups (sort (hash-keys (*groups_map*)) string<?)])
     (when (not (null? groups))
           (printf "  <symbol id=\"~a\">\n" (car groups))
@@ -179,8 +177,9 @@
               
                     (when shape_at?
                           (printf "x=\"~a\" y=\"~a\" " (car shape_at?) (cdr shape_at?)))
-              
-                    (printf "~a/>\n" (sstyle-format _sstyle)))
+
+                    (printf "~a/>\n" (sstyle-format _sstyle))
+                    )
                   (loop-shape (cdr shapes))))
           (printf "  </symbol>\n\n")
           (loop-group (cdr groups))))
@@ -188,12 +187,11 @@
   (let loop-group ([groups ((*show-list*))])
     (when (not (null? groups))
       (let* ([group_index (caar groups)]
-             [group_at? (cdar groups)]
-             [_sstyle (hash-ref (*sstyles_map*) group_index)])
+             [group_at? (cdar groups)])
         (printf "  <use xlink:href=\"#~a\" " group_index)
         
         (when group_at?
               (printf "x=\"~a\" y=\"~a\" " (car group_at?) (cdr group_at?)))
-
-        (printf "~a/>\n" (sstyle-format _sstyle)))
+        
+        (printf "/>\n"))
       (loop-group (cdr groups)))))

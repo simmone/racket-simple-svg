@@ -20,5 +20,5 @@
     <use xlink:href="#s1" fill="#7AA20D" stroke-width="9" stroke="#7AA20D" stroke-linejoin="round" />
   </symbol>
 
-  <use xlink:href="#default" fill="none" />
+  <use xlink:href="#default" />
 </svg>

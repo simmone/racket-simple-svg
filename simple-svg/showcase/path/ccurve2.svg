@@ -31,5 +31,5 @@
     <use xlink:href="#s9" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" fill="none" />
+  <use xlink:href="#default" />
 </svg>

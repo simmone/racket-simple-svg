@@ -14,5 +14,5 @@
     <use xlink:href="#s1" x="130" y="130" fill="blue" />
   </symbol>
 
-  <use xlink:href="#default" fill="none" />
+  <use xlink:href="#default" />
 </svg>

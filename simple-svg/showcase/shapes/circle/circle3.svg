@@ -18,5 +18,5 @@
     <use xlink:href="#s5" fill="green" />
   </symbol>
 
-  <use xlink:href="#default" fill="none" />
+  <use xlink:href="#default" />
 </svg>
