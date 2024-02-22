@@ -10,8 +10,31 @@ thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
 
 # ShowCase-1: Recursive circle
 
-https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/example/recursive.rkt
+```racket
+(let ([canvas_size 400])
+  (with-output-to-file
+      "recursive.svg" #:exists 'replace
+      (lambda ()
+        (printf "~a\n"
+                (svg-out
+                 canvas_size canvas_size
+                 (lambda ()
+                   (let ([_sstyle (sstyle-new)])
+                     (set-SSTYLE-stroke! _sstyle "red")
+                     (set-SSTYLE-stroke-width! _sstyle 1)
 
+                     (letrec ([recur-circle 
+                               (lambda (x y radius)
+                                 (let ([circle_id (svg-def-shape (new-circle radius))])
+                                   (svg-place-widget circle_id #:style _sstyle #:at (cons x y)))
+
+                                 (when (> radius 8)
+                                   (recur-circle (+ x radius) y (/ radius 2))
+                                   (recur-circle (- x radius) y (/ radius 2))
+                                   (recur-circle x (+ y radius) (/ radius 2))
+                                   (recur-circle x (- y radius) (/ radius 2))))])
+                       (recur-circle 200 200 100)))))))))
+```
 ![ScreenShot](simple-svg/showcase/example/recursive.svg)
 
 # ShowCase-2: Recursive fern (Thanks to the author: Matteo d'Addio matteo.daddio@live.it)
@@ -20,7 +43,7 @@ https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/exa
 
 ![ScreenShot](simple-svg/showcase/example/fern.svg)
 
-# Basic Step
+# Steps to use
 
 1. use svg-out to define a canvas and a lambda to define all the things, at the end, output complete svg string.
 
@@ -47,7 +70,7 @@ https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/exa
      (svg-place-widget rec_id #:style _sstyle #:at '(50 . 50)))))
 ```
 
-![ScreenShot](simple-svg/showcase/example/fern.svg)
+![ScreenShot](simple-svg/showcase/shapes/rect/rect.svg)
 
 # Group Example
 
