@@ -5,31 +5,25 @@
     width="200" height="120"
     >
   <defs>
-    <path id="s1"
+    <path id="s2"
           d="
              M10,60
              c20,-45 70,-45 90,0
              c20,45 70,45 90,0
             "/>
-    <circle id="s3" cx="10" cy="60" r="5" />
-    <circle id="s4" cx="30" cy="15" r="5" />
-    <circle id="s5" cx="80" cy="15" r="5" />
-    <circle id="s6" cx="100" cy="60" r="5" />
-    <circle id="s7" cx="120" cy="105" r="5" />
-    <circle id="s8" cx="170" cy="105" r="5" />
-    <circle id="s9" cx="190" cy="60" r="5" />
+    <circle id="s3" r="5" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" fill="none" stroke-width="3" stroke="#333333" />
-    <use xlink:href="#s3" fill="red" />
-    <use xlink:href="#s4" fill="red" />
-    <use xlink:href="#s5" fill="red" />
-    <use xlink:href="#s6" fill="red" />
-    <use xlink:href="#s7" fill="red" />
-    <use xlink:href="#s8" fill="red" />
-    <use xlink:href="#s9" fill="red" />
+  <symbol id="g1">
+    <use xlink:href="#s2" fill="none" stroke-width="3" stroke="#333333" />
+    <use xlink:href="#s3" x="10" y="60" fill="red" />
+    <use xlink:href="#s3" x="30" y="15" fill="red" />
+    <use xlink:href="#s3" x="80" y="15" fill="red" />
+    <use xlink:href="#s3" x="100" y="60" fill="red" />
+    <use xlink:href="#s3" x="120" y="105" fill="red" />
+    <use xlink:href="#s3" x="170" y="105" fill="red" />
+    <use xlink:href="#s3" x="190" y="60" fill="red" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#g1" />
 </svg>

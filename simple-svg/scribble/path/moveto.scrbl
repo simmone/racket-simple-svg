@@ -1,13 +1,14 @@
 #lang scribble/manual
 
-@(require (for-label racket))
-@(require (for-label simple-svg))
-
 @title{svg-path-moveto/svg-path-moveto*}
 
-@defproc[(svg-path-moveto* [point (cons/c natural? natural?)])
-        void?]{
+@codeblock|{
+(svg-path-moveto (-> (cons/c number? number?) void?))
+(svg-path-moveto* (-> (cons/c number? number?) void?))
+}|
+
+  Move to new position.
+
   moveto* use absolute position.
 
   moveto use relative position.
-}

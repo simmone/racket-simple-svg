@@ -1,59 +1,32 @@
 #lang scribble/manual
 
-@(require (for-label racket))
-@(require (for-label simple-svg))
-
 @title{Svg Style}
-
-@defmodule[simple-svg #:link-target? #f]
 
 each shape and group can have multiple styles: stroke, fill etc.
 
-sstyle is a struct, use sstyle-new, sstyle-clone, sstyle-get and sstyle-set! to manage it.
+sstyle is a struct, use standard struct set-SSTYLE-*! to set styles.
 
-sstyle used in svg-use-shape and svg-show-group.
+each style's meaning please check the Joni's tutorial: @hyperlink["http://svgpocketguide.com/"]{"Svg Pocket Guide"}.
 
-@defstruct*[sstyle (
-     [fill string?]
-     [fill-rule (or/c #f 'nonzero 'evenodd 'inerit)]
-     [fill-opacity (or/c #f (between/c 0 1))]
-     [stroke (or/c #f string?)]
-     [stroke-width (or/c #f natural?)]
-     [stroke-linecap (or/c #f 'butt 'round 'square 'inherit)]
-     [stroke-linejoin (or/c #f 'miter 'round 'bevel)]
-     [stroke-miterlimit (or/c #f (>=/c 1))]
-     [stroke-dasharray (or/c #f string?)]
-     [stroke-dashoffset (or/c #f natural?)]
-     [translate (or/c #f (cons/c natural? natural?))]
-     [rotate (or/c #f integer?)]
-     [scale (or/c #f natural? (cons/c natural? natural?))]
-     [skewX (or/c #f natural?)]
-     [skewY (or/c #f natural?)]
-     [fil-gradient (or/c #f string?)]
-     )]{
-}
-
-@defproc[(sstyle-new) sstyle/c]{
-  init a empty svg style.                    
-}
-
-@defproc[(sstyle-clone
-           [sstyle sstyle/c]
-         ) sstyle/c]{
-  init a empty svg style.                    
-}
-
-@defproc[(sstyle-get
-           [sstyle sstyle/c]
-           [key symbol?]
-         ) sstyle/c]{
-  get a sstyle property.
-}
-
-@defproc[(sstyle-set!
-           [sstyle sstyle/c]
-           [key symbol?]
-           [val any/c]
-         ) void?]{
-  set a sstyle property.
-}
+@codeblock|{
+(struct
+  SSTYLE
+    (
+      [fill (or/c #f string?)]
+      [fill-rule (or/c #f 'nonzero 'evenodd 'inerit)]
+      [fill-opacity (or/c #f (between/c 0 1))]
+      [stroke (or/c #f string?)]
+      [stroke-width (or/c #f number?)]
+      [stroke-linecap (or/c #f 'butt 'round 'square 'inherit)]
+      [stroke-linejoin (or/c #f 'miter 'round 'bevel)]
+      [stroke-miterlimit (or/c #f (>=/c 1))]
+      [stroke-dasharray (or/c #f string?)]
+      [stroke-dashoffset (or/c #f number?)]
+      [translate (or/c #f (cons/c number? number?))]
+      [rotate (or/c #f number?)]
+      [scale (or/c #f number? (cons/c number? number?))]
+      [skewX (or/c #f number?)]
+      [skewY (or/c #f number?)]
+      [fill-gradient (or/c #f string?)]
+    ))
+}|

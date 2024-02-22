@@ -21,12 +21,10 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([circle (svg-def-circle 50)]
+              (let ([circle_id (svg-def-shape (new-circle 50))]
                     [_sstyle (sstyle-new)])
-
-                (sstyle-set! _sstyle 'fill "#BBC42A")
-                (svg-use-shape circle _sstyle #:at? '(50 . 50))
-                (svg-show-default))))])
+                (set-SSTYLE-fill! _sstyle "#BBC42A")
+                (svg-place-widget circle_id #:style _sstyle #:at '(50 . 50)))))])
       
       (call-with-input-file circle_svg
         (lambda (expected)
@@ -42,25 +40,23 @@
            (svg-out
             200 200
             (lambda ()
-              (let ([circle (svg-def-circle 50)]
+              (let ([circle_id (svg-def-shape (new-circle 50))]
                     [red_sstyle (sstyle-new)]
                     [yellow_sstyle (sstyle-new)]
                     [blue_sstyle (sstyle-new)]
                     [green_sstyle (sstyle-new)])
                 
-                (sstyle-set! red_sstyle 'fill "red")
-                (svg-use-shape circle red_sstyle #:at? '(50 . 50))
+                (set-SSTYLE-fill! red_sstyle "red")
+                (svg-place-widget circle_id #:style red_sstyle #:at '(50 . 50))
 
-                (sstyle-set! yellow_sstyle 'fill "yellow")
-                (svg-use-shape circle yellow_sstyle #:at? '(150 . 50))
+                (set-SSTYLE-fill! yellow_sstyle "yellow")
+                (svg-place-widget circle_id #:style yellow_sstyle #:at '(150 . 50))
 
-                (sstyle-set! blue_sstyle 'fill "blue")
-                (svg-use-shape circle blue_sstyle #:at? '(50 . 150))
+                (set-SSTYLE-fill! blue_sstyle "blue")
+                (svg-place-widget circle_id #:style blue_sstyle #:at '(50 . 150))
 
-                (sstyle-set! green_sstyle 'fill "green")
-                (svg-use-shape circle green_sstyle #:at? '(150 . 150))
-
-                (svg-show-default))))])
+                (set-SSTYLE-fill! green_sstyle "green")
+                (svg-place-widget circle_id #:style green_sstyle #:at '(150 . 150)))))])
       
       (call-with-input-file circle3_svg
         (lambda (expected)

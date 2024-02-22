@@ -5,16 +5,16 @@
     width="310" height="280"
     >
   <defs>
-    <text id="s1" font-size="50" text-decoration="overline" >国破山河在</text>
-    <text id="s2" font-size="50" text-decoration="underline" >国破山河在</text>
-    <text id="s3" font-size="50" text-decoration="line-through" >国破山河在</text>
+    <text id="s2" font-size="50" text-decoration="overline">国破山河在</text>
+    <text id="s3" font-size="50" text-decoration="underline">国破山河在</text>
+    <text id="s4" font-size="50" text-decoration="line-through">国破山河在</text>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="30" y="60" fill="#ED6E46" />
-    <use xlink:href="#s2" x="30" y="160" fill="#ED6E46" />
-    <use xlink:href="#s3" x="30" y="260" fill="#ED6E46" />
+  <symbol id="g1">
+    <use xlink:href="#s2" x="30" y="60" fill="#ED6E46" />
+    <use xlink:href="#s3" x="30" y="160" fill="#ED6E46" />
+    <use xlink:href="#s4" x="30" y="260" fill="#ED6E46" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#g1" />
 </svg>

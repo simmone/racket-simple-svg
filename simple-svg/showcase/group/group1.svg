@@ -5,21 +5,25 @@
     width="220" height="280"
     >
   <defs>
-    <line id="s1" x1="0" y1="0" x2="30" y2="30" />
-    <line id="s2" x1="0" y1="15" x2="30" y2="15" />
-    <line id="s3" x1="15" y1="0" x2="15" y2="30" />
-    <line id="s4" x1="30" y1="0" x2="0" y2="30" />
+    <line id="s2" x1="0" y1="0" x2="30" y2="30" />
+    <line id="s3" x1="0" y1="15" x2="30" y2="15" />
+    <line id="s4" x1="15" y1="0" x2="15" y2="30" />
+    <line id="s5" x1="30" y1="0" x2="0" y2="30" />
   </defs>
 
-  <symbol id="pattern">
-    <use xlink:href="#s1" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
+  <symbol id="g6">
     <use xlink:href="#s2" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
     <use xlink:href="#s3" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
     <use xlink:href="#s4" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
+    <use xlink:href="#s5" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
   </symbol>
 
-  <use xlink:href="#pattern" x="50" y="50" />
-  <use xlink:href="#pattern" x="100" y="100" />
-  <use xlink:href="#pattern" x="80" y="200" />
-  <use xlink:href="#pattern" x="150" y="100" />
+  <symbol id="g1">
+    <use xlink:href="#g6" x="50" y="50" />
+    <use xlink:href="#g6" x="100" y="100" />
+    <use xlink:href="#g6" x="80" y="200" />
+    <use xlink:href="#g6" x="150" y="100" />
+  </symbol>
+
+  <use xlink:href="#g1" />
 </svg>

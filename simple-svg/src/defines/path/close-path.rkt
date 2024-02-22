@@ -1,6 +1,5 @@
 #lang racket
 
-(require "../svg.rkt")
 (require "path.rkt")
 
 (provide (contract-out

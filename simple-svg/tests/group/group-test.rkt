@@ -22,27 +22,28 @@
             220 280
             (lambda ()
               (let (
-                    [line1 (svg-def-line '(0 . 0) '(30 . 30))]
-                    [line2 (svg-def-line '(0 . 15) '(30 . 15))]
-                    [line3 (svg-def-line '(15 . 0) '(15 . 30))]
-                    [line4 (svg-def-line '(30 . 0) '(0 . 30))]
+                    [line1_id (svg-def-shape (new-line '(0 . 0) '(30 . 30)))]
+                    [line2_id (svg-def-shape (new-line '(0 . 15) '(30 . 15)))]
+                    [line3_id (svg-def-shape (new-line '(15 . 0) '(15 . 30)))]
+                    [line4_id (svg-def-shape (new-line '(30 . 0) '(0 . 30)))]
                     [_sstyle (sstyle-new)]
                     [group_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'stroke-width 5)
-                (sstyle-set! _sstyle 'stroke "#765373")
-                (svg-def-group
-                 "pattern"
-                 (lambda ()
-                   (svg-use-shape line1 _sstyle #:at? '(5 . 5))
-                   (svg-use-shape line2 _sstyle #:at? '(5 . 5))
-                   (svg-use-shape line3 _sstyle #:at? '(5 . 5))
-                   (svg-use-shape line4 _sstyle #:at? '(5 . 5))))
-                (svg-show-group "pattern" #:at? '(50 . 50))
-                (svg-show-group "pattern" #:at? '(100 . 100))
-                (svg-show-group "pattern" #:at? '(80 . 200))
-                (svg-show-group "pattern" #:at? '(150 . 100))
-                )))])
 
+                (set-SSTYLE-stroke-width! _sstyle 5)
+                (set-SSTYLE-stroke! _sstyle "#765373")
+                (let ([pattern_id 
+                       (svg-def-group
+                        (lambda ()
+                          (svg-place-widget line1_id #:style _sstyle #:at '(5 . 5))
+                          (svg-place-widget line2_id #:style _sstyle #:at '(5 . 5))
+                          (svg-place-widget line3_id #:style _sstyle #:at '(5 . 5))
+                          (svg-place-widget line4_id #:style _sstyle #:at '(5 . 5))))])
+
+                  (svg-place-widget pattern_id #:at '(50 . 50))
+                  (svg-place-widget pattern_id #:at '(100 . 100))
+                  (svg-place-widget pattern_id #:at '(80 . 200))
+                  (svg-place-widget pattern_id #:at '(150 . 100))))))])
+      
       (call-with-input-file group1_svg
         (lambda (expected)
           (call-with-input-string
@@ -55,38 +56,44 @@
 
     (let ([actual_svg
            (svg-out
-            50 50
+            100 100
             (lambda ()
               (let (
-                    [rect (svg-def-rect 50 50)]
-                    [line1 (svg-def-line '(10 . 0) '(0 . 50))]
-                    [line2 (svg-def-line '(0 . 0) '(10 . 50))]
+                    [rect_id (svg-def-shape (new-rect 50 50))]
+                    [line1_id (svg-def-shape (new-line '(10 . 0) '(0 . 50)))]
+                    [line2_id (svg-def-shape (new-line '(0 . 0) '(10 . 50)))]
                     [rect_sstyle (sstyle-new)]
                     [group_sstyle (sstyle-new)]
+                    [cross_line_id #f]
+                    [pattern_id #f]
                     )
-                
-                (sstyle-set! rect_sstyle 'stroke-width 2)
-                (sstyle-set! rect_sstyle 'stroke "red")
-                (sstyle-set! rect_sstyle 'fill "orange")
-                (svg-def-group
-                 "rect"
-                 (lambda ()
-                   (svg-use-shape rect rect_sstyle #:at? '(0 . 0))))
 
-                (sstyle-set! group_sstyle 'stroke-width 1)
-                (sstyle-set! group_sstyle 'stroke "black")
-                (svg-def-group
-                 "pattern"
-                 (lambda ()
-                   (svg-use-shape line1 group_sstyle #:at? '(0 . 0))
-                   (svg-use-shape line2 group_sstyle #:at? '(0 . 0))))
+                (set-SSTYLE-stroke-width! group_sstyle 1)
+                (set-SSTYLE-stroke! group_sstyle "black")
+                (set! cross_line_id
+                      (svg-def-group
+                       (lambda ()
+                         (svg-place-widget line1_id #:style group_sstyle)
+                         (svg-place-widget line2_id #:style group_sstyle)
+                         )))
 
-                (svg-show-group "rect")
-                (svg-show-group "pattern" #:at? '(0 . 0))
-                (svg-show-group "pattern" #:at? '(10 . 0))
-                (svg-show-group "pattern" #:at? '(20 . 0))
-                (svg-show-group "pattern" #:at? '(30 . 0))
-                (svg-show-group "pattern" #:at? '(40 . 0))
+                (set-SSTYLE-stroke-width! rect_sstyle 2)
+                (set-SSTYLE-stroke! rect_sstyle "red")
+                (set-SSTYLE-fill! rect_sstyle "orange")
+                (set! pattern_id
+                      (svg-def-group
+                       (lambda ()
+                         (svg-place-widget rect_id #:style rect_sstyle)
+                         (svg-place-widget cross_line_id #:at '(0 . 0))
+                         (svg-place-widget cross_line_id #:at '(10 . 0))
+                         (svg-place-widget cross_line_id #:at '(20 . 0))
+                         (svg-place-widget cross_line_id #:at '(30 . 0))
+                         (svg-place-widget cross_line_id #:at '(40 . 0)))))
+
+                (svg-place-widget pattern_id #:at '(0 . 0))
+                (svg-place-widget pattern_id #:at '(50 . 0))
+                (svg-place-widget pattern_id #:at '(0 . 50))
+                (svg-place-widget pattern_id #:at '(50 . 50))
                 )))])
 
       (call-with-input-file group2_svg

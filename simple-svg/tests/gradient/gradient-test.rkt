@@ -7,8 +7,8 @@
 (require "../../main.rkt")
 
 (require racket/runtime-path)
-(define-runtime-path gradient1_svg "../../showcase/gradient/gradient1.svg")
-(define-runtime-path gradient2_svg "../../showcase/gradient/gradient2.svg")
+(define-runtime-path linear_gradient_svg "../../showcase/gradient/linear_gradient.svg")
+(define-runtime-path radial_gradient_svg "../../showcase/gradient/radial_gradient.svg")
 
 (define test-all
   (test-suite
@@ -21,19 +21,19 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-def-rect 100 100)]
-                    [gradient
-                     (svg-def-linear-gradient
-                      (list
-                       (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
-                       (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
-                       ))]
+              (let ([rec_id (svg-def-shape (new-rect 100 100))]
+                    [gradient_id
+                     (svg-def-shape
+                      (new-linear-gradient
+                       '(
+                        (0 "#BBC42A" 1)
+                        (100 "#ED6E46" 1))))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill-gradient gradient)
-                (svg-use-shape rec _sstyle)
-                (svg-show-default))))])
+
+                (set-SSTYLE-fill-gradient! _sstyle gradient_id)
+                (svg-place-widget rec_id #:style _sstyle))))])
       
-      (call-with-input-file gradient1_svg
+      (call-with-input-file linear_gradient_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg
@@ -47,19 +47,19 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-def-rect 100 100)]
-                    [gradient
-                     (svg-def-radial-gradient
-                      (list
-                       (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
-                       (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
-                       ))]
+              (let ([rec_id (svg-def-shape (new-rect 100 100))]
+                    [gradient_id
+                     (svg-def-shape
+                      (new-radial-gradient
+                       '(
+                         (0 "#BBC42A" 1)
+                         (100 "#ED6E46" 1))))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill-gradient gradient)
-                (svg-use-shape rec _sstyle)
-                (svg-show-default))))])
+
+                (set-SSTYLE-fill-gradient! _sstyle gradient_id)
+                (svg-place-widget rec_id #:style _sstyle))))])
       
-      (call-with-input-file gradient2_svg
+      (call-with-input-file radial_gradient_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg

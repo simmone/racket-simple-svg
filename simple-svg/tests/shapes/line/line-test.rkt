@@ -20,13 +20,12 @@
            (svg-out
             110 110
             (lambda ()
-              (let ([line (svg-def-line '(0 . 0) '(100 . 100))]
+              (let ([line_id (svg-def-shape (new-line '(0 . 0) '(100 . 100)))]
                     [_sstyle (sstyle-new)])
                 
-                (sstyle-set! _sstyle 'stroke-width 10)
-                (sstyle-set! _sstyle 'stroke "#765373")
-                (svg-use-shape line _sstyle #:at? '(5 . 5))
-                (svg-show-default))))])
+                (set-SSTYLE-stroke-width! _sstyle 10)
+                (set-SSTYLE-stroke! _sstyle "#765373")
+                (svg-place-widget line_id #:style _sstyle #:at '(5 . 5)))))])
       
       (call-with-input-file line_svg
         (lambda (expected)

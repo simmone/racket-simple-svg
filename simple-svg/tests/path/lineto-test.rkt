@@ -20,31 +20,30 @@
            (svg-out
             110 160
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto* '(5 . 5))
-                        (svg-path-hlineto 100)
-                        (svg-path-vlineto 100)
-                        (svg-path-lineto '(-50 . 50))
-                        (svg-path-lineto '(-50 . -50))
-                        (svg-path-close)))]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto* '(5 . 5))
+                         (svg-path-hlineto 100)
+                         (svg-path-vlineto 100)
+                         (svg-path-lineto '(-50 . 50))
+                         (svg-path-lineto '(-50 . -50))
+                         (svg-path-close))))]
                     [sstyle_path (sstyle-new)])
 
-                (sstyle-set! sstyle_path 'stroke-width 5)
-                (sstyle-set! sstyle_path 'stroke "#7AA20D")
-                (sstyle-set! sstyle_path 'stroke-linejoin 'round)
-                (svg-use-shape path sstyle_path)
+                (set-SSTYLE-fill! sstyle_path "none")
+                (set-SSTYLE-stroke-width! sstyle_path 5)
+                (set-SSTYLE-stroke! sstyle_path "#7AA20D")
+                (set-SSTYLE-stroke-linejoin! sstyle_path 'round)
+                (svg-place-widget path_id #:style sstyle_path))))])
 
-                (svg-show-default))))])
-      
       (call-with-input-file lineto_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg
            (lambda (actual)
              (check-lines? expected actual)))))))
-
    ))
 
 (run-tests test-all)

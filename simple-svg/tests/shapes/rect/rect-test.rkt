@@ -24,11 +24,10 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-def-rect 100 100)]
+              (let ([rec_id (svg-def-shape (new-rect 100 100))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill "#BBC42A")
-                (svg-use-shape rec _sstyle)
-                (svg-show-default))))])
+                (set-SSTYLE-fill! _sstyle "#BBC42A")
+                (svg-place-widget rec_id #:style _sstyle))))])
       
       (call-with-input-file rect_svg
         (lambda (expected)
@@ -44,12 +43,11 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-def-rect 100 100)]
+              (let ([rec_id (svg-def-shape (new-rect 100 100))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill "#BBC42A")
-                (svg-use-shape rec _sstyle #:at? '(50 . 50))
-                (svg-show-default))))])
-
+                (set-SSTYLE-fill! _sstyle "#BBC42A")
+                (svg-place-widget rec_id #:style _sstyle #:at '(50 . 50)))))])
+      
       (call-with-input-file rect_y_svg
         (lambda (expected)
           (call-with-input-string
@@ -64,11 +62,10 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([rec (svg-def-rect 100 100 #:radius? '(5 . 10))]
+              (let ([rec_id (svg-def-shape (new-rect 100 100 #:radius_x 5 #:radius_y 10))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill "#BBC42A")
-                (svg-use-shape rec _sstyle)
-                (svg-show-default))))])
+                (set-SSTYLE-fill! _sstyle "#BBC42A")
+                (svg-place-widget rec_id #:style _sstyle))))])
 
       (call-with-input-file rect_radius_svg
         (lambda (expected)
@@ -85,23 +82,21 @@
             150 150
             (lambda ()
               (let (
-                    [blue_rec (svg-def-rect 150 150)]
+                    [blue_rec_id (svg-def-shape (new-rect 150 150))]
                     [_blue_sstyle (sstyle-new)]
-                    [green_rec (svg-def-rect 100 100)]
+                    [green_rec_id (svg-def-shape (new-rect 100 100))]
                     [_green_sstyle (sstyle-new)]
-                    [red_rec (svg-def-rect 50 50)]
+                    [red_rec_id (svg-def-shape (new-rect 50 50))]
                     [_red_sstyle (sstyle-new)])
 
-                (sstyle-set! _blue_sstyle 'fill "blue")
-                (svg-use-shape blue_rec _blue_sstyle)
+                (set-SSTYLE-fill! _blue_sstyle "blue")
+                (svg-place-widget blue_rec_id #:style _blue_sstyle)
 
-                (sstyle-set! _green_sstyle 'fill "green")
-                (svg-use-shape green_rec _green_sstyle #:at? '(25 . 25))
+                (set-SSTYLE-fill! _green_sstyle "green")
+                (svg-place-widget green_rec_id #:style _green_sstyle #:at '(25 . 25))
 
-                (sstyle-set! _red_sstyle 'fill "red")
-                (svg-use-shape red_rec _red_sstyle #:at? '(50 . 50))
-
-                (svg-show-default))))])
+                (set-SSTYLE-fill! _red_sstyle "red")
+                (svg-place-widget red_rec_id #:style _red_sstyle #:at '(50 . 50)))))])
 
       (call-with-input-file m_rect_svg
         (lambda (expected)
@@ -118,16 +113,14 @@
             190 190
             (lambda ()
               (let (
-                    [rec (svg-def-rect 50 50)]
+                    [rec_id (svg-def-shape (new-rect 50 50))]
                     [rec_sstyle (sstyle-new)])
 
-                (sstyle-set! rec_sstyle 'fill "blue")
+                (set-SSTYLE-fill! rec_sstyle "blue")
 
-                (svg-use-shape rec rec_sstyle #:at? '(10 . 10))
-                (svg-use-shape rec rec_sstyle #:at? '(70 . 70))
-                (svg-use-shape rec rec_sstyle #:at? '(130 . 130))
-
-                (svg-show-default))))])
+                (svg-place-widget rec_id #:style rec_sstyle #:at '(10 . 10))
+                (svg-place-widget rec_id #:style rec_sstyle #:at '(70 . 70))
+                (svg-place-widget rec_id #:style rec_sstyle #:at '(130 . 130)))))])
 
       (call-with-input-file rect_reuse_svg
         (lambda (expected)

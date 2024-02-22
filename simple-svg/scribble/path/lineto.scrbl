@@ -1,41 +1,44 @@
 #lang scribble/manual
 
-@(require (for-label racket))
-@(require (for-label simple-svg))
-
 @title{svg-path-lineto/lineto*/hlineto/vlineto}
 
-@defproc[(svg-path-lineto [point (cons/c integer? integer?)]) void?]{
-  relative position.                        
-}
+@codeblock|{
+(svg-path-lineto (-> (cons/c number? number?) void?))
+(svg-path-lineto* (-> (cons/c number? number?) void?))
+(svg-path-hlineto (-> number? void?))
+(svg-path-vlineto (-> number? void?))
+}|
 
-@defproc[(svg-path-lineto* [point (cons/c integer? integer?)]) void?]{
-  absolute position.
-}
+Draw a line.
 
-@defproc[(svg-path-hlineto [point integer?]) void?]{
-}
+svg-path-lineto: use absolute position.
 
-@defproc[(svg-path-vlineto [point integer?]) void?]{
-}
+svg-path-lineto: use relative postion.
 
-@codeblock{
-(let ([path
-  (svg-def-path
-    (lambda ()
-      (svg-path-moveto* '(5 . 5))
-      (svg-path-hlineto 100)
-      (svg-path-vlineto 100)
-      (svg-path-lineto '(-50 . 50))
-      (svg-path-lineto '(-50 . -50))
-      (svg-path-close)))]
-     [path_sstyle (sstyle-new)])
+svg-path-hlineto: horizontal distince.
 
-  (sstyle-set! path_style 'stroke-width 5)
-  (sstyle-set! path_style 'stroke "#7AA20D")
-  (sstyle-set! path_style 'stroke-linejoin 'round)
-  (svg-use-shape path path_sstyle)
+svg-path-vlineto: vertical distince.
 
-  (svg-show-default))
-}
+@codeblock|{
+(svg-out
+ 110 160
+ (lambda ()
+   (let ([path_id
+          (svg-def-shape
+            (new-path
+              (lambda ()
+                (svg-path-moveto* '(5 . 5))
+                  (svg-path-hlineto 100)
+                  (svg-path-vlineto 100)
+                  (svg-path-lineto '(-50 . 50))
+                  (svg-path-lineto '(-50 . -50))
+                  (svg-path-close))))]
+         [sstyle_path (sstyle-new)])
+
+     (set-SSTYLE-fill! sstyle_path "none")
+     (set-SSTYLE-stroke-width! sstyle_path 5)
+     (set-SSTYLE-stroke! sstyle_path "#7AA20D")
+     (set-SSTYLE-stroke-linejoin! sstyle_path 'round)
+     (svg-place-widget path_id #:style sstyle_path))))
+}|
 @image{showcase/path/lineto.svg}

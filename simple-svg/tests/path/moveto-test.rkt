@@ -21,22 +21,21 @@
            (svg-out
             30 70
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto* '(20 . 60))))]
-                    [red_dot (svg-def-circle 5)]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto* '(20 . 60)))))]
+                    [red_dot_id (svg-def-shape (new-circle 5))]
                     [sstyle_path (sstyle-new)]
                     [sstyle_red_dot (sstyle-new)])
                 
-                (sstyle-set! sstyle_path 'stroke-width 1)
-                (sstyle-set! sstyle_path 'stroke "#7AA20D")
-                (svg-use-shape path sstyle_path)
+                (set-SSTYLE-stroke-width! sstyle_path 1)
+                (set-SSTYLE-stroke! sstyle_path "#7AA20D")
+                (svg-place-widget path_id #:style sstyle_path)
 
-                (sstyle-set! sstyle_red_dot 'fill "red")
-                (svg-use-shape red_dot sstyle_red_dot #:at? '(20 . 60))
-
-                (svg-show-default))))])
+                (set-SSTYLE-fill! sstyle_red_dot "red")
+                (svg-place-widget red_dot_id #:style sstyle_red_dot #:at '(20 . 60)))))])
       
       (call-with-input-file moveto1_svg
         (lambda (expected)
@@ -52,23 +51,22 @@
            (svg-out
             30 70
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto '(20 . 60))))]
-                    [red_dot (svg-def-circle 5)]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto '(20 . 60)))))]
+                    [red_dot_id (svg-def-shape (new-circle 5))]
                     [sstyle_path (sstyle-new)]
                     [sstyle_red_dot (sstyle-new)])
 
-                (sstyle-set! sstyle_path 'stroke-width 1)
-                (sstyle-set! sstyle_path 'stroke "#7AA20D")
-                (svg-use-shape path sstyle_path)
+                (set-SSTYLE-stroke-width! sstyle_path 1)
+                (set-SSTYLE-stroke! sstyle_path "#7AA20D")
+                (svg-place-widget path_id #:style sstyle_path)
 
-                (sstyle-set! sstyle_red_dot 'fill "red")
-                (svg-use-shape red_dot sstyle_red_dot #:at? '(20 . 60))
+                (set-SSTYLE-fill! sstyle_red_dot "red")
+                (svg-place-widget red_dot_id #:style sstyle_red_dot #:at '(20 . 60)))))])
 
-                (svg-show-default))))])
-      
       (call-with-input-file moveto2_svg
         (lambda (expected)
           (call-with-input-string

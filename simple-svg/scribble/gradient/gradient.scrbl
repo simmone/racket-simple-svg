@@ -1,80 +1,78 @@
 #lang scribble/manual
 
-@(require (for-label racket))
-@(require (for-label simple-svg))
-
 @title{Gradient}
 
-@defmodule[simple-svg #:link-target? #f]
+@codeblock|{
+(new-linear-gradient (->*
+  ((listof (list/c (between/c 0 100) string? (between/c 0 1))))
+  (
+   #:x1 (or/c #f number?)
+   #:y1 (or/c #f number?)
+   #:x2 (or/c #f number?)
+   #:y2 (or/c #f number?)
+   #:gradientUnits (or/c #f 'userSpaceOnUse 'objectBoundingBox)
+   #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
+   )
+  LINEAR-GRADIENT?))
+}|
 
-@defproc[(svg-def-gradient-stop
-           [#:offset offset (integer-in 0 100)]
-           [#:color color string?]
-           [#:opacity? opacity? (between/c 0 1) 1]
-         )
-         (list/c (integer-in 0 100) string? (between/c 0 1))]{
+  gradient combined by stop_list, each stop has 3 factor: offset, color, opacity.
+  
   offset from 0 to 100, means the distance of the color gradient.
- 
-  lineargradient and radialgradient both have a stop list.
-}
 
-@defproc[(svg-def-linear-gradient
-           [stop_list (listof (list/c (integer-in 0 100) string? (between/c 0 1)))]
-           [#:x1? x1? (or/c #f natural?) #f]
-           [#:y1? y1? (or/c #f natural?) #f]
-           [#:x2? x2? (or/c #f natural?) #f]
-           [#:y2? y2? (or/c #f natural?) #f]
-           [#:gradientUnits? gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox) #f]
-           [#:spreadMethod? spreadMethod? (or/c #f 'pad 'repeat 'reflect) #f]
-         )
-         string?]{
   use x1, y1, x2, y2 justify gradient's direction and position.
 
   default is from left to right, x1=0, y1=0, x2=100, y2=0.
-}
 
-@codeblock{
-(let ([rec (svg-def-rect 100 100)]
-      [gradient
-        (svg-def-linear-gradient
-          (list
-            (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
-            (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
-           ))]
-     [_sstyle (sstyle-new)])
+@codeblock|{
+(svg-out
+ 100 100
+ (lambda ()
+   (let ([rec_id (svg-def-shape (new-rect 100 100))]
+         [gradient_id
+          (svg-def-shape
+            (new-linear-gradient
+            '(
+               (0 "#BBC42A" 1)
+               (100 "#ED6E46" 1))))]
+         [_sstyle (sstyle-new)])
 
-   (sstyle-set! _sstyle 'fill-gradient gradient)
-   (svg-use-shape rec _sstyle)
-   (svg-show-default))
-}
-@image{showcase/gradient/gradient1.svg}
+      (set-SSTYLE-fill-gradient! _sstyle gradient_id)
+      (svg-place-widget rec_id #:style _sstyle))))
+}|
+@image{showcase/gradient/linear_gradient.svg}
 
-@defproc[(svg-def-radial-gradient
-           [stop_list (listof (list/c (integer-in 0 100) string? (between/c 0 1)))]
-           [#:cx? cx? (or/c #f natural?) #f]
-           [#:cy? cy? (or/c #f natural?) #f]
-           [#:fx? fx? (or/f #f natural?) #f]
-           [#:fy? fy? (or/f #f natural?) #f]
-           [#:r? r? (or/c #f natural?) #f]
-           [#:gradientUnits? gradientUnits? (or/c #f 'userSpaceOnUse 'objectBoundingBox) #f]
-           [#:spreadMethod? spreadMethod? (or/c #f 'pad 'repeat 'reflect) #f]
-         )
-         string?]{
+@codeblock|{
+(new-radial-gradient (->*
+  ((listof (list/c (between/c 0 100) string? (between/c 0 1))))
+  (
+   #:cx (or/c #f (between/c 0 100))
+   #:cy (or/c #f (between/c 0 100))
+   #:fx (or/c #f (between/c 0 100))
+   #:fy (or/c #f (between/c 0 100))
+   #:r (or/c #f number?)
+   #:gradientUnits (or/c #f 'userSpaceOnUse 'objectBoundingBox)
+   #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
+   )
+  RADIAL-GRADIENT?))
+}|
+
   cx, cy, fx, fy has value 0 - 100, means 0% - 100%, use them to justify gradient's position and direction.
-}
 
-@codeblock{
-(let ([rec (svg-def-rect 100 100)]
-      [gradient
-       (svg-def-radial-gradient
-        (list
-         (svg-def-gradient-stop #:offset 0 #:color "#BBC42A")
-         (svg-def-gradient-stop #:offset 100 #:color "#ED6E46")
-         ))]
-      [_sstyle (sstyle-new)])
+@codeblock|{
+(svg-out
+ 100 100
+ (lambda ()
+   (let ([rec_id (svg-def-shape (new-rect 100 100))]
+         [gradient_id
+          (svg-def-shape
+           (new-radial-gradient
+            '(
+              (0 "#BBC42A" 1)
+              (100 "#ED6E46" 1))))]
+         [_sstyle (sstyle-new)])
 
-  (sstyle-set! _sstyle 'fill-gradient gradient)
-  (svg-use-shape rec _sstyle)
-  (svg-show-default))
-}
-@image{showcase/gradient/gradient2.svg}
+     (set-SSTYLE-fill-gradient! _sstyle gradient_id)
+     (svg-place-widget rec_id #:style _sstyle))))
+}|
+@image{showcase/gradient/radial_gradient.svg}

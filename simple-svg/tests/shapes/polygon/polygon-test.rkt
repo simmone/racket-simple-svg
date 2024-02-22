@@ -20,18 +20,18 @@
            (svg-out
             110 110
             (lambda ()
-              (let ([polygon
-                     (svg-def-polygon
-                      '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75)))]
+              (let ([polygon_id
+                     (svg-def-shape
+                      (new-polygon
+                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75))))]
                     [_sstyle (sstyle-new)])
 
-                (sstyle-set! _sstyle 'stroke-width 5)
-                (sstyle-set! _sstyle 'stroke "#765373")
-                (sstyle-set! _sstyle 'fill "#ED6E46")
+                (set-SSTYLE-stroke-width! _sstyle 5)
+                (set-SSTYLE-stroke! _sstyle "#765373")
+                (set-SSTYLE-fill! _sstyle "#ED6E46")
 
-                (svg-use-shape polygon _sstyle #:at? '(5 . 5))
-                (svg-show-default))))])
-      
+                (svg-place-widget polygon_id #:style _sstyle #:at '(5 . 5)))))])
+
       (call-with-input-file polygon_svg
         (lambda (expected)
           (call-with-input-string

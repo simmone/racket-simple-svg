@@ -21,32 +21,32 @@
            (svg-out
             200 120
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto* '(10 . 60))
-                        (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
-                        (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
-                        ))]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto* '(10 . 60))
+                         (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
+                         (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
+                         )))]
                     [path_style (sstyle-new)]
-                    [red_dot (svg-def-circle 5)]
+                    [red_dot_id (svg-def-shape (new-circle 5))]
                     [dot_style (sstyle-new)])
 
-                (sstyle-set! path_style 'stroke "#333333")
-                (sstyle-set! path_style 'stroke-width 3)
-                (svg-use-shape path path_style)
+                (set-SSTYLE-fill! path_style "none")
+                (set-SSTYLE-stroke-width! path_style 3)
+                (set-SSTYLE-stroke! path_style "#333333")
+                (svg-place-widget path_id #:style path_style)
 
-                (sstyle-set! dot_style 'fill "red")
-                (svg-use-shape red_dot dot_style #:at? '(10 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(30 . 15))
-                (svg-use-shape red_dot dot_style #:at? '(80 . 15))
-                (svg-use-shape red_dot dot_style #:at? '(100 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(120 . 105))
-                (svg-use-shape red_dot dot_style #:at? '(170 . 105))
-                (svg-use-shape red_dot dot_style #:at? '(190 . 60))
-
-                (svg-show-default))))])
-      
+                (set-SSTYLE-fill! dot_style "red")
+                (svg-place-widget red_dot_id #:style dot_style #:at '(10 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(30 . 15))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(80 . 15))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(100 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(120 . 105))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(170 . 105))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(190 . 60)))))])
+          
       (call-with-input-file ccurve1_svg
         (lambda (expected)
           (call-with-input-string
@@ -61,32 +61,32 @@
            (svg-out
             200 120
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto* '(10 . 60))
-                        (svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
-                        (svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
-                        ))]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto* '(10 . 60))
+                         (svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
+                         (svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
+                         )))]
                     [path_style (sstyle-new)]
-                    [red_dot (svg-def-circle 5)]
+                    [red_dot_id (svg-def-shape (new-circle 5))]
                     [dot_style (sstyle-new)])
 
-                (sstyle-set! path_style 'stroke "#333333")
-                (sstyle-set! path_style 'stroke-width 3)
-                (svg-use-shape path path_style)
+                (set-SSTYLE-fill! path_style "none")
+                (set-SSTYLE-stroke-width! path_style 3)
+                (set-SSTYLE-stroke! path_style "#333333")
+                (svg-place-widget path_id #:style path_style)
 
-                (sstyle-set! dot_style 'fill "red")
-                (svg-use-shape red_dot dot_style #:at? '(10 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(30 . 15))
-                (svg-use-shape red_dot dot_style #:at? '(80 . 15))
-                (svg-use-shape red_dot dot_style #:at? '(100 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(120 . 105))
-                (svg-use-shape red_dot dot_style #:at? '(170 . 105))
-                (svg-use-shape red_dot dot_style #:at? '(190 . 60))
+                (set-SSTYLE-fill! dot_style "red")
+                (svg-place-widget red_dot_id #:style dot_style #:at '(10 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(30 . 15))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(80 . 15))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(100 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(120 . 105))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(170 . 105))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(190 . 60)))))])
 
-                (svg-show-default))))])
-      
       (call-with-input-file ccurve2_svg
         (lambda (expected)
           (call-with-input-string

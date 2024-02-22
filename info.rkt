@@ -1,6 +1,6 @@
 #lang info
 
-(define version "1.0")
+(define version "2.0")
 
 (define license
   '(Apache-2.0 OR MIT))

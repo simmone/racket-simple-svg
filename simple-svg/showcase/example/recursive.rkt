@@ -1,6 +1,6 @@
 #lang racket
 
-(require simple-svg)
+(require "../../main.rkt")
 
 (let ([canvas_size 400])
   (with-output-to-file
@@ -11,19 +11,17 @@
                  canvas_size canvas_size
                  (lambda ()
                    (let ([_sstyle (sstyle-new)])
-                     (sstyle-set! _sstyle 'stroke "red")
-                     (sstyle-set! _sstyle 'stroke-width 1)
+                     (set-SSTYLE-stroke! _sstyle "red")
+                     (set-SSTYLE-stroke-width! _sstyle 1)
 
                      (letrec ([recur-circle 
                                (lambda (x y radius)
-                                 (let ([circle (svg-def-circle radius)])
-                                   (svg-use-shape circle _sstyle #:at? (cons x y)))
+                                 (let ([circle_id (svg-def-shape (new-circle radius))])
+                                   (svg-place-widget circle_id #:style _sstyle #:at (cons x y)))
 
                                  (when (> radius 8)
-                                   (recur-circle (+ x radius) y (floor (/ radius 2)))
-                                   (recur-circle (- x radius) y (floor (/ radius 2)))
-                                   (recur-circle x (+ y radius) (floor (/ radius 2)))
-                                   (recur-circle x (- y radius) (floor (/ radius 2)))))])
-                       (recur-circle 200 200 100)))
-                   
-                   (svg-show-default)))))))
+                                   (recur-circle (+ x radius) y (/ radius 2))
+                                   (recur-circle (- x radius) y (/ radius 2))
+                                   (recur-circle x (+ y radius) (/ radius 2))
+                                   (recur-circle x (- y radius) (/ radius 2))))])
+                       (recur-circle 200 200 100)))))))))

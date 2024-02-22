@@ -1,16 +1,15 @@
 #lang racket
 
-(require "../svg.rkt")
 (require "path.rkt")
 
 (provide (contract-out
           [svg-path-qcurve (-> 
-                            (cons/c integer? integer?)
-                            (cons/c integer? integer?)
+                            (cons/c number? number?)
+                            (cons/c number? number?)
                             void?)]
           [svg-path-qcurve* (->
-                             (cons/c integer? integer?)
-                             (cons/c integer? integer?)
+                             (cons/c number? number?)
+                             (cons/c number? number?)
                              void?)]
           ))
 
@@ -21,7 +20,7 @@
 (define (curve type point1 point2)
   ((*add-path*) (format "~a~a,~a ~a,~a"
                         type 
-                        (car point1)
-                        (cdr point1)
-                        (car point2)
-                        (cdr point2))))
+                        (~r (car point1))
+                        (~r (cdr point1))
+                        (~r (car point2))
+                        (~r (cdr point2)))))

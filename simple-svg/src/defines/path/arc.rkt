@@ -1,17 +1,16 @@
 #lang racket
 
-(require "../svg.rkt")
 (require "path.rkt")
 
 (provide (contract-out
           [svg-path-arc (->
-                (cons/c integer? integer?)
-                (cons/c natural? natural?)
+                (cons/c number? number?)
+                (cons/c number? number?)
                 (or/c 'left_big 'left_small 'right_big 'right_small)
                 void?)]
           [svg-path-arc* (->
-                 (cons/c integer? integer?)
-                 (cons/c natural? natural?)
+                 (cons/c number? number?)
+                 (cons/c number? number?)
                  (or/c 'left_big 'left_small 'right_big 'right_small)
                  void?)]
           ))
@@ -35,8 +34,8 @@
     ((*add-path*)
      (format "~a~a,~a 0 ~a ~a,~a"
              type
-             (car radius)
-             (cdr radius)
+             (~r (car radius))
+             (~r (cdr radius))
              section
-             (car point)
-             (cdr point)))))
+             (~r (car point))
+             (~r (cdr point))))))

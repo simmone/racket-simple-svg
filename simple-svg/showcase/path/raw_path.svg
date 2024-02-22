@@ -5,7 +5,7 @@
     width="263" height="188"
     >
   <defs>
-    <path id="s1"
+    <path id="s2"
           d="
              M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021
            c-10.035,37.291-51.174,65.206-100.414,65.206 c-49.261,0-90.443-27.979-100.435-65.334
@@ -16,9 +16,9 @@
             "/>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" fill="#7AA20D" stroke-width="9" stroke="#7AA20D" stroke-linejoin="round" />
+  <symbol id="g1">
+    <use xlink:href="#s2" fill="#7AA20D" stroke-width="9" stroke="#7AA20D" stroke-linejoin="round" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#g1" />
 </svg>

@@ -21,14 +21,13 @@
            (svg-out
             150 150
             (lambda ()
-              (let ([rec (svg-def-rect 100 100)]
+              (let ([rec_id (svg-def-shape (new-rect 100 100))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill "#BBC42A")
-                (sstyle-set! _sstyle 'translate '(75 . 5))
-                (sstyle-set! _sstyle 'rotate 45)
-                (svg-use-shape rec _sstyle)
-                (svg-show-default))))])
-
+                (set-SSTYLE-fill! _sstyle "#BBC42A")
+                (set-SSTYLE-translate! _sstyle '(75 . 5))
+                (set-SSTYLE-rotate! _sstyle 45)
+                (svg-place-widget rec_id #:style _sstyle))))])
+      
       (call-with-input-file transform1_svg
         (lambda (expected)
           (call-with-input-string
@@ -43,14 +42,13 @@
            (svg-out
             250 240
             (lambda ()
-              (let ([rec (svg-def-circle 50)]
+              (let ([rec_id (svg-def-shape (new-circle 50))]
                     [_sstyle (sstyle-new)])
-                (sstyle-set! _sstyle 'fill "#BBC42A")
-                (sstyle-set! _sstyle 'scale 2)
-                (sstyle-set! _sstyle 'skewX 20)
-                (svg-use-shape rec _sstyle #:at? '(40 . 60))
-                (svg-show-default))))])
-
+                (set-SSTYLE-fill! _sstyle "#BBC42A")
+                (set-SSTYLE-scale! _sstyle 2)
+                (set-SSTYLE-skewX! _sstyle 20)
+                (svg-place-widget rec_id #:style _sstyle #:at '(40 . 60)))))])
+      
       (call-with-input-file transform2_svg
         (lambda (expected)
           (call-with-input-string

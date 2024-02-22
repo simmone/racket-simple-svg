@@ -21,29 +21,29 @@
            (svg-out
             220 120
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto* '(10 . 60))
-                        (svg-path-qcurve* '(60 . 10) '(110 . 60))
-                        (svg-path-qcurve* '(160 . 110) '(210 . 60))))]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto* '(10 . 60))
+                         (svg-path-qcurve* '(60 . 10) '(110 . 60))
+                         (svg-path-qcurve* '(160 . 110) '(210 . 60)))))]
                     [path_style (sstyle-new)]
-                    [red_dot (svg-def-circle 5)]
+                    [red_dot_id (svg-def-shape (new-circle 5))]
                     [dot_style (sstyle-new)])
 
-                (sstyle-set! path_style 'stroke "#333333")
-                (sstyle-set! path_style 'stroke-width 3)
-                (svg-use-shape path path_style)
+                (set-SSTYLE-fill! path_style "none")
+                (set-SSTYLE-stroke-width! path_style 3)
+                (set-SSTYLE-stroke! path_style "#333333")
+                (svg-place-widget path_id #:style path_style)
 
-                (sstyle-set! dot_style 'fill "red")
-                (svg-use-shape red_dot dot_style #:at? '(10 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(60 . 10))
-                (svg-use-shape red_dot dot_style #:at? '(110 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(160 . 110))
-                (svg-use-shape red_dot dot_style #:at? '(210 . 60))
-
-                (svg-show-default))))])
-
+                (set-SSTYLE-fill! dot_style "red")
+                (svg-place-widget red_dot_id #:style dot_style #:at '(10 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(60 . 10))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(110 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(160 . 110))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(210 . 60)))))])
+      
       (call-with-input-file qcurve1_svg
         (lambda (expected)
           (call-with-input-string
@@ -58,29 +58,29 @@
            (svg-out
             220 120
             (lambda ()
-              (let ([path
-                     (svg-def-path
-                      (lambda ()
-                        (svg-path-moveto* '(10 . 60))
-                        (svg-path-qcurve '(50 . -50) '(100 . 0))
-                        (svg-path-qcurve '(50 . 50) '(100 . 0))
-                        ))]
+              (let ([path_id
+                     (svg-def-shape
+                      (new-path
+                       (lambda ()
+                         (svg-path-moveto* '(10 . 60))
+                         (svg-path-qcurve '(50 . -50) '(100 . 0))
+                         (svg-path-qcurve '(50 . 50) '(100 . 0))
+                         )))]
                     [path_style (sstyle-new)]
-                    [red_dot (svg-def-circle 5)]
+                    [red_dot_id (svg-def-shape (new-circle 5))]
                     [dot_style (sstyle-new)])
 
-                (sstyle-set! path_style 'stroke "#333333")
-                (sstyle-set! path_style 'stroke-width 3)
-                (svg-use-shape path path_style)
+                (set-SSTYLE-fill! path_style "none")
+                (set-SSTYLE-stroke-width! path_style 3)
+                (set-SSTYLE-stroke! path_style "#333333")
+                (svg-place-widget path_id #:style path_style)
 
-                (sstyle-set! dot_style 'fill "red")
-                (svg-use-shape red_dot dot_style #:at? '(10 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(60 . 10))
-                (svg-use-shape red_dot dot_style #:at? '(110 . 60))
-                (svg-use-shape red_dot dot_style #:at? '(160 . 110))
-                (svg-use-shape red_dot dot_style #:at? '(210 . 60))
-
-                (svg-show-default))))])
+                (set-SSTYLE-fill! dot_style "red")
+                (svg-place-widget red_dot_id #:style dot_style #:at '(10 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(60 . 10))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(110 . 60))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(160 . 110))
+                (svg-place-widget red_dot_id #:style dot_style #:at '(210 . 60)))))])
       
       (call-with-input-file qcurve2_svg
         (lambda (expected)

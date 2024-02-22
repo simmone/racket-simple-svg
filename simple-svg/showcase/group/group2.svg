@@ -2,27 +2,34 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="50" height="50"
+    width="100" height="100"
     >
   <defs>
-    <rect id="s1" width="50" height="50" />
-    <line id="s2" x1="10" y1="0" x2="0" y2="50" />
-    <line id="s3" x1="0" y1="0" x2="10" y2="50" />
+    <rect id="s2" width="50" height="50" />
+    <line id="s3" x1="10" y1="0" x2="0" y2="50" />
+    <line id="s4" x1="0" y1="0" x2="10" y2="50" />
   </defs>
 
-  <symbol id="pattern">
-    <use xlink:href="#s2" x="0" y="0" fill="none" stroke-width="1" stroke="black" />
-    <use xlink:href="#s3" x="0" y="0" fill="none" stroke-width="1" stroke="black" />
+  <symbol id="g5">
+    <use xlink:href="#s3" fill="none" stroke-width="1" stroke="black" />
+    <use xlink:href="#s4" fill="none" stroke-width="1" stroke="black" />
   </symbol>
 
-  <symbol id="rect">
-    <use xlink:href="#s1" x="0" y="0" fill="orange" stroke-width="2" stroke="red" />
+  <symbol id="g6">
+    <use xlink:href="#s2" fill="orange" stroke-width="2" stroke="red" />
+    <use xlink:href="#g5" />
+    <use xlink:href="#g5" x="10" y="0" />
+    <use xlink:href="#g5" x="20" y="0" />
+    <use xlink:href="#g5" x="30" y="0" />
+    <use xlink:href="#g5" x="40" y="0" />
   </symbol>
 
-  <use xlink:href="#rect" />
-  <use xlink:href="#pattern" x="0" y="0" />
-  <use xlink:href="#pattern" x="10" y="0" />
-  <use xlink:href="#pattern" x="20" y="0" />
-  <use xlink:href="#pattern" x="30" y="0" />
-  <use xlink:href="#pattern" x="40" y="0" />
+  <symbol id="g1">
+    <use xlink:href="#g6" />
+    <use xlink:href="#g6" x="50" y="0" />
+    <use xlink:href="#g6" x="0" y="50" />
+    <use xlink:href="#g6" x="50" y="50" />
+  </symbol>
+
+  <use xlink:href="#g1" />
 </svg>
