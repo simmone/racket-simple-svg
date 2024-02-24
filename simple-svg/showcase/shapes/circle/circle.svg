@@ -5,12 +5,12 @@
     width="100" height="100"
     >
   <defs>
-    <circle id="s2" r="50" />
+    <circle id="s1" r="50" />
   </defs>
 
-  <symbol id="g1">
-    <use xlink:href="#s2" x="50" y="50" fill="#BBC42A" />
+  <symbol id="default">
+    <use xlink:href="#s1" x="50" y="50" fill="#BBC42A" />
   </symbol>
 
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>

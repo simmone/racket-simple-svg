@@ -5,16 +5,16 @@
     width="100" height="100"
     >
   <defs>
-    <rect id="s2" width="100" height="100" />
-    <linearGradient id="s3" >
+    <rect id="s1" width="100" height="100" />
+    <linearGradient id="s2" >
       <stop offset="0%" stop-color="#BBC42A" />
       <stop offset="100%" stop-color="#ED6E46" />
     </linearGradient>
   </defs>
 
-  <symbol id="g1">
-    <use xlink:href="#s2" fill="url(#s3)" />
+  <symbol id="default">
+    <use xlink:href="#s1" fill="url(#s2)" />
   </symbol>
 
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>

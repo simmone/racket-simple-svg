@@ -5,37 +5,37 @@
     width="300" height="130"
     >
   <defs>
-    <path id="s2"
+    <path id="s1"
           d="
              M130,45
              A80,40 0 1,0 170,85
             "/>
-    <path id="s3"
+    <path id="s2"
           d="
              M130,45
              A80,40 0 0,0 170,85
             "/>
-    <path id="s4"
+    <path id="s3"
           d="
              M130,45
              A80,40 0 1,1 170,85
             "/>
-    <path id="s5"
+    <path id="s4"
           d="
              M130,45
              A80,40 0 0,1 170,85
             "/>
-    <circle id="s6" r="5" />
+    <circle id="s5" r="5" />
   </defs>
 
-  <symbol id="g1">
-    <use xlink:href="#s2" fill="none" stroke-width="3" stroke="#ccccff" />
-    <use xlink:href="#s3" fill="none" stroke-width="3" stroke="green" />
-    <use xlink:href="#s4" fill="none" stroke-width="3" stroke="blue" />
-    <use xlink:href="#s5" fill="none" stroke-width="3" stroke="yellow" />
-    <use xlink:href="#s6" x="130" y="45" fill="red" />
-    <use xlink:href="#s6" x="170" y="85" fill="red" />
+  <symbol id="default">
+    <use xlink:href="#s1" fill="none" stroke-width="3" stroke="#ccccff" />
+    <use xlink:href="#s2" fill="none" stroke-width="3" stroke="green" />
+    <use xlink:href="#s3" fill="none" stroke-width="3" stroke="blue" />
+    <use xlink:href="#s4" fill="none" stroke-width="3" stroke="yellow" />
+    <use xlink:href="#s5" x="130" y="45" fill="red" />
+    <use xlink:href="#s5" x="170" y="85" fill="red" />
   </symbol>
 
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>

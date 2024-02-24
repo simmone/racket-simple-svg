@@ -3,15 +3,14 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     width="100" height="100"
-    viewBox="50 0 100 100"
     >
   <defs>
     <rect id="s1" width="100" height="100" />
   </defs>
 
-  <symbol id="default">
+  <symbol id="background">
     <use xlink:href="#s1" fill="#BBC42A" />
   </symbol>
 
-  <use xlink:href="#default" />
+  <use xlink:href="#background" />
 </svg>

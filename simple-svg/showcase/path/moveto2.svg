@@ -5,17 +5,17 @@
     width="30" height="70"
     >
   <defs>
-    <path id="s2"
+    <path id="s1"
           d="
              m20,60
             "/>
-    <circle id="s3" r="5" />
+    <circle id="s2" r="5" />
   </defs>
 
-  <symbol id="g1">
-    <use xlink:href="#s2" fill="none" stroke-width="1" stroke="#7AA20D" />
-    <use xlink:href="#s3" x="20" y="60" fill="red" />
+  <symbol id="default">
+    <use xlink:href="#s1" fill="none" stroke-width="1" stroke="#7AA20D" />
+    <use xlink:href="#s2" x="20" y="60" fill="red" />
   </symbol>
 
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>

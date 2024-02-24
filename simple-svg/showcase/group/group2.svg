@@ -5,31 +5,31 @@
     width="100" height="100"
     >
   <defs>
-    <rect id="s2" width="50" height="50" />
-    <line id="s3" x1="10" y1="0" x2="0" y2="50" />
-    <line id="s4" x1="0" y1="0" x2="10" y2="50" />
+    <rect id="s1" width="50" height="50" />
+    <line id="s2" x1="10" y1="0" x2="0" y2="50" />
+    <line id="s3" x1="0" y1="0" x2="10" y2="50" />
   </defs>
 
-  <symbol id="g5">
+  <symbol id="g4">
+    <use xlink:href="#s2" fill="none" stroke-width="1" stroke="black" />
     <use xlink:href="#s3" fill="none" stroke-width="1" stroke="black" />
-    <use xlink:href="#s4" fill="none" stroke-width="1" stroke="black" />
   </symbol>
 
-  <symbol id="g6">
-    <use xlink:href="#s2" fill="orange" stroke-width="2" stroke="red" />
+  <symbol id="g5">
+    <use xlink:href="#s1" fill="orange" stroke-width="2" stroke="red" />
+    <use xlink:href="#g4" />
+    <use xlink:href="#g4" x="10" y="0" />
+    <use xlink:href="#g4" x="20" y="0" />
+    <use xlink:href="#g4" x="30" y="0" />
+    <use xlink:href="#g4" x="40" y="0" />
+  </symbol>
+
+  <symbol id="default">
     <use xlink:href="#g5" />
-    <use xlink:href="#g5" x="10" y="0" />
-    <use xlink:href="#g5" x="20" y="0" />
-    <use xlink:href="#g5" x="30" y="0" />
-    <use xlink:href="#g5" x="40" y="0" />
+    <use xlink:href="#g5" x="50" y="0" />
+    <use xlink:href="#g5" x="0" y="50" />
+    <use xlink:href="#g5" x="50" y="50" />
   </symbol>
 
-  <symbol id="g1">
-    <use xlink:href="#g6" />
-    <use xlink:href="#g6" x="50" y="0" />
-    <use xlink:href="#g6" x="0" y="50" />
-    <use xlink:href="#g6" x="50" y="50" />
-  </symbol>
-
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>

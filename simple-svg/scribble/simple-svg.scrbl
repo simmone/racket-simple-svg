@@ -14,7 +14,9 @@ thanks to Joni's tutorial: @hyperlink["http://svgpocketguide.com/"]{"Svg Pocket 
 
 raco pkg install simple-svg
 
-@include-section["usage.scrbl"]
+@include-section["showcase.scrbl"]
+
+@include-section["basic.scrbl"]
 
 @include-section["sstyle.scrbl"]
 

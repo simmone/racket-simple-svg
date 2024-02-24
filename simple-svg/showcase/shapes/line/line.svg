@@ -5,12 +5,12 @@
     width="110" height="110"
     >
   <defs>
-    <line id="s2" x1="0" y1="0" x2="100" y2="100" />
+    <line id="s1" x1="0" y1="0" x2="100" y2="100" />
   </defs>
 
-  <symbol id="g1">
-    <use xlink:href="#s2" x="5" y="5" fill="none" stroke-width="10" stroke="#765373" />
+  <symbol id="default">
+    <use xlink:href="#s1" x="5" y="5" fill="none" stroke-width="10" stroke="#765373" />
   </symbol>
 
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>

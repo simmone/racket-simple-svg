@@ -5,12 +5,12 @@
     width="200" height="100"
     >
   <defs>
-    <ellipse id="s2" rx="100" ry="50" />
+    <ellipse id="s1" rx="100" ry="50" />
   </defs>
 
-  <symbol id="g1">
-    <use xlink:href="#s2" x="100" y="50" fill="#7AA20D" />
+  <symbol id="default">
+    <use xlink:href="#s1" x="100" y="50" fill="#7AA20D" />
   </symbol>
 
-  <use xlink:href="#g1" />
+  <use xlink:href="#default" />
 </svg>
