@@ -39,7 +39,7 @@ thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
 
 # ShowCase-2: Recursive fern (Thanks to the author: Matteo d'Addio matteo.daddio@live.it)
 
-https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/example/recursive.rkt
+https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/example/fern.rkt
 
 ![ScreenShot](simple-svg/showcase/example/fern.svg)
 
