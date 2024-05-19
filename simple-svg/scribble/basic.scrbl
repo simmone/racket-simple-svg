@@ -16,6 +16,8 @@
 
 6. use svg-place-widget to show a shape or a group at specific postion and style.
 
+7. caution: position axis is (x . y), if you want use row, column to locate, it means (colunm . row).
+
 @codeblock|{
 (svg-out (->* (positive? positive? procedure?)
            (
