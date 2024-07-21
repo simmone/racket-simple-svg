@@ -1,14 +1,14 @@
 #lang racket
 
-(require rackunit)
-(require rackunit/text-ui)
+(require rackunit
+         rackunit/text-ui
+         "../../src/lib/lib.rkt"
+         "../../main.rkt"
+         racket/runtime-path)
 
-(require "../../src/lib/lib.rkt")
-(require "../../main.rkt")
-
-(require racket/runtime-path)
 (define-runtime-path group1_svg "../../showcase/group/group1.svg")
 (define-runtime-path group2_svg "../../showcase/group/group2.svg")
+(define-runtime-path group3_svg "../../showcase/group/group3.svg")
 
 (define test-all
   (test-suite
@@ -97,6 +97,52 @@
                 )))])
 
       (call-with-input-file group2_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
+
+   (test-case
+    "test-five-circles-pattern"
+
+    (let ([actual_svg
+           (svg-out
+            1000 600
+            (lambda ()
+              (define pattern_id
+                (svg-def-group
+                 (lambda ()
+                   (let ([circle1_sstyle (sstyle-new)]
+                         [circle2_sstyle (sstyle-new)]
+                         [circle3_sstyle (sstyle-new)]
+                         [circle4_sstyle (sstyle-new)]
+                         [circle5_sstyle (sstyle-new)]
+                         [circle_id (svg-def-shape (new-circle 60))])
+
+                     (set-SSTYLE-stroke! circle1_sstyle "rgb(11, 112, 191)")
+                     (set-SSTYLE-stroke! circle2_sstyle "rgb(240, 183, 0)")
+                     (set-SSTYLE-stroke! circle3_sstyle "rgb(0, 0, 0)")
+                     (set-SSTYLE-stroke! circle4_sstyle "rgb(13, 146, 38)")
+                     (set-SSTYLE-stroke! circle5_sstyle "rgb(214, 0, 23)")
+
+                     (svg-place-widget circle_id #:style circle1_sstyle #:at '(120 . 120))
+                     (svg-place-widget circle_id #:style circle2_sstyle #:at '(180 . 180))
+                     (svg-place-widget circle_id #:style circle3_sstyle #:at '(260 . 120))
+                     (svg-place-widget circle_id #:style circle4_sstyle #:at '(320 . 180))
+                     (svg-place-widget circle_id #:style circle5_sstyle #:at '(400 . 120))
+                     ))))
+
+              (let ([group_style (sstyle-new)])
+                (set-SSTYLE-stroke-width! group_style 12)
+
+                (svg-place-widget pattern_id #:style group_style #:at '(0 . 0))
+                (svg-place-widget pattern_id #:style group_style #:at '(0 . 300))
+                (svg-place-widget pattern_id #:style group_style #:at '(500 . 0))
+                (svg-place-widget pattern_id #:style group_style #:at '(500 . 300)))
+              ))])
+
+      (call-with-input-file group3_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg

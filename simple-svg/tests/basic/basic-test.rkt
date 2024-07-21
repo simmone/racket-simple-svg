@@ -1,11 +1,11 @@
 #lang racket
 
-(require rackunit/text-ui)
+(require rackunit
+         rackunit/text-ui
+         "../../src/lib/lib.rkt"
+         "../../main.rkt"
+         racket/runtime-path)
 
-(require "../../src/lib/lib.rkt")
-(require rackunit "../../main.rkt")
-
-(require racket/runtime-path)
 (define-runtime-path empty_svg "../../showcase/basic/empty.svg")
 (define-runtime-path background_svg "../../showcase/basic/background.svg")
 (define-runtime-path rect_svg "../../showcase/shapes/rect/rect.svg")

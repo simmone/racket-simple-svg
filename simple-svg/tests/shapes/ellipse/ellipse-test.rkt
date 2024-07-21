@@ -1,12 +1,11 @@
 #lang racket
 
-(require rackunit)
-(require rackunit/text-ui)
+(require rackunit
+         rackunit/text-ui
+         "../../../src/lib/lib.rkt"
+         "../../../main.rkt"
+         racket/runtime-path)
 
-(require "../../../src/lib/lib.rkt")
-(require "../../../main.rkt")
-
-(require racket/runtime-path)
 (define-runtime-path ellipse_svg "../../../showcase/shapes/ellipse/ellipse.svg")
 
 (define test-all

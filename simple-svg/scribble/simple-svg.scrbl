@@ -20,6 +20,8 @@ raco pkg install simple-svg
 
 @include-section["sstyle.scrbl"]
 
+@include-section["color.scrbl"]
+
 @include-section["shapes/rect.scrbl"] 
 
 @include-section["shapes/circle.scrbl"]

@@ -1,12 +1,11 @@
 #lang racket
 
-(require rackunit)
-(require rackunit/text-ui)
+(require rackunit
+         rackunit/text-ui
+         "../../src/lib/lib.rkt"
+         "../../main.rkt"
+         racket/runtime-path)
 
-(require "../../src/lib/lib.rkt")
-(require "../../main.rkt")
-
-(require racket/runtime-path)
 (define-runtime-path linear_gradient_svg "../../showcase/gradient/linear_gradient.svg")
 (define-runtime-path radial_gradient_svg "../../showcase/gradient/radial_gradient.svg")
 

@@ -1,16 +1,16 @@
 #lang racket
 
-(require "rect.rkt")
-(require "circle.rkt")
-(require "ellipse.rkt")
-(require "line.rkt")
-(require "polygon.rkt")
-(require "polyline.rkt")
-(require "gradient.rkt")
-(require "view-box.rkt")
-(require "text.rkt")
-(require "path/path.rkt")
-(require "group.rkt")
+(require "rect.rkt"
+         "circle.rkt"
+         "ellipse.rkt"
+         "line.rkt"
+         "polygon.rkt"
+         "polyline.rkt"
+         "gradient.rkt"
+         "view-box.rkt"
+         "text.rkt"
+         "path/path.rkt"
+         "group.rkt")
 
 (provide (contract-out
           [struct SVG

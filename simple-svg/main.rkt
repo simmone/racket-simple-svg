@@ -1,39 +1,39 @@
 #lang racket
 
-(require "src/defines/view-box.rkt")
-(require "src/defines/rect.rkt")
-(require "src/defines/circle.rkt")
-(require "src/defines/ellipse.rkt")
-(require "src/defines/line.rkt")
-(require "src/defines/polygon.rkt")
-(require "src/defines/polyline.rkt")
-(require "src/defines/gradient.rkt")
-(require "src/defines/path/path.rkt")
-(require "src/defines/path/moveto.rkt")
-(require "src/defines/path/arc.rkt")
-(require "src/defines/path/lineto.rkt")
-(require "src/defines/path/close-path.rkt")
-(require "src/defines/path/ccurve.rkt")
-(require "src/defines/path/qcurve.rkt")
-(require "src/defines/path/raw-path.rkt")
-(require "src/defines/text.rkt")
-(require "src/defines/svg.rkt")
-(require "src/defines/sstyle.rkt")
-(require "src/defines/group.rkt")
+(require "src/defines/view-box.rkt"
+         "src/defines/rect.rkt"
+         "src/defines/circle.rkt"
+         "src/defines/ellipse.rkt"
+         "src/defines/line.rkt"
+         "src/defines/polygon.rkt"
+         "src/defines/polyline.rkt"
+         "src/defines/gradient.rkt"
+         "src/defines/path/path.rkt"
+         "src/defines/path/moveto.rkt"
+         "src/defines/path/arc.rkt"
+         "src/defines/path/lineto.rkt"
+         "src/defines/path/close-path.rkt"
+         "src/defines/path/ccurve.rkt"
+         "src/defines/path/qcurve.rkt"
+         "src/defines/path/raw-path.rkt"
+         "src/defines/text.rkt"
+         "src/defines/svg.rkt"
+         "src/defines/sstyle.rkt"
+         "src/defines/group.rkt")
 
 (provide (contract-out
           [svg-out (->* (number? number? procedure?)
                         (
                          #:background (or/c #f string?)
-                         #:viewBox (or/c #f VIEW-BOX?)
-                        )
+                                      #:viewBox (or/c #f VIEW-BOX?)
+                                      )
                         string?)]
           [new-view-box (-> number? number? number? number? VIEW-BOX?)]
           [new-rect (->* (number? number?)
                          (
                           #:radius_x (or/c #f number?)
-                          #:radius_y (or/c #f number?)
-                         )
+                                     #:radius_y (or/c #f number?)
+                                     )
                          RECT?
                          )]
           [new-circle (-> number? CIRCLE?)]
@@ -45,38 +45,38 @@
                                 ((listof (list/c (between/c 0 100) string? (between/c 0 1))))
                                 (
                                  #:x1 (or/c #f number?)
-                                 #:y1 (or/c #f number?)
-                                 #:x2 (or/c #f number?)
-                                 #:y2 (or/c #f number?)
-                                 #:gradientUnits (or/c #f 'userSpaceOnUse 'objectBoundingBox)
-                                 #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
-                                 )
+                                      #:y1 (or/c #f number?)
+                                      #:x2 (or/c #f number?)
+                                      #:y2 (or/c #f number?)
+                                      #:gradientUnits (or/c #f 'userSpaceOnUse 'objectBoundingBox)
+                                      #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
+                                      )
                                 LINEAR-GRADIENT?)]
           [new-radial-gradient (->*
                                 ((listof (list/c (between/c 0 100) string? (between/c 0 1))))
                                 (
                                  #:cx (or/c #f (between/c 0 100))
-                                 #:cy (or/c #f (between/c 0 100))
-                                 #:fx (or/c #f (between/c 0 100))
-                                 #:fy (or/c #f (between/c 0 100))
-                                 #:r (or/c #f number?)
-                                 #:gradientUnits (or/c #f 'userSpaceOnUse 'objectBoundingBox)
-                                 #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
-                                 )
+                                      #:cy (or/c #f (between/c 0 100))
+                                      #:fx (or/c #f (between/c 0 100))
+                                      #:fy (or/c #f (between/c 0 100))
+                                      #:r (or/c #f number?)
+                                      #:gradientUnits (or/c #f 'userSpaceOnUse 'objectBoundingBox)
+                                      #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
+                                      )
                                 RADIAL-GRADIENT?)]
           [new-path (-> procedure? PATH?)]
           [svg-path-moveto (-> (cons/c number? number?) void?)]
           [svg-path-moveto* (-> (cons/c number? number?) void?)]
           [svg-path-arc (->
-                (cons/c number? number?)
-                (cons/c number? number?)
-                (or/c 'left_big 'left_small 'right_big 'right_small)
-                void?)]
+                         (cons/c number? number?)
+                         (cons/c number? number?)
+                         (or/c 'left_big 'left_small 'right_big 'right_small)
+                         void?)]
           [svg-path-arc* (->
-                 (cons/c number? number?)
-                 (cons/c number? number?)
-                 (or/c 'left_big 'left_small 'right_big 'right_small)
-                 void?)]
+                          (cons/c number? number?)
+                          (cons/c number? number?)
+                          (or/c 'left_big 'left_small 'right_big 'right_small)
+                          void?)]
           [svg-path-lineto (-> (cons/c number? number?) void?)]
           [svg-path-lineto* (-> (cons/c number? number?) void?)]
           [svg-path-hlineto (-> number? void?)]
@@ -105,18 +105,18 @@
                      (string?)
                      (
                       #:font-size (or/c #f number?)
-                      #:font-family (or/c #f string?)
-                      #:dx (or/c #f number?)
-                      #:dy (or/c #f number?)
-                      #:rotate (or/c #f (listof number?))
-                      #:textLength (or/c #f number?)
-                      #:kerning (or/c #f number? 'auto 'inherit)
-                      #:letter-space (or/c #f number? 'normal 'inherit)
-                      #:word-space (or/c #f number? 'normal 'inherit)
-                      #:text-decoration (or/c #f 'overline 'underline 'line-through)
-                      #:path (or/c #f string?)
-                      #:path-startOffset (or/c #f (between/c 0 100))
-                      )
+                                  #:font-family (or/c #f string?)
+                                  #:dx (or/c #f number?)
+                                  #:dy (or/c #f number?)
+                                  #:rotate (or/c #f (listof number?))
+                                  #:textLength (or/c #f number?)
+                                  #:kerning (or/c #f number? 'auto 'inherit)
+                                  #:letter-space (or/c #f number? 'normal 'inherit)
+                                  #:word-space (or/c #f number? 'normal 'inherit)
+                                  #:text-decoration (or/c #f 'overline 'underline 'line-through)
+                                  #:path (or/c #f string?)
+                                  #:path-startOffset (or/c #f (between/c 0 100))
+                                  )
                      TEXT?)]
           [format-text (-> string? TEXT? string?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
@@ -215,14 +215,14 @@
     (svg-def-name-group group_id user_proc)))
 
 (define (svg-def-name-group group_id user_proc)
-    (parameterize
-        ([*GROUP* (new-group)])
+  (parameterize
+      ([*GROUP* (new-group)])
 
-      (hash-set! (SVG-group_define_map (*SVG*)) group_id (*GROUP*))
+    (hash-set! (SVG-group_define_map (*SVG*)) group_id (*GROUP*))
 
-      (user_proc)
-      
-      group_id))
+    (user_proc)
+    
+    group_id))
 
 (define (svg-place-widget widget_id
                           #:style [style #f]
@@ -280,30 +280,30 @@
   (let loop-group ([group_ids
                     `(,@(filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) string<?))
                       ,DEFAULT_GROUP_ID)])
-      (when (not (null? group_ids))
-        (let* ([group_id (car group_ids)]
-               [group (hash-ref (SVG-group_define_map (*SVG*)) group_id)])
-          (when (> (length (GROUP-widget_list group)) 0)
-            (printf "  <symbol id=\"~a\">\n" group_id)
-            (let loop-widget ([widget_list (GROUP-widget_list group)])
-              (when (not (null? widget_list))
-                (let* ([widget (car widget_list)]
-                       [widget_id (WIDGET-id widget)]
-                       [widget_at (WIDGET-at widget)]
-                       [widget_style (WIDGET-style widget)])
-                  (printf "    <use xlink:href=\"#~a\"" widget_id)
-                  
-                  (when (and widget_at (not (equal? widget_at '(0 . 0))))
-                    (printf " x=\"~a\" y=\"~a\"" (~r (car widget_at)) (~r (cdr widget_at))))
-                  
-                  (when widget_style
-                    (printf "~a" (sstyle-format widget_style)))
-                  
-                  (printf " />\n")
-                  )
-                (loop-widget (cdr widget_list))))
-            (printf "  </symbol>\n\n")))
-          (loop-group (cdr group_ids))))
+    (when (not (null? group_ids))
+      (let* ([group_id (car group_ids)]
+             [group (hash-ref (SVG-group_define_map (*SVG*)) group_id)])
+        (when (> (length (GROUP-widget_list group)) 0)
+          (printf "  <symbol id=\"~a\">\n" group_id)
+          (let loop-widget ([widget_list (GROUP-widget_list group)])
+            (when (not (null? widget_list))
+              (let* ([widget (car widget_list)]
+                     [widget_id (WIDGET-id widget)]
+                     [widget_at (WIDGET-at widget)]
+                     [widget_style (WIDGET-style widget)])
+                (printf "    <use xlink:href=\"#~a\"" widget_id)
+                
+                (when (and widget_at (not (equal? widget_at '(0 . 0))))
+                  (printf " x=\"~a\" y=\"~a\"" (~r (car widget_at)) (~r (cdr widget_at))))
+                
+                (when widget_style
+                  (printf "~a" (sstyle-format widget_style)))
+                
+                (printf " />\n")
+                )
+              (loop-widget (cdr widget_list))))
+          (printf "  </symbol>\n\n")))
+      (loop-group (cdr group_ids))))
   
   (let loop-show ([group_shows (SVG-group_show_list (*SVG*))])
     (when (not (null? group_shows))
