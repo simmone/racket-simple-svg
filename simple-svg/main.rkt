@@ -8,6 +8,7 @@
          "src/defines/polygon.rkt"
          "src/defines/polyline.rkt"
          "src/defines/gradient.rkt"
+         "src/defines/filter.rkt"
          "src/defines/path/path.rkt"
          "src/defines/path/moveto.rkt"
          "src/defines/path/arc.rkt"
