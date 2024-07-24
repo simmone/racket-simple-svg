@@ -13,7 +13,7 @@
                               (
                                #:blur (or/c #f number?)
                                #:dropdown_offset (or/c #f number?)
-                               #:dropdown_color (or/c #f number?)
+                               #:dropdown_color (or/c #f string?)
                                )
                               BLUR-DROPDOWN?)]
           [format-blur-dropdown (-> string? BLUR-DROPDOWN? string?)]

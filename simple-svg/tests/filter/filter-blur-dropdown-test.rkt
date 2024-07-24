@@ -25,8 +25,8 @@
 
                 (set-SSTYLE-fill! _sstyle "red")
 
-                (svg-place-widget circle_id #:style _sstyle #:filter filter_id #:at '(60 . 60)))))])
-      
+                (svg-place-widget circle_id #:style _sstyle #:filter_id filter_id #:at '(60 . 60)))))])
+
       (call-with-input-file filter_blur_dropdown_svg
         (lambda (expected)
           (call-with-input-string

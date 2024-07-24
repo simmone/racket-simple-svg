@@ -70,7 +70,7 @@
                               (
                                #:blur (or/c #f number?)
                                #:dropdown_offset (or/c #f number?)
-                               #:dropdown_color (or/c #f number?)
+                               #:dropdown_color (or/c #f string?)
                                )
                               BLUR-DROPDOWN?)]
           [new-path (-> procedure? PATH?)]
@@ -155,8 +155,9 @@
           [svg-place-widget (->* (string?)
                                  (
                                   #:style SSTYLE?
-                                          #:at (cons/c number? number?)
-                                          )
+                                  #:at (cons/c number? number?)
+                                  #:filter_id string?
+                                  )
                                  void?)]
           ))
 
@@ -236,12 +237,12 @@
 
 (define (svg-place-widget widget_id
                           #:style [style #f]
-                          #:filter [filter #f]
+                          #:filter_id [filter_id #f]
                           #:at [at #f])
   (set-GROUP-widget_list! (*GROUP*)
                           `(
                             ,@(GROUP-widget_list (*GROUP*))
-                            ,(WIDGET widget_id at style))))
+                            ,(WIDGET widget_id at style filter_id))))
 
 (define (flush-data)
   (printf "    width=\"~a\" height=\"~a\"\n" (~r (SVG-width (*SVG*))) (~r (SVG-height (*SVG*))))
@@ -300,10 +301,13 @@
           (printf "  <symbol id=\"~a\">\n" group_id)
           (let loop-widget ([widget_list (GROUP-widget_list group)])
             (when (not (null? widget_list))
-              (let* ([widget (car widget_list)]
+              (let* (
+                     [widget (car widget_list)]
                      [widget_id (WIDGET-id widget)]
                      [widget_at (WIDGET-at widget)]
-                     [widget_style (WIDGET-style widget)])
+                     [widget_style (WIDGET-style widget)]
+                     [widget_filter_id (WIDGET-filter_id widget)]
+                     )
                 (printf "    <use xlink:href=\"#~a\"" widget_id)
                 
                 (when (and widget_at (not (equal? widget_at '(0 . 0))))
@@ -311,6 +315,9 @@
                 
                 (when widget_style
                   (printf "~a" (sstyle-format widget_style)))
+
+                (when widget_filter_id
+                  (printf " filter=\"url(#~a)\"" widget_filter_id))
                 
                 (printf " />\n")
                 )
