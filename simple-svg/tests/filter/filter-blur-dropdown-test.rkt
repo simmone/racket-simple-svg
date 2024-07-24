@@ -20,7 +20,7 @@
             120 120
             (lambda ()
               (let ([circle_id (svg-def-shape (new-circle 50))]
-                    [filter_id (svg-def-filter (new-blur-dropdown 2 3 "black"))]
+                    [filter_id (svg-def-shape (new-blur-dropdown))]
                     [_sstyle (sstyle-new)])
 
                 (set-SSTYLE-fill! _sstyle "red")

@@ -1,6 +1,7 @@
 #lang racket
 
 (require "sstyle.rkt")
+(require "filter.rkt")
 
 (provide (contract-out
           [struct WIDGET
@@ -8,6 +9,7 @@
                    (id string?)
                    (at (or/c #f (cons/c number? number?)))
                    (style (or/c #f SSTYLE?))
+                   (filter (or/c #f BLUR-DROPDOWN?))
                    )]
           [struct GROUP
                   (
@@ -23,6 +25,7 @@
                 [id #:mutable]
                 [at #:mutable]
                 [style #:mutable]
+                [filter #:mutable]
                 )
         #:transparent)
 

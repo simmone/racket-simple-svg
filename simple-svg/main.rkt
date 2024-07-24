@@ -65,6 +65,14 @@
                                       #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
                                       )
                                 RADIAL-GRADIENT?)]
+          [new-blur-dropdown (->*
+                              ()
+                              (
+                               #:blur (or/c #f number?)
+                               #:dropdown_offset (or/c #f number?)
+                               #:dropdown_color (or/c #f number?)
+                               )
+                              BLUR-DROPDOWN?)]
           [new-path (-> procedure? PATH?)]
           [svg-path-moveto (-> (cons/c number? number?) void?)]
           [svg-path-moveto* (-> (cons/c number? number?) void?)]
@@ -121,7 +129,8 @@
                      TEXT?)]
           [format-text (-> string? TEXT? string?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
-                                   POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?) string?)]
+                                   POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
+                                   BLUR-DROPDOWN?) string?)]
           [svg-def-group (-> procedure? string?)]
           [struct SSTYLE
                   (
@@ -227,6 +236,7 @@
 
 (define (svg-place-widget widget_id
                           #:style [style #f]
+                          #:filter [filter #f]
                           #:at [at #f])
   (set-GROUP-widget_list! (*GROUP*)
                           `(
@@ -269,6 +279,8 @@
                     (format-linear-gradient (car shape_ids) shape)]
                    [(RADIAL-GRADIENT? shape)
                     (format-radial-gradient (car shape_ids) shape)]
+                   [(BLUR-DROPDOWN? shape)
+                    (format-blur-dropdown (car shape_ids) shape)]
                    [(PATH? shape)
                     (format-path (car shape_ids) shape)]
                    [(TEXT? shape)
