@@ -8,6 +8,7 @@
                    (id string?)
                    (at (or/c #f (cons/c number? number?)))
                    (style (or/c #f SSTYLE?))
+                   (filter_id (or/c #f string?))
                    )]
           [struct GROUP
                   (
@@ -23,6 +24,7 @@
                 [id #:mutable]
                 [at #:mutable]
                 [style #:mutable]
+                [filter_id #:mutable]
                 )
         #:transparent)
 

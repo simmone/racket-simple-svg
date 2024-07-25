@@ -1,0 +1,26 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="140" height="140"
+    >
+  <defs>
+    <circle id="s1" r="50" />
+    <filter id="s2">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur>
+      <feOffset dx="3" dy="3" result="offsetblur"></feOffset>
+      <feFlood flood-color="black"></feFlood>
+      <feComposite in2="offsetblur" operator="in"></feComposite>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <symbol id="default">
+    <use xlink:href="#s1" x="70" y="70" fill="none" stroke-width="12" stroke="red" filter="url(#s2)" />
+  </symbol>
+
+  <use xlink:href="#default" />
+</svg>

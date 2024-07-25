@@ -8,6 +8,7 @@
          "src/defines/polygon.rkt"
          "src/defines/polyline.rkt"
          "src/defines/gradient.rkt"
+         "src/defines/filter.rkt"
          "src/defines/path/path.rkt"
          "src/defines/path/moveto.rkt"
          "src/defines/path/arc.rkt"
@@ -64,6 +65,14 @@
                                       #:spreadMethod (or/c #f 'pad 'repeat 'reflect)
                                       )
                                 RADIAL-GRADIENT?)]
+          [new-blur-dropdown (->*
+                              ()
+                              (
+                               #:blur (or/c #f number?)
+                               #:dropdown_offset (or/c #f number?)
+                               #:dropdown_color (or/c #f string?)
+                               )
+                              BLUR-DROPDOWN?)]
           [new-path (-> procedure? PATH?)]
           [svg-path-moveto (-> (cons/c number? number?) void?)]
           [svg-path-moveto* (-> (cons/c number? number?) void?)]
@@ -120,7 +129,8 @@
                      TEXT?)]
           [format-text (-> string? TEXT? string?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
-                                   POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?) string?)]
+                                   POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
+                                   BLUR-DROPDOWN?) string?)]
           [svg-def-group (-> procedure? string?)]
           [struct SSTYLE
                   (
@@ -145,8 +155,9 @@
           [svg-place-widget (->* (string?)
                                  (
                                   #:style SSTYLE?
-                                          #:at (cons/c number? number?)
-                                          )
+                                  #:at (cons/c number? number?)
+                                  #:filter_id string?
+                                  )
                                  void?)]
           ))
 
@@ -226,11 +237,12 @@
 
 (define (svg-place-widget widget_id
                           #:style [style #f]
+                          #:filter_id [filter_id #f]
                           #:at [at #f])
   (set-GROUP-widget_list! (*GROUP*)
                           `(
                             ,@(GROUP-widget_list (*GROUP*))
-                            ,(WIDGET widget_id at style))))
+                            ,(WIDGET widget_id at style filter_id))))
 
 (define (flush-data)
   (printf "    width=\"~a\" height=\"~a\"\n" (~r (SVG-width (*SVG*))) (~r (SVG-height (*SVG*))))
@@ -268,6 +280,8 @@
                     (format-linear-gradient (car shape_ids) shape)]
                    [(RADIAL-GRADIENT? shape)
                     (format-radial-gradient (car shape_ids) shape)]
+                   [(BLUR-DROPDOWN? shape)
+                    (format-blur-dropdown (car shape_ids) shape)]
                    [(PATH? shape)
                     (format-path (car shape_ids) shape)]
                    [(TEXT? shape)
@@ -287,10 +301,13 @@
           (printf "  <symbol id=\"~a\">\n" group_id)
           (let loop-widget ([widget_list (GROUP-widget_list group)])
             (when (not (null? widget_list))
-              (let* ([widget (car widget_list)]
+              (let* (
+                     [widget (car widget_list)]
                      [widget_id (WIDGET-id widget)]
                      [widget_at (WIDGET-at widget)]
-                     [widget_style (WIDGET-style widget)])
+                     [widget_style (WIDGET-style widget)]
+                     [widget_filter_id (WIDGET-filter_id widget)]
+                     )
                 (printf "    <use xlink:href=\"#~a\"" widget_id)
                 
                 (when (and widget_at (not (equal? widget_at '(0 . 0))))
@@ -298,6 +315,9 @@
                 
                 (when widget_style
                   (printf "~a" (sstyle-format widget_style)))
+
+                (when widget_filter_id
+                  (printf " filter=\"url(#~a)\"" widget_filter_id))
                 
                 (printf " />\n")
                 )

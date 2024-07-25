@@ -133,13 +133,14 @@
                      (svg-place-widget circle_id #:style circle5_sstyle #:at '(400 . 120))
                      ))))
 
-              (let ([group_style (sstyle-new)])
+              (let ([group_style (sstyle-new)]
+                    [filter_id (svg-def-shape (new-blur-dropdown))])
                 (set-SSTYLE-stroke-width! group_style 12)
 
-                (svg-place-widget pattern_id #:style group_style #:at '(0 . 0))
-                (svg-place-widget pattern_id #:style group_style #:at '(0 . 300))
-                (svg-place-widget pattern_id #:style group_style #:at '(500 . 0))
-                (svg-place-widget pattern_id #:style group_style #:at '(500 . 300)))
+                (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(0 . 0))
+                (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(0 . 300))
+                (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(500 . 0))
+                (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(500 . 300)))
               ))])
 
       (call-with-input-file group3_svg
