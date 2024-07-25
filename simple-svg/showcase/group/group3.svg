@@ -6,6 +6,16 @@
     >
   <defs>
     <circle id="s2" r="60" />
+    <filter id="s3">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur>
+      <feOffset dx="3" dy="3" result="offsetblur"></feOffset>
+      <feFlood flood-color="black"></feFlood>
+      <feComposite in2="offsetblur" operator="in"></feComposite>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
   </defs>
 
   <symbol id="g1">
@@ -17,10 +27,10 @@
   </symbol>
 
   <symbol id="default">
-    <use xlink:href="#g1" fill="none" stroke-width="12" />
-    <use xlink:href="#g1" x="0" y="300" fill="none" stroke-width="12" />
-    <use xlink:href="#g1" x="500" y="0" fill="none" stroke-width="12" />
-    <use xlink:href="#g1" x="500" y="300" fill="none" stroke-width="12" />
+    <use xlink:href="#g1" fill="none" stroke-width="12" filter="url(#s3)" />
+    <use xlink:href="#g1" x="0" y="300" fill="none" stroke-width="12" filter="url(#s3)" />
+    <use xlink:href="#g1" x="500" y="0" fill="none" stroke-width="12" filter="url(#s3)" />
+    <use xlink:href="#g1" x="500" y="300" fill="none" stroke-width="12" filter="url(#s3)" />
   </symbol>
 
   <use xlink:href="#default" />

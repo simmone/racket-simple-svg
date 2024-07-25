@@ -40,4 +40,6 @@ raco pkg install simple-svg
 
 @include-section["gradient/gradient.scrbl"]
 
+@include-section["filter/filter.scrbl"]
+
 @include-section["group/group.scrbl"]

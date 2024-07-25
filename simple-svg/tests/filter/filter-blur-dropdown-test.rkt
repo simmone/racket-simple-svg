@@ -17,15 +17,16 @@
 
     (let ([actual_svg
            (svg-out
-            120 120
+            140 140
             (lambda ()
               (let ([circle_id (svg-def-shape (new-circle 50))]
                     [filter_id (svg-def-shape (new-blur-dropdown))]
                     [_sstyle (sstyle-new)])
 
-                (set-SSTYLE-fill! _sstyle "red")
+                (set-SSTYLE-stroke! _sstyle "red")
+                (set-SSTYLE-stroke-width! _sstyle 12)
 
-                (svg-place-widget circle_id #:style _sstyle #:filter_id filter_id #:at '(60 . 60)))))])
+                (svg-place-widget circle_id #:style _sstyle #:filter_id filter_id #:at '(70 . 70)))))])
 
       (call-with-input-file filter_blur_dropdown_svg
         (lambda (expected)
