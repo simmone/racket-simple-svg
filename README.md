@@ -87,6 +87,14 @@ https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/exa
 ```
 ![ScreenShot](simple-svg/showcase/example/five_circles.svg)
 
+# ShowCase-4: Racket Logo (Plain svg and Blur Effect svg)
+
+https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/example/logo.rkt
+
+![ScreenShot](simple-svg/showcase/example/logo.svg)
+
+![ScreenShot](simple-svg/showcase/example/logo_blur.svg)
+
 # Steps to use
 
 1. use svg-out to define a canvas and a lambda to define all the things, at the end, output complete svg string.
