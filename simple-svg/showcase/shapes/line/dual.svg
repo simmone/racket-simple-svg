@@ -1,0 +1,21 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="800" height="600"
+    >
+  <defs>
+    <rect id="s1" width="800" height="600" />
+    <line id="s2" x1="100" y1="300" x2="700" y2="300" />
+    <line id="s3" x1="400" y1="100" x2="400" y2="500" />
+  </defs>
+
+  <symbol id="background">
+    <use xlink:href="#s1" fill="#eeeeee" />
+  </symbol>
+
+  <use xlink:href="#background" />
+
+    <use xlink:href="#s2" fill="none" stroke-width="2" stroke="#5c3d19" />
+    <use xlink:href="#s3" fill="none" stroke-width="2" stroke="#5c3d19" />
+</svg>
