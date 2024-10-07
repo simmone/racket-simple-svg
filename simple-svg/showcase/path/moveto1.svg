@@ -12,10 +12,6 @@
     <circle id="s2" r="5" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" fill="none" stroke-width="1" stroke="#7AA20D" />
-    <use xlink:href="#s2" x="20" y="60" fill="red" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" fill="none" stroke-width="1" stroke="#7AA20D" />
+  <use xlink:href="#s2" x="20" y="60" fill="red" />
 </svg>

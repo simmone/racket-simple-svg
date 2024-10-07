@@ -26,12 +26,8 @@
     <use xlink:href="#s2" x="400" y="120" fill="none" stroke="rgb(214, 0, 23)" />
   </symbol>
 
-  <symbol id="default">
-    <use xlink:href="#g1" fill="none" stroke-width="12" filter="url(#s3)" />
-    <use xlink:href="#g1" x="0" y="300" fill="none" stroke-width="12" filter="url(#s3)" />
-    <use xlink:href="#g1" x="500" y="0" fill="none" stroke-width="12" filter="url(#s3)" />
-    <use xlink:href="#g1" x="500" y="300" fill="none" stroke-width="12" filter="url(#s3)" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#g1" fill="none" stroke-width="12" filter="url(#s3)" />
+  <use xlink:href="#g1" x="0" y="300" fill="none" stroke-width="12" filter="url(#s3)" />
+  <use xlink:href="#g1" x="500" y="0" fill="none" stroke-width="12" filter="url(#s3)" />
+  <use xlink:href="#g1" x="500" y="300" fill="none" stroke-width="12" filter="url(#s3)" />
 </svg>

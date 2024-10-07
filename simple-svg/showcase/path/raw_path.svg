@@ -16,9 +16,5 @@
             "/>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" fill="#7AA20D" stroke-width="9" stroke="#7AA20D" stroke-linejoin="round" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" fill="#7AA20D" stroke-width="9" stroke="#7AA20D" stroke-linejoin="round" />
 </svg>

@@ -12,9 +12,5 @@
     </linearGradient>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" fill="url(#s2)" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" fill="url(#s2)" />
 </svg>

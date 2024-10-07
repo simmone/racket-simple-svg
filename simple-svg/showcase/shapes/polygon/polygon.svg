@@ -8,9 +8,5 @@
     <polygon id="s1" points="0,25 25,0 75,0 100,25 100,75 75,100 25,100 0,75" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="5" y="5" fill="#ED6E46" stroke-width="5" stroke="#765373" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="5" y="5" fill="#ED6E46" stroke-width="5" stroke="#765373" />
 </svg>

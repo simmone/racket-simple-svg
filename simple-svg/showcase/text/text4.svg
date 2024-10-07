@@ -16,9 +16,5 @@
     </text>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s2" fill="#ED6E46" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s2" fill="#ED6E46" />
 </svg>

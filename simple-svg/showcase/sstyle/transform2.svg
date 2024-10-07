@@ -8,9 +8,5 @@
     <circle id="s1" r="50" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="40" y="60" fill="#BBC42A" transform="scale(2) skewX(20)" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="40" y="60" fill="#BBC42A" transform="scale(2) skewX(20)" />
 </svg>

@@ -95,7 +95,7 @@
                 (svg-place-widget pattern_id #:at '(0 . 50))
                 (svg-place-widget pattern_id #:at '(50 . 50))
                 )))])
-
+      
       (call-with-input-file group2_svg
         (lambda (expected)
           (call-with-input-string

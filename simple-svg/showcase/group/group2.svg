@@ -24,12 +24,8 @@
     <use xlink:href="#g4" x="40" y="0" />
   </symbol>
 
-  <symbol id="default">
-    <use xlink:href="#g5" />
-    <use xlink:href="#g5" x="50" y="0" />
-    <use xlink:href="#g5" x="0" y="50" />
-    <use xlink:href="#g5" x="50" y="50" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#g5" />
+  <use xlink:href="#g5" x="50" y="0" />
+  <use xlink:href="#g5" x="0" y="50" />
+  <use xlink:href="#g5" x="50" y="50" />
 </svg>

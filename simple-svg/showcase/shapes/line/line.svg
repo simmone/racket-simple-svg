@@ -8,9 +8,5 @@
     <line id="s1" x1="0" y1="0" x2="100" y2="100" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="5" y="5" fill="none" stroke-width="10" stroke="#765373" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="5" y="5" fill="none" stroke-width="10" stroke="#765373" />
 </svg>

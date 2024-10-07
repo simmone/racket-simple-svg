@@ -16,6 +16,6 @@
 
   <use xlink:href="#background" />
 
-    <use xlink:href="#s2" fill="none" stroke-width="2" stroke="#5c3d19" />
-    <use xlink:href="#s3" fill="none" stroke-width="2" stroke="#5c3d19" />
+  <use xlink:href="#s2" fill="none" stroke-width="2" stroke="#5c3d19" />
+  <use xlink:href="#s3" fill="none" stroke-width="2" stroke="#5c3d19" />
 </svg>

@@ -8,12 +8,8 @@
     <circle id="s1" r="50" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="50" y="50" fill="red" />
-    <use xlink:href="#s1" x="150" y="50" fill="yellow" />
-    <use xlink:href="#s1" x="50" y="150" fill="blue" />
-    <use xlink:href="#s1" x="150" y="150" fill="green" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="50" y="50" fill="red" />
+  <use xlink:href="#s1" x="150" y="50" fill="yellow" />
+  <use xlink:href="#s1" x="50" y="150" fill="blue" />
+  <use xlink:href="#s1" x="150" y="150" fill="green" />
 </svg>

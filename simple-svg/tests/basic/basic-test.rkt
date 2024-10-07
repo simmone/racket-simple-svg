@@ -80,7 +80,7 @@
                     [_sstyle (sstyle-new)])
                 (set-SSTYLE-fill! _sstyle "#FFFFFF")
                 (svg-place-widget rec_id #:style _sstyle #:at '(25 . 25)))))])
-
+      
       (call-with-input-file rect_in_background_svg
         (lambda (expected)
           (call-with-input-string

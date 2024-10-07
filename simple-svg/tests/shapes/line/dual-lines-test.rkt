@@ -6,7 +6,7 @@
          "../../../main.rkt"
          racket/runtime-path)
 
-(define-runtime-path line_svg "../../../showcase/shapes/line/line.svg")
+(define-runtime-path line_svg "../../../showcase/shapes/line/dual.svg")
 
 (define test-all
   (test-suite
@@ -33,8 +33,6 @@
 
              (svg-place-widget line-h #:style line-h-style)
              (svg-place-widget line-v #:style line-v-style)))])
-      
-      (printf "~a\n" actual_svg)
 
       (call-with-input-file line_svg
         (lambda (expected)

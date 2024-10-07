@@ -8,9 +8,5 @@
     <ellipse id="s1" rx="100" ry="50" />
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="100" y="50" fill="#7AA20D" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="100" y="50" fill="#7AA20D" />
 </svg>

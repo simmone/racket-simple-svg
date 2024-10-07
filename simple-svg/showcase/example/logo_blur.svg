@@ -30,13 +30,9 @@
     </filter>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="256.252" y="255.986" fill="white" />
-    <use xlink:href="#s2" fill="#3E5BA9" filter="url(#s5)" />
-    <use xlink:href="#s3" fill="#9F1D20" filter="url(#s5)" />
-    <use xlink:href="#s4" fill="#9F1D20" filter="url(#s5)" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="256.252" y="255.986" fill="white" />
+  <use xlink:href="#s2" fill="#3E5BA9" filter="url(#s5)" />
+  <use xlink:href="#s3" fill="#9F1D20" filter="url(#s5)" />
+  <use xlink:href="#s4" fill="#9F1D20" filter="url(#s5)" />
 </svg>
 

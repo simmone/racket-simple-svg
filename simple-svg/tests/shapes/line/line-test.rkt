@@ -25,7 +25,7 @@
                 (set-SSTYLE-stroke-width! _sstyle 10)
                 (set-SSTYLE-stroke! _sstyle "#765373")
                 (svg-place-widget line_id #:style _sstyle #:at '(5 . 5)))))])
-      
+
       (call-with-input-file line_svg
         (lambda (expected)
           (call-with-input-string

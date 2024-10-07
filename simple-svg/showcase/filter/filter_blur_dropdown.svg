@@ -18,9 +18,5 @@
     </filter>
   </defs>
 
-  <symbol id="default">
-    <use xlink:href="#s1" x="70" y="70" fill="none" stroke-width="12" stroke="red" filter="url(#s2)" />
-  </symbol>
-
-  <use xlink:href="#default" />
+  <use xlink:href="#s1" x="70" y="70" fill="none" stroke-width="12" stroke="red" filter="url(#s2)" />
 </svg>

@@ -289,16 +289,46 @@
                    )))
 
         (loop-def (cdr shape_ids))))
-    (printf "  </defs>\n\n"))
+    (printf "  </defs>\n"))
 
-  (let loop-group ([group_ids
-                    `(,@(filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) string<?))
-                      ,DEFAULT_GROUP_ID)])
-    (when (not (null? group_ids))
-      (let* ([group_id (car group_ids)]
-             [group (hash-ref (SVG-group_define_map (*SVG*)) group_id)])
+  (let ([all_group_ids
+         (filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) string<?))])
+
+    (let loop-group ([group_ids all_group_ids])
+      (when (not (null? group_ids))
+        (printf "\n")
+        (printf "  <symbol id=\"~a\">\n" (car group_ids))
+        (show-group-widgets (car group_ids) "    ")
+        (printf "  </symbol>\n")
+        (loop-group (cdr group_ids)))))
+  
+  (let ([all_group_shows
+         (filter (lambda (group_show) (not (string=? (car group_show) DEFAULT_GROUP_ID))) (SVG-group_show_list (*SVG*)))])
+
+    (when (not (null? all_group_shows)) (printf "\n"))
+
+    (let loop-show ([group_shows all_group_shows])
+      (when (not (null? group_shows))
+        (let* ([group_show (car group_shows)]
+               [group_id (car group_show)]
+               [group_pos (cdr group_show)])
+          (printf "  <use xlink:href=\"#~a\" " group_id)
+          
+          (when (and group_pos (not (equal? group_pos '(0 . 0))))
+            (printf "x=\"~a\" y=\"~a\" " (~r (car group_pos)) (~r (cdr group_pos))))
+          
+          (printf "/>\n"))
+        (loop-show (cdr group_shows)))))
+
+  (let ([group (hash-ref (SVG-group_define_map (*SVG*)) DEFAULT_GROUP_ID)])
         (when (> (length (GROUP-widget_list group)) 0)
-          (printf "  <symbol id=\"~a\">\n" group_id)
+          (printf "\n")
+          (show-group-widgets DEFAULT_GROUP_ID "  ")))
+)
+
+(define (show-group-widgets group_id prefix)
+  (let ([group (hash-ref (SVG-group_define_map (*SVG*)) group_id)])
+        (when (> (length (GROUP-widget_list group)) 0)
           (let loop-widget ([widget_list (GROUP-widget_list group)])
             (when (not (null? widget_list))
               (let* (
@@ -308,7 +338,7 @@
                      [widget_style (WIDGET-style widget)]
                      [widget_filter_id (WIDGET-filter_id widget)]
                      )
-                (printf "    <use xlink:href=\"#~a\"" widget_id)
+                (printf "~a<use xlink:href=\"#~a\"" prefix widget_id)
                 
                 (when (and widget_at (not (equal? widget_at '(0 . 0))))
                   (printf " x=\"~a\" y=\"~a\"" (~r (car widget_at)) (~r (cdr widget_at))))
@@ -321,19 +351,5 @@
                 
                 (printf " />\n")
                 )
-              (loop-widget (cdr widget_list))))
-          (printf "  </symbol>\n\n")))
-      (loop-group (cdr group_ids))))
-  
-  (let loop-show ([group_shows (SVG-group_show_list (*SVG*))])
-    (when (not (null? group_shows))
-      (let* ([group_show (car group_shows)]
-             [group_id (car group_show)]
-             [group_pos (cdr group_show)])
-        (printf "  <use xlink:href=\"#~a\" " group_id)
-        
-        (when (and group_pos (not (equal? group_pos '(0 . 0))))
-          (printf "x=\"~a\" y=\"~a\" " (~r (car group_pos)) (~r (cdr group_pos))))
-        
-        (printf "/>\n"))
-      (loop-show (cdr group_shows)))))
+              (loop-widget (cdr widget_list)))))))
+
