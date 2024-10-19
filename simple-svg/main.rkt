@@ -18,6 +18,7 @@
          "src/defines/path/qcurve.rkt"
          "src/defines/path/raw-path.rkt"
          "src/defines/text.rkt"
+         "src/defines/arrow.rkt"
          "src/defines/svg.rkt"
          "src/defines/sstyle.rkt"
          "src/defines/group.rkt")
@@ -127,10 +128,10 @@
                                   #:path-startOffset (or/c #f (between/c 0 100))
                                   )
                      TEXT?)]
-          [format-text (-> string? TEXT? string?)]
+          [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? ARROW?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
-                                   BLUR-DROPDOWN?) string?)]
+                                   BLUR-DROPDOWN? ARROW?) string?)]
           [svg-def-group (-> procedure? string?)]
           [struct SSTYLE
                   (
@@ -286,6 +287,8 @@
                     (format-path (car shape_ids) shape)]
                    [(TEXT? shape)
                     (format-text (car shape_ids) shape)]
+                   [(ARROW? shape)
+                    (format-arrow (car shape_ids) shape)]
                    )))
 
         (loop-def (cdr shape_ids))))

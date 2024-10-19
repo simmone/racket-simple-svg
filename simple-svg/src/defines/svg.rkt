@@ -11,6 +11,7 @@
          "view-box.rkt"
          "text.rkt"
          "path/path.rkt"
+         "arrow.rkt"
          "group.rkt")
 
 (provide (contract-out
@@ -23,7 +24,7 @@
                    (shape_define_map (hash/c string?
                                              (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
                                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
-                                                   BLUR-DROPDOWN?)))
+                                                   BLUR-DROPDOWN? ARROW?)))
                    (group_define_map (hash/c string? GROUP?))
                    (group_show_list (listof (cons/c string? (cons/c number? number?))))
                    )
