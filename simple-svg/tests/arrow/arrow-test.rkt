@@ -20,9 +20,9 @@
             500 500
             (lambda ()
               (let (
-                    [arrow1_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 450) 10 20 10))]
-                    [arrow2_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 350) 10 20 10))]
                     [arrow3_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 450) 10 20 10))]
+                    [arrow4_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 450) 10 20 10))]
+                    [arrow5_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 450) 10 20 10))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
@@ -30,9 +30,9 @@
                 (set-SSTYLE-stroke! sstyle_arrow "red")
                 (set-SSTYLE-fill! sstyle_arrow "#ED6E46")
 
-                (svg-place-widget arrow1_id #:style sstyle_arrow)
-                (svg-place-widget arrow2_id #:style sstyle_arrow)
                 (svg-place-widget arrow3_id #:style sstyle_arrow)
+                (svg-place-widget arrow4_id #:style sstyle_arrow)
+                (svg-place-widget arrow5_id #:style sstyle_arrow)
                 )))])
 
       (printf "~a\n" actual_svg)

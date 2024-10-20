@@ -37,25 +37,44 @@
          [start_y (ARROW-start_y arrow)]
          [end_x (ARROW-end_x arrow)]
          [end_y (ARROW-end_y arrow)]
-         [horizontal_direction (if (< start_x end_x) 'RIGHT 'LEFT)]
-         [vertical_direction (if (< start_y end_y) 'DOWN 'UP)]
+         [horizontal_direction (if (>= start_x end_x) 'LEFT 'RIGHT)]
+         [vertical_direction (if (>= start_y end_y) 'DOWN 'UP)]
          [handle_base (ARROW-handle_base arrow)]
          [head_height (ARROW-head_height arrow)]
          [head_base (ARROW-head_base arrow)]
          [total_base (+ handle_base head_base)]
          [x_offset (- end_x start_x)]
          [y_offset (- end_y start_y)]
-         [theta (atan (/ y_offset x_offset))]
+         [theta (atan (if (= x_offset 0) 0 (/ y_offset x_offset)))]
          [alpha (- (/ pi 2) theta)]
-         [handle_delta_q (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))]
-         [handle_bottom_left (cons (- start_x (car handle_delta_q)) (+ start_y (cdr handle_delta_q)))]
-         [handle_bottom_right (cons (- end_x (car handle_delta_q)) (+ end_y (cdr handle_delta_q)))]
-         [handle_top_left (cons (+ start_x (car handle_delta_q)) (- start_y (cdr handle_delta_q)))]
-         [handle_top_right (cons (+ end_x (car handle_delta_q)) (- end_y (cdr handle_delta_q)))]
-         [head_delta_q (cons (* total_base (cos alpha)) (* total_base (sin alpha)))]
+         [handle_delta_q
+          (cond
+           [(eq? horizontal_direction 'LEFT)
+            (cons (* handle_base (sin alpha)) (* handle_base (cos alpha)))]
+           [(eq? horizontal_direction 'RIGHT)
+            (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))])]
+         [handle_bottom_left
+            (cons (- start_x (car handle_delta_q)) (+ start_y (cdr handle_delta_q)))]
+         [handle_bottom_right
+          (cons (- end_x (car handle_delta_q)) (+ end_y (cdr handle_delta_q)))]
+         [handle_top_left
+          (cons (+ start_x (car handle_delta_q)) (- start_y (cdr handle_delta_q)))]
+         [handle_top_right
+            (cons (+ end_x (car handle_delta_q)) (- end_y (cdr handle_delta_q)))]
+         [head_delta_q
+          (cond
+           [(eq? horizontal_direction 'LEFT)
+            (cons (* total_base (sin alpha)) (* total_base (cos alpha)))]
+           [(eq? horizontal_direction 'RIGHT)
+            (cons (* total_base (cos alpha)) (* total_base (sin alpha)))])]
          [Q (cons (- end_x (car head_delta_q)) (+ end_y (cdr head_delta_q)))]
-         [delta_r (cons (* head_height (cos theta)) (* head_height (sin theta)))]
-         [R (cons ((if (eq? horizontal_direction 'RIGHT) + -) end_x (car delta_r)) ((if (eq? vertical_direction 'DOWN) + -) end_y (cdr delta_r)))]
+         [delta_r
+          (cond
+           [(eq? horizontal_direction 'LEFT)
+            (cons (* head_height (sin theta)) (* head_height (cos theta)))]
+           [(eq? horizontal_direction 'RIGHT)
+            (cons (* head_height (cos theta)) (* head_height (sin theta)))])]
+         [R (cons (+ end_x (car delta_r)) (+ end_y (cdr delta_r)))]
          [S (cons (+ end_x (car head_delta_q)) (- end_y (cdr head_delta_q)))]
          )
 
