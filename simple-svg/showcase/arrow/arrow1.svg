@@ -1,0 +1,20 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="300" height="300"
+    >
+  <defs>
+    <path id="s1"
+          d="
+             M100,100
+             L200,200
+             L192.92893218813452,207.07106781186548
+             L214.14213562373095,214.14213562373095
+             L207.07106781186548,192.92893218813452
+             L200,200
+            "/>
+  </defs>
+
+  <use xlink:href="#s1" fill="#ED6E46" stroke-width="10" stroke="#ED6E46" />
+</svg>

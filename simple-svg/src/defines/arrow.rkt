@@ -37,22 +37,20 @@
          [end_y (ARROW-end_y arrow)]
          [height (ARROW-height arrow)]
          [base (ARROW-base arrow)]
-         [theta (tan (/ (- end_y start_y) (- end_x start_x)))]
+         [theta (atan (/ (- end_y start_y) (- end_x start_x)))]
          [alpha (- (/ pi 2) theta)]
          [delta_q (cons (* base (cos alpha)) (* base (sin alpha)))]
          [Q (cons (- end_x (car delta_q)) (+ end_y (cdr delta_q)))]
          [S (cons (+ end_x (car delta_q)) (- end_y (cdr delta_q)))]
          [delta_r (cons (* height (cos theta)) (* height (sin theta)))]
          [R (cons (+ end_x (car delta_r)) (+ end_y (cdr delta_r)))])
-    
-    (with-output-to-string
-      (lambda ()
-        (printf "    <path id=\"~a\"\n" shape_id)
-        (printf "          d=\"\n")
-        (printf "             M~a,~a\n" start_x start_y)
-        (printf "             L~a,~a\n" end_x end_y)
-        (printf "             L~a,~a\n" (car Q) (cdr Q))
-        (printf "             L~a,~a\n" (car R) (cdr R))
-        (printf "             L~a,~a\n" (car S) (cdr S))
-        (printf "             L~a,~a\n" end_x end_y)
-        (printf "            \"/>\n" )))))
+
+    (format "    <polygon id=\"~a\" points=\"~a\" />\n"
+            shape_id
+            (with-output-to-string
+              (lambda ()
+                (printf "~a,~a " start_x start_y)
+                (printf "~a,~a " end_x end_y)
+                (printf "~a,~a " (car Q) (cdr Q))
+                (printf "~a,~a " (car R) (cdr R))
+                (printf "~a,~a" (car S) (cdr S)))))))

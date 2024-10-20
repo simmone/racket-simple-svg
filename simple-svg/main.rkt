@@ -355,4 +355,3 @@
                 (printf " />\n")
                 )
               (loop-widget (cdr widget_list)))))))
-
