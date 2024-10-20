@@ -128,7 +128,7 @@
                                   #:path-startOffset (or/c #f (between/c 0 100))
                                   )
                      TEXT?)]
-          [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? ARROW?)]
+          [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? number? ARROW?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
                                    BLUR-DROPDOWN? ARROW?) string?)]
