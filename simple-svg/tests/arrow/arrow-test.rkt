@@ -19,15 +19,12 @@
            (svg-out
             500 500
             (lambda ()
-              (let ([arrow1_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 250) 10 20 10))]
-                    [arrow2_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 450) 10 20 10))]
-                    [arrow3_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 450) 10 20 10))]
-                    [arrow4_id (svg-def-shape (new-arrow '(250 . 250) '(50 . 450) 10 20 10))]
-                    [arrow5_id (svg-def-shape (new-arrow '(250 . 250) '(50 . 250) 10 20 10))]
-                    [arrow6_id (svg-def-shape (new-arrow '(250 . 250) '(50 . 50) 10 20 10))]
-                    [arrow7_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 50) 10 20 10))]
-                    [arrow8_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 50) 10 20 10))]
-                    [sstyle_arrow (sstyle-new)])
+              (let (
+                    [arrow1_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 450) 10 20 10))]
+                    [arrow2_id (svg-def-shape (new-arrow '(250 . 250) '(450 . 350) 10 20 10))]
+                    [arrow3_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 450) 10 20 10))]
+                    [sstyle_arrow (sstyle-new)]
+                    )
 
                 (set-SSTYLE-stroke-width! sstyle_arrow 2)
                 (set-SSTYLE-stroke! sstyle_arrow "red")
@@ -36,11 +33,6 @@
                 (svg-place-widget arrow1_id #:style sstyle_arrow)
                 (svg-place-widget arrow2_id #:style sstyle_arrow)
                 (svg-place-widget arrow3_id #:style sstyle_arrow)
-                (svg-place-widget arrow4_id #:style sstyle_arrow)
-                (svg-place-widget arrow5_id #:style sstyle_arrow)
-                (svg-place-widget arrow6_id #:style sstyle_arrow)
-                (svg-place-widget arrow7_id #:style sstyle_arrow)
-                (svg-place-widget arrow8_id #:style sstyle_arrow)
                 )))])
 
       (printf "~a\n" actual_svg)
