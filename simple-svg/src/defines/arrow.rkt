@@ -37,7 +37,7 @@
          [start_y (ARROW-start_y arrow)]
          [end_x (ARROW-end_x arrow)]
          [end_y (ARROW-end_y arrow)]
-         [horizontal_direction (if (>= start_x end_x) 'LEFT 'RIGHT)]
+         [toward_left? (if (>= start_x end_x) #t #f)]
          [vertical_direction (if (>= start_y end_y) 'DOWN 'UP)]
          [handle_base (ARROW-handle_base arrow)]
          [head_height (ARROW-head_height arrow)]
@@ -48,17 +48,13 @@
          [theta (atan (if (= x_offset 0) 0 (/ y_offset x_offset)))]
          [alpha (- (/ pi 2) theta)]
          [handle_delta_q
-          (cond
-           [(eq? horizontal_direction 'LEFT)
-            (cons (* handle_base (sin alpha)) (* handle_base (cos alpha)))]
-           [(eq? horizontal_direction 'RIGHT)
-            (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))])]
+          (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))]
          [handle_bottom_left
           (cons
-           (- start_x (car handle_delta_q))
-           (+ start_y (cdr handle_delta_q)))]
+           ((if toward_left? + -) start_x (car handle_delta_q))
+           ((if toward_left? - +) start_y (cdr handle_delta_q)))]
          [handle_bottom_right
-          (cons (- end_x (car handle_delta_q)) (+ end_y (cdr handle_delta_q)))]
+          (cons ((if toward_left? + -) end_x (car handle_delta_q)) (+ end_y (cdr handle_delta_q)))]
          [handle_top_left
           (cons (+ start_x (car handle_delta_q)) (- start_y (cdr handle_delta_q)))]
          [handle_top_right
@@ -66,21 +62,19 @@
              (+ end_x (car handle_delta_q))
              (- end_y (cdr handle_delta_q)))]
          [head_delta_q
-          (cond
-           [(eq? horizontal_direction 'LEFT)
-            (cons (* total_base (sin alpha)) (* total_base (cos alpha)))]
-           [(eq? horizontal_direction 'RIGHT)
-            (cons (* total_base (cos alpha)) (* total_base (sin alpha)))])]
+          (if toward_left?
+            (cons (* total_base (sin alpha)) (* total_base (cos alpha)))
+            (cons (* total_base (cos alpha)) (* total_base (sin alpha))))]
          [Q (cons (- end_x (car head_delta_q)) (+ end_y (cdr head_delta_q)))]
          [delta_r
-          (cond
-           [(eq? horizontal_direction 'LEFT)
-            (cons (* head_height (sin theta)) (* head_height (cos theta)))]
-           [(eq? horizontal_direction 'RIGHT)
-            (cons (* head_height (cos theta)) (* head_height (sin theta)))])]
+          (if toward_left?
+              (cons (* head_height (sin theta)) (* head_height (cos theta)))
+              (cons (* head_height (cos theta)) (* head_height (sin theta))))]
          [R (cons (+ end_x (car delta_r)) (+ end_y (cdr delta_r)))]
          [S (cons (+ end_x (car head_delta_q)) (- end_y (cdr head_delta_q)))]
          )
+    
+    (printf "~a\n" handle_delta_q)
 
     (format "    <polygon id=\"~a\"\n~a"
             shape_id
