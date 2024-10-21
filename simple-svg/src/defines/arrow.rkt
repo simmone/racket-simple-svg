@@ -54,13 +54,17 @@
            [(eq? horizontal_direction 'RIGHT)
             (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))])]
          [handle_bottom_left
-            (cons (- start_x (car handle_delta_q)) (+ start_y (cdr handle_delta_q)))]
+          (cons
+           (- start_x (car handle_delta_q))
+           (+ start_y (cdr handle_delta_q)))]
          [handle_bottom_right
           (cons (- end_x (car handle_delta_q)) (+ end_y (cdr handle_delta_q)))]
          [handle_top_left
           (cons (+ start_x (car handle_delta_q)) (- start_y (cdr handle_delta_q)))]
          [handle_top_right
-            (cons (+ end_x (car handle_delta_q)) (- end_y (cdr handle_delta_q)))]
+            (cons
+             (+ end_x (car handle_delta_q))
+             (- end_y (cdr handle_delta_q)))]
          [head_delta_q
           (cond
            [(eq? horizontal_direction 'LEFT)
