@@ -57,11 +57,38 @@ delta_r: (20 . 0)
             100.0,260.0
             250.0,260.0
             "/>
+handle_delta_q: (7.0710678118654755 . 7.071067811865475)
+head_delta_q: (14.142135623730951 . 14.14213562373095)
+delta_r: (14.142135623730951 . 14.14213562373095)
+    <polygon id="s5"
+          points="
+            257.0710678118655,242.92893218813452
+            157.07106781186548,142.92893218813452
+            164.14213562373095,135.85786437626905
+            135.85786437626905,135.85786437626905
+            135.85786437626905,164.14213562373095
+            142.92893218813452,157.07106781186548
+            242.92893218813452,257.0710678118655
+            "/>
+handle_delta_q: (6.123233995736766e-16 . 10.0)
+head_delta_q: (1.2246467991473533e-15 . 20.0)
+delta_r: (20 . 0)
+    <polygon id="s6"
+          points="
+            240.0,250.0
+            240.0,100.0
+            230.0,100.0
+            250,120
+            270.0,100.0
+            260.0,100.0
+            260.0,250.0
+            "/>
   </defs>
 
   <use xlink:href="#s1" fill="#ED6E46" stroke-width="2" stroke="red" />
   <use xlink:href="#s2" fill="#ED6E46" stroke-width="2" stroke="red" />
   <use xlink:href="#s3" fill="#ED6E46" stroke-width="2" stroke="red" />
   <use xlink:href="#s4" fill="#ED6E46" stroke-width="2" stroke="red" />
+  <use xlink:href="#s5" fill="#ED6E46" stroke-width="2" stroke="red" />
+  <use xlink:href="#s6" fill="#ED6E46" stroke-width="2" stroke="red" />
 </svg>
-

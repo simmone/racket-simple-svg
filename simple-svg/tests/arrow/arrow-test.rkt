@@ -24,6 +24,8 @@
                     [arrow2_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 400) 10 20 10))]
                     [arrow3_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 350) 10 20 10))]
                     [arrow4_id (svg-def-shape (new-arrow '(250 . 250) '(100 . 250) 10 20 10))]
+                    [arrow5_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 150) 10 20 10))]
+                    [arrow6_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 100) 10 20 10))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
@@ -35,6 +37,8 @@
                 (svg-place-widget arrow2_id #:style sstyle_arrow)
                 (svg-place-widget arrow3_id #:style sstyle_arrow)
                 (svg-place-widget arrow4_id #:style sstyle_arrow)
+                (svg-place-widget arrow5_id #:style sstyle_arrow)
+                (svg-place-widget arrow6_id #:style sstyle_arrow)
                 )))])
 
       (printf "~a\n" actual_svg)
