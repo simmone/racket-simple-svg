@@ -37,8 +37,8 @@
          [start_y (ARROW-start_y arrow)]
          [end_x (ARROW-end_x arrow)]
          [end_y (ARROW-end_y arrow)]
-         [toward_left? (if (>= start_x end_x) #t #f)]
-         [vertical_direction (if (>= start_y end_y) 'DOWN 'UP)]
+         [toward_left? (if (> start_x end_x) #t #f)]
+         [toward_updown? (if (= start_x end_x) #t #f)]
          [handle_base (ARROW-handle_base arrow)]
          [head_height (ARROW-head_height arrow)]
          [head_base (ARROW-head_base arrow)]
@@ -51,29 +51,38 @@
           (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))]
          [handle_bottom_left
           (cons
-           ((if toward_left? + -) start_x (car handle_delta_q))
-           ((if toward_left? - +) start_y (cdr handle_delta_q)))]
+           ((if toward_left? + -) start_x ((if toward_updown? cdr car) handle_delta_q))
+           ((if toward_left? - +) start_y ((if toward_updown? car cdr) handle_delta_q)))]
          [handle_bottom_right
-          (cons ((if toward_left? + -) end_x (car handle_delta_q)) (+ end_y (cdr handle_delta_q)))]
+          (cons
+           ((if toward_left? + -) end_x ((if toward_updown? cdr car) handle_delta_q))
+           ((if toward_left? - +) end_y ((if toward_updown? car cdr) handle_delta_q)))]
          [handle_top_left
-          (cons (+ start_x (car handle_delta_q)) (- start_y (cdr handle_delta_q)))]
+          (cons
+           ((if toward_left? - +) start_x ((if toward_updown? cdr car) handle_delta_q))
+           ((if toward_left? + -) start_y ((if toward_updown? car cdr) handle_delta_q)))]
          [handle_top_right
             (cons
-             (+ end_x (car handle_delta_q))
-             (- end_y (cdr handle_delta_q)))]
+             ((if toward_left? - +) end_x ((if toward_updown? cdr car) handle_delta_q))
+             ((if toward_left? + -) end_y ((if toward_updown? car cdr) handle_delta_q)))]
          [head_delta_q
           (cons (* total_base (cos alpha)) (* total_base (sin alpha)))]
-         [Q (cons (- end_x (car head_delta_q)) (+ end_y (cdr head_delta_q)))]
+         [Q (cons
+             ((if toward_left? + -) end_x ((if toward_updown? cdr car) head_delta_q))
+             ((if toward_left? - +) end_y ((if toward_updown? car cdr) head_delta_q)))]
          [delta_r
-          (if toward_left?
-              (cons (* head_height (sin theta)) (* head_height (cos theta)))
-              (cons (* head_height (cos theta)) (* head_height (sin theta))))]
-         [R (cons (+ end_x (car delta_r)) (+ end_y (cdr delta_r)))]
-         [S (cons (+ end_x (car head_delta_q)) (- end_y (cdr head_delta_q)))]
+          (cons (* head_height (cos theta)) (* head_height (sin theta)))]
+         [R (cons
+             ((if toward_left? - +) end_x ((if toward_updown? cdr car) delta_r))
+             ((if toward_left? - +) end_y ((if toward_updown? car cdr) delta_r)))]
+         [S (cons
+             ((if toward_left? - +) end_x ((if toward_updown? cdr car) head_delta_q))
+             ((if toward_left? + -) end_y ((if toward_updown? car cdr) head_delta_q)))]
          )
     
     (printf "handle_delta_q: ~a\n" handle_delta_q)
     (printf "head_delta_q: ~a\n" head_delta_q)
+    (printf "delta_r: ~a\n" delta_r)
 
     (format "    <polygon id=\"~a\"\n~a"
             shape_id
