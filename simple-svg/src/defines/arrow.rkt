@@ -62,9 +62,7 @@
              (+ end_x (car handle_delta_q))
              (- end_y (cdr handle_delta_q)))]
          [head_delta_q
-          (if toward_left?
-            (cons (* total_base (sin alpha)) (* total_base (cos alpha)))
-            (cons (* total_base (cos alpha)) (* total_base (sin alpha))))]
+          (cons (* total_base (cos alpha)) (* total_base (sin alpha)))]
          [Q (cons (- end_x (car head_delta_q)) (+ end_y (cdr head_delta_q)))]
          [delta_r
           (if toward_left?
@@ -74,7 +72,8 @@
          [S (cons (+ end_x (car head_delta_q)) (- end_y (cdr head_delta_q)))]
          )
     
-    (printf "~a\n" handle_delta_q)
+    (printf "handle_delta_q: ~a\n" handle_delta_q)
+    (printf "head_delta_q: ~a\n" head_delta_q)
 
     (format "    <polygon id=\"~a\"\n~a"
             shape_id
