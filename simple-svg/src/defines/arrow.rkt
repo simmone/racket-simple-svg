@@ -37,9 +37,9 @@
          [start_y (ARROW-start_y arrow)]
          [end_x (ARROW-end_x arrow)]
          [end_y (ARROW-end_y arrow)]
-         [toward_left? (if (>= start_x end_x) #t #f)]
+         [toward_left? (if (> start_x end_x) #t #f)]
          [toward_updown? (if (= start_x end_x) #t #f)]
-         [toward_up? (if (> start_y end_y) #t #f)]
+         [toward_down? (if (< start_y end_y) #t #f)]
          [handle_base (ARROW-handle_base arrow)]
          [head_height (ARROW-head_height arrow)]
          [head_base (ARROW-head_base arrow)]
@@ -75,7 +75,10 @@
           (cons (* head_height (cos theta)) (* head_height (sin theta)))]
          [R (cons
              ((if toward_left? - +) end_x ((if toward_updown? cdr car) delta_r))
-             ((if toward_left? - +) end_y ((if toward_updown? car cdr) delta_r)))]
+             ((cond
+;               [toward_down? +]
+               [toward_left? -]
+               [else +]) end_y ((if toward_updown? car cdr) delta_r)))]
          [S (cons
              ((if toward_left? - +) end_x ((if toward_updown? cdr car) head_delta_q))
              ((if toward_left? + -) end_y ((if toward_updown? car cdr) head_delta_q)))]
