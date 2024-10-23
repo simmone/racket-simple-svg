@@ -8,8 +8,8 @@
                    (end_x number?)
                    (end_y number?)
                    (handle_base number?)
-                   (head_height number?)
                    (head_base number?)
+                   (head_height number?)
                    )
                   ]
           [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? number? ARROW?)]
@@ -22,14 +22,14 @@
               [end_x #:mutable]
               [end_y #:mutable]
               [handle_base #:mutable]
-              [head_height #:mutable]
               [head_base #:mutable]
+              [head_height #:mutable]
               )
         #:transparent
         )
 
-(define (new-arrow start_point end_point handle_base head_height head_base)
-  (ARROW (car start_point) (cdr start_point) (car end_point) (cdr end_point) handle_base head_height head_base))
+(define (new-arrow start_point end_point handle_base head_base head_height)
+  (ARROW (car start_point) (cdr start_point) (car end_point) (cdr end_point) handle_base head_base head_height))
 
 (define (format-arrow shape_id arrow)
   (let* (
