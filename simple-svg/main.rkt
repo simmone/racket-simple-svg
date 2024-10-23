@@ -260,7 +260,7 @@
 
   (when (not (= (hash-count (SVG-shape_define_map (*SVG*))) 0))
     (printf "  <defs>\n")
-    (let loop-def ([shape_ids (sort (hash-keys (SVG-shape_define_map (*SVG*))) string<?)])
+    (let loop-def ([shape_ids (sort (hash-keys (SVG-shape_define_map (*SVG*))) < #:key (lambda (item) (string->number (substring item 1))))])
       (when (not (null? shape_ids))
         (let ([shape (hash-ref (SVG-shape_define_map (*SVG*)) (car shape_ids))])
           (printf "~a"
@@ -295,7 +295,7 @@
     (printf "  </defs>\n"))
 
   (let ([all_group_ids
-         (filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) string<?))])
+         (filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) < #:key (lambda (item) (string->number (substring item 1)))))])
 
     (let loop-group ([group_ids all_group_ids])
       (when (not (null? group_ids))

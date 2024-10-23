@@ -39,9 +39,9 @@
          [end_y (ARROW-end_y arrow)]
          [toward_left? (if (> start_x end_x) #t #f)]
          [toward_updown? (if (= start_x end_x) #t #f)]
-         [toward_up? (if (> start_y end_y) #t #f)]
-         [handle_base (ARROW-handle_base arrow)]
+         [toward_up? (if (and (= start_x end_x) (> start_y end_y)) #t #f)]
          [head_height (ARROW-head_height arrow)]
+         [handle_base (ARROW-handle_base arrow)]
          [head_base (ARROW-head_base arrow)]
          [total_base (+ handle_base head_base)]
          [x_offset (- end_x start_x)]
@@ -78,16 +78,13 @@
              ((cond
                [toward_up? -]
                [toward_left? -]
-               [else +]) end_y ((if toward_updown? car cdr) delta_r)))]
+               [else +])
+               end_y ((if toward_updown? car cdr) delta_r)))]
          [S (cons
              ((if toward_left? - +) end_x ((if toward_updown? cdr car) head_delta_q))
              ((if toward_left? + -) end_y ((if toward_updown? car cdr) head_delta_q)))]
          )
     
-    (printf "handle_delta_q: ~a\n" handle_delta_q)
-    (printf "head_delta_q: ~a\n" head_delta_q)
-    (printf "delta_r: ~a\n" delta_r)
-
     (format "    <polygon id=\"~a\"\n~a"
             shape_id
             (with-output-to-string

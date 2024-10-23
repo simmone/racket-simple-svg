@@ -53,8 +53,6 @@
                 (svg-place-widget arrow42_id #:style sstyle_arrow)
                 )))])
 
-      (printf "~a\n" actual_svg)
-      
       (call-with-input-file arrow1_svg
         (lambda (expected)
           (call-with-input-string
