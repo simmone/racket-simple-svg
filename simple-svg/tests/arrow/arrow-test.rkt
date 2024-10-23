@@ -21,14 +21,13 @@
             300 300
             (lambda ()
               (let (
-                    [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(200 . 200) 20 20 40))]
+                    [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(200 . 200) 40 40 80))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
                 (set-SSTYLE-stroke-width! sstyle_arrow 5)
                 (set-SSTYLE-stroke! sstyle_arrow "teal")
                 (set-SSTYLE-fill! sstyle_arrow "lavender")
-
                 (svg-place-widget arrow_id #:style sstyle_arrow)
                 )))])
       

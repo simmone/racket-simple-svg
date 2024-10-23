@@ -15,7 +15,17 @@
             228.2842712474619,171.7157287525381
             78.2842712474619,21.7157287525381
             "/>
+    <circle id="s2" r="10" />
+    <line id="s3" x1="50" y1="50" x2="21.715729" y2="78.284271" />
+    <line id="s4" x1="171.715729" y1="228.284271" x2="143.431458" y2="256.568542" />
+    <line id="s5" x1="200" y1="200" x2="256.568542" y2="256.568542" />
   </defs>
 
   <use xlink:href="#s1" fill="lavender" stroke-width="5" stroke="teal" />
+  <use xlink:href="#s2" x="50" y="50" fill="#3949AB" />
+  <use xlink:href="#s2" x="200" y="200" fill="#FB8C00" />
+  <use xlink:href="#s3" fill="none" stroke-width="5" stroke="#FFD600" />
+  <use xlink:href="#s4" fill="none" stroke-width="5" stroke="#F4511E" />
+  <use xlink:href="#s5" fill="none" stroke-width="5" stroke="#4CAF50" />
 </svg>
+
