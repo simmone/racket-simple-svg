@@ -37,7 +37,7 @@
          [start_y (ARROW-start_y arrow)]
          [end_x (ARROW-end_x arrow)]
          [end_y (ARROW-end_y arrow)]
-         [toward_left? (if (> start_x end_x) #t #f)]
+         [toward_left? (if (>= start_x end_x) #t #f)]
          [toward_updown? (if (= start_x end_x) #t #f)]
          [toward_up? (if (> start_y end_y) #t #f)]
          [handle_base (ARROW-handle_base arrow)]
