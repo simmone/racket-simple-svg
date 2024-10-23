@@ -20,18 +20,18 @@
             500 500
             (lambda ()
               (let (
-                    [arrow1_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 350) 10 20 10))]
-                    [arrow11_id (svg-def-shape (new-arrow '(250 . 250) '(300 . 375) 10 20 10))]
-                    [arrow2_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 400) 10 20 10))]
-                    [arrow22_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 375) 10 20 10))]
-                    [arrow3_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 350) 10 20 10))]
-                    [arrow33_id (svg-def-shape (new-arrow '(250 . 250) '(125 . 300) 10 20 10))]
-                    [arrow4_id (svg-def-shape (new-arrow '(250 . 250) '(100 . 250) 10 20 10))]
-                    [arrow44_id (svg-def-shape (new-arrow '(250 . 250) '(125 . 200) 10 20 10))]
-                    [arrow5_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 150) 10 20 10))]
-                    [arrow55_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 125) 10 20 10))]
-                    [arrow6_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 100) 10 20 10))]
-                    [arrow66_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 125) 10 20 10))]
+                    [arrow10_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 400) 10 20 10))]
+                    [arrow11_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 350) 10 20 10))]
+                    [arrow12_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 300) 10 20 10))]
+                    [arrow20_id (svg-def-shape (new-arrow '(250 . 250) '(100 . 250) 10 20 10))]
+                    [arrow21_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 200) 10 20 10))]
+                    [arrow22_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 150) 10 20 10))]
+                    [arrow30_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 100) 10 20 10))]
+                    [arrow31_id (svg-def-shape (new-arrow '(250 . 250) '(300 . 150) 10 20 10))]
+                    [arrow32_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 200) 10 20 10))]
+                    [arrow40_id (svg-def-shape (new-arrow '(250 . 250) '(400 . 250) 10 20 10))]
+                    [arrow41_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 300) 10 20 10))]
+                    [arrow42_id (svg-def-shape (new-arrow '(250 . 250) '(300 . 350) 10 20 10))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
@@ -39,18 +39,18 @@
                 (set-SSTYLE-stroke! sstyle_arrow "red")
                 (set-SSTYLE-fill! sstyle_arrow "#ED6E46")
 
-                (svg-place-widget arrow1_id #:style sstyle_arrow)
+                (svg-place-widget arrow10_id #:style sstyle_arrow)
                 (svg-place-widget arrow11_id #:style sstyle_arrow)
-                (svg-place-widget arrow2_id #:style sstyle_arrow)
+                (svg-place-widget arrow12_id #:style sstyle_arrow)
+                (svg-place-widget arrow20_id #:style sstyle_arrow)
+                (svg-place-widget arrow21_id #:style sstyle_arrow)
                 (svg-place-widget arrow22_id #:style sstyle_arrow)
-                (svg-place-widget arrow3_id #:style sstyle_arrow)
-                (svg-place-widget arrow33_id #:style sstyle_arrow)
-                (svg-place-widget arrow4_id #:style sstyle_arrow)
-                (svg-place-widget arrow44_id #:style sstyle_arrow)
-                (svg-place-widget arrow5_id #:style sstyle_arrow)
-                (svg-place-widget arrow55_id #:style sstyle_arrow)
-                (svg-place-widget arrow6_id #:style sstyle_arrow)
-                (svg-place-widget arrow66_id #:style sstyle_arrow)
+                (svg-place-widget arrow30_id #:style sstyle_arrow)
+                (svg-place-widget arrow31_id #:style sstyle_arrow)
+                (svg-place-widget arrow32_id #:style sstyle_arrow)
+                (svg-place-widget arrow40_id #:style sstyle_arrow)
+                (svg-place-widget arrow41_id #:style sstyle_arrow)
+                (svg-place-widget arrow42_id #:style sstyle_arrow)
                 )))])
 
       (printf "~a\n" actual_svg)
