@@ -35,19 +35,46 @@
   (let* (
          [start_x (ARROW-start_x arrow)]
          [start_y (ARROW-start_y arrow)]
-         [end_x (ARROW-end_x arrow)]
-         [end_y (ARROW-end_y arrow)]
-         [toward_left? (if (> start_x end_x) #t #f)]
-         [toward_updown? (if (= start_x end_x) #t #f)]
-         [toward_up? (if (and (= start_x end_x) (> start_y end_y)) #t #f)]
          [head_height (ARROW-head_height arrow)]
          [handle_base (ARROW-handle_base arrow)]
          [head_base (ARROW-head_base arrow)]
          [total_base (+ handle_base head_base)]
+         [pre_end_x (ARROW-end_x arrow)]
+         [pre_end_y (ARROW-end_y arrow)]
+         [pre_toward_left? (if (> start_x pre_end_x) #t #f)]
+         [pre_toward_updown? (if (= start_x pre_end_x) #t #f)]
+         [pre_toward_up? (if (and (= start_x pre_end_x) (> start_y pre_end_y)) #t #f)]
+         [pre_x_offset (- pre_end_x start_x)]
+         [pre_y_offset (- pre_end_y start_y)]
+         [pre_theta (atan (if (= pre_x_offset 0) 0 (/ pre_y_offset pre_x_offset)))]
+         [pre_alpha (- (/ pi 2) pre_theta)]
+         [pre_delta_r
+          (cons (* head_height (cos pre_theta)) (* head_height (sin pre_theta)))]
+         [pre_R (cons
+             ((if pre_toward_left? + -) pre_end_x ((if pre_toward_updown? cdr car) pre_delta_r))
+             ((cond
+               [pre_toward_up? +]
+               [pre_toward_left? +]
+               [else -])
+               pre_end_y ((if pre_toward_updown? car cdr) pre_delta_r)))]
+         [end_x (car pre_R)]
+         [end_y (cdr pre_R)]
+         [toward_left? (if (> start_x end_x) #t #f)]
+         [toward_updown? (if (= start_x end_x) #t #f)]
+         [toward_up? (if (and (= start_x end_x) (> start_y end_y)) #t #f)]
          [x_offset (- end_x start_x)]
          [y_offset (- end_y start_y)]
          [theta (atan (if (= x_offset 0) 0 (/ y_offset x_offset)))]
          [alpha (- (/ pi 2) theta)]
+         [delta_r
+          (cons (* head_height (cos theta)) (* head_height (sin theta)))]
+         [R (cons
+             ((if toward_left? - +) end_x ((if toward_updown? cdr car) delta_r))
+             ((cond
+               [toward_up? -]
+               [toward_left? -]
+               [else +])
+               end_y ((if toward_updown? car cdr) delta_r)))]
          [handle_delta_q
           (cons (* handle_base (cos alpha)) (* handle_base (sin alpha)))]
          [handle_bottom_left
@@ -71,15 +98,6 @@
          [Q (cons
              ((if toward_left? + -) end_x ((if toward_updown? cdr car) head_delta_q))
              ((if toward_left? - +) end_y ((if toward_updown? car cdr) head_delta_q)))]
-         [delta_r
-          (cons (* head_height (cos theta)) (* head_height (sin theta)))]
-         [R (cons
-             ((if toward_left? - +) end_x ((if toward_updown? cdr car) delta_r))
-             ((cond
-               [toward_up? -]
-               [toward_left? -]
-               [else +])
-               end_y ((if toward_updown? car cdr) delta_r)))]
          [S (cons
              ((if toward_left? - +) end_x ((if toward_updown? cdr car) head_delta_q))
              ((if toward_left? + -) end_y ((if toward_updown? car cdr) head_delta_q)))]

@@ -21,7 +21,7 @@
             300 300
             (lambda ()
               (let (
-                    [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(200 . 200) 40 40 80))]
+                    [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(280 . 280) 40 40 80))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
@@ -43,21 +43,21 @@
 
     (let ([actual_svg
            (svg-out
-            500 500
+            400 400
             (lambda ()
               (let (
-                    [arrow10_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 400) 10 10 20))]
-                    [arrow11_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 350) 10 10 20))]
-                    [arrow12_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 300) 10 10 20))]
-                    [arrow20_id (svg-def-shape (new-arrow '(250 . 250) '(100 . 250) 10 10 20))]
-                    [arrow21_id (svg-def-shape (new-arrow '(250 . 250) '(150 . 200) 10 10 20))]
-                    [arrow22_id (svg-def-shape (new-arrow '(250 . 250) '(200 . 150) 10 10 20))]
-                    [arrow30_id (svg-def-shape (new-arrow '(250 . 250) '(250 . 100) 10 10 20))]
-                    [arrow31_id (svg-def-shape (new-arrow '(250 . 250) '(300 . 150) 10 10 20))]
-                    [arrow32_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 200) 10 10 20))]
-                    [arrow40_id (svg-def-shape (new-arrow '(250 . 250) '(400 . 250) 10 10 20))]
-                    [arrow41_id (svg-def-shape (new-arrow '(250 . 250) '(350 . 300) 10 10 20))]
-                    [arrow42_id (svg-def-shape (new-arrow '(250 . 250) '(300 . 350) 10 10 20))]
+                    [arrow10_id (svg-def-shape (new-arrow '(200 . 200) '(200 . 350) 10 10 20))]
+                    [arrow11_id (svg-def-shape (new-arrow '(200 . 200) '(150 . 300) 10 10 20))]
+                    [arrow12_id (svg-def-shape (new-arrow '(200 . 200) '(100 . 250) 10 10 20))]
+                    [arrow20_id (svg-def-shape (new-arrow '(200 . 200) '(50 . 200) 10 10 20))]
+                    [arrow21_id (svg-def-shape (new-arrow '(200 . 200) '(100 . 150) 10 10 20))]
+                    [arrow22_id (svg-def-shape (new-arrow '(200 . 200) '(150 . 100) 10 10 20))]
+                    [arrow30_id (svg-def-shape (new-arrow '(200 . 200) '(200 . 50) 10 10 20))]
+                    [arrow31_id (svg-def-shape (new-arrow '(200 . 200) '(250 . 100) 10 10 20))]
+                    [arrow32_id (svg-def-shape (new-arrow '(200 . 200) '(300 . 150) 10 10 20))]
+                    [arrow40_id (svg-def-shape (new-arrow '(200 . 200) '(350 . 200) 10 10 20))]
+                    [arrow41_id (svg-def-shape (new-arrow '(200 . 200) '(300 . 250) 10 10 20))]
+                    [arrow42_id (svg-def-shape (new-arrow '(200 . 200) '(250 . 300) 10 10 20))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
@@ -78,7 +78,7 @@
                 (svg-place-widget arrow41_id #:style sstyle_arrow)
                 (svg-place-widget arrow42_id #:style sstyle_arrow)
                 )))])
-
+      
       (call-with-input-file arrow2_svg
         (lambda (expected)
           (call-with-input-string

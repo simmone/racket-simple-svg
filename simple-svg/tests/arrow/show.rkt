@@ -8,16 +8,16 @@
         300 300
         (lambda ()
           (let (
-                [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(200 . 200) 40 40 80))]
+                [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(280 . 280) 40 40 80))]
                 [sstyle_arrow (sstyle-new)]
                 [point_id (svg-def-shape (new-circle 10))]
                 [start_point_sstyle (sstyle-new)]
                 [end_point_sstyle (sstyle-new)]
                 [handle_base_id (svg-def-shape (new-line '(50 . 50) '(21.715728752538098 . 78.2842712474619)))]
                 [handle_base_sstyle (sstyle-new)]
-                [head_base_id (svg-def-shape (new-line '(171.7157287525381 . 228.2842712474619) '(143.4314575050762 . 256.5685424949238)))]
+                [head_base_id (svg-def-shape (new-line '(195.1471862576143 . 251.7157287525381) '(166.8629150101524 . 280.0)))]
                 [head_base_sstyle (sstyle-new)]
-                [head_height_id (svg-def-shape (new-line '(200 . 200) '(256.5685424949238 . 256.5685424949238)))]
+                [head_height_id (svg-def-shape (new-line '(223.4314575050762 . 223.4314575050762) '(280 . 280)))]
                 [head_height_sstyle (sstyle-new)]
                 )
 
@@ -30,7 +30,7 @@
             (svg-place-widget point_id #:style start_point_sstyle #:at '(50 . 50))
 
             (set-SSTYLE-fill! end_point_sstyle "#FB8C00")
-            (svg-place-widget point_id #:style end_point_sstyle #:at '(200 . 200))
+            (svg-place-widget point_id #:style end_point_sstyle #:at '(280 . 280))
 
             (set-SSTYLE-stroke-width! handle_base_sstyle 5)
             (set-SSTYLE-stroke! handle_base_sstyle "#FFD600")
