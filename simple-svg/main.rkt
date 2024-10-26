@@ -18,6 +18,7 @@
          "src/defines/path/qcurve.rkt"
          "src/defines/path/raw-path.rkt"
          "src/defines/text.rkt"
+         "src/defines/arrow.rkt"
          "src/defines/svg.rkt"
          "src/defines/sstyle.rkt"
          "src/defines/group.rkt")
@@ -127,10 +128,10 @@
                                   #:path-startOffset (or/c #f (between/c 0 100))
                                   )
                      TEXT?)]
-          [format-text (-> string? TEXT? string?)]
+          [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? number? ARROW?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
-                                   BLUR-DROPDOWN?) string?)]
+                                   BLUR-DROPDOWN? ARROW?) string?)]
           [svg-def-group (-> procedure? string?)]
           [struct SSTYLE
                   (
@@ -259,7 +260,7 @@
 
   (when (not (= (hash-count (SVG-shape_define_map (*SVG*))) 0))
     (printf "  <defs>\n")
-    (let loop-def ([shape_ids (sort (hash-keys (SVG-shape_define_map (*SVG*))) string<?)])
+    (let loop-def ([shape_ids (sort (hash-keys (SVG-shape_define_map (*SVG*))) < #:key (lambda (item) (string->number (substring item 1))))])
       (when (not (null? shape_ids))
         (let ([shape (hash-ref (SVG-shape_define_map (*SVG*)) (car shape_ids))])
           (printf "~a"
@@ -286,13 +287,15 @@
                     (format-path (car shape_ids) shape)]
                    [(TEXT? shape)
                     (format-text (car shape_ids) shape)]
+                   [(ARROW? shape)
+                    (format-arrow (car shape_ids) shape)]
                    )))
 
         (loop-def (cdr shape_ids))))
     (printf "  </defs>\n"))
 
   (let ([all_group_ids
-         (filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) string<?))])
+         (filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) < #:key (lambda (item) (string->number (substring item 1)))))])
 
     (let loop-group ([group_ids all_group_ids])
       (when (not (null? group_ids))
@@ -352,4 +355,3 @@
                 (printf " />\n")
                 )
               (loop-widget (cdr widget_list)))))))
-

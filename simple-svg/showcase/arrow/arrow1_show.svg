@@ -1,0 +1,41 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="400" height="400"
+    >
+  <defs>
+    <polygon id="s1"
+          points="
+            21.715728752538098,78.2842712474619
+            195.1471862576143,251.7157287525381
+            166.8629150101524,280.0
+            280.0,280.0
+            280.0,166.8629150101524
+            251.7157287525381,195.1471862576143
+            78.2842712474619,21.7157287525381
+            "/>
+    <circle id="s2" r="10" />
+    <text id="s3" font-size="15">start point</text>
+    <text id="s4" font-size="15">end point</text>
+    <line id="s5" x1="50" y1="50" x2="21.715729" y2="78.284271" />
+    <text id="s6" font-size="15">handle base</text>
+    <line id="s7" x1="195.147186" y1="251.715729" x2="166.862915" y2="280" />
+    <text id="s8" font-size="15">head base</text>
+    <line id="s9" x1="223.431458" y1="223.431458" x2="280" y2="280" />
+    <text id="s10" font-size="15">head height</text>
+  </defs>
+
+  <use xlink:href="#s1" fill="lavender" stroke-width="5" stroke="teal" />
+  <use xlink:href="#s2" x="50" y="50" fill="#3949AB" />
+  <use xlink:href="#s3" x="60" y="50" fill="none" stroke="#3949AB" />
+  <use xlink:href="#s2" x="280" y="280" fill="#FB8C00" />
+  <use xlink:href="#s4" x="290" y="280" fill="#FB8C00" />
+  <use xlink:href="#s5" fill="none" stroke-width="5" stroke="#E6AC00" />
+  <use xlink:href="#s6" x="40" y="80" fill="#E6AC00" />
+  <use xlink:href="#s7" fill="none" stroke-width="5" stroke="#F4511E" />
+  <use xlink:href="#s8" x="80" y="270" fill="#F4511E" />
+  <use xlink:href="#s9" fill="none" stroke-width="5" stroke="#4CAF50" />
+  <use xlink:href="#s10" x="255" y="250" fill="#4CAF50" />
+</svg>
+
