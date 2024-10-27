@@ -33,7 +33,7 @@
 
              (svg-place-widget line-h #:style line-h-style)
              (svg-place-widget line-v #:style line-v-style)))])
-
+      
       (call-with-input-file line_svg
         (lambda (expected)
           (call-with-input-string

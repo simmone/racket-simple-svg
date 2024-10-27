@@ -32,7 +32,3 @@
           (~r (LINE-start_y line))
           (~r (LINE-end_x line))
           (~r (LINE-end_y line))))
-
-
-
-

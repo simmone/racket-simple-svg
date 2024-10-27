@@ -8,9 +8,9 @@
     <rect id="s1" width="100" height="100" />
   </defs>
 
-  <symbol id="background">
+  <symbol id="b0">
     <use xlink:href="#s1" fill="#BBC42A" />
   </symbol>
 
-  <use xlink:href="#background" />
+  <use xlink:href="#b0" />
 </svg>

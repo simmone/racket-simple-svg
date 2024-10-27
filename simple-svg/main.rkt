@@ -162,8 +162,8 @@
                                  void?)]
           ))
 
-(define BACKGROUND_GROUP_ID "background")
-(define DEFAULT_GROUP_ID "default")
+(define BACKGROUND_GROUP_ID "b0")
+(define DEFAULT_GROUP_ID "d0")
 
 (define (svg-out width height write_proc
                  #:background [background #f]

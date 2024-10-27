@@ -10,11 +10,11 @@
     <line id="s3" x1="400" y1="100" x2="400" y2="500" />
   </defs>
 
-  <symbol id="background">
+  <symbol id="b0">
     <use xlink:href="#s1" fill="#eeeeee" />
   </symbol>
 
-  <use xlink:href="#background" />
+  <use xlink:href="#b0" />
 
   <use xlink:href="#s2" fill="none" stroke-width="2" stroke="#5c3d19" />
   <use xlink:href="#s3" fill="none" stroke-width="2" stroke="#5c3d19" />
