@@ -19,9 +19,12 @@
          "src/defines/path/raw-path.rkt"
          "src/defines/text.rkt"
          "src/defines/arrow.rkt"
+         "src/defines/marker.rkt"
          "src/defines/svg.rkt"
          "src/defines/sstyle.rkt"
-         "src/defines/group.rkt")
+         "src/defines/widget.rkt"
+         "src/defines/group.rkt"
+         )
 
 (provide (contract-out
           [svg-out (->* (number? number? procedure?)
@@ -129,9 +132,10 @@
                                   )
                      TEXT?)]
           [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? number? ARROW?)]
+          [new-marker (-> (or/c 'triangle 'circle 'indent 'diamond) MARKER?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
-                                   BLUR-DROPDOWN? ARROW?) string?)]
+                                   BLUR-DROPDOWN? ARROW? MARKER?) string?)]
           [svg-def-group (-> procedure? string?)]
           [struct SSTYLE
                   (
@@ -158,6 +162,9 @@
                                   #:style SSTYLE?
                                   #:at (cons/c number? number?)
                                   #:filter_id string?
+                                  #:marker_start_id string?
+                                  #:marker_mid_id string?
+                                  #:marker_end_id string?
                                   )
                                  void?)]
           ))
@@ -239,11 +246,14 @@
 (define (svg-place-widget widget_id
                           #:style [style #f]
                           #:filter_id [filter_id #f]
+                          #:marker_start_id [marker_start_id #f]
+                          #:marker_mid_id [marker_mid_id #f]
+                          #:marker_end_id [marker_end_id #f]
                           #:at [at #f])
   (set-GROUP-widget_list! (*GROUP*)
                           `(
                             ,@(GROUP-widget_list (*GROUP*))
-                            ,(WIDGET widget_id at style filter_id))))
+                            ,(WIDGET widget_id at style filter_id marker_start_id marker_mid_id marker_end_id))))
 
 (define (flush-data)
   (printf "    width=\"~a\" height=\"~a\"\n" (~r (SVG-width (*SVG*))) (~r (SVG-height (*SVG*))))
@@ -289,6 +299,8 @@
                     (format-text (car shape_ids) shape)]
                    [(ARROW? shape)
                     (format-arrow (car shape_ids) shape)]
+                   [(MARKER? shape)
+                    (format-marker (car shape_ids) shape)]
                    )))
 
         (loop-def (cdr shape_ids))))
@@ -340,6 +352,9 @@
                      [widget_at (WIDGET-at widget)]
                      [widget_style (WIDGET-style widget)]
                      [widget_filter_id (WIDGET-filter_id widget)]
+                     [widget_marker_start_id (WIDGET-marker_start_id widget)]
+                     [widget_marker_mid_id (WIDGET-marker_mid_id widget)]
+                     [widget_marker_end_id (WIDGET-marker_end_id widget)]
                      )
                 (printf "~a<use xlink:href=\"#~a\"" prefix widget_id)
                 
@@ -351,6 +366,15 @@
 
                 (when widget_filter_id
                   (printf " filter=\"url(#~a)\"" widget_filter_id))
+
+                (when widget_marker_start_id
+                  (printf " marker-start=\"url(#~a)\"" widget_marker_start_id))
+
+                (when widget_marker_mid_id
+                  (printf " marker-mid=\"url(#~a)\"" widget_marker_mid_id))
+
+                (when widget_marker_end_id
+                  (printf " marker-end=\"url(#~a)\"" widget_marker_end_id))
                 
                 (printf " />\n")
                 )

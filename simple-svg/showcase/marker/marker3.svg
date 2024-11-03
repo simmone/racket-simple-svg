@@ -1,0 +1,18 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="200" height="200"
+    >
+  <defs>
+    <marker id="s1" markerWidth="4" markerHeight="3" orient="auto-start-reverse" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" />
+    </marker>
+    <marker id="s2" markerWidth="4" markerHeight="3" orient="auto-start-reverse" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="strokeWidth">
+      <circle r="5" cx="5" cy="5" fill="context-stroke" />
+    </marker>
+    <polyline id="s3" points="0,0 0,100 100,100" />
+  </defs>
+
+  <use xlink:href="#s3" x="50" y="50" fill="none" stroke-width="5" stroke="#000000" marker-start="url(#s1)" marker-mid="url(#s2)" marker-end="url(#s1)" />
+</svg>

@@ -45,3 +45,5 @@ raco pkg install simple-svg
 @include-section["filter/filter.scrbl"]
 
 @include-section["group/group.scrbl"]
+
+@include-section["marker/marker.scrbl"]
