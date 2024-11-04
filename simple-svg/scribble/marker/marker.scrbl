@@ -4,13 +4,26 @@
 
 Marker a maker shape stick to another shape's end(or start middle etc.).
 
-Simple svg predefined these markers: triangle, circle, indent, diamond etc.
+Simple svg predefined these markers: triangle1, triangle2, circle, indent1, indent2, diamond1, diamond2, curve1, curve2 etc.
 
-@image{showcase/marker/marker_show.svg}
+@image{showcase/marker/marker_show1.svg}
 
 @codeblock|{
-  (new-marker (-> (or/c 'triangle 'circle 'indent 'diamond) MARKER?))
+(new-marker (->*
+              ((or/c 'triangle1 'triangle2 'circle 'indent1 'indent2 'diamond1 'diamond2 'curve1 'curve2))
+              (
+               #:size (or/c #f number?)
+               #:x (or/c #f number?)
+              )
+              MARKER?))
 }|
+
+Marker's size is ratioed by shape's stroke-width, sometimes you need tune the #:size and #:x let it looks right.
+
+#:size set marker's size(ratio).
+#:x set marker's x reference, if you enlarge marker, sometimes need enlarge x too.
+
+@image{showcase/marker/marker_show2.svg}
 
 Define a marker and use svg-place-widget...#:marker_end_start_id(#:marker_start_id, #:marker_mid_id) to use it.
 

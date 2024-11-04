@@ -23,12 +23,12 @@
             200 120
             (lambda ()
               (let (
-                    [_marker (svg-def-shape (new-marker 'triangle))]
+                    [_marker (svg-def-shape (new-marker 'triangle1))]
                     [line_id (svg-def-shape (new-line '(0 . 0) '(100 . 0)))]
                     [_sstyle (sstyle-new)]
                     )
 
-                (set-SSTYLE-stroke-width! _sstyle 5)
+                (set-SSTYLE-stroke-width! _sstyle 2)
                 (set-SSTYLE-stroke! _sstyle "#000000")
                 (svg-place-widget line_id #:at '(50 . 50) #:style _sstyle #:marker_end_id _marker)
                 )))])
@@ -48,7 +48,7 @@
             300 300
             (lambda ()
               (let (
-                    [_marker (svg-def-shape (new-marker 'triangle))]
+                    [_marker (svg-def-shape (new-marker 'triangle2))]
                     [line1_id (svg-def-shape (new-line '(0 . 0) '(100 . 0)))]
                     [line2_id (svg-def-shape (new-line '(0 . 0) '(70 . 70)))]
                     [line3_id (svg-def-shape (new-line '(0 . 0) '(0 . 100)))]
@@ -60,7 +60,7 @@
                     [_sstyle (sstyle-new)]
                     )
 
-                (set-SSTYLE-stroke-width! _sstyle 5)
+                (set-SSTYLE-stroke-width! _sstyle 2)
                 (set-SSTYLE-stroke! _sstyle "#000000")
                 (svg-place-widget line1_id #:at '(180 . 150) #:style _sstyle #:marker_end_id _marker #:marker_start_id _marker)
                 (svg-place-widget line2_id #:at '(180 . 180) #:style _sstyle #:marker_end_id _marker #:marker_start_id _marker)
@@ -71,7 +71,7 @@
                 (svg-place-widget line7_id #:at '(150 . 120) #:style _sstyle #:marker_end_id _marker #:marker_start_id _marker)
                 (svg-place-widget line8_id #:at '(180 . 120) #:style _sstyle #:marker_end_id _marker #:marker_start_id _marker)
                 )))])
-      
+
       (call-with-input-file marker2_svg
         (lambda (expected)
           (call-with-input-string
@@ -87,7 +87,7 @@
             200 200
             (lambda ()
               (let (
-                    [arrow_marker (svg-def-shape (new-marker 'triangle))]
+                    [arrow_marker (svg-def-shape (new-marker 'triangle1))]
                     [circle_marker (svg-def-shape (new-marker 'circle))]
                     [polyline_id
                      (svg-def-shape
@@ -95,7 +95,7 @@
                     [_sstyle (sstyle-new)]
                     )
 
-                (set-SSTYLE-stroke-width! _sstyle 5)
+                (set-SSTYLE-stroke-width! _sstyle 2)
                 (set-SSTYLE-stroke! _sstyle "#000000")
                 (svg-place-widget polyline_id #:at '(50 . 50) #:style _sstyle #:marker_mid_id circle_marker #:marker_end_id arrow_marker #:marker_start_id arrow_marker)
                 )))])
@@ -131,7 +131,7 @@
                          (svg-path-ccurve* '(150 . 150) '(125 . 150) '(100 . 125))
                          )))]
                     [curve2_sstyle (sstyle-new)]
-                    [arrow_marker (svg-def-shape (new-marker 'triangle))]
+                    [arrow_marker (svg-def-shape (new-marker 'triangle1))]
                     )
 
                 (set-SSTYLE-stroke-width! curve1_sstyle 10)

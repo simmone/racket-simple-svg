@@ -1,0 +1,65 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="300" height="300"
+    >
+  <defs>
+    <marker id="s1" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="1" refY="5" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke" />
+    </marker>
+    <marker id="s2" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="1" refY="5" markerUnits="strokeWidth">
+      <path d="M0,0 L15,5 L0,10 z" fill="context-stroke" />
+    </marker>
+    <marker id="s3" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="1" refY="5" markerUnits="strokeWidth">
+      <circle r="5" cx="5" cy="5" fill="context-stroke" />
+    </marker>
+    <marker id="s4" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="4" refY="5" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 L5,5 z" fill="context-stroke" />
+    </marker>
+    <marker id="s5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="4" refY="5" markerUnits="strokeWidth">
+      <path d="M0,0 L15,5 L0,10 L5,5 z" fill="context-stroke" />
+    </marker>
+    <marker id="s6" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="1" refY="5" markerUnits="strokeWidth">
+      <path d="M3,0 L10,5 L3,10 L0,5 z" fill="context-stroke" />
+    </marker>
+    <marker id="s7" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="1" refY="5" markerUnits="strokeWidth">
+      <path d="M3,0 L15,5 L3,10 L0,5 z" fill="context-stroke" />
+    </marker>
+    <marker id="s8" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="2" refY="5" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 C0,10 5,5 0,0 z" fill="context-stroke" />
+    </marker>
+    <marker id="s9" markerWidth="6" markerHeight="6" orient="auto-start-reverse" viewBox="0 0 15 15" refX="2" refY="5" markerUnits="strokeWidth">
+      <path d="M0,0 L15,5 L0,10 C0,10 5,5 0,0 z" fill="context-stroke" />
+    </marker>
+    <line id="s10" x1="0" y1="0" x2="100" y2="0" />
+    <text id="s11" font-size="15">triangle1</text>
+    <text id="s12" font-size="15">triangle2</text>
+    <text id="s13" font-size="15">circle</text>
+    <text id="s14" font-size="15">indent1</text>
+    <text id="s15" font-size="15">indent2</text>
+    <text id="s16" font-size="15">diamond1</text>
+    <text id="s17" font-size="15">diamond2</text>
+    <text id="s18" font-size="15">curve1</text>
+    <text id="s19" font-size="15">curve2</text>
+  </defs>
+
+  <use xlink:href="#s10" x="30" y="30" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s1)" marker-end="url(#s1)" />
+  <use xlink:href="#s11" x="150" y="35" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="60" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s2)" marker-end="url(#s2)" />
+  <use xlink:href="#s12" x="150" y="65" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="90" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s3)" marker-end="url(#s3)" />
+  <use xlink:href="#s13" x="150" y="95" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="120" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s4)" marker-end="url(#s4)" />
+  <use xlink:href="#s14" x="150" y="125" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="150" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s5)" marker-end="url(#s5)" />
+  <use xlink:href="#s15" x="150" y="155" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="180" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s6)" marker-end="url(#s6)" />
+  <use xlink:href="#s16" x="150" y="185" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="210" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s7)" marker-end="url(#s7)" />
+  <use xlink:href="#s17" x="150" y="215" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="240" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s8)" marker-end="url(#s8)" />
+  <use xlink:href="#s18" x="150" y="245" fill="#FB8C00" />
+  <use xlink:href="#s10" x="30" y="270" fill="none" stroke-width="2" stroke="#000000" marker-start="url(#s9)" marker-end="url(#s9)" />
+  <use xlink:href="#s19" x="150" y="275" fill="#FB8C00" />
+</svg>

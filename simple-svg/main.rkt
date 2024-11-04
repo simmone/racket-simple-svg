@@ -132,7 +132,13 @@
                                   )
                      TEXT?)]
           [new-arrow (-> (cons/c number? number?) (cons/c number? number?) number? number? number? ARROW?)]
-          [new-marker (-> (or/c 'triangle 'circle 'indent 'diamond) MARKER?)]
+          [new-marker (->*
+                       ((or/c 'triangle1 'triangle2 'circle 'indent1 'indent2 'diamond1 'diamond2 'curve1 'curve2))
+                       (
+                        #:size (or/c #f number?)
+                        #:x (or/c #f number?)
+                       )
+                       MARKER?)]
           [svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?
                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
                                    BLUR-DROPDOWN? ARROW? MARKER?) string?)]
