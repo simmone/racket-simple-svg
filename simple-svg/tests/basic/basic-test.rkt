@@ -21,7 +21,7 @@
 
     (let ([svg_str
            (svg-out
-            20 20
+            30 20
             (lambda ()
               (void)))])
 
