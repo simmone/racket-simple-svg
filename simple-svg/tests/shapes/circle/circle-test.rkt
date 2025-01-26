@@ -7,7 +7,7 @@
          racket/runtime-path)
 
 (define-runtime-path circle_svg "../../../showcase/shapes/circle/circle.svg")
-(define-runtime-path circle3_svg "../../../showcase/shapes/circle/circle3.svg")
+(define-runtime-path circle4_svg "../../../showcase/shapes/circle/circle4.svg")
 
 (define test-all
   (test-suite
@@ -33,7 +33,7 @@
              (check-lines? expected actual)))))))
 
    (test-case
-    "test-circle3"
+    "test-circle4"
 
     (let ([actual_svg
            (svg-out
@@ -57,7 +57,7 @@
                 (set-SSTYLE-fill! green_sstyle "green")
                 (svg-place-widget circle_id #:style green_sstyle #:at '(150 . 150)))))])
       
-      (call-with-input-file circle3_svg
+      (call-with-input-file circle4_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg
