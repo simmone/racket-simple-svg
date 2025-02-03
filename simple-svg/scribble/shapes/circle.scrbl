@@ -45,4 +45,4 @@ define a circle by radius length.
      (set-SSTYLE-fill! green_sstyle "green")
      (svg-place-widget circle_id #:style green_sstyle #:at '(150 . 150)))))
 }|
-@image{showcase/shapes/circle/circle3.svg}
+@image{showcase/shapes/circle/circle4.svg}
