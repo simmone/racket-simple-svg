@@ -63,18 +63,18 @@
                     [line1_id (svg-def-shape (new-line '(10 . 0) '(0 . 50)))]
                     [line2_id (svg-def-shape (new-line '(0 . 0) '(10 . 50)))]
                     [rect_sstyle (sstyle-new)]
-                    [group_sstyle (sstyle-new)]
+                    [line_sstyle (sstyle-new)]
                     [cross_line_id #f]
                     [pattern_id #f]
                     )
 
-                (set-SSTYLE-stroke-width! group_sstyle 1)
-                (set-SSTYLE-stroke! group_sstyle "black")
+                (set-SSTYLE-stroke-width! line_sstyle 1)
+                (set-SSTYLE-stroke! line_sstyle "black")
                 (set! cross_line_id
                       (svg-def-group
                        (lambda ()
-                         (svg-place-widget line1_id #:style group_sstyle)
-                         (svg-place-widget line2_id #:style group_sstyle)
+                         (svg-place-widget line1_id #:style line_sstyle)
+                         (svg-place-widget line2_id #:style line_sstyle)
                          )))
 
                 (set-SSTYLE-stroke-width! rect_sstyle 2)
