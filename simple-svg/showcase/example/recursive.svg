@@ -6,281 +6,44 @@
     >
   <defs>
     <circle id="s1" r="100" />
-    <circle id="s10" r="6.25" />
-    <circle id="s100" r="6.25" />
-    <circle id="s101" r="6.25" />
-    <circle id="s102" r="6.25" />
-    <circle id="s103" r="6.25" />
-    <circle id="s104" r="12.5" />
-    <circle id="s105" r="6.25" />
-    <circle id="s106" r="6.25" />
-    <circle id="s107" r="6.25" />
-    <circle id="s108" r="6.25" />
-    <circle id="s109" r="25" />
-    <circle id="s11" r="6.25" />
-    <circle id="s110" r="12.5" />
-    <circle id="s111" r="6.25" />
-    <circle id="s112" r="6.25" />
-    <circle id="s113" r="6.25" />
-    <circle id="s114" r="6.25" />
-    <circle id="s115" r="12.5" />
-    <circle id="s116" r="6.25" />
-    <circle id="s117" r="6.25" />
-    <circle id="s118" r="6.25" />
-    <circle id="s119" r="6.25" />
-    <circle id="s12" r="6.25" />
-    <circle id="s120" r="12.5" />
-    <circle id="s121" r="6.25" />
-    <circle id="s122" r="6.25" />
-    <circle id="s123" r="6.25" />
-    <circle id="s124" r="6.25" />
-    <circle id="s125" r="12.5" />
-    <circle id="s126" r="6.25" />
-    <circle id="s127" r="6.25" />
-    <circle id="s128" r="6.25" />
-    <circle id="s129" r="6.25" />
-    <circle id="s13" r="6.25" />
-    <circle id="s130" r="25" />
-    <circle id="s131" r="12.5" />
-    <circle id="s132" r="6.25" />
-    <circle id="s133" r="6.25" />
-    <circle id="s134" r="6.25" />
-    <circle id="s135" r="6.25" />
-    <circle id="s136" r="12.5" />
-    <circle id="s137" r="6.25" />
-    <circle id="s138" r="6.25" />
-    <circle id="s139" r="6.25" />
-    <circle id="s14" r="12.5" />
-    <circle id="s140" r="6.25" />
-    <circle id="s141" r="12.5" />
-    <circle id="s142" r="6.25" />
-    <circle id="s143" r="6.25" />
-    <circle id="s144" r="6.25" />
-    <circle id="s145" r="6.25" />
-    <circle id="s146" r="12.5" />
-    <circle id="s147" r="6.25" />
-    <circle id="s148" r="6.25" />
-    <circle id="s149" r="6.25" />
-    <circle id="s15" r="6.25" />
-    <circle id="s150" r="6.25" />
-    <circle id="s151" r="25" />
-    <circle id="s152" r="12.5" />
-    <circle id="s153" r="6.25" />
-    <circle id="s154" r="6.25" />
-    <circle id="s155" r="6.25" />
-    <circle id="s156" r="6.25" />
-    <circle id="s157" r="12.5" />
-    <circle id="s158" r="6.25" />
-    <circle id="s159" r="6.25" />
-    <circle id="s16" r="6.25" />
-    <circle id="s160" r="6.25" />
-    <circle id="s161" r="6.25" />
-    <circle id="s162" r="12.5" />
-    <circle id="s163" r="6.25" />
-    <circle id="s164" r="6.25" />
-    <circle id="s165" r="6.25" />
-    <circle id="s166" r="6.25" />
-    <circle id="s167" r="12.5" />
-    <circle id="s168" r="6.25" />
-    <circle id="s169" r="6.25" />
-    <circle id="s17" r="6.25" />
-    <circle id="s170" r="6.25" />
-    <circle id="s171" r="6.25" />
-    <circle id="s172" r="50" />
-    <circle id="s173" r="25" />
-    <circle id="s174" r="12.5" />
-    <circle id="s175" r="6.25" />
-    <circle id="s176" r="6.25" />
-    <circle id="s177" r="6.25" />
-    <circle id="s178" r="6.25" />
-    <circle id="s179" r="12.5" />
-    <circle id="s18" r="6.25" />
-    <circle id="s180" r="6.25" />
-    <circle id="s181" r="6.25" />
-    <circle id="s182" r="6.25" />
-    <circle id="s183" r="6.25" />
-    <circle id="s184" r="12.5" />
-    <circle id="s185" r="6.25" />
-    <circle id="s186" r="6.25" />
-    <circle id="s187" r="6.25" />
-    <circle id="s188" r="6.25" />
-    <circle id="s189" r="12.5" />
-    <circle id="s19" r="12.5" />
-    <circle id="s190" r="6.25" />
-    <circle id="s191" r="6.25" />
-    <circle id="s192" r="6.25" />
-    <circle id="s193" r="6.25" />
-    <circle id="s194" r="25" />
-    <circle id="s195" r="12.5" />
-    <circle id="s196" r="6.25" />
-    <circle id="s197" r="6.25" />
-    <circle id="s198" r="6.25" />
-    <circle id="s199" r="6.25" />
     <circle id="s2" r="50" />
-    <circle id="s20" r="6.25" />
-    <circle id="s200" r="12.5" />
-    <circle id="s201" r="6.25" />
-    <circle id="s202" r="6.25" />
-    <circle id="s203" r="6.25" />
-    <circle id="s204" r="6.25" />
-    <circle id="s205" r="12.5" />
-    <circle id="s206" r="6.25" />
-    <circle id="s207" r="6.25" />
-    <circle id="s208" r="6.25" />
-    <circle id="s209" r="6.25" />
-    <circle id="s21" r="6.25" />
-    <circle id="s210" r="12.5" />
-    <circle id="s211" r="6.25" />
-    <circle id="s212" r="6.25" />
-    <circle id="s213" r="6.25" />
-    <circle id="s214" r="6.25" />
-    <circle id="s215" r="25" />
-    <circle id="s216" r="12.5" />
-    <circle id="s217" r="6.25" />
-    <circle id="s218" r="6.25" />
-    <circle id="s219" r="6.25" />
-    <circle id="s22" r="6.25" />
-    <circle id="s220" r="6.25" />
-    <circle id="s221" r="12.5" />
-    <circle id="s222" r="6.25" />
-    <circle id="s223" r="6.25" />
-    <circle id="s224" r="6.25" />
-    <circle id="s225" r="6.25" />
-    <circle id="s226" r="12.5" />
-    <circle id="s227" r="6.25" />
-    <circle id="s228" r="6.25" />
-    <circle id="s229" r="6.25" />
-    <circle id="s23" r="6.25" />
-    <circle id="s230" r="6.25" />
-    <circle id="s231" r="12.5" />
-    <circle id="s232" r="6.25" />
-    <circle id="s233" r="6.25" />
-    <circle id="s234" r="6.25" />
-    <circle id="s235" r="6.25" />
-    <circle id="s236" r="25" />
-    <circle id="s237" r="12.5" />
-    <circle id="s238" r="6.25" />
-    <circle id="s239" r="6.25" />
-    <circle id="s24" r="25" />
-    <circle id="s240" r="6.25" />
-    <circle id="s241" r="6.25" />
-    <circle id="s242" r="12.5" />
-    <circle id="s243" r="6.25" />
-    <circle id="s244" r="6.25" />
-    <circle id="s245" r="6.25" />
-    <circle id="s246" r="6.25" />
-    <circle id="s247" r="12.5" />
-    <circle id="s248" r="6.25" />
-    <circle id="s249" r="6.25" />
-    <circle id="s25" r="12.5" />
-    <circle id="s250" r="6.25" />
-    <circle id="s251" r="6.25" />
-    <circle id="s252" r="12.5" />
-    <circle id="s253" r="6.25" />
-    <circle id="s254" r="6.25" />
-    <circle id="s255" r="6.25" />
-    <circle id="s256" r="6.25" />
-    <circle id="s257" r="50" />
-    <circle id="s258" r="25" />
-    <circle id="s259" r="12.5" />
-    <circle id="s26" r="6.25" />
-    <circle id="s260" r="6.25" />
-    <circle id="s261" r="6.25" />
-    <circle id="s262" r="6.25" />
-    <circle id="s263" r="6.25" />
-    <circle id="s264" r="12.5" />
-    <circle id="s265" r="6.25" />
-    <circle id="s266" r="6.25" />
-    <circle id="s267" r="6.25" />
-    <circle id="s268" r="6.25" />
-    <circle id="s269" r="12.5" />
-    <circle id="s27" r="6.25" />
-    <circle id="s270" r="6.25" />
-    <circle id="s271" r="6.25" />
-    <circle id="s272" r="6.25" />
-    <circle id="s273" r="6.25" />
-    <circle id="s274" r="12.5" />
-    <circle id="s275" r="6.25" />
-    <circle id="s276" r="6.25" />
-    <circle id="s277" r="6.25" />
-    <circle id="s278" r="6.25" />
-    <circle id="s279" r="25" />
-    <circle id="s28" r="6.25" />
-    <circle id="s280" r="12.5" />
-    <circle id="s281" r="6.25" />
-    <circle id="s282" r="6.25" />
-    <circle id="s283" r="6.25" />
-    <circle id="s284" r="6.25" />
-    <circle id="s285" r="12.5" />
-    <circle id="s286" r="6.25" />
-    <circle id="s287" r="6.25" />
-    <circle id="s288" r="6.25" />
-    <circle id="s289" r="6.25" />
-    <circle id="s29" r="6.25" />
-    <circle id="s290" r="12.5" />
-    <circle id="s291" r="6.25" />
-    <circle id="s292" r="6.25" />
-    <circle id="s293" r="6.25" />
-    <circle id="s294" r="6.25" />
-    <circle id="s295" r="12.5" />
-    <circle id="s296" r="6.25" />
-    <circle id="s297" r="6.25" />
-    <circle id="s298" r="6.25" />
-    <circle id="s299" r="6.25" />
     <circle id="s3" r="25" />
+    <circle id="s4" r="12.5" />
+    <circle id="s5" r="6.25" />
+    <circle id="s6" r="6.25" />
+    <circle id="s7" r="6.25" />
+    <circle id="s8" r="6.25" />
+    <circle id="s9" r="12.5" />
+    <circle id="s10" r="6.25" />
+    <circle id="s11" r="6.25" />
+    <circle id="s12" r="6.25" />
+    <circle id="s13" r="6.25" />
+    <circle id="s14" r="12.5" />
+    <circle id="s15" r="6.25" />
+    <circle id="s16" r="6.25" />
+    <circle id="s17" r="6.25" />
+    <circle id="s18" r="6.25" />
+    <circle id="s19" r="12.5" />
+    <circle id="s20" r="6.25" />
+    <circle id="s21" r="6.25" />
+    <circle id="s22" r="6.25" />
+    <circle id="s23" r="6.25" />
+    <circle id="s24" r="25" />
+    <circle id="s25" r="12.5" />
+    <circle id="s26" r="6.25" />
+    <circle id="s27" r="6.25" />
+    <circle id="s28" r="6.25" />
+    <circle id="s29" r="6.25" />
     <circle id="s30" r="12.5" />
-    <circle id="s300" r="25" />
-    <circle id="s301" r="12.5" />
-    <circle id="s302" r="6.25" />
-    <circle id="s303" r="6.25" />
-    <circle id="s304" r="6.25" />
-    <circle id="s305" r="6.25" />
-    <circle id="s306" r="12.5" />
-    <circle id="s307" r="6.25" />
-    <circle id="s308" r="6.25" />
-    <circle id="s309" r="6.25" />
     <circle id="s31" r="6.25" />
-    <circle id="s310" r="6.25" />
-    <circle id="s311" r="12.5" />
-    <circle id="s312" r="6.25" />
-    <circle id="s313" r="6.25" />
-    <circle id="s314" r="6.25" />
-    <circle id="s315" r="6.25" />
-    <circle id="s316" r="12.5" />
-    <circle id="s317" r="6.25" />
-    <circle id="s318" r="6.25" />
-    <circle id="s319" r="6.25" />
     <circle id="s32" r="6.25" />
-    <circle id="s320" r="6.25" />
-    <circle id="s321" r="25" />
-    <circle id="s322" r="12.5" />
-    <circle id="s323" r="6.25" />
-    <circle id="s324" r="6.25" />
-    <circle id="s325" r="6.25" />
-    <circle id="s326" r="6.25" />
-    <circle id="s327" r="12.5" />
-    <circle id="s328" r="6.25" />
-    <circle id="s329" r="6.25" />
     <circle id="s33" r="6.25" />
-    <circle id="s330" r="6.25" />
-    <circle id="s331" r="6.25" />
-    <circle id="s332" r="12.5" />
-    <circle id="s333" r="6.25" />
-    <circle id="s334" r="6.25" />
-    <circle id="s335" r="6.25" />
-    <circle id="s336" r="6.25" />
-    <circle id="s337" r="12.5" />
-    <circle id="s338" r="6.25" />
-    <circle id="s339" r="6.25" />
     <circle id="s34" r="6.25" />
-    <circle id="s340" r="6.25" />
-    <circle id="s341" r="6.25" />
     <circle id="s35" r="12.5" />
     <circle id="s36" r="6.25" />
     <circle id="s37" r="6.25" />
     <circle id="s38" r="6.25" />
     <circle id="s39" r="6.25" />
-    <circle id="s4" r="12.5" />
     <circle id="s40" r="12.5" />
     <circle id="s41" r="6.25" />
     <circle id="s42" r="6.25" />
@@ -291,7 +54,6 @@
     <circle id="s47" r="6.25" />
     <circle id="s48" r="6.25" />
     <circle id="s49" r="6.25" />
-    <circle id="s5" r="6.25" />
     <circle id="s50" r="6.25" />
     <circle id="s51" r="12.5" />
     <circle id="s52" r="6.25" />
@@ -302,7 +64,6 @@
     <circle id="s57" r="6.25" />
     <circle id="s58" r="6.25" />
     <circle id="s59" r="6.25" />
-    <circle id="s6" r="6.25" />
     <circle id="s60" r="6.25" />
     <circle id="s61" r="12.5" />
     <circle id="s62" r="6.25" />
@@ -313,7 +74,6 @@
     <circle id="s67" r="12.5" />
     <circle id="s68" r="6.25" />
     <circle id="s69" r="6.25" />
-    <circle id="s7" r="6.25" />
     <circle id="s70" r="6.25" />
     <circle id="s71" r="6.25" />
     <circle id="s72" r="12.5" />
@@ -324,7 +84,6 @@
     <circle id="s77" r="12.5" />
     <circle id="s78" r="6.25" />
     <circle id="s79" r="6.25" />
-    <circle id="s8" r="6.25" />
     <circle id="s80" r="6.25" />
     <circle id="s81" r="6.25" />
     <circle id="s82" r="12.5" />
@@ -335,7 +94,6 @@
     <circle id="s87" r="50" />
     <circle id="s88" r="25" />
     <circle id="s89" r="12.5" />
-    <circle id="s9" r="12.5" />
     <circle id="s90" r="6.25" />
     <circle id="s91" r="6.25" />
     <circle id="s92" r="6.25" />
@@ -346,6 +104,248 @@
     <circle id="s97" r="6.25" />
     <circle id="s98" r="6.25" />
     <circle id="s99" r="12.5" />
+    <circle id="s100" r="6.25" />
+    <circle id="s101" r="6.25" />
+    <circle id="s102" r="6.25" />
+    <circle id="s103" r="6.25" />
+    <circle id="s104" r="12.5" />
+    <circle id="s105" r="6.25" />
+    <circle id="s106" r="6.25" />
+    <circle id="s107" r="6.25" />
+    <circle id="s108" r="6.25" />
+    <circle id="s109" r="25" />
+    <circle id="s110" r="12.5" />
+    <circle id="s111" r="6.25" />
+    <circle id="s112" r="6.25" />
+    <circle id="s113" r="6.25" />
+    <circle id="s114" r="6.25" />
+    <circle id="s115" r="12.5" />
+    <circle id="s116" r="6.25" />
+    <circle id="s117" r="6.25" />
+    <circle id="s118" r="6.25" />
+    <circle id="s119" r="6.25" />
+    <circle id="s120" r="12.5" />
+    <circle id="s121" r="6.25" />
+    <circle id="s122" r="6.25" />
+    <circle id="s123" r="6.25" />
+    <circle id="s124" r="6.25" />
+    <circle id="s125" r="12.5" />
+    <circle id="s126" r="6.25" />
+    <circle id="s127" r="6.25" />
+    <circle id="s128" r="6.25" />
+    <circle id="s129" r="6.25" />
+    <circle id="s130" r="25" />
+    <circle id="s131" r="12.5" />
+    <circle id="s132" r="6.25" />
+    <circle id="s133" r="6.25" />
+    <circle id="s134" r="6.25" />
+    <circle id="s135" r="6.25" />
+    <circle id="s136" r="12.5" />
+    <circle id="s137" r="6.25" />
+    <circle id="s138" r="6.25" />
+    <circle id="s139" r="6.25" />
+    <circle id="s140" r="6.25" />
+    <circle id="s141" r="12.5" />
+    <circle id="s142" r="6.25" />
+    <circle id="s143" r="6.25" />
+    <circle id="s144" r="6.25" />
+    <circle id="s145" r="6.25" />
+    <circle id="s146" r="12.5" />
+    <circle id="s147" r="6.25" />
+    <circle id="s148" r="6.25" />
+    <circle id="s149" r="6.25" />
+    <circle id="s150" r="6.25" />
+    <circle id="s151" r="25" />
+    <circle id="s152" r="12.5" />
+    <circle id="s153" r="6.25" />
+    <circle id="s154" r="6.25" />
+    <circle id="s155" r="6.25" />
+    <circle id="s156" r="6.25" />
+    <circle id="s157" r="12.5" />
+    <circle id="s158" r="6.25" />
+    <circle id="s159" r="6.25" />
+    <circle id="s160" r="6.25" />
+    <circle id="s161" r="6.25" />
+    <circle id="s162" r="12.5" />
+    <circle id="s163" r="6.25" />
+    <circle id="s164" r="6.25" />
+    <circle id="s165" r="6.25" />
+    <circle id="s166" r="6.25" />
+    <circle id="s167" r="12.5" />
+    <circle id="s168" r="6.25" />
+    <circle id="s169" r="6.25" />
+    <circle id="s170" r="6.25" />
+    <circle id="s171" r="6.25" />
+    <circle id="s172" r="50" />
+    <circle id="s173" r="25" />
+    <circle id="s174" r="12.5" />
+    <circle id="s175" r="6.25" />
+    <circle id="s176" r="6.25" />
+    <circle id="s177" r="6.25" />
+    <circle id="s178" r="6.25" />
+    <circle id="s179" r="12.5" />
+    <circle id="s180" r="6.25" />
+    <circle id="s181" r="6.25" />
+    <circle id="s182" r="6.25" />
+    <circle id="s183" r="6.25" />
+    <circle id="s184" r="12.5" />
+    <circle id="s185" r="6.25" />
+    <circle id="s186" r="6.25" />
+    <circle id="s187" r="6.25" />
+    <circle id="s188" r="6.25" />
+    <circle id="s189" r="12.5" />
+    <circle id="s190" r="6.25" />
+    <circle id="s191" r="6.25" />
+    <circle id="s192" r="6.25" />
+    <circle id="s193" r="6.25" />
+    <circle id="s194" r="25" />
+    <circle id="s195" r="12.5" />
+    <circle id="s196" r="6.25" />
+    <circle id="s197" r="6.25" />
+    <circle id="s198" r="6.25" />
+    <circle id="s199" r="6.25" />
+    <circle id="s200" r="12.5" />
+    <circle id="s201" r="6.25" />
+    <circle id="s202" r="6.25" />
+    <circle id="s203" r="6.25" />
+    <circle id="s204" r="6.25" />
+    <circle id="s205" r="12.5" />
+    <circle id="s206" r="6.25" />
+    <circle id="s207" r="6.25" />
+    <circle id="s208" r="6.25" />
+    <circle id="s209" r="6.25" />
+    <circle id="s210" r="12.5" />
+    <circle id="s211" r="6.25" />
+    <circle id="s212" r="6.25" />
+    <circle id="s213" r="6.25" />
+    <circle id="s214" r="6.25" />
+    <circle id="s215" r="25" />
+    <circle id="s216" r="12.5" />
+    <circle id="s217" r="6.25" />
+    <circle id="s218" r="6.25" />
+    <circle id="s219" r="6.25" />
+    <circle id="s220" r="6.25" />
+    <circle id="s221" r="12.5" />
+    <circle id="s222" r="6.25" />
+    <circle id="s223" r="6.25" />
+    <circle id="s224" r="6.25" />
+    <circle id="s225" r="6.25" />
+    <circle id="s226" r="12.5" />
+    <circle id="s227" r="6.25" />
+    <circle id="s228" r="6.25" />
+    <circle id="s229" r="6.25" />
+    <circle id="s230" r="6.25" />
+    <circle id="s231" r="12.5" />
+    <circle id="s232" r="6.25" />
+    <circle id="s233" r="6.25" />
+    <circle id="s234" r="6.25" />
+    <circle id="s235" r="6.25" />
+    <circle id="s236" r="25" />
+    <circle id="s237" r="12.5" />
+    <circle id="s238" r="6.25" />
+    <circle id="s239" r="6.25" />
+    <circle id="s240" r="6.25" />
+    <circle id="s241" r="6.25" />
+    <circle id="s242" r="12.5" />
+    <circle id="s243" r="6.25" />
+    <circle id="s244" r="6.25" />
+    <circle id="s245" r="6.25" />
+    <circle id="s246" r="6.25" />
+    <circle id="s247" r="12.5" />
+    <circle id="s248" r="6.25" />
+    <circle id="s249" r="6.25" />
+    <circle id="s250" r="6.25" />
+    <circle id="s251" r="6.25" />
+    <circle id="s252" r="12.5" />
+    <circle id="s253" r="6.25" />
+    <circle id="s254" r="6.25" />
+    <circle id="s255" r="6.25" />
+    <circle id="s256" r="6.25" />
+    <circle id="s257" r="50" />
+    <circle id="s258" r="25" />
+    <circle id="s259" r="12.5" />
+    <circle id="s260" r="6.25" />
+    <circle id="s261" r="6.25" />
+    <circle id="s262" r="6.25" />
+    <circle id="s263" r="6.25" />
+    <circle id="s264" r="12.5" />
+    <circle id="s265" r="6.25" />
+    <circle id="s266" r="6.25" />
+    <circle id="s267" r="6.25" />
+    <circle id="s268" r="6.25" />
+    <circle id="s269" r="12.5" />
+    <circle id="s270" r="6.25" />
+    <circle id="s271" r="6.25" />
+    <circle id="s272" r="6.25" />
+    <circle id="s273" r="6.25" />
+    <circle id="s274" r="12.5" />
+    <circle id="s275" r="6.25" />
+    <circle id="s276" r="6.25" />
+    <circle id="s277" r="6.25" />
+    <circle id="s278" r="6.25" />
+    <circle id="s279" r="25" />
+    <circle id="s280" r="12.5" />
+    <circle id="s281" r="6.25" />
+    <circle id="s282" r="6.25" />
+    <circle id="s283" r="6.25" />
+    <circle id="s284" r="6.25" />
+    <circle id="s285" r="12.5" />
+    <circle id="s286" r="6.25" />
+    <circle id="s287" r="6.25" />
+    <circle id="s288" r="6.25" />
+    <circle id="s289" r="6.25" />
+    <circle id="s290" r="12.5" />
+    <circle id="s291" r="6.25" />
+    <circle id="s292" r="6.25" />
+    <circle id="s293" r="6.25" />
+    <circle id="s294" r="6.25" />
+    <circle id="s295" r="12.5" />
+    <circle id="s296" r="6.25" />
+    <circle id="s297" r="6.25" />
+    <circle id="s298" r="6.25" />
+    <circle id="s299" r="6.25" />
+    <circle id="s300" r="25" />
+    <circle id="s301" r="12.5" />
+    <circle id="s302" r="6.25" />
+    <circle id="s303" r="6.25" />
+    <circle id="s304" r="6.25" />
+    <circle id="s305" r="6.25" />
+    <circle id="s306" r="12.5" />
+    <circle id="s307" r="6.25" />
+    <circle id="s308" r="6.25" />
+    <circle id="s309" r="6.25" />
+    <circle id="s310" r="6.25" />
+    <circle id="s311" r="12.5" />
+    <circle id="s312" r="6.25" />
+    <circle id="s313" r="6.25" />
+    <circle id="s314" r="6.25" />
+    <circle id="s315" r="6.25" />
+    <circle id="s316" r="12.5" />
+    <circle id="s317" r="6.25" />
+    <circle id="s318" r="6.25" />
+    <circle id="s319" r="6.25" />
+    <circle id="s320" r="6.25" />
+    <circle id="s321" r="25" />
+    <circle id="s322" r="12.5" />
+    <circle id="s323" r="6.25" />
+    <circle id="s324" r="6.25" />
+    <circle id="s325" r="6.25" />
+    <circle id="s326" r="6.25" />
+    <circle id="s327" r="12.5" />
+    <circle id="s328" r="6.25" />
+    <circle id="s329" r="6.25" />
+    <circle id="s330" r="6.25" />
+    <circle id="s331" r="6.25" />
+    <circle id="s332" r="12.5" />
+    <circle id="s333" r="6.25" />
+    <circle id="s334" r="6.25" />
+    <circle id="s335" r="6.25" />
+    <circle id="s336" r="6.25" />
+    <circle id="s337" r="12.5" />
+    <circle id="s338" r="6.25" />
+    <circle id="s339" r="6.25" />
+    <circle id="s340" r="6.25" />
+    <circle id="s341" r="6.25" />
   </defs>
 
   <use xlink:href="#s1" x="200" y="200" fill="none" stroke-width="1" stroke="red" />

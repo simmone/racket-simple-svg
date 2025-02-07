@@ -222,20 +222,20 @@
               (printf "</svg>\n")))))))
 
 (define (svg-def-shape shape)
-  (let* ([new_widget_index (add1 (SVG-widget_id_count (*SVG*)))]
+  (let* ([new_widget_index (add1 (SVG-shape_id_count (*SVG*)))]
          [shape_id (format "s~a" new_widget_index)])
 
-    (set-SVG-widget_id_count! (*SVG*) new_widget_index)
+    (set-SVG-shape_id_count! (*SVG*) new_widget_index)
 
     (hash-set! (SVG-shape_define_map (*SVG*)) shape_id shape)
 
     shape_id))
 
 (define (svg-def-group user_proc)
-  (let* ([new_widget_index (add1 (SVG-widget_id_count (*SVG*)))]
+  (let* ([new_widget_index (add1 (SVG-group_id_count (*SVG*)))]
          [group_id (format "g~a" new_widget_index)])
 
-    (set-SVG-widget_id_count! (*SVG*) new_widget_index)
+    (set-SVG-group_id_count! (*SVG*) new_widget_index)
     
     (svg-def-name-group group_id user_proc)))
 

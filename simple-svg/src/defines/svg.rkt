@@ -18,7 +18,8 @@
 (provide (contract-out
           [struct SVG
                   (
-                   (widget_id_count number?)
+                   (shape_id_count number?)
+                   (group_id_count number?)
                    (width number?)
                    (height number?)
                    (view_box (or/c #f VIEW-BOX?))
@@ -37,7 +38,8 @@
 (define *SVG* (make-parameter #f))
 
 (struct SVG (
-             [widget_id_count #:mutable]
+             [shape_id_count #:mutable]
+             [group_id_count #:mutable]
              [width #:mutable]
              [height #:mutable]
              [view_box #:mutable]
@@ -49,4 +51,4 @@
         )
 
 (define (new-svg width height view_box)
-  (SVG 0 width height view_box (make-hash) (make-hash) '()))
+  (SVG 0 0 width height view_box (make-hash) (make-hash) '()))
