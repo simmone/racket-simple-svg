@@ -12,7 +12,7 @@
 (define test-all
   (test-suite
    "test-gradient"
-
+   
    (test-case
     "test-linearGradient"
 
