@@ -37,5 +37,5 @@
         (when (not (null? _defs))
           (printf "             ~a\n" (car _defs))
           (loop (cdr _defs))))
-      (printf "            \"/>\n" ))))
+      (printf "            \"/>\n"))))
 
