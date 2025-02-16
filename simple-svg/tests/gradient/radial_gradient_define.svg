@@ -1,0 +1,4 @@
+    <radialGradient id="s1" cx="0" cy="1" fx="2" fy="3" r="4" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
+      <stop offset="0%" stop-color="#BBC42A" />
+      <stop offset="100%" stop-color="#ED6E46" />
+    </radialGradient>

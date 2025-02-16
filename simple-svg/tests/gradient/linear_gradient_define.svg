@@ -1,0 +1,4 @@
+    <linearGradient id="s1" x1="0" y1="1" x2="2" y2="3" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
+      <stop offset="0%" stop-color="#BBC42A" />
+      <stop offset="100%" stop-color="#ED6E46" />
+    </linearGradient>
