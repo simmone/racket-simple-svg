@@ -89,19 +89,19 @@
                 (printf " font-family=\"~a\"" (TEXT-font-family text)))
 
               (when (TEXT-rotate text)
-                (printf " rotate=\"~a\"" (foldr (lambda (a b) (format "~a ~a" a b)) "" (map (lambda (degree) (~r degree)) (TEXT-rotate text)))))
+                (printf " rotate=\"~a\"" (string-join (map (lambda (degree) (~r degree)) (TEXT-rotate text)))))
 
               (when (TEXT-textLength text)
                 (printf " textLength=\"~a\"" (~r (TEXT-textLength text))))
 
               (when (TEXT-kerning text)
-                (printf " kerning=\"~a\"" (~r (TEXT-kerning text))))
+                (printf " kerning=\"~a\"" (TEXT-kerning text)))
 
               (when (TEXT-letter-space text)
-                (printf " letter-space=\"~a\"" (~r (TEXT-letter-space text))))
+                (printf " letter-space=\"~a\"" (TEXT-letter-space text)))
 
               (when (TEXT-word-space text)
-                (printf " word-space=\"~a\"" (~r (TEXT-word-space text))))
+                (printf " word-space=\"~a\"" (TEXT-word-space text)))
 
               (when (TEXT-text-decoration text)
                 (printf " text-decoration=\"~a\"" (TEXT-text-decoration text)))
