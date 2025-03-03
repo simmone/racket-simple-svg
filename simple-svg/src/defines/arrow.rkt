@@ -47,7 +47,6 @@
          [pre_x_offset (- pre_end_x start_x)]
          [pre_y_offset (- pre_end_y start_y)]
          [pre_theta (atan (if (= pre_x_offset 0) 0 (/ pre_y_offset pre_x_offset)))]
-         [pre_alpha (- (/ pi 2) pre_theta)]
          [pre_delta_r
           (cons (* head_height (cos pre_theta)) (* head_height (sin pre_theta)))]
          [pre_R (cons
@@ -118,4 +117,4 @@
                 (printf "            \"/>\n")
                 )))))
 
-(define (precision x) (~r x #:precision 4))
+(define (precision x) (~r x #:precision '(= 4)))
