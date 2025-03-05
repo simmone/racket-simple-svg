@@ -18,7 +18,7 @@
     </filter>
   </defs>
 
-  <symbol id="g1">
+  <symbol id="g2">
     <use xlink:href="#s1" x="120" y="120" fill="none" stroke="rgb(11, 112, 191)" />
     <use xlink:href="#s1" x="180" y="180" fill="none" stroke="rgb(240, 183, 0)" />
     <use xlink:href="#s1" x="260" y="120" fill="none" stroke="rgb(0, 0, 0)" />
@@ -26,8 +26,8 @@
     <use xlink:href="#s1" x="400" y="120" fill="none" stroke="rgb(214, 0, 23)" />
   </symbol>
 
-  <use xlink:href="#g1" fill="none" stroke-width="12" filter="url(#s2)" />
-  <use xlink:href="#g1" x="0" y="300" fill="none" stroke-width="12" filter="url(#s2)" />
-  <use xlink:href="#g1" x="500" y="0" fill="none" stroke-width="12" filter="url(#s2)" />
-  <use xlink:href="#g1" x="500" y="300" fill="none" stroke-width="12" filter="url(#s2)" />
+  <use xlink:href="#g2" fill="none" stroke-width="12" filter="url(#s2)" />
+  <use xlink:href="#g2" x="0" y="300" fill="none" stroke-width="12" filter="url(#s2)" />
+  <use xlink:href="#g2" x="500" y="0" fill="none" stroke-width="12" filter="url(#s2)" />
+  <use xlink:href="#g2" x="500" y="300" fill="none" stroke-width="12" filter="url(#s2)" />
 </svg>

@@ -9,11 +9,11 @@
     <rect id="s2" width="50" height="50" />
   </defs>
 
-  <symbol id="b0">
+  <symbol id="g1">
     <use xlink:href="#s1" fill="#BBC42A" />
   </symbol>
 
-  <use xlink:href="#b0" />
+  <use xlink:href="#g1" />
 
   <use xlink:href="#s2" x="25" y="25" fill="#FFFFFF" />
 </svg>

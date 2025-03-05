@@ -51,4 +51,4 @@
         )
 
 (define (new-svg width height view_box)
-  (SVG 0 0 width height view_box (make-hash) (make-hash) '()))
+  (SVG 0 1 width height view_box (make-hash) (make-hash) '()))
