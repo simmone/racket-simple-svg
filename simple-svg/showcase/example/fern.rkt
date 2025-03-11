@@ -30,14 +30,26 @@
   (svg-out
    canvas-width canvas-height
    (lambda ()
-     ;; draw the stem
-     (define end (end-point start-point #:length start-length #:deg start-deg))
-     (make-line start-point end #:width start-width)
-     ;; start the fern
-     (fern end
-           #:length start-length
-           #:deg start-deg
-           #:width start-width))))
+     ;; move all shapes a group, set group color, reduce the svg file
+     (define top_group_id
+       (svg-def-group
+        (lambda ()
+
+          ;; draw the stem
+          (define end (end-point start-point #:length start-length #:deg start-deg))
+          (make-line start-point end #:width start-width)
+     
+          ;; start the fern
+          (fern end
+                #:length start-length
+                #:deg start-deg
+                #:width start-width))))
+
+     (define _sstyle (sstyle-new))
+     (set-SSTYLE-stroke! _sstyle color)
+
+     (svg-place-widget top_group_id #:style _sstyle))))
+     
  
 ;;; draw the fern
 (define (fern start
@@ -106,7 +118,6 @@
                                            (pair end-x   (- canvas-height end-y)))))
   (define line-style (sstyle-new))
   (set-SSTYLE-stroke-width! line-style width)
-  (set-SSTYLE-stroke! line-style color)
   (svg-place-widget line_id #:style line-style))
  
 ;;;; ----- write the svg data ------
