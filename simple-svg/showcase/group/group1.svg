@@ -12,14 +12,18 @@
   </defs>
 
   <symbol id="g2">
-    <use xlink:href="#s1" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
-    <use xlink:href="#s2" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
-    <use xlink:href="#s3" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
-    <use xlink:href="#s4" x="5" y="5" fill="none" stroke-width="5" stroke="#765373" />
+    <use xlink:href="#s1" x="5" y="5" />
+    <use xlink:href="#s2" x="5" y="5" />
+    <use xlink:href="#s3" x="5" y="5" />
+    <use xlink:href="#s4" x="5" y="5" />
   </symbol>
 
-  <use xlink:href="#g2" x="50" y="50" />
-  <use xlink:href="#g2" x="100" y="100" />
-  <use xlink:href="#g2" x="80" y="200" />
-  <use xlink:href="#g2" x="150" y="100" />
+  <symbol id="g3">
+    <use xlink:href="#g2" x="50" y="50" />
+    <use xlink:href="#g2" x="100" y="100" />
+    <use xlink:href="#g2" x="80" y="200" />
+    <use xlink:href="#g2" x="150" y="100" />
+  </symbol>
+
+  <use xlink:href="#g3" fill="none" stroke-width="5" stroke="#765373" />
 </svg>

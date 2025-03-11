@@ -31,18 +31,22 @@
 
                 (set-SSTYLE-stroke-width! _sstyle 5)
                 (set-SSTYLE-stroke! _sstyle "#765373")
-                (let ([pattern_id 
-                       (svg-def-group
-                        (lambda ()
-                          (svg-place-widget line1_id #:style _sstyle #:at '(5 . 5))
-                          (svg-place-widget line2_id #:style _sstyle #:at '(5 . 5))
-                          (svg-place-widget line3_id #:style _sstyle #:at '(5 . 5))
-                          (svg-place-widget line4_id #:style _sstyle #:at '(5 . 5))))])
 
-                  (svg-place-widget pattern_id #:at '(50 . 50))
-                  (svg-place-widget pattern_id #:at '(100 . 100))
-                  (svg-place-widget pattern_id #:at '(80 . 200))
-                  (svg-place-widget pattern_id #:at '(150 . 100))))))])
+                (let* ([pattern_id 
+                        (svg-def-group
+                         (lambda ()
+                           (svg-place-widget line1_id #:at '(5 . 5))
+                           (svg-place-widget line2_id #:at '(5 . 5))
+                           (svg-place-widget line3_id #:at '(5 . 5))
+                           (svg-place-widget line4_id #:at '(5 . 5))))]
+                       [top_group_id
+                        (svg-def-group
+                         (lambda ()
+                           (svg-place-widget pattern_id #:at '(50 . 50))
+                           (svg-place-widget pattern_id #:at '(100 . 100))
+                           (svg-place-widget pattern_id #:at '(80 . 200))
+                           (svg-place-widget pattern_id #:at '(150 . 100))))])
+                  (svg-place-widget top_group_id #:style _sstyle)))))])
       
       (call-with-input-file group1_svg
         (lambda (expected)
