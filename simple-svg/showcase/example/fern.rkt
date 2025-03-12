@@ -1,126 +1,95 @@
-#lang racket/base
+#lang racket
 
-(require racket/math
-         racket/function
-         "../../main.rkt")
-
-(define pair cons)
-(define pair-first car)
-(define pair-second cdr)
- 
-;;;; ----- parameters -----
-(define canvas-width 600)
-(define canvas-height 600)
- 
-(define start-point '(300 . 50))
-(define start-length 120)
-(define start-deg 100) ;100°
-(define start-width 3)
-(define step-width 0.86)
-(define color "#5a5")
- 
-(define min-length 0.5)
-(define central-reduction 0.75)
-(define lateral-reduction 0.35)
-(define lateral-deg 80) ;80°
-(define bend 5) ;5°
- 
-;;;; ----- create the svg -----
-(define (svg-data)
-  (svg-out
-   canvas-width canvas-height
-   (lambda ()
-     ;; move all shapes a group, set group color, reduce the svg file
-     (define top_group_id
-       (svg-def-group
-        (lambda ()
-
-          ;; draw the stem
-          (define end (end-point start-point #:length start-length #:deg start-deg))
-          (make-line start-point end #:width start-width)
-     
-          ;; start the fern
-          (fern end
-                #:length start-length
-                #:deg start-deg
-                #:width start-width))))
-
-     (define _sstyle (sstyle-new))
-     (set-SSTYLE-stroke! _sstyle color)
-
-     (svg-place-widget top_group_id #:style _sstyle))))
-     
- 
-;;; draw the fern
-(define (fern start
-              #:length prev-length
-              #:deg prev-deg
-              #:width prev-width)
- 
-  (define central-length (* central-reduction prev-length))
-  (when (>= central-length min-length)
-    (define new-width (* step-width prev-width))
-    ;; central branch
-    (define central-deg (- prev-deg bend))
-    (define central-end (end-point start
-                                   #:length central-length
-                                   #:deg central-deg))
- 
-    (make-line start central-end #:width new-width)
- 
-    (fern central-end
-          #:length central-length
-          #:deg central-deg
-          #:width new-width)
- 
-    ;; left branch
-    (define left-length (* lateral-reduction prev-length))
-    (define left-deg (- (+ prev-deg lateral-deg) bend))
-    (define left-end (end-point start
-                           #:length left-length
-                           #:deg left-deg))
- 
-    (make-line start left-end #:width new-width)
- 
-    (fern left-end
-          #:length left-length
-          #:deg left-deg
-          #:width new-width)
- 
-    ;; right branch
-    (define right-length (* lateral-reduction prev-length))
-    (define right-deg (- (- prev-deg lateral-deg) bend))
-    (define right-end (end-point start
-                           #:length right-length
-                           #:deg right-deg))
- 
-    (make-line start right-end #:width new-width)
- 
-    (fern right-end
-          #:length right-length
-          #:deg right-deg
-          #:width new-width)))
+(require "../../main.rkt")
  
 ;;; calculate the end point
-(define (end-point start #:length length #:deg deg)
-  (define end (make-polar length (* 2 pi (/ deg 360))))
-  (define end-x (+ (pair-first  start) (real-part end)))
-  (define end-y (+ (pair-second start) (imag-part end)))
-  (pair end-x end-y))
- 
-;;; create a line
-(define (make-line start end  #:width [width 1])
-  (define start-x (pair-first start))
-  (define start-y (pair-second start))
-  (define end-x (pair-first end))
-  (define end-y (pair-second end))
-  (define line_id (svg-def-shape (new-line (pair start-x (- canvas-height start-y))
-                                           (pair end-x   (- canvas-height end-y)))))
-  (define line-style (sstyle-new))
-  (set-SSTYLE-stroke-width! line-style width)
-  (svg-place-widget line_id #:style line-style))
- 
-;;;; ----- write the svg data ------
-(with-output-to-file
-    "fern.svg" #:exists 'replace
-  (lambda () (display (svg-data))))
+(define (get-end-point start_point #:length length #:deg deg #:precision precision)
+  (let* ([end (make-polar length (* 2 pi (/ deg 360)))]
+         [end_x (string->number (~r #:precision precision (+ (car  start_point) (real-part end))))]
+         [end_y (string->number (~r #:precision precision (+ (cdr start_point) (imag-part end))))])
+    (cons end_x end_y)))
+
+(let ([canvas_width 600]
+      [canvas_height 600]
+      [start_point '(300 . 50)]
+      [start_length 120]
+      [start_deg 100] ;100°
+      [start_width 3]
+      [step_width 0.86]
+      [color "#5a5"]
+      [min_length 0.5]
+      [central_reduction 0.75]
+      [lateral_reduction 0.35]
+      [lateral_deg 80] ;80°
+      [bend 5] ;5°
+      [precision 0])
+   
+  (let ([svg_data
+         (svg-out
+          canvas_width canvas_height
+          (lambda ()
+            ;; same style in a group, reduce svg file size.
+            ;; group same width lines to a list
+            (let ([style_map (make-hash)])
+              (let loop ([loop_start_point start_point]
+                         [loop_length start_length]
+                         [loop_deg start_deg]
+                         [loop_width start_width])
+                
+                (when (>= (* central_reduction loop_length) min_length)
+                  (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg #:precision precision)])
+                    ;; width -> listof (start_point, end_point)
+                    (hash-set! style_map
+                               loop_width
+                               `(,@(hash-ref style_map loop_width '())
+                                 ,(list
+                                   (cons (car loop_start_point) (- canvas_height (cdr loop_start_point)))
+                                   (cons (car loop_end_point) (- canvas_height (cdr loop_end_point))))))
+
+                    ;; central branch
+                    (loop
+                     loop_end_point
+                     (* loop_length central_reduction)
+                     (- loop_deg bend)
+                     (* loop_width step_width))
+                    
+                    ;; left branch
+                    (loop
+                     loop_end_point
+                     (* loop_length lateral_reduction)
+                     (- (+ loop_deg lateral_deg) bend)
+                     (* loop_width step_width))
+
+                    ;; right branch
+                    (loop
+                     loop_end_point
+                     (* loop_length lateral_reduction)
+                     (- (- loop_deg lateral_deg) bend)
+                     (* loop_width step_width)))))
+
+              ;; place all the lines to different groups
+              (let loop-width ([widths (sort (hash->list style_map) > #:key car)])
+                (when (not (null? widths))
+                  (let ([_sstyle (sstyle-new)])
+                    (set-SSTYLE-stroke! _sstyle color)
+                    (set-SSTYLE-stroke-width! _sstyle (caar widths))
+
+                    (let ([group_id
+                           (svg-def-group
+                            (lambda ()
+                              (let loop-group ([point_pair_list (hash-ref style_map (caar widths) '())])
+                                (when (not (null? point_pair_list))
+                                  (let* ([line_start_point (first (car point_pair_list))]
+                                         [line_end_point (second (car point_pair_list))]
+                                         [line_id (svg-def-shape (new-line line_start_point line_end_point))])
+
+                                    (svg-place-widget line_id)
+                                    (loop-group (cdr point_pair_list)))))))])
+
+                      (svg-place-widget group_id #:style _sstyle)))
+                  
+                  (loop-width (cdr widths)))))))])
+
+    (with-output-to-file
+        "fern.svg" #:exists 'replace
+        (lambda () (display svg_data)))))
