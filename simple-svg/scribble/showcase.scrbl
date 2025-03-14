@@ -104,7 +104,7 @@ generated a empty svg only have a head part:
 ;;; calculate the end point
 (define (get-end-point start_point #:length length #:deg deg #:precision precision)
   (let* ([end (make-polar length (* 2 pi (/ deg 360)))]
-         [end_x (string->number (~r #:precision precision (+ (car  start_point) (real-part end))))]
+         [end_x (string->number (~r #:precision precision (+ (car start_point) (real-part end))))]
          [end_y (string->number (~r #:precision precision (+ (cdr start_point) (imag-part end))))])
     (cons end_x end_y)))
 
@@ -136,11 +136,13 @@ generated a empty svg only have a head part:
                          [loop_width start_width])
                 
                 (when (>= (* central_reduction loop_length) min_length)
-                  (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg #:precision precision)])
+                  (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg #:precision precision)]
+                        [truncted_width (string->number (~r #:precision 2 loop_width))])
+
                     ;; width -> listof (start_point, end_point)
                     (hash-set! style_map
-                               loop_width
-                               `(,@(hash-ref style_map loop_width '())
+                               truncted_width
+                               `(,@(hash-ref style_map truncted_width '())
                                  ,(list
                                    (cons (car loop_start_point) (- canvas_height (cdr loop_start_point)))
                                    (cons (car loop_end_point) (- canvas_height (cdr loop_end_point))))))
@@ -165,7 +167,7 @@ generated a empty svg only have a head part:
                      (* loop_length lateral_reduction)
                      (- (- loop_deg lateral_deg) bend)
                      (* loop_width step_width)))))
-
+              
               ;; place all the lines to different groups
               (let loop-width ([widths (sort (hash->list style_map) > #:key car)])
                 (when (not (null? widths))

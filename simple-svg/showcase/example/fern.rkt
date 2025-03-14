@@ -37,11 +37,13 @@
                          [loop_width start_width])
                 
                 (when (>= (* central_reduction loop_length) min_length)
-                  (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg #:precision precision)])
+                  (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg #:precision precision)]
+                        [truncted_width (string->number (~r #:precision 2 loop_width))])
+
                     ;; width -> listof (start_point, end_point)
                     (hash-set! style_map
-                               loop_width
-                               `(,@(hash-ref style_map loop_width '())
+                               truncted_width
+                               `(,@(hash-ref style_map truncted_width '())
                                  ,(list
                                    (cons (car loop_start_point) (- canvas_height (cdr loop_start_point)))
                                    (cons (car loop_end_point) (- canvas_height (cdr loop_end_point))))))
@@ -66,7 +68,7 @@
                      (* loop_length lateral_reduction)
                      (- (- loop_deg lateral_deg) bend)
                      (* loop_width step_width)))))
-
+              
               ;; place all the lines to different groups
               (let loop-width ([widths (sort (hash->list style_map) > #:key car)])
                 (when (not (null? widths))
