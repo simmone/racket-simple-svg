@@ -1,18 +1,18 @@
 #lang racket
 
-(require "rect.rkt"
-         "circle.rkt"
-         "ellipse.rkt"
-         "line.rkt"
-         "polygon.rkt"
-         "polyline.rkt"
-         "gradient.rkt"
-         "filter.rkt"
-         "view-box.rkt"
-         "text.rkt"
-         "path/path.rkt"
-         "arrow.rkt"
-         "marker.rkt"
+(require "shape/rect.rkt"
+         "shape/circle.rkt"
+         "shape/ellipse.rkt"
+         "shape/line.rkt"
+         "shape/polygon.rkt"
+         "shape/polyline.rkt"
+         "shape/gradient.rkt"
+         "shape/filter.rkt"
+         "shape/view-box.rkt"
+         "shape/text.rkt"
+         "shape/path/path.rkt"
+         "shape/arrow.rkt"
+         "shape/marker.rkt"
          "group.rkt")
 
 (provide (contract-out
