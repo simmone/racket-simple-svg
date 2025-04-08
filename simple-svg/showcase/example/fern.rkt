@@ -1,15 +1,12 @@
 #lang racket
 
 (require "../../main.rkt")
-
-(define (round/precision p n)
-  (string->number (~r #:precision p n)))
  
 ;;; calculate the end point
 (define (get-end-point start_point #:length length #:deg deg #:precision precision)
   (let* ([end (make-polar length (* 2 pi (/ deg 360)))]
-         [end_x (round/precision precision (+ (car start_point) (real-part end)))]
-         [end_y (round/precision precision (+ (cdr start_point) (imag-part end)))])
+         [end_x (string->number (~r #:precision precision (+ (car start_point) (real-part end))))]
+         [end_y (string->number (~r #:precision precision (+ (cdr start_point) (imag-part end))))])
     (cons end_x end_y)))
 
 (let ([canvas_width 600]

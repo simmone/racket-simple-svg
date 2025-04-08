@@ -18,32 +18,50 @@ raco pkg install simple-svg
 
 @include-section["basic.scrbl"]
 
-@include-section["sstyle.scrbl"]
+@include-section["sstyle/sstyle.scrbl"]
+
+@include-section["sstyle/gradient.scrbl"]
 
 @include-section["color.scrbl"]
 
-@include-section["shapes/rect.scrbl"] 
+@section{Shape}
 
-@include-section["shapes/circle.scrbl"]
+Shape is basic brick of svg, basic usage: define it, use sstyle to colorize it, use svg-place-widget place it somewhere.
 
-@include-section["shapes/ellipse.scrbl"]
+Shape include: Rect, Circle, Ellipse, Line, Polyline, Polygon, Path, Text, Arrow.
 
-@include-section["shapes/line.scrbl"]
+@include-section["shape/rect.scrbl"] 
 
-@include-section["shapes/polyline.scrbl"]
+@include-section["shape/circle.scrbl"]
 
-@include-section["shapes/polygon.scrbl"]
+@include-section["shape/ellipse.scrbl"]
 
-@include-section["shapes/arrow.scrbl"]
+@include-section["shape/line.scrbl"]
 
-@include-section["path/path.scrbl"]
+@include-section["shape/polyline.scrbl"]
 
-@include-section["text/text.scrbl"]
+@include-section["shape/polygon.scrbl"]
 
-@include-section["gradient/gradient.scrbl"]
+@include-section["shape/path.scrbl"]
 
-@include-section["filter/filter.scrbl"]
+@include-section["shape/arrow.scrbl"]
+
+@include-section["shape/text.scrbl"]
+
+@section{Effect}
+
+Effect can give shape some decoration: DropdownBlur, Marker.
+
+@include-section["effect/filter.scrbl"]
+
+@include-section["effect/marker.scrbl"]
 
 @include-section["group/group.scrbl"]
 
-@include-section["marker/marker.scrbl"]
+@section{Gadget}
+
+Combine shapes and groups can make new component: Table etc.
+
+@include-section["gadget/table.scrbl"]
+
+@include-section["squeeze.scrbl"]

@@ -1,30 +1,7 @@
 #lang racket
 
-(require "src/defines/view-box.rkt"
-         "src/defines/rect.rkt"
-         "src/defines/circle.rkt"
-         "src/defines/ellipse.rkt"
-         "src/defines/line.rkt"
-         "src/defines/polygon.rkt"
-         "src/defines/polyline.rkt"
-         "src/defines/gradient.rkt"
-         "src/defines/filter.rkt"
-         "src/defines/path/path.rkt"
-         "src/defines/path/moveto.rkt"
-         "src/defines/path/arc.rkt"
-         "src/defines/path/lineto.rkt"
-         "src/defines/path/close-path.rkt"
-         "src/defines/path/ccurve.rkt"
-         "src/defines/path/qcurve.rkt"
-         "src/defines/path/raw-path.rkt"
-         "src/defines/text.rkt"
-         "src/defines/arrow.rkt"
-         "src/defines/marker.rkt"
-         "src/defines/svg.rkt"
-         "src/defines/sstyle.rkt"
-         "src/defines/widget.rkt"
-         "src/defines/group.rkt"
-         )
+(require "src/function.rkt")
+(require "src/gadget/table.rkt")
 
 (provide (contract-out
           [svg-out (->* (number? number? procedure?)
@@ -143,6 +120,21 @@
                                    POLYLINE? LINEAR-GRADIENT? RADIAL-GRADIENT? PATH? TEXT?
                                    BLUR-DROPDOWN? ARROW? MARKER?) string?)]
           [svg-def-group (-> procedure? string?)]
+          [svg-gadget-table (->* (
+                                  (listof (listof string?))
+                                  procedure?
+                                  )
+                                 (
+                                  #:col_width number?
+                                  #:row_height number?
+                                  #:color string?
+                                  #:cell_margin_top number?
+                                  #:cell_margin_left number?
+                                  #:at (cons/c natural? natural?)
+                                  #:font_size number?
+                                  #:font_color string?
+                                  )
+                                 string?)]
           [struct SSTYLE
                   (
                    (fill (or/c #f string?))
@@ -173,215 +165,10 @@
                                   #:marker_end_id string?
                                   )
                                  void?)]
+          [set-table-col-width! (-> (listof natural?) natural? any)]
+          [set-table-row-height! (-> (listof natural?) natural? any)]
+          [set-table-col-margin-left! (-> (listof natural?) natural? any)]
+          [set-table-row-margin-top! (-> (listof natural?) natural? any)]
+          [set-table-cell-font-size! (-> (listof (cons/c natural? natural?)) natural? any)]
+          [set-table-cell-font-color! (-> (listof (cons/c natural? natural?)) string? any)]
           ))
-
-(define BACKGROUND_GROUP_ID "g1")
-(define DEFAULT_GROUP_ID "g0")
-
-(define (svg-out width height write_proc
-                 #:background [background #f]
-                 #:viewBox [viewBox #f]
-                 )
-  (parameterize
-      ([*SVG* (new-svg width height viewBox)])
-    (with-output-to-string
-      (lambda ()
-        (dynamic-wind
-            (lambda () 
-              (printf 
-               "<svg\n    ~a\n    ~a\n    ~a\n"
-               "version=\"1.1\""
-               "xmlns=\"http://www.w3.org/2000/svg\""
-               "xmlns:xlink=\"http://www.w3.org/1999/xlink\""))
-            (lambda ()
-              (when background
-                (svg-def-name-group
-                 BACKGROUND_GROUP_ID
-                 (lambda ()
-                   (let ([rec_id (svg-def-shape (new-rect width height))]
-                         [_sstyle (sstyle-new)])
-                     (set-SSTYLE-fill! _sstyle background)
-                     (svg-place-widget rec_id #:style _sstyle)))))
-
-              (svg-def-name-group
-               DEFAULT_GROUP_ID
-               write_proc)
-
-              (let ([default_not_null (> (length (GROUP-widget_list (hash-ref (SVG-group_define_map (*SVG*)) DEFAULT_GROUP_ID))) 0)])
-                (set-SVG-group_show_list!
-                 (*SVG*)
-                 (append
-                  (if background
-                      (list (cons BACKGROUND_GROUP_ID (cons 0 0)))
-                      '())
-                  (if default_not_null
-                      (list (cons DEFAULT_GROUP_ID (cons 0 0)))
-                      '())))))
-            (lambda ()
-              (flush-data)
-              (printf "</svg>\n")))))))
-
-(define (svg-def-shape shape)
-  (let* ([new_widget_index (add1 (SVG-shape_id_count (*SVG*)))]
-         [shape_id (format "s~a" new_widget_index)])
-
-    (set-SVG-shape_id_count! (*SVG*) new_widget_index)
-
-    (hash-set! (SVG-shape_define_map (*SVG*)) shape_id shape)
-
-    shape_id))
-
-(define (svg-def-group user_proc)
-  (let* ([new_widget_index (add1 (SVG-group_id_count (*SVG*)))]
-         [group_id (format "g~a" new_widget_index)])
-
-    (set-SVG-group_id_count! (*SVG*) new_widget_index)
-    
-    (svg-def-name-group group_id user_proc)))
-
-(define (svg-def-name-group group_id user_proc)
-  (parameterize
-      ([*GROUP* (new-group)])
-
-    (hash-set! (SVG-group_define_map (*SVG*)) group_id (*GROUP*))
-
-    (user_proc)
-    
-    group_id))
-
-(define (svg-place-widget widget_id
-                          #:style [style #f]
-                          #:filter_id [filter_id #f]
-                          #:marker_start_id [marker_start_id #f]
-                          #:marker_mid_id [marker_mid_id #f]
-                          #:marker_end_id [marker_end_id #f]
-                          #:at [at #f])
-  (set-GROUP-widget_list! (*GROUP*)
-                          `(
-                            ,@(GROUP-widget_list (*GROUP*))
-                            ,(WIDGET widget_id at style filter_id marker_start_id marker_mid_id marker_end_id))))
-
-(define (flush-data)
-  (printf "    width=\"~a\" height=\"~a\"\n" (~r (SVG-width (*SVG*))) (~r (SVG-height (*SVG*))))
-
-  (when (SVG-view_box (*SVG*))
-    (let ([view_box (SVG-view_box (*SVG*))])
-      (printf "    viewBox=\"~a ~a ~a ~a\"\n"
-              (~r (VIEW-BOX-min_x view_box))
-              (~r (VIEW-BOX-min_y view_box))
-              (~r (VIEW-BOX-width view_box))
-              (~r (VIEW-BOX-height view_box)))))
-  
-  (printf "    >\n")
-
-  (when (not (= (hash-count (SVG-shape_define_map (*SVG*))) 0))
-    (printf "  <defs>\n")
-    (let loop-def ([shape_ids (sort (hash-keys (SVG-shape_define_map (*SVG*))) < #:key (lambda (item) (string->number (substring item 1))))])
-      (when (not (null? shape_ids))
-        (let ([shape (hash-ref (SVG-shape_define_map (*SVG*)) (car shape_ids))])
-          (printf "~a"
-                  (cond
-                   [(RECT? shape)
-                    (format-rect (car shape_ids) shape)]
-                   [(CIRCLE? shape)
-                    (format-circle (car shape_ids) shape)]
-                   [(ELLIPSE? shape)
-                    (format-ellipse (car shape_ids) shape)]
-                   [(LINE? shape)
-                    (format-line (car shape_ids) shape)]
-                   [(POLYGON? shape)
-                    (format-polygon (car shape_ids) shape)]
-                   [(POLYLINE? shape)
-                    (format-polyline (car shape_ids) shape)]
-                   [(LINEAR-GRADIENT? shape)
-                    (format-linear-gradient (car shape_ids) shape)]
-                   [(RADIAL-GRADIENT? shape)
-                    (format-radial-gradient (car shape_ids) shape)]
-                   [(BLUR-DROPDOWN? shape)
-                    (format-blur-dropdown (car shape_ids) shape)]
-                   [(PATH? shape)
-                    (format-path (car shape_ids) shape)]
-                   [(TEXT? shape)
-                    (format-text (car shape_ids) shape)]
-                   [(ARROW? shape)
-                    (format-arrow (car shape_ids) shape)]
-                   [(MARKER? shape)
-                    (format-marker (car shape_ids) shape)]
-                   )))
-
-        (loop-def (cdr shape_ids))))
-    (printf "  </defs>\n"))
-
-  (let ([all_group_ids
-         (filter (lambda (id) (not (string=? id DEFAULT_GROUP_ID))) (sort (hash-keys (SVG-group_define_map (*SVG*))) < #:key (lambda (item) (string->number (substring item 1)))))])
-
-    (let loop-group ([group_ids all_group_ids])
-      (when (not (null? group_ids))
-        (printf "\n")
-        (printf "  <symbol id=\"~a\">\n" (car group_ids))
-        (show-group-widgets (car group_ids) "    ")
-        (printf "  </symbol>\n")
-        (loop-group (cdr group_ids)))))
-  
-  (let ([all_group_shows
-         (filter (lambda (group_show) (not (string=? (car group_show) DEFAULT_GROUP_ID))) (SVG-group_show_list (*SVG*)))])
-
-    (when (not (null? all_group_shows)) (printf "\n"))
-
-    (let loop-show ([group_shows all_group_shows])
-      (when (not (null? group_shows))
-        (let* ([group_show (car group_shows)]
-               [group_id (car group_show)]
-               [group_pos (cdr group_show)])
-          (printf "  <use xlink:href=\"#~a\" " group_id)
-          
-          (when (and group_pos (not (equal? group_pos '(0 . 0))))
-            (printf "x=\"~a\" y=\"~a\" " (~r (car group_pos)) (~r (cdr group_pos))))
-          
-          (printf "/>\n"))
-        (loop-show (cdr group_shows)))))
-
-  (let ([group (hash-ref (SVG-group_define_map (*SVG*)) DEFAULT_GROUP_ID)])
-        (when (> (length (GROUP-widget_list group)) 0)
-          (printf "\n")
-          (show-group-widgets DEFAULT_GROUP_ID "  ")))
-)
-
-(define (show-group-widgets group_id prefix)
-  (let ([group (hash-ref (SVG-group_define_map (*SVG*)) group_id)])
-        (when (> (length (GROUP-widget_list group)) 0)
-          (let loop-widget ([widget_list (GROUP-widget_list group)])
-            (when (not (null? widget_list))
-              (let* (
-                     [widget (car widget_list)]
-                     [widget_id (WIDGET-id widget)]
-                     [widget_at (WIDGET-at widget)]
-                     [widget_style (WIDGET-style widget)]
-                     [widget_filter_id (WIDGET-filter_id widget)]
-                     [widget_marker_start_id (WIDGET-marker_start_id widget)]
-                     [widget_marker_mid_id (WIDGET-marker_mid_id widget)]
-                     [widget_marker_end_id (WIDGET-marker_end_id widget)]
-                     )
-                (printf "~a<use xlink:href=\"#~a\"" prefix widget_id)
-                
-                (when (and widget_at (not (equal? widget_at '(0 . 0))))
-                  (printf " x=\"~a\" y=\"~a\"" (~r (car widget_at)) (~r (cdr widget_at))))
-                
-                (when widget_style
-                  (printf "~a" (sstyle-format widget_style)))
-
-                (when widget_filter_id
-                  (printf " filter=\"url(#~a)\"" widget_filter_id))
-
-                (when widget_marker_start_id
-                  (printf " marker-start=\"url(#~a)\"" widget_marker_start_id))
-
-                (when widget_marker_mid_id
-                  (printf " marker-mid=\"url(#~a)\"" widget_marker_mid_id))
-
-                (when widget_marker_end_id
-                  (printf " marker-end=\"url(#~a)\"" widget_marker_end_id))
-                
-                (printf " />\n")
-                )
-              (loop-widget (cdr widget_list)))))))

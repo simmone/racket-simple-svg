@@ -3,7 +3,7 @@
 (require rackunit
          rackunit/text-ui
          "../../src/lib/lib.rkt"
-         "../../src/defines/sstyle.rkt"
+         "../../src/define/sstyle.rkt"
          racket/runtime-path)
 
 (define test-all

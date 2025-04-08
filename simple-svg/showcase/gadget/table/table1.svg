@@ -1,0 +1,42 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="250" height="200"
+    >
+  <defs>
+    <rect id="s1" width="50" height="30" />
+    <text id="s2" font-size="20">1</text>
+    <text id="s3" font-size="20">2</text>
+    <text id="s4" font-size="20">3</text>
+    <text id="s5" font-size="20">4</text>
+    <text id="s6" font-size="20">5</text>
+    <text id="s7" font-size="20">6</text>
+    <text id="s8" font-size="20">7</text>
+    <text id="s9" font-size="20">8</text>
+    <text id="s10" font-size="20">9</text>
+  </defs>
+
+  <symbol id="g2">
+    <use xlink:href="#s1" x="50" y="50" fill="none" stroke="black" />
+    <use xlink:href="#s2" x="70" y="72" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="100" y="50" fill="none" stroke="black" />
+    <use xlink:href="#s3" x="120" y="72" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="150" y="50" fill="none" stroke="black" />
+    <use xlink:href="#s4" x="170" y="72" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="50" y="80" fill="none" stroke="black" />
+    <use xlink:href="#s5" x="70" y="102" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="100" y="80" fill="none" stroke="black" />
+    <use xlink:href="#s6" x="120" y="102" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="150" y="80" fill="none" stroke="black" />
+    <use xlink:href="#s7" x="170" y="102" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="50" y="110" fill="none" stroke="black" />
+    <use xlink:href="#s8" x="70" y="132" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="100" y="110" fill="none" stroke="black" />
+    <use xlink:href="#s9" x="120" y="132" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="150" y="110" fill="none" stroke="black" />
+    <use xlink:href="#s10" x="170" y="132" fill="black" stroke="black" />
+  </symbol>
+
+  <use xlink:href="#g2" />
+</svg>
