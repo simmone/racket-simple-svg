@@ -21,7 +21,6 @@
           [get-cells (-> (listof list?) (values (listof (cons/c natural? natural?)) list?))]
           [struct CELL
                   (
-                   (col_row (cons/c natural? natural?))
                    (start_point (cons/c number? number?))
                    (width number?)
                    (height number?)
@@ -49,7 +48,6 @@
           ))
 
 (struct CELL (
-              [col_row #:mutable]
               [start_point #:mutable]
               [width #:mutable]
               [height #:mutable]
@@ -147,7 +145,6 @@
                  null)
              (cons
               (CELL
-               (car axises)
                loop_point
                col_real_width
                row_real_height
