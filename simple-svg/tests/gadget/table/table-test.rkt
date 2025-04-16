@@ -49,7 +49,7 @@
       
       (let ([cells
              (matrix-to-cells
-              '(("1" "2") ("3" "4")) 5 5 "black" 1 1 '(0 . 0) 10 "red")])
+              '(("1" "2") ("3" "4")) 5 5 "black" 1 1 10 "red")])
         (check-equal? (length cells) 4)
         (check-equal? cells
                       (list
@@ -69,22 +69,22 @@
 
       (let ([cells
              (matrix-to-cells
-              '(("1" "2" "3") ("4" "5") ("6" "7" "8" "9")) 4 5 "black" 1 2 '(1 . 2) 10 "red")])
+              '(("1" "2" "3") ("4" "5") ("6" "7" "8" "9")) 4 5 "black" 1 2 10 "red")])
         (check-equal? (length cells) 12)
         (check-equal? cells
                       (list
-                       (CELL '(1 . 2) 4 5 "black" "1" 10 "red" 1 2)
-                       (CELL '(5 . 2) 4 5 "black" "2" 10 "red" 1 2)
-                       (CELL '(9 . 2) 4 5 "black" "3" 10 "red" 1 2)
-                       (CELL '(13 . 2) 4 5 "black" "" 10 "red" 1 2)
-                       (CELL '(1 . 7) 4 5 "black" "4" 10 "red" 1 2)
-                       (CELL '(5 . 7) 4 5 "black" "5" 10 "red" 1 2)
-                       (CELL '(9 . 7) 4 5 "black" "" 10 "red" 1 2)
-                       (CELL '(13 . 7) 4 5 "black" "" 10 "red" 1 2)
-                       (CELL '(1 . 12) 4 5 "black" "6" 10 "red" 1 2)
-                       (CELL '(5 . 12) 4 5 "black" "7" 10 "red" 1 2)
-                       (CELL '(9 . 12) 4 5 "black" "8" 10 "red" 1 2)
-                       (CELL '(13 . 12) 4 5 "black" "9" 10 "red" 1 2)
+                       (CELL '(0 . 0) 4 5 "black" "1" 10 "red" 1 2)
+                       (CELL '(4 . 0) 4 5 "black" "2" 10 "red" 1 2)
+                       (CELL '(8 . 0) 4 5 "black" "3" 10 "red" 1 2)
+                       (CELL '(12 . 0) 4 5 "black" "" 10 "red" 1 2)
+                       (CELL '(0 . 5) 4 5 "black" "4" 10 "red" 1 2)
+                       (CELL '(4 . 5) 4 5 "black" "5" 10 "red" 1 2)
+                       (CELL '(8 . 5) 4 5 "black" "" 10 "red" 1 2)
+                       (CELL '(12 . 5) 4 5 "black" "" 10 "red" 1 2)
+                       (CELL '(0 . 10) 4 5 "black" "6" 10 "red" 1 2)
+                       (CELL '(4 . 10) 4 5 "black" "7" 10 "red" 1 2)
+                       (CELL '(8 . 10) 4 5 "black" "8" 10 "red" 1 2)
+                       (CELL '(12 . 10) 4 5 "black" "9" 10 "red" 1 2)
                        ))))
 
     (parameterize
@@ -100,7 +100,7 @@
       (set-table-col-margin-left! '(0) 70)
       (set-table-row-margin-top! '(1) 80)
       
-      (let ([cells (matrix-to-cells '(("1" "2" "1") ("3" "4" "1") ("5" "6" "1")) 5 5 "black" 1 1 '(0 . 0) 10 "red")])
+      (let ([cells (matrix-to-cells '(("1" "2" "1") ("3" "4" "1") ("5" "6" "1")) 5 5 "black" 1 1 10 "red")])
         (check-equal? (length cells) 9)
         (check-equal? cells
                       (list

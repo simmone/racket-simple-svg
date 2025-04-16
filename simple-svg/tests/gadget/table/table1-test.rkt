@@ -21,10 +21,9 @@
             (lambda ()
               (let ([table_id (svg-gadget-table
                                '(("1" "2" "3") ("4" "5" "6") ("7" "8" "9"))
-                               #:at '(50 . 50)
                                (lambda () (void)))])
 
-                (svg-place-widget table_id))))])
+                (svg-place-widget table_id #:at '(50 . 50)))))])
       
       (call-with-input-file table1_svg
         (lambda (expected)

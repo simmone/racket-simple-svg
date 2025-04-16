@@ -21,25 +21,25 @@
   </defs>
 
   <symbol id="g2">
-    <use xlink:href="#s1" x="50" y="50" fill="none" stroke="black" />
-    <use xlink:href="#s2" x="70" y="72" fill="black" stroke="black" />
-    <use xlink:href="#s3" x="100" y="50" fill="none" stroke="black" />
-    <use xlink:href="#s4" x="135" y="72" fill="black" stroke="black" />
-    <use xlink:href="#s1" x="180" y="50" fill="none" stroke="black" />
-    <use xlink:href="#s5" x="200" y="72" fill="black" stroke="black" />
-    <use xlink:href="#s6" x="50" y="80" fill="none" stroke="black" />
-    <use xlink:href="#s7" x="70" y="110" fill="black" stroke="black" />
-    <use xlink:href="#s8" x="100" y="80" fill="none" stroke="black" />
-    <use xlink:href="#s9" x="135" y="110" fill="black" stroke="black" />
-    <use xlink:href="#s6" x="180" y="80" fill="none" stroke="black" />
-    <use xlink:href="#s10" x="200" y="110" fill="black" stroke="black" />
-    <use xlink:href="#s1" x="50" y="130" fill="none" stroke="black" />
-    <use xlink:href="#s11" x="70" y="152" fill="black" stroke="black" />
-    <use xlink:href="#s3" x="100" y="130" fill="none" stroke="black" />
-    <use xlink:href="#s12" x="135" y="152" fill="black" stroke="black" />
-    <use xlink:href="#s1" x="180" y="130" fill="none" stroke="black" />
-    <use xlink:href="#s13" x="200" y="152" fill="black" stroke="black" />
+    <use xlink:href="#s1" fill="none" stroke="black" />
+    <use xlink:href="#s2" x="20" y="22" fill="black" stroke="black" />
+    <use xlink:href="#s3" x="50" y="0" fill="none" stroke="black" />
+    <use xlink:href="#s4" x="85" y="22" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="130" y="0" fill="none" stroke="black" />
+    <use xlink:href="#s5" x="150" y="22" fill="black" stroke="black" />
+    <use xlink:href="#s6" x="0" y="30" fill="none" stroke="black" />
+    <use xlink:href="#s7" x="20" y="60" fill="black" stroke="black" />
+    <use xlink:href="#s8" x="50" y="30" fill="none" stroke="black" />
+    <use xlink:href="#s9" x="85" y="60" fill="black" stroke="black" />
+    <use xlink:href="#s6" x="130" y="30" fill="none" stroke="black" />
+    <use xlink:href="#s10" x="150" y="60" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="0" y="80" fill="none" stroke="black" />
+    <use xlink:href="#s11" x="20" y="102" fill="black" stroke="black" />
+    <use xlink:href="#s3" x="50" y="80" fill="none" stroke="black" />
+    <use xlink:href="#s12" x="85" y="102" fill="black" stroke="black" />
+    <use xlink:href="#s1" x="130" y="80" fill="none" stroke="black" />
+    <use xlink:href="#s13" x="150" y="102" fill="black" stroke="black" />
   </symbol>
 
-  <use xlink:href="#g2" />
+  <use xlink:href="#g2" x="50" y="50" />
 </svg>

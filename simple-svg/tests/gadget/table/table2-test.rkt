@@ -21,7 +21,6 @@
             (lambda ()
               (let ([table_id (svg-gadget-table
                                '(("1" "2" "3") ("4" "5" "6") ("7" "8" "9"))
-                               #:at '(50 . 50)
                                (lambda ()
                                  (set-table-col-width! '(1) 80)
                                  (set-table-row-height! '(1) 50)
@@ -29,7 +28,7 @@
                                  (set-table-row-margin-top! '(1) 30)
                                  ))])
 
-                (svg-place-widget table_id))))])
+                (svg-place-widget table_id #:at '(50 . 50)))))])
       
       (call-with-input-file table2_svg
         (lambda (expected)

@@ -31,10 +31,9 @@ Example: (svg-gadget-table '((1 2) (3 4))), generate a 2 rows and 2 cols table.
  (lambda ()
    (let ([table_id (svg-gadget-table
                     '(("1" "2" "3") ("4" "5" "6") ("7" "8" "9"))
-                    #:at '(50 . 50)
                     (lambda () (void)))])
 
-     (svg-place-widget table_id))))
+     (svg-place-widget table_id #:at '(50 . 50)))))
 }|
 
 @image{showcase/gadget/table/table1.svg}
@@ -49,7 +48,6 @@ Below example set second column width and margin left, second row height and mar
  (lambda ()
    (let ([table_id (svg-gadget-table
                     '(("1" "2" "3") ("4" "5" "6") ("7" "8" "9"))
-                    #:at '(50 . 50)
                     (lambda ()
                       (set-table-col-width! '(1) 80)
                       (set-table-row-height! '(1) 50)
@@ -57,7 +55,7 @@ Below example set second column width and margin left, second row height and mar
                       (set-table-row-margin-top! '(1) 30)
                       ))])
 
-     (svg-place-widget table_id))))
+     (svg-place-widget table_id #:at '(50 . 50)))))
 }|
 
 @image{showcase/gadget/table/table2.svg}
@@ -76,13 +74,12 @@ You can set table font size and color.
                     #:font_color "blue"
                     #:cell_margin_top 44
                     #:cell_margin_left 40
-                    #:at '(50 . 50)
                     (lambda ()
                       (set-table-cell-font-size! '((0 . 0) (1 . 1) (2 . 2)) 40)
                       (set-table-cell-font-color! '((0 . 0) (1 . 1) (2 . 2)) "red")
                       ))])
 
-     (svg-place-widget table_id))))
+     (svg-place-widget table_id #:at '(50 . 50)))))
 }|
 
 

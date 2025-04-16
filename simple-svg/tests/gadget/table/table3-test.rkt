@@ -27,13 +27,12 @@
                                #:font_color "blue"
                                #:cell_margin_top 44
                                #:cell_margin_left 40
-                               #:at '(50 . 50)
                                (lambda ()
                                  (set-table-cell-font-size! '((0 . 0) (1 . 1) (2 . 2)) 40)
                                  (set-table-cell-font-color! '((0 . 0) (1 . 1) (2 . 2)) "red")
                                  ))])
 
-                (svg-place-widget table_id))))])
+                (svg-place-widget table_id #:at '(50 . 50)))))])
       
       (call-with-input-file table3_svg
         (lambda (expected)

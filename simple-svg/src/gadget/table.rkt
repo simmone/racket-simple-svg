@@ -13,7 +13,6 @@
                                   #:color string?
                                   #:cell_margin_top number?
                                   #:cell_margin_left number?
-                                  #:at (cons/c natural? natural?)
                                   #:font_size number?
                                   #:font_color string?
                                   )
@@ -32,7 +31,7 @@
                    (margin_left number?)
                    )
                   ]
-          [matrix-to-cells (-> (listof list?) number? number? string? number? number? (cons/c number? number?) number? string? (listof CELL?))]
+          [matrix-to-cells (-> (listof list?) number? number? string? number? number? number? string? (listof CELL?))]
           [set-table-col-width! (-> (listof natural?) natural? any)]
           [set-table-row-height! (-> (listof natural?) natural? any)]
           [set-table-col-margin-left! (-> (listof natural?) natural? any)]
@@ -95,11 +94,11 @@
 (define *CELL_FONT_SIZE_MAP* (make-parameter #f))
 (define *CELL_FONT_COLOR_MAP* (make-parameter #f))
 
-(define (matrix-to-cells matrix col_width row_height color cell_margin_top cell_margin_left start_point font_size font_color)
+(define (matrix-to-cells matrix col_width row_height color cell_margin_top cell_margin_left font_size font_color)
   (let-values ([(axis_list data_list) (get-cells matrix)])
     (let loop ([axises axis_list]
                [datas data_list]
-               [loop_point start_point]
+               [loop_point '(0 . 0)]
                [result_list '()])
       (if (not (null? axises))
           (let* ([row_index (caar axises)]
@@ -140,7 +139,7 @@
                       (+ (car loop_point) col_real_width)
                       (cdr loop_point))
                      (cons
-                      (car start_point)
+                      0
                       (+ (cdr loop_point) row_real_height)))
                  null)
              (cons
@@ -181,7 +180,6 @@
                           #:color [color "black"]
                           #:cell_margin_top [cell_margin_top 22]
                           #:cell_margin_left [cell_margin_left 20]
-                          #:at [at '(0 . 0)]
                           #:font_size [font_size 20]
                           #:font_color [font_color "black"]
                           user_proc
@@ -198,7 +196,7 @@
 
        (user_proc)
        
-       (let loop ([cells (matrix-to-cells matrix col_width row_height color cell_margin_top cell_margin_left at font_size font_color)])
+       (let loop ([cells (matrix-to-cells matrix col_width row_height color cell_margin_top cell_margin_left font_size font_color)])
          (when (not (null? cells))
            (let* ([cell (car cells)]
                   [rect_id (svg-def-shape (new-rect (CELL-width cell) (CELL-height cell)))]

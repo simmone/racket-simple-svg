@@ -130,7 +130,6 @@
                                   #:color string?
                                   #:cell_margin_top number?
                                   #:cell_margin_left number?
-                                  #:at (cons/c natural? natural?)
                                   #:font_size number?
                                   #:font_color string?
                                   )
