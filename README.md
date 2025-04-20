@@ -39,8 +39,6 @@ thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
 
 # ShowCase-2: Recursive fern (Thanks to the author: Matteo d'Addio matteo.daddio@live.it)
 
-https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/example/fern.rkt
-
 ![ScreenShot](simple-svg/showcase/example/fern.svg)
 
 # ShowCase-3: Five circles
@@ -88,8 +86,6 @@ https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/exa
 ![ScreenShot](simple-svg/showcase/example/five_circles.svg)
 
 # ShowCase-4: Racket Logo (Plain svg and Blur Effect svg)
-
-https://github.com/simmone/racket-simple-svg/blob/master/simple-svg/showcase/example/logo.rkt
 
 ![ScreenShot](simple-svg/showcase/example/logo.svg)
 

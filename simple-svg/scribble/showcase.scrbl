@@ -240,7 +240,6 @@ generated a empty svg only have a head part:
 	                     "c35.419,18.857,75.84,29.559,118.766,29.559c44.132,0,85.618-11.306,121.74-31.163"
                 "C357.171,381.712,317.868,293.604,266.638,221.727z")
                ))))]
-;;                [filter_id (svg-def-shape (new-blur-dropdown))]
          )
 
      (set-SSTYLE-fill! background_circle_sstyle "white")
@@ -248,19 +247,14 @@ generated a empty svg only have a head part:
 
      (set-SSTYLE-fill! blue_piece_sstyle "#3E5BA9")
      (svg-place-widget blue_piece_id #:style blue_piece_sstyle)
-;;            (svg-place-widget blue_piece_id #:style blue_piece_sstyle #:filter_id filter_id)
 
      (set-SSTYLE-fill! left_red_piece_sstyle "#9F1D20")
      (svg-place-widget left_red_piece_id #:style left_red_piece_sstyle)
-;;            (svg-place-widget left_red_piece_id #:style left_red_piece_sstyle #:filter_id filter_id)
 
      (set-SSTYLE-fill! bottom_red_piece_sstyle "#9F1D20")
      (svg-place-widget bottom_red_piece_id #:style bottom_red_piece_sstyle)
-;;            (svg-place-widget bottom_red_piece_id #:style bottom_red_piece_sstyle #:filter_id filter_id)
      )))
 }|
 
 @image{showcase/example/logo.svg}
-
-@image{showcase/example/logo_blur.svg}
 
