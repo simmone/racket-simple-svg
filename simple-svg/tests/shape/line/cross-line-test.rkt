@@ -6,7 +6,7 @@
          "../../../main.rkt"
          racket/runtime-path)
 
-(define-runtime-path line_svg "../../../showcase/shapes/line/dual.svg")
+(define-runtime-path line_svg "../../../showcase/shapes/line/cross.svg")
 
 (define test-all
   (test-suite
