@@ -56,7 +56,7 @@
                 (set-SSTYLE-fill! sstyle_arrow "lavender")
                 (svg-place-widget arrow_id #:style sstyle_arrow)
                 )))])
-      
+
       (call-with-input-file arrow_align_svg
         (lambda (expected)
           (call-with-input-string

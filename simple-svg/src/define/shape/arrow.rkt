@@ -119,4 +119,4 @@
                 (printf "            \"/>\n")
                 )))))
 
-(define (precision x) (~r x #:precision '(= 4)))
+(define (precision x) (~r x #:precision 4))
