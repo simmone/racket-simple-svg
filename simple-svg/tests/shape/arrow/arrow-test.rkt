@@ -47,7 +47,7 @@
             300 300
             (lambda ()
               (let (
-                    [arrow_id (svg-def-shape (new-arrow '(200 . 200) '(200 . 350) 10 10 20))]
+                    [arrow_id (svg-def-shape (new-arrow '(100 . 100) '(100 . 250) 10 10 20))]
                     [sstyle_arrow (sstyle-new)]
                     )
 
@@ -56,7 +56,7 @@
                 (set-SSTYLE-fill! sstyle_arrow "lavender")
                 (svg-place-widget arrow_id #:style sstyle_arrow)
                 )))])
-
+      
       (call-with-input-file arrow_align_svg
         (lambda (expected)
           (call-with-input-string
