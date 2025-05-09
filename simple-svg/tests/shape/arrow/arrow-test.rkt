@@ -7,6 +7,7 @@
          racket/runtime-path)
 
 (define-runtime-path arrow1_svg "../../../showcase/arrow/arrow1.svg")
+(define-runtime-path arrow_align_svg "../../../showcase/arrow/arrow_align.svg")
 (define-runtime-path arrow2_svg "../../../showcase/arrow/arrow2.svg")
 
 (define test-all
@@ -32,6 +33,31 @@
                 )))])
 
       (call-with-input-file arrow1_svg
+        (lambda (expected)
+          (call-with-input-string
+           actual_svg
+           (lambda (actual)
+             (check-lines? expected actual)))))))
+
+   (test-case
+    "test-arrow-align"
+
+    (let ([actual_svg
+           (svg-out
+            300 300
+            (lambda ()
+              (let (
+                    [arrow_id (svg-def-shape (new-arrow '(200 . 200) '(200 . 350) 10 10 20))]
+                    [sstyle_arrow (sstyle-new)]
+                    )
+
+                (set-SSTYLE-stroke-width! sstyle_arrow 5)
+                (set-SSTYLE-stroke! sstyle_arrow "teal")
+                (set-SSTYLE-fill! sstyle_arrow "lavender")
+                (svg-place-widget arrow_id #:style sstyle_arrow)
+                )))])
+
+      (call-with-input-file arrow_align_svg
         (lambda (expected)
           (call-with-input-string
            actual_svg
