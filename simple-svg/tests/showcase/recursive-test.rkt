@@ -19,14 +19,8 @@
            (svg-out
             400 400
             (lambda ()
-              (let ([radius_to_circle_id_map (make-hash)]
-                    [origin_radius 100]
+              (let ([origin_radius 100]
                     [_sstyle (sstyle-new)])
-                
-                (let loop-radius ([loop_radius origin_radius])
-                  (when (> loop_radius 6)
-                    (hash-set! radius_to_circle_id_map loop_radius (svg-def-shape (new-circle loop_radius)))
-                    (loop-radius (/ loop_radius 2))))
                 
                 (set-SSTYLE-stroke! _sstyle "red")
                 (set-SSTYLE-stroke-width! _sstyle 1)
@@ -38,7 +32,7 @@
                                      [loop_y 200]
                                      [loop_radius origin_radius])
                             (when (> loop_radius 6)
-                              (let ([circle_id (hash-ref radius_to_circle_id_map loop_radius)])
+                              (let ([circle_id (svg-def-shape (new-circle loop_radius))])
                                 (svg-place-widget circle_id #:at (cons loop_x loop_y)))
 
                               (loop (+ loop_x loop_radius) loop_y (/ loop_radius 2))
