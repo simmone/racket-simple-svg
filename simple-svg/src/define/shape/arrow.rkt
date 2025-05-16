@@ -2,6 +2,8 @@
 
 (require racket/serialize)
 
+(require "../../lib/lib.rkt")
+
 (provide (contract-out
           [struct ARROW
                   (
@@ -109,14 +111,12 @@
             (with-output-to-string
               (lambda ()
                 (printf "          points=\"\n")
-                (printf "            ~a,~a\n" (precision (car handle_bottom_left)) (precision (cdr handle_bottom_left)))
-                (printf "            ~a,~a\n" (precision (car handle_bottom_right)) (precision (cdr handle_bottom_right)))
-                (printf "            ~a,~a\n" (precision (car Q)) (precision (cdr Q)))
-                (printf "            ~a,~a\n" (precision (car R)) (precision (cdr R)))
-                (printf "            ~a,~a\n" (precision (car S)) (precision (cdr S)))
-                (printf "            ~a,~a\n" (precision (car handle_top_right)) (precision (cdr handle_top_right)))
-                (printf "            ~a,~a\n" (precision (car handle_top_left)) (precision (cdr handle_top_left)))
+                (printf "            ~a,~a\n" (svg-round (car handle_bottom_left)) (svg-round (cdr handle_bottom_left)))
+                (printf "            ~a,~a\n" (svg-round (car handle_bottom_right)) (svg-round (cdr handle_bottom_right)))
+                (printf "            ~a,~a\n" (svg-round (car Q)) (svg-round (cdr Q)))
+                (printf "            ~a,~a\n" (svg-round (car R)) (svg-round (cdr R)))
+                (printf "            ~a,~a\n" (svg-round (car S)) (svg-round (cdr S)))
+                (printf "            ~a,~a\n" (svg-round (car handle_top_right)) (svg-round (cdr handle_top_right)))
+                (printf "            ~a,~a\n" (svg-round (car handle_top_left)) (svg-round (cdr handle_top_left)))
                 (printf "            \"/>\n")
                 )))))
-
-(define (precision x) (~r x #:precision 4))
