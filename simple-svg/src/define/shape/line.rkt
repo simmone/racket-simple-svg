@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct LINE
@@ -30,7 +31,7 @@
 (define (format-line shape_id line)
   (format "    <line id=\"~a\" x1=\"~a\" y1=\"~a\" x2=\"~a\" y2=\"~a\" />\n"
           shape_id
-          (~r (LINE-start_x line))
-          (~r (LINE-start_y line))
-          (~r (LINE-end_x line))
-          (~r (LINE-end_y line))))
+          (svg-round (LINE-start_x line))
+          (svg-round (LINE-start_y line))
+          (svg-round (LINE-end_x line))
+          (svg-round (LINE-end_y line))))

@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -22,7 +22,7 @@
             300 300
             (lambda ()
               (let (
-                    [arrow_id (svg-def-shape (new-arrow '(50 . 50) '(280 . 280) 40 40 80))]
+                    [arrow_id (svg-def-shape (new-arrow '(50.0 . 50.0) '(280.0 . 280.0) 40.0 40.0 80.0))]
                     [sstyle_arrow (sstyle-new)]
                     )
 

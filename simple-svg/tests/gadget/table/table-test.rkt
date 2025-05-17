@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../src/function.rkt"
          "../../../src/gadget/table.rkt"
          racket/runtime-path)

@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct POLYLINE
@@ -27,5 +28,5 @@
           (string-join
            (map
             (lambda (point)
-              (format "~a,~a" (~r (car point)) (~r (cdr point))))
+              (format "~a,~a" (svg-round (car point)) (svg-round (cdr point))))
             (POLYLINE-points polyline)))))

@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct RECT
@@ -39,11 +40,11 @@
           (with-output-to-string
             (lambda ()
               (printf "width=\"~a\" height=\"~a\""
-                      (RECT-width rect)
-                      (RECT-height rect))
+                      (svg-round (RECT-width rect))
+                      (svg-round (RECT-height rect)))
                              
               (when (and (RECT-radius_x rect) (RECT-radius_y rect))
                 (printf " rx=\"~a\" ry=\"~a\""
-                        (RECT-radius_x rect)
-                        (RECT-radius_y rect)))
+                        (svg-round (RECT-radius_x rect))
+                        (svg-round (RECT-radius_y rect))))
               ))))

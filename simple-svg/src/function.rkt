@@ -23,7 +23,8 @@
          "define/shape/path/raw-path.rkt"
          "define/shape/text.rkt"
          "define/shape/arrow.rkt"
-         "define/shape/marker.rkt")
+         "define/shape/marker.rkt"
+         "lib.rkt")
 
 (require racket/serialize
          racket/fasl
@@ -383,15 +384,15 @@
                             ,(WIDGET widget_id at style filter_id marker_start_id marker_mid_id marker_end_id))))
 
 (define (flush-data)
-  (printf "    width=\"~a\" height=\"~a\"\n" (~r (SVG-width (*SVG*))) (~r (SVG-height (*SVG*))))
+  (printf "    width=\"~a\" height=\"~a\"\n" (svg-round (SVG-width (*SVG*))) (svg-round (SVG-height (*SVG*))))
 
   (when (SVG-view_box (*SVG*))
     (let ([view_box (SVG-view_box (*SVG*))])
       (printf "    viewBox=\"~a ~a ~a ~a\"\n"
-              (~r (VIEW-BOX-min_x view_box))
-              (~r (VIEW-BOX-min_y view_box))
-              (~r (VIEW-BOX-width view_box))
-              (~r (VIEW-BOX-height view_box)))))
+              (svg-round (VIEW-BOX-min_x view_box))
+              (svg-round (VIEW-BOX-min_y view_box))
+              (svg-round (VIEW-BOX-width view_box))
+              (svg-round (VIEW-BOX-height view_box)))))
   
   (printf "    >\n")
 
@@ -457,8 +458,10 @@
                [group_pos (cdr group_show)])
           (printf "  <use xlink:href=\"#~a\" " group_id)
           
-          (when (and group_pos (not (equal? group_pos '(0 . 0))))
-            (printf "x=\"~a\" y=\"~a\" " (~r (car group_pos)) (~r (cdr group_pos))))
+          (when group_pos
+            (let ([group_pos_str (cons (svg-round (car group_pos)) (svg-round (cdr group_pos)))])
+              (when (not (equal? group_pos_str '("0" . "0")))
+                (printf " x=\"~a\" y=\"~a\"" (car group_pos_str) (cdr group_pos_str)))))
           
           (printf "/>\n"))
         (loop-show (cdr group_shows)))))
@@ -486,8 +489,10 @@
                      )
                 (printf "~a<use xlink:href=\"#~a\"" prefix widget_id)
                 
-                (when (and widget_at (not (equal? widget_at '(0 . 0))))
-                  (printf " x=\"~a\" y=\"~a\"" (~r (car widget_at)) (~r (cdr widget_at))))
+                (when widget_at
+                  (let ([widget_at_str (cons (svg-round (car widget_at)) (svg-round (cdr widget_at)))])
+                    (when (not (equal? widget_at_str '("0" . "0")))
+                      (printf " x=\"~a\" y=\"~a\"" (car widget_at_str) (cdr widget_at_str)))))
                 
                 (when widget_style
                   (printf "~a" (sstyle-format widget_style)))

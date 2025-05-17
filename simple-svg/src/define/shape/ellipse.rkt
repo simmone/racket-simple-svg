@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct ELLIPSE
@@ -29,6 +30,6 @@
           (with-output-to-string
             (lambda ()
               (printf "rx=\"~a\" ry=\"~a\""
-                      (~r (ELLIPSE-radius_x ellipse))
-                      (~r (ELLIPSE-radius_y ellipse)))
+                      (svg-round (ELLIPSE-radius_x ellipse))
+                      (svg-round (ELLIPSE-radius_y ellipse)))
               ))))

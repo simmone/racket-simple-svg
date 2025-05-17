@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct TEXT
@@ -79,22 +80,22 @@
           (with-output-to-string
             (lambda ()
               (when (TEXT-dx text)
-                (printf " dx=\"~a\"" (~r (TEXT-dx text))))
+                (printf " dx=\"~a\"" (svg-round (TEXT-dx text))))
 
               (when (TEXT-dy text)
-                (printf " dy=\"~a\"" (~r (TEXT-dy text))))
+                (printf " dy=\"~a\"" (svg-round (TEXT-dy text))))
 
               (when (TEXT-font-size text)
-                (printf " font-size=\"~a\"" (~r (TEXT-font-size text))))
+                (printf " font-size=\"~a\"" (svg-round (TEXT-font-size text))))
 
               (when (TEXT-font-family text)
                 (printf " font-family=\"~a\"" (TEXT-font-family text)))
 
               (when (TEXT-rotate text)
-                (printf " rotate=\"~a\"" (string-join (map (lambda (degree) (~r degree)) (TEXT-rotate text)))))
+                (printf " rotate=\"~a\"" (string-join (map (lambda (degree) (svg-round degree)) (TEXT-rotate text)))))
 
               (when (TEXT-textLength text)
-                (printf " textLength=\"~a\"" (~r (TEXT-textLength text))))
+                (printf " textLength=\"~a\"" (svg-round (TEXT-textLength text))))
 
               (when (TEXT-kerning text)
                 (printf " kerning=\"~a\"" (TEXT-kerning text)))
@@ -113,6 +114,6 @@
                 (lambda ()
                   (printf "\n      <textPath xlink:href=\"#~a\" " (TEXT-path text))
                   (when (TEXT-path-startOffset text)
-                    (printf "startOffset=\"~a%\" " (~r (TEXT-path-startOffset text))))
+                    (printf "startOffset=\"~a%\" " (svg-round (TEXT-path-startOffset text))))
                   (printf ">~a</textPath>\n    " (TEXT-text text))))
               (TEXT-text text))))

@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../src/lib/lib.rkt"
+         "../../src/lib.rkt"
          "../../main.rkt"
          racket/runtime-path)
 
@@ -22,7 +22,7 @@
             220 280
             (lambda ()
               (let (
-                    [line1_id (svg-def-shape (new-line '(0 . 0) '(30 . 30)))]
+                    [line1_id (svg-def-shape (new-line '(0.00001 . 0.00001) '(30 . 30)))]
                     [line2_id (svg-def-shape (new-line '(0 . 15) '(30 . 15)))]
                     [line3_id (svg-def-shape (new-line '(15 . 0) '(15 . 30)))]
                     [line4_id (svg-def-shape (new-line '(30 . 0) '(0 . 30)))]
@@ -88,7 +88,7 @@
                       (svg-def-group
                        (lambda ()
                          (svg-place-widget rect_id #:style rect_sstyle)
-                         (svg-place-widget cross_line_id #:at '(0 . 0))
+                         (svg-place-widget cross_line_id #:at '(0.00001 . 0.00001))
                          (svg-place-widget cross_line_id #:at '(10 . 0))
                          (svg-place-widget cross_line_id #:at '(20 . 0))
                          (svg-place-widget cross_line_id #:at '(30 . 0))
@@ -141,7 +141,7 @@
                     [filter_id (svg-def-shape (new-blur-dropdown))])
                 (set-SSTYLE-stroke-width! group_style 12)
 
-                (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(0 . 0))
+                (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(0.00001 . 0.00001))
                 (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(0 . 300))
                 (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(500 . 0))
                 (svg-place-widget pattern_id #:style group_style #:filter_id filter_id #:at '(500 . 300)))

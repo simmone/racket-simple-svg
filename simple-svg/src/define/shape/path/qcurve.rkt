@@ -1,6 +1,7 @@
 #lang racket
 
-(require "path.rkt")
+(require "path.rkt"
+         "../../../lib.rkt")
 
 (provide (contract-out
           [svg-path-qcurve (-> 
@@ -20,7 +21,7 @@
 (define (curve type point1 point2)
   ((*add-path*) (format "~a~a,~a ~a,~a"
                         type 
-                        (~r (car point1))
-                        (~r (cdr point1))
-                        (~r (car point2))
-                        (~r (cdr point2)))))
+                        (svg-round (car point1))
+                        (svg-round (cdr point1))
+                        (svg-round (car point2))
+                        (svg-round (cdr point2)))))

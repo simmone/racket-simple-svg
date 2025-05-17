@@ -164,10 +164,10 @@
                                   #:marker_end_id string?
                                   )
                                  void?)]
-          [set-table-col-width! (-> (listof natural?) natural? any)]
-          [set-table-row-height! (-> (listof natural?) natural? any)]
-          [set-table-col-margin-left! (-> (listof natural?) natural? any)]
-          [set-table-row-margin-top! (-> (listof natural?) natural? any)]
-          [set-table-cell-font-size! (-> (listof (cons/c natural? natural?)) natural? any)]
+          [set-table-col-width! (-> (listof natural?) number? any)]
+          [set-table-row-height! (-> (listof natural?) number? any)]
+          [set-table-col-margin-left! (-> (listof natural?) number? any)]
+          [set-table-row-margin-top! (-> (listof natural?) number? any)]
+          [set-table-cell-font-size! (-> (listof (cons/c natural? natural?)) number? any)]
           [set-table-cell-font-color! (-> (listof (cons/c natural? natural?)) string? any)]
           ))

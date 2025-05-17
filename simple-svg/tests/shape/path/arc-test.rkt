@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -24,8 +24,8 @@
                      (svg-def-shape
                       (new-path
                        (lambda ()
-                         (svg-path-moveto* '(130 . 45))
-                         (svg-path-arc* '(170 . 85) '(80 . 40) 'left_big))))]
+                         (svg-path-moveto* '(130.00001 . 45.00001))
+                         (svg-path-arc* '(170.00001 . 85.00001) '(80.00001 . 40.00001) 'left_big))))]
                     [arc2_id
                      (svg-def-shape
                       (new-path

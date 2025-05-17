@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct MARKER
@@ -57,8 +58,8 @@
     (lambda ()
       (printf "    <marker id=\"~a\" markerWidth=\"~a\" markerHeight=\"~a\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"~a\" refY=\"5\" markerUnits=\"strokeWidth\">\n"
               shape_id
-              (MARKER-size marker)
-              (MARKER-size marker)
-              (MARKER-x marker))
+              (svg-round (MARKER-size marker))
+              (svg-round (MARKER-size marker))
+              (svg-round (MARKER-x marker)))
       (printf "      ~a fill=\"context-stroke\" />\n" (MARKER-shape marker))
       (printf "    </marker>\n"))))

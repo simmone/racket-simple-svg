@@ -1,6 +1,7 @@
 #lang racket
 
-(require "path.rkt")
+(require "path.rkt"
+         "../../../lib.rkt")
 
 (provide (contract-out
           [svg-path-arc (->
@@ -34,8 +35,8 @@
     ((*add-path*)
      (format "~a~a,~a 0 ~a ~a,~a"
              type
-             (~r (car radius))
-             (~r (cdr radius))
+             (svg-round (car radius))
+             (svg-round (cdr radius))
              section
-             (~r (car point))
-             (~r (cdr point))))))
+             (svg-round (car point))
+             (svg-round (cdr point))))))

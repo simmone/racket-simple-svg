@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../src/define/shape/text.rkt"
          racket/runtime-path)
 
@@ -14,11 +14,11 @@
     "test-basic"
 
     (let ([text (new-text "hello world"
-                          #:font-size 1
+                          #:font-size 1.00001
                           #:font-family "Arial"
-                          #:dx 2
-                          #:dy 3
-                          #:rotate '(4.0 5.0 6.0 7.0)
+                          #:dx 2.00001
+                          #:dy 3.00001
+                          #:rotate '(4.00001 5.00001 6.0 7.0)
                           #:textLength 8
                           #:kerning 'auto
                           #:letter-space 'normal

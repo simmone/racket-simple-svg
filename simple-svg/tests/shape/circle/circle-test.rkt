@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -20,10 +20,10 @@
            (svg-out
             100 100
             (lambda ()
-              (let ([circle_id (svg-def-shape (new-circle 50))]
+              (let ([circle_id (svg-def-shape (new-circle 50.00001))]
                     [_sstyle (sstyle-new)])
                 (set-SSTYLE-fill! _sstyle "#BBC42A")
-                (svg-place-widget circle_id #:style _sstyle #:at '(50 . 50)))))])
+                (svg-place-widget circle_id #:style _sstyle #:at '(50.0 . 50.00001)))))])
       
       (call-with-input-file circle_svg
         (lambda (expected)

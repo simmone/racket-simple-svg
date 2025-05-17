@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../src/lib/lib.rkt"
+         "../../src/lib.rkt"
          "../../main.rkt"
          racket/runtime-path)
 
@@ -21,7 +21,7 @@
 
     (let ([svg_str
            (svg-out
-            30 20
+            30.00001 20.00001
             (lambda ()
               (void)))])
 
@@ -79,7 +79,7 @@
               (let ([rec_id (svg-def-shape (new-rect 50 50))]
                     [_sstyle (sstyle-new)])
                 (set-SSTYLE-fill! _sstyle "#FFFFFF")
-                (svg-place-widget rec_id #:style _sstyle #:at '(25 . 25)))))])
+                (svg-place-widget rec_id #:style _sstyle #:at '(25.00001 . 25.00001)))))])
       
       (call-with-input-file rect_in_background_svg
         (lambda (expected)
@@ -94,7 +94,7 @@
     (let ([svg_str
            (svg-out
             100 100
-            #:viewBox (new-view-box 50 0 100 100)
+            #:viewBox (new-view-box 50.00001 0.00001 100.00001 100.00001)
             (lambda ()
               (let ([rec_id (svg-def-shape (new-rect 100 100))]
                     [_sstyle (sstyle-new)])

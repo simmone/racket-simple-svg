@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -28,7 +28,7 @@
                                #:cell_margin_top 44
                                #:cell_margin_left 40
                                (lambda ()
-                                 (set-table-cell-font-size! '((0 . 0) (1 . 1) (2 . 2)) 40)
+                                 (set-table-cell-font-size! '((0 . 0) (1 . 1) (2 . 2)) 40.00001)
                                  (set-table-cell-font-color! '((0 . 0) (1 . 1) (2 . 2)) "red")
                                  ))])
 

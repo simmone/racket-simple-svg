@@ -1,6 +1,7 @@
 #lang racket
 
-(require "path.rkt")
+(require "path.rkt"
+         "../../../lib.rkt")
 
 (provide (contract-out
           [svg-path-moveto (-> (cons/c number? number?) void?)]
@@ -12,4 +13,4 @@
 (define (svg-path-moveto* point) (m 'M point))
 
 (define (m type point)
-  ((*add-path*) (format "~a~a,~a" type (~r (car point)) (~r (cdr point)))))
+  ((*add-path*) (format "~a~a,~a" type (svg-round (car point)) (svg-round (cdr point)))))

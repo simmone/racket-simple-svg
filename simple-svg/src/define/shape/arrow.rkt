@@ -1,8 +1,7 @@
 #lang racket
 
-(require racket/serialize)
-
-(require "../../lib/lib.rkt")
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct ARROW

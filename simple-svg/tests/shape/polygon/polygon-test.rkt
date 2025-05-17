@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -22,7 +22,7 @@
               (let ([polygon_id
                      (svg-def-shape
                       (new-polygon
-                       '((0 . 25) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75))))]
+                       '((0.00001 . 25.00001) (25 . 0) (75 . 0) (100 . 25) (100 . 75) (75 . 100) (25 . 100) (0 . 75))))]
                     [_sstyle (sstyle-new)])
 
                 (set-SSTYLE-stroke-width! _sstyle 5)

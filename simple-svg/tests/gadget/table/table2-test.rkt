@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -22,10 +22,10 @@
               (let ([table_id (svg-gadget-table
                                '(("1" "2" "3") ("4" "5" "6") ("7" "8" "9"))
                                (lambda ()
-                                 (set-table-col-width! '(1) 80)
-                                 (set-table-row-height! '(1) 50)
-                                 (set-table-col-margin-left! '(1) 35)
-                                 (set-table-row-margin-top! '(1) 30)
+                                 (set-table-col-width! '(1) 80.00001)
+                                 (set-table-row-height! '(1) 50.00001)
+                                 (set-table-col-margin-left! '(1) 35.00001)
+                                 (set-table-row-margin-top! '(1) 30.00001)
                                  ))])
 
                 (svg-place-widget table_id #:at '(50 . 50)))))])

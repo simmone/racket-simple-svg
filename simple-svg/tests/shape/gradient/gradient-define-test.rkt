@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../src/define/shape/gradient.rkt"
          racket/runtime-path)
 
@@ -19,12 +19,12 @@
     (let ([linear_gradient
            (new-linear-gradient
             '(
-              (0 "#BBC42A" 1)
-              (100 "#ED6E46" 1))
-            #:x1 0
-            #:y1 1
-            #:x2 2
-            #:y2 3
+              (0.00001 "#BBC42A" 1.00000)
+              (100.00000 "#ED6E46" 1.00000))
+            #:x1 0.00001
+            #:y1 1.00001
+            #:x2 2.00001
+            #:y2 3.00001
             #:gradientUnits 'userSpaceOnUse
             #:spreadMethod 'repeat
             )])
@@ -42,13 +42,13 @@
     (let ([radial_gradient
            (new-radial-gradient
             '(
-              (0 "#BBC42A" 1)
-              (100 "#ED6E46" 1))
-            #:cx 0
-            #:cy 1
-            #:fx 2
-            #:fy 3
-            #:r  4
+              (0.00001 "#BBC42A" 1.00000)
+              (100.00000 "#ED6E46" 1.00000))
+            #:cx 0.00001
+            #:cy 1.00001
+            #:fx 2.00001
+            #:fy 3.00001
+            #:r  4.00001
             #:gradientUnits 'userSpaceOnUse
             #:spreadMethod 'repeat
             )])

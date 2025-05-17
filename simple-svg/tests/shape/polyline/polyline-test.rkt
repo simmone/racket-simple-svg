@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -21,7 +21,7 @@
             (lambda ()
               (let ([polyline_id
                      (svg-def-shape
-                      (new-polyline '((0 . 0) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120))))]
+                      (new-polyline '((0.00001 . 0.00001) (40 . 0) (40 . 40) (80 . 40) (80 . 80) (120 . 80) (120 . 120))))]
                     [_sstyle (sstyle-new)])
                 
                 (set-SSTYLE-stroke-width! _sstyle 5)

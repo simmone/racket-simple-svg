@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/serialize)
+(require racket/serialize
+         "../../lib.rkt")
 
 (provide (contract-out
           [struct CIRCLE
@@ -24,4 +25,4 @@
 (define (format-circle shape_id circle)
   (format "    <circle id=\"~a\" r=\"~a\" />\n"
           shape_id
-          (~r (CIRCLE-radius circle))))
+          (svg-round (CIRCLE-radius circle))))

@@ -2,7 +2,7 @@
 
 (require rackunit
          rackunit/text-ui
-         "../../../src/lib/lib.rkt"
+         "../../../src/lib.rkt"
          "../../../main.rkt"
          racket/runtime-path)
 
@@ -25,7 +25,7 @@
                       (new-path
                        (lambda ()
                          (svg-path-moveto* '(10 . 60))
-                         (svg-path-ccurve* '(30 . 15) '(80 . 15) '(100 . 60))
+                         (svg-path-ccurve* '(30.00001 . 15.00001) '(80 . 15) '(100 . 60))
                          (svg-path-ccurve* '(120 . 105) '(170 . 105) '(190 . 60))
                          )))]
                     [path_style (sstyle-new)]
@@ -65,7 +65,7 @@
                       (new-path
                        (lambda ()
                          (svg-path-moveto* '(10 . 60))
-                         (svg-path-ccurve '(20 . -45) '(70 . -45) '(90 . 0))
+                         (svg-path-ccurve '(20.00001 . -45.00001) '(70 . -45) '(90 . 0))
                          (svg-path-ccurve '(20 . 45) '(70 . 45) '(90 . 0))
                          )))]
                     [path_style (sstyle-new)]
