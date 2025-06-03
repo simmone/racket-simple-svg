@@ -35,8 +35,8 @@
     ((*add-path*)
      (format "~a~a,~a 0 ~a ~a,~a"
              type
-             (svg-round (car radius))
-             (svg-round (cdr radius))
+             (svg-precision (car radius))
+             (svg-precision (cdr radius))
              section
-             (svg-round (car point))
-             (svg-round (cdr point))))))
+             (svg-precision (car point))
+             (svg-precision (cdr point))))))

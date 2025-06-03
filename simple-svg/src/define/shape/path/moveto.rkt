@@ -13,4 +13,4 @@
 (define (svg-path-moveto* point) (m 'M point))
 
 (define (m type point)
-  ((*add-path*) (format "~a~a,~a" type (svg-round (car point)) (svg-round (cdr point)))))
+  ((*add-path*) (format "~a~a,~a" type (svg-precision (car point)) (svg-precision (cdr point)))))

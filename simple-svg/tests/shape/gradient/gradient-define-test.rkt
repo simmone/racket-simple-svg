@@ -3,6 +3,7 @@
 (require rackunit
          rackunit/text-ui
          "../../../src/lib.rkt"
+         "../../../src/global.rkt"
          "../../../src/define/shape/gradient.rkt"
          racket/runtime-path)
 
@@ -32,7 +33,9 @@
       (call-with-input-file linear_gradient_define
         (lambda (expected)
           (call-with-input-string
-           (format-linear-gradient "s1" linear_gradient)
+           (parameterize
+               ([*PRECISION* 4])
+             (format-linear-gradient "s1" linear_gradient))
            (lambda (actual)
              (check-lines? expected actual)))))))
 
@@ -56,7 +59,9 @@
       (call-with-input-file radial_gradient_define
         (lambda (expected)
           (call-with-input-string
-           (format-radial-gradient "s1" radial_gradient)
+           (parameterize
+               ([*PRECISION* 4])
+             (format-radial-gradient "s1" radial_gradient))
            (lambda (actual)
              (check-lines? expected actual)))))))
    ))

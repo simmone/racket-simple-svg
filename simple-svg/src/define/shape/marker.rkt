@@ -58,8 +58,8 @@
     (lambda ()
       (printf "    <marker id=\"~a\" markerWidth=\"~a\" markerHeight=\"~a\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"~a\" refY=\"5\" markerUnits=\"strokeWidth\">\n"
               shape_id
-              (svg-round (MARKER-size marker))
-              (svg-round (MARKER-size marker))
-              (svg-round (MARKER-x marker)))
+              (svg-precision (MARKER-size marker))
+              (svg-precision (MARKER-size marker))
+              (svg-precision (MARKER-x marker)))
       (printf "      ~a fill=\"context-stroke\" />\n" (MARKER-shape marker))
       (printf "    </marker>\n"))))

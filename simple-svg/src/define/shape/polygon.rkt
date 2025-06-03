@@ -28,5 +28,5 @@
           (string-join
            (map
             (lambda (point)
-              (format "~a,~a" (svg-round (car point)) (svg-round (cdr point))))
+              (format "~a,~a" (svg-precision (car point)) (svg-precision (cdr point))))
             (POLYGON-points polygon)))))

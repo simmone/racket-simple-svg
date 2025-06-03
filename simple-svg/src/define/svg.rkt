@@ -26,9 +26,10 @@
                    (serialized_to_shape_id_map (hash/c bytes? string?))
                    (group_define_map (hash/c string? GROUP?))
                    (group_show_list (listof (cons/c string? (cons/c number? number?))))
+                   (precision natural?)
                    )
                   ]
-          [new-svg (-> number? number? (or/c #f VIEW-BOX?) SVG?)]
+          [new-svg (-> number? number? (or/c #f VIEW-BOX?) natural? SVG?)]
           [*SVG* (parameter/c (or/c #f SVG?))]
           ))
 
@@ -43,9 +44,10 @@
              [serialized_to_shape_id_map #:mutable]
              [group_define_map #:mutable]
              [group_show_list #:mutable]
+             [precision #:mutable]
              )
         #:transparent
         )
 
-(define (new-svg width height view_box)
-  (SVG 0 1 width height view_box (make-hash) (make-hash) '()))
+(define (new-svg width height view_box precision)
+  (SVG 0 1 width height view_box (make-hash) (make-hash) '() precision))

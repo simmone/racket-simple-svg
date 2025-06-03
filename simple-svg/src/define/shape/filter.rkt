@@ -40,10 +40,10 @@
   (with-output-to-string
     (lambda ()
       (printf "    <filter id=\"~a\">\n" shape_id)
-      (printf "      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"~a\"></feGaussianBlur>\n" (svg-round (BLUR-DROPDOWN-blur blur_dropdown)))
+      (printf "      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"~a\"></feGaussianBlur>\n" (svg-precision (BLUR-DROPDOWN-blur blur_dropdown)))
       (printf "      <feOffset dx=\"~a\" dy=\"~a\" result=\"offsetblur\"></feOffset>\n"
-              (svg-round (BLUR-DROPDOWN-dropdown_offset blur_dropdown))
-              (svg-round (BLUR-DROPDOWN-dropdown_offset blur_dropdown)))
+              (svg-precision (BLUR-DROPDOWN-dropdown_offset blur_dropdown))
+              (svg-precision (BLUR-DROPDOWN-dropdown_offset blur_dropdown)))
       (printf "      <feFlood flood-color=\"~a\"></feFlood>\n" (BLUR-DROPDOWN-dropdown_color blur_dropdown))
       (printf "      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n")
       (printf "      <feMerge>\n")

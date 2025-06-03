@@ -1,5 +1,7 @@
 #lang racket
 
+(require "../lib.rkt")
+
 (provide (contract-out
           [struct SSTYLE
                   (
@@ -63,10 +65,10 @@
         (printf " fill-rule=\"~a\"" (SSTYLE-fill-rule _sstyle)))
 
       (when (SSTYLE-fill-opacity _sstyle)
-        (printf " fill-opacity=\"~a\"" (~r (SSTYLE-fill-opacity _sstyle))))
+        (printf " fill-opacity=\"~a\"" (svg-precision (SSTYLE-fill-opacity _sstyle))))
 
       (when (SSTYLE-stroke-width _sstyle)
-        (printf " stroke-width=\"~a\"" (~r (SSTYLE-stroke-width _sstyle))))
+        (printf " stroke-width=\"~a\"" (svg-precision (SSTYLE-stroke-width _sstyle))))
 
       (when (SSTYLE-stroke _sstyle)
         (printf " stroke=\"~a\"" (SSTYLE-stroke _sstyle)))
@@ -78,13 +80,13 @@
         (printf " stroke-linecap=\"~a\"" (SSTYLE-stroke-linecap _sstyle)))
 
       (when (SSTYLE-stroke-miterlimit _sstyle)
-        (printf " stroke-miterlimit=\"~a\"" (SSTYLE-stroke-miterlimit _sstyle)))
+        (printf " stroke-miterlimit=\"~a\"" (svg-precision (SSTYLE-stroke-miterlimit _sstyle))))
 
       (when (SSTYLE-stroke-dasharray _sstyle)
         (printf " stroke-dasharray=\"~a\"" (SSTYLE-stroke-dasharray _sstyle)))
 
       (when (SSTYLE-stroke-dashoffset _sstyle)
-        (printf " stroke-dashoffset=\"~a\"" (~r (SSTYLE-stroke-dashoffset _sstyle))))
+        (printf " stroke-dashoffset=\"~a\"" (svg-precision (SSTYLE-stroke-dashoffset _sstyle))))
       
       (when (or
              (SSTYLE-translate _sstyle)
@@ -100,23 +102,23 @@
                   (list
                    (if (SSTYLE-translate _sstyle)
                        (format "translate(~a ~a)"
-                               (~r (car (SSTYLE-translate _sstyle)))
-                               (~r (cdr (SSTYLE-translate _sstyle))))
+                               (svg-precision (car (SSTYLE-translate _sstyle)))
+                               (svg-precision (cdr (SSTYLE-translate _sstyle))))
                        "")
                    (if (SSTYLE-rotate _sstyle)
-                       (format "rotate(~a)" (~r (SSTYLE-rotate _sstyle)))
+                       (format "rotate(~a)" (svg-precision (SSTYLE-rotate _sstyle)))
                        "")
                    (if (SSTYLE-scale _sstyle)
                        (if (pair? (SSTYLE-scale _sstyle))
                            (format "scale(~a ~a)"
-                                   (~r (car (SSTYLE-scale _sstyle)))
-                                   (~r (cdr (SSTYLE-scale _sstyle))))
-                           (format "scale(~a)" (~r (SSTYLE-scale _sstyle))))
+                                   (svg-precision (car (SSTYLE-scale _sstyle)))
+                                   (svg-precision (cdr (SSTYLE-scale _sstyle))))
+                           (format "scale(~a)" (svg-precision (SSTYLE-scale _sstyle))))
                        "")
                    (if (SSTYLE-skewX _sstyle)
-                       (format "skewX(~a)" (~r (SSTYLE-skewX _sstyle)))
+                       (format "skewX(~a)" (svg-precision (SSTYLE-skewX _sstyle)))
                        "")
                    (if (SSTYLE-skewY _sstyle)
-                       (format "skewY(~a)" (~r (SSTYLE-skewY _sstyle)))
+                       (format "skewY(~a)" (svg-precision (SSTYLE-skewY _sstyle)))
                        ""))))))
       )))

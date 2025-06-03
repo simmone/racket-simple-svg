@@ -40,11 +40,11 @@
           (with-output-to-string
             (lambda ()
               (printf "width=\"~a\" height=\"~a\""
-                      (svg-round (RECT-width rect))
-                      (svg-round (RECT-height rect)))
+                      (svg-precision (RECT-width rect))
+                      (svg-precision (RECT-height rect)))
                              
               (when (and (RECT-radius_x rect) (RECT-radius_y rect))
                 (printf " rx=\"~a\" ry=\"~a\""
-                        (svg-round (RECT-radius_x rect))
-                        (svg-round (RECT-radius_y rect))))
+                        (svg-precision (RECT-radius_x rect))
+                        (svg-precision (RECT-radius_y rect))))
               ))))

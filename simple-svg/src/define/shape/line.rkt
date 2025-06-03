@@ -31,7 +31,7 @@
 (define (format-line shape_id line)
   (format "    <line id=\"~a\" x1=\"~a\" y1=\"~a\" x2=\"~a\" y2=\"~a\" />\n"
           shape_id
-          (svg-round (LINE-start_x line))
-          (svg-round (LINE-start_y line))
-          (svg-round (LINE-end_x line))
-          (svg-round (LINE-end_y line))))
+          (svg-precision (LINE-start_x line))
+          (svg-precision (LINE-start_y line))
+          (svg-precision (LINE-end_x line))
+          (svg-precision (LINE-end_y line))))

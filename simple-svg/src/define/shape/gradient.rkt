@@ -97,20 +97,20 @@
                (filter
                 (lambda (a) (not (string=? a "")))
                 (list
-                 (if (LINEAR-GRADIENT-x1 gradient) (format "x1=\"~a\"" (svg-round (LINEAR-GRADIENT-x1 gradient))) "")
-                 (if (LINEAR-GRADIENT-y1 gradient) (format "y1=\"~a\"" (svg-round (LINEAR-GRADIENT-y1 gradient))) "")
-                 (if (LINEAR-GRADIENT-x2 gradient) (format "x2=\"~a\"" (svg-round (LINEAR-GRADIENT-x2 gradient))) "")
-                 (if (LINEAR-GRADIENT-y2 gradient) (format "y2=\"~a\"" (svg-round (LINEAR-GRADIENT-y2 gradient))) "")
+                 (if (LINEAR-GRADIENT-x1 gradient) (format "x1=\"~a\"" (svg-precision (LINEAR-GRADIENT-x1 gradient))) "")
+                 (if (LINEAR-GRADIENT-y1 gradient) (format "y1=\"~a\"" (svg-precision (LINEAR-GRADIENT-y1 gradient))) "")
+                 (if (LINEAR-GRADIENT-x2 gradient) (format "x2=\"~a\"" (svg-precision (LINEAR-GRADIENT-x2 gradient))) "")
+                 (if (LINEAR-GRADIENT-y2 gradient) (format "y2=\"~a\"" (svg-precision (LINEAR-GRADIENT-y2 gradient))) "")
                  (if (LINEAR-GRADIENT-gradientUnits gradient) (format "gradientUnits=\"~a\"" (LINEAR-GRADIENT-gradientUnits gradient)) "")
                  (if (LINEAR-GRADIENT-spreadMethod gradient) (format "spreadMethod=\"~a\"" (LINEAR-GRADIENT-spreadMethod gradient)) "")))))
       
       (let loop ([stops (LINEAR-GRADIENT-stops gradient)])
         (when (not (null? stops))
           (printf "      <stop offset=\"~a%\" stop-color=\"~a\" "
-                  (svg-round (list-ref (car stops) 0)) (list-ref (car stops) 1))
+                  (svg-precision (list-ref (car stops) 0)) (list-ref (car stops) 1))
 
           (when (not (= (list-ref (car stops) 2) 1))
-            (printf "stop-opacity=\"~a\" " (svg-round (list-ref (car stops) 2))))
+            (printf "stop-opacity=\"~a\" " (svg-precision (list-ref (car stops) 2))))
           (printf "/>\n")
           (loop (cdr stops))))
       
@@ -136,11 +136,11 @@
                (filter
                 (lambda (a) (not (string=? a "")))
                 (list
-                 (if (RADIAL-GRADIENT-cx gradient) (format "cx=\"~a\"" (svg-round (RADIAL-GRADIENT-cx gradient))) "")
-                 (if (RADIAL-GRADIENT-cy gradient) (format "cy=\"~a\"" (svg-round (RADIAL-GRADIENT-cy gradient))) "")
-                 (if (RADIAL-GRADIENT-fx gradient) (format "fx=\"~a\"" (svg-round (RADIAL-GRADIENT-fx gradient))) "")
-                 (if (RADIAL-GRADIENT-fy gradient) (format "fy=\"~a\"" (svg-round (RADIAL-GRADIENT-fy gradient))) "")
-                 (if (RADIAL-GRADIENT-r gradient) (format "r=\"~a\"" (svg-round (RADIAL-GRADIENT-r gradient))) "")
+                 (if (RADIAL-GRADIENT-cx gradient) (format "cx=\"~a\"" (svg-precision (RADIAL-GRADIENT-cx gradient))) "")
+                 (if (RADIAL-GRADIENT-cy gradient) (format "cy=\"~a\"" (svg-precision (RADIAL-GRADIENT-cy gradient))) "")
+                 (if (RADIAL-GRADIENT-fx gradient) (format "fx=\"~a\"" (svg-precision (RADIAL-GRADIENT-fx gradient))) "")
+                 (if (RADIAL-GRADIENT-fy gradient) (format "fy=\"~a\"" (svg-precision (RADIAL-GRADIENT-fy gradient))) "")
+                 (if (RADIAL-GRADIENT-r gradient) (format "r=\"~a\"" (svg-precision (RADIAL-GRADIENT-r gradient))) "")
                  (if (RADIAL-GRADIENT-gradientUnits gradient) (format "gradientUnits=\"~a\"" (RADIAL-GRADIENT-gradientUnits gradient)) "")
                  (if (RADIAL-GRADIENT-spreadMethod gradient) (format "spreadMethod=\"~a\"" (RADIAL-GRADIENT-spreadMethod gradient)) "")
                  ))))
@@ -148,10 +148,10 @@
       (let loop ([stops (RADIAL-GRADIENT-stops gradient)])
         (when (not (null? stops))
           (printf "      <stop offset=\"~a%\" stop-color=\"~a\" "
-                  (svg-round (list-ref (car stops) 0)) (list-ref (car stops) 1))
+                  (svg-precision (list-ref (car stops) 0)) (list-ref (car stops) 1))
 
           (when (not (= (list-ref (car stops) 2) 1))
-            (printf "stop-opacity=\"~a\" " (svg-round (list-ref (car stops) 2))))
+            (printf "stop-opacity=\"~a\" " (svg-precision (list-ref (car stops) 2))))
           (printf "/>\n")
           (loop (cdr stops))))
       

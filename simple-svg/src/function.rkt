@@ -24,6 +24,7 @@
          "define/shape/text.rkt"
          "define/shape/arrow.rkt"
          "define/shape/marker.rkt"
+         "global.rkt"
          "lib.rkt")
 
 (require racket/serialize
@@ -35,6 +36,7 @@
                         (
                          #:background (or/c #f string?)
                          #:viewBox (or/c #f VIEW-BOX?)
+                         #:precision (or/c #f natural?)
                          )
                         string?)]
           [struct VIEW-BOX
@@ -300,9 +302,11 @@
 (define (svg-out width height write_proc
                  #:background [background #f]
                  #:viewBox [viewBox #f]
+                 #:precision [precision 4]
                  )
   (parameterize
-      ([*SVG* (new-svg width height viewBox)])
+      ([*SVG* (new-svg width height viewBox precision)]
+       [*PRECISION* precision])
     (with-output-to-string
       (lambda ()
         (dynamic-wind
@@ -384,15 +388,15 @@
                             ,(WIDGET widget_id at style filter_id marker_start_id marker_mid_id marker_end_id))))
 
 (define (flush-data)
-  (printf "    width=\"~a\" height=\"~a\"\n" (svg-round (SVG-width (*SVG*))) (svg-round (SVG-height (*SVG*))))
+  (printf "    width=\"~a\" height=\"~a\"\n" (svg-precision (SVG-width (*SVG*))) (svg-precision (SVG-height (*SVG*))))
 
   (when (SVG-view_box (*SVG*))
     (let ([view_box (SVG-view_box (*SVG*))])
       (printf "    viewBox=\"~a ~a ~a ~a\"\n"
-              (svg-round (VIEW-BOX-min_x view_box))
-              (svg-round (VIEW-BOX-min_y view_box))
-              (svg-round (VIEW-BOX-width view_box))
-              (svg-round (VIEW-BOX-height view_box)))))
+              (svg-precision (VIEW-BOX-min_x view_box))
+              (svg-precision (VIEW-BOX-min_y view_box))
+              (svg-precision (VIEW-BOX-width view_box))
+              (svg-precision (VIEW-BOX-height view_box)))))
   
   (printf "    >\n")
 
@@ -459,7 +463,7 @@
           (printf "  <use xlink:href=\"#~a\" " group_id)
           
           (when group_pos
-            (let ([group_pos_str (cons (svg-round (car group_pos)) (svg-round (cdr group_pos)))])
+            (let ([group_pos_str (cons (svg-precision (car group_pos)) (svg-precision (cdr group_pos)))])
               (when (not (equal? group_pos_str '("0" . "0")))
                 (printf " x=\"~a\" y=\"~a\"" (car group_pos_str) (cdr group_pos_str)))))
           
@@ -490,7 +494,7 @@
                 (printf "~a<use xlink:href=\"#~a\"" prefix widget_id)
                 
                 (when widget_at
-                  (let ([widget_at_str (cons (svg-round (car widget_at)) (svg-round (cdr widget_at)))])
+                  (let ([widget_at_str (cons (svg-precision (car widget_at)) (svg-precision (cdr widget_at)))])
                     (when (not (equal? widget_at_str '("0" . "0")))
                       (printf " x=\"~a\" y=\"~a\"" (car widget_at_str) (cdr widget_at_str)))))
                 

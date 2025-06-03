@@ -9,10 +9,10 @@
 (define-runtime-path fern_svg "../../showcase/example/fern.svg")
 
 ;;; calculate the end point
-(define (get-end-point start_point #:length length #:deg deg #:precision precision)
+(define (get-end-point start_point #:length length #:deg deg)
   (let* ([end (make-polar length (* 2 pi (/ deg 360)))]
-         [end_x (string->number (~r #:precision precision (+ (car start_point) (real-part end))))]
-         [end_y (string->number (~r #:precision precision (+ (cdr start_point) (imag-part end))))])
+         [end_x (+ (car start_point) (real-part end))]
+         [end_y (+ (cdr start_point) (imag-part end))])
     (cons end_x end_y)))
 
 (define test-fern
@@ -35,7 +35,6 @@
            [lateral_reduction 0.35]
            [lateral_deg 80] ;80°
            [bend 5] ;5°
-           [precision 0]
            [svg_str
             (svg-out
              canvas_width canvas_height
@@ -49,13 +48,12 @@
                             [loop_width start_width])
                    
                    (when (>= (* central_reduction loop_length) min_length)
-                     (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg #:precision precision)]
-                           [truncted_width (string->number (~r #:precision 2 loop_width))])
+                     (let ([loop_end_point (get-end-point loop_start_point #:length loop_length #:deg loop_deg)])
 
                        ;; width -> listof (start_point, end_point)
                        (hash-set! style_map
-                                  truncted_width
-                                  `(,@(hash-ref style_map truncted_width '())
+                                  loop_width
+                                  `(,@(hash-ref style_map loop_width '())
                                     ,(list
                                       (cons (car loop_start_point) (- canvas_height (cdr loop_start_point)))
                                       (cons (car loop_end_point) (- canvas_height (cdr loop_end_point))))))
@@ -103,13 +101,13 @@
                          (svg-place-widget group_id #:style _sstyle)))
                      
                      (loop-width (cdr widths)))))))])
-        
-        (call-with-input-file fern_svg
-          (lambda (expected)
-            (call-with-input-string
-             svg_str
-             (lambda (actual)
-               (check-lines? expected actual)))))))
+
+      (call-with-input-file fern_svg
+        (lambda (expected)
+          (call-with-input-string
+           svg_str
+           (lambda (actual)
+             (check-lines? expected actual)))))))
    ))
 
 (run-tests test-fern)

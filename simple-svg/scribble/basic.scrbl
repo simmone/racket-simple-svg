@@ -23,6 +23,7 @@
            (
              #:background (or/c #f string?)
              #:viewBox (or/c #f VIEW-BOX?)
+             #:precision (or/c #f natural?)
            )
            string?
            ))
@@ -33,6 +34,10 @@
   background: background color, if not null, will create a rectangle with this color on the bottom of canvas.
   
   viewBox: use (new-view-box x y width height) to create a view-box, if needed.
+  
+  precision: specify all the number type's decimal places in the output xml, default is 4.
+
+  For Example: 4.0 => 4, 0.12345 => 0.1235.
 
 @codeblock|{
   (svg-def-shape (-> (or/c RECT? CIRCLE? ELLIPSE? LINE? POLYGON?

@@ -25,4 +25,4 @@
 (define (format-circle shape_id circle)
   (format "    <circle id=\"~a\" r=\"~a\" />\n"
           shape_id
-          (svg-round (CIRCLE-radius circle))))
+          (svg-precision (CIRCLE-radius circle))))

@@ -30,6 +30,6 @@
           (with-output-to-string
             (lambda ()
               (printf "rx=\"~a\" ry=\"~a\""
-                      (svg-round (ELLIPSE-radius_x ellipse))
-                      (svg-round (ELLIPSE-radius_y ellipse)))
+                      (svg-precision (ELLIPSE-radius_x ellipse))
+                      (svg-precision (ELLIPSE-radius_y ellipse)))
               ))))

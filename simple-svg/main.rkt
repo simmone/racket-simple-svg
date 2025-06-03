@@ -7,8 +7,9 @@
           [svg-out (->* (number? number? procedure?)
                         (
                          #:background (or/c #f string?)
-                                      #:viewBox (or/c #f VIEW-BOX?)
-                                      )
+                         #:viewBox (or/c #f VIEW-BOX?)
+                         #:precision (or/c #f natural?)
+                         )
                         string?)]
           [new-view-box (-> number? number? number? number? VIEW-BOX?)]
           [new-rect (->* (number? number?)

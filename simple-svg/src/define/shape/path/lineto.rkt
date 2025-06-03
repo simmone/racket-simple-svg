@@ -17,7 +17,7 @@
 (define (svg-path-vlineto length) (line 'v length))
 
 (define (line* type point)
-  ((*add-path*) (format "~a~a,~a" type (svg-round (car point)) (svg-round (cdr point)))))
+  ((*add-path*) (format "~a~a,~a" type (svg-precision (car point)) (svg-precision (cdr point)))))
 
 (define (line type length)
-  ((*add-path*) (format "~a~a" type (svg-round length))))
+  ((*add-path*) (format "~a~a" type (svg-precision length))))
