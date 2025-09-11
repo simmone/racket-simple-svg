@@ -2,6 +2,15 @@
 
 @title{Showcase}
 
+The head lang and require part in examples below is removed, so you want to run each example,
+you should add the head part below:
+
+@verbatim{
+#lang racket
+
+(require simple-svg)
+}
+
 @section{Empty Svg}
 
 @codeblock|{

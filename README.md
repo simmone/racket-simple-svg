@@ -8,6 +8,17 @@ thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
 # Install
     raco pkg install simple-svg
 
+# Showcase
+
+The head lang and require part in examples below is removed, so you want to run each example,
+you should add the head part below:
+
+```racket
+#lang racket
+
+(require simple-svg)
+```
+
 # ShowCase-1: Recursive circle
 
 ```racket
